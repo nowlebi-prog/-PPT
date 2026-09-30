@@ -116,28 +116,27 @@
     }, 2300);
   })();
 
-  /* ---------- 3. 스크롤하면 글자가 하나씩 켜지는 문장 ---------- */
+  /* ---------- 3. 스크롤 고정 큰 글자: 읽고, → 설계하고, → 만듭니다. ---------- */
   (() => {
-    const el = $("[data-highlight]");
-    if (!el) return;
-    const out = [];
-    el.childNodes.forEach((n) => {
-      const accent = n.nodeType === 1;
-      (n.textContent || "").split(/(\s+)/).forEach((t) => {
-        if (!t) return;
-        out.push(/^\s+$/.test(t) ? t : `<span class="w${accent ? " a" : ""}">${esc(t)}</span>`);
-      });
-    });
-    el.innerHTML = out.join("");
-    const ws = $$(".w", el);
-    if (rm) return ws.forEach((w) => w.classList.add("is-lit"));
+    const sec = $("[data-impact]");
+    if (!sec) return;
+    const steps = $$(".impact__step", sec), nav = $$(".impact__nav li", sec);
+    let cur = -1;
+    const set = (i) => {
+      if (i === cur) return;
+      cur = i;
+      steps.forEach((el, n) => { el.classList.toggle("is-cur", n === i); el.classList.toggle("is-past", n < i); });
+      nav.forEach((el, n) => el.classList.toggle("is-cur", n === i));
+    };
+    if (rm) { sec.classList.add("is-static"); steps.forEach((el) => el.classList.add("is-cur")); return; }
     const tick = () => {
-      const r = el.getBoundingClientRect(), h = innerHeight;
-      const p = clamp((h * 0.85 - r.top) / (r.height + h * 0.3), 0, 1);
-      const n = Math.round(p * ws.length);
-      ws.forEach((w, k) => w.classList.toggle("is-lit", k < n));
+      const r = sec.getBoundingClientRect(), total = sec.offsetHeight - innerHeight;
+      const p = clamp(-r.top / (total || 1), 0, 1);
+      sec.style.setProperty("--p", p.toFixed(3));
+      set(Math.min(steps.length - 1, Math.floor(p * steps.length * 0.999)));
     };
     addEventListener("scroll", tick, { passive: true });
+    addEventListener("resize", tick);
     tick();
   })();
 

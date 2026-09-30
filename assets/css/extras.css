@@ -20,15 +20,41 @@
 .rot b.is-cur { opacity: 1; transform: none; }
 .rot b.is-out { opacity: 0; transform: translateY(-110%); }
 
-/* 스크롤하면 글자가 하나씩 켜지는 문장 */
-.manifesto { position: relative; padding: 170px 0; background: var(--bg); }
-.manifesto__text { margin: 0; max-width: 21em; font-size: clamp(28px, 4.4vw, 64px); font-weight: 700; line-height: 1.34; letter-spacing: -.04em; text-wrap: pretty; }
-.manifesto__text .w { color: #2b2e36; transition: color .35s; }
-.manifesto__text .w.is-lit { color: #fff; }
-.manifesto__text .w.a.is-lit { color: var(--accent-2); }
-.manifesto__by { display: flex; align-items: center; gap: 12px; margin: 48px 0 0; font-size: 15px; color: var(--muted); }
-.manifesto__by::before { content: ""; width: 30px; height: 1px; background: currentColor; }
-@media (max-width: 640px) { .manifesto { padding: 110px 0; } }
+/* 스크롤 고정 · 큰 글자 3단어 (읽고, → 설계하고, → 만듭니다.) */
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.impact { position: relative; height: 330vh; background: var(--bg); }
+.impact__pin { position: sticky; top: 0; height: 100vh; height: 100svh; display: flex; align-items: center; overflow: hidden; }
+.impact__bars { position: absolute; left: 5vw; right: 5vw; bottom: 0; top: 12vh; display: flex; gap: 2vw; align-items: flex-end; pointer-events: none; }
+.impact__bars i { flex: 1; height: calc(var(--h) * 100%); border-radius: 8px 8px 0 0; background: linear-gradient(180deg, rgba(61,123,255,.22), rgba(61,123,255,.02)); transform-origin: 50% 100%; transform: scaleY(calc(.08 + var(--p, 0) * .92)); transition: transform .15s linear; }
+.impact__inner { position: relative; z-index: 1; }
+.impact__label { display: flex; align-items: center; gap: 12px; margin: 0 0 4vh; font-size: 15px; font-weight: 700; color: var(--muted); }
+.impact__label::before { content: ""; width: 30px; height: 1px; background: currentColor; }
+.impact__stage { position: relative; min-height: clamp(280px, 48vh, 560px); }
+.impact__step { position: absolute; inset: 0; opacity: 0; transform: translateY(60px) scale(.96); filter: blur(12px); transition: opacity .7s var(--ease), transform .9s cubic-bezier(.16,1,.3,1), filter .7s var(--ease); }
+.impact__step.is-cur { opacity: 1; transform: none; filter: none; }
+.impact__step.is-past { transform: translateY(-60px) scale(1.02); }
+.impact__step b { display: block; font-size: clamp(76px, 16vw, 250px); font-weight: 800; line-height: .95; letter-spacing: -.065em; color: #fff; }
+.impact__step b em { font-style: normal; color: var(--accent); }
+.impact__step p { margin: 4vh 0 0; font-size: clamp(18px, 1.9vw, 26px); font-weight: 600; line-height: 1.5; letter-spacing: -.02em; color: var(--text-2); }
+.impact__nav { position: absolute; right: 0; top: 50%; display: grid; gap: 16px; margin: 0; padding: 0; list-style: none; transform: translateY(-50%); font-size: 14px; font-weight: 800; color: #3a3d44; }
+.impact__nav li { display: flex; align-items: center; gap: 10px; transition: color .4s; }
+.impact__nav li::before { content: ""; width: 18px; height: 2px; background: currentColor; transition: width .4s var(--ease); }
+.impact__nav li.is-cur { color: #fff; }
+.impact__nav li.is-cur::before { width: 36px; background: var(--accent); }
+@media (max-width: 760px) {
+  .impact { height: 280vh; }
+  .impact__nav { top: auto; bottom: 12vh; right: auto; left: 0; transform: none; grid-auto-flow: column; }
+  .impact__stage { min-height: 52vh; }
+}
+.impact.is-static { height: auto; }
+.impact.is-static .impact__pin { position: static; height: auto; padding: 120px 0; }
+.impact.is-static .impact__stage { min-height: 0; }
+.impact.is-static .impact__step { position: static; opacity: 1; transform: none; filter: none; margin-bottom: 64px; }
+.impact.is-static .impact__nav, .impact.is-static .impact__bars { display: none; }
+
+/* 첫 화면 헤드라인 크게 */
+.hero__ko { font-size: clamp(40px, 8.2vw, 120px); line-height: 1.08; letter-spacing: -.055em; }
+@media (max-width: 640px) { .hero__ko { font-size: clamp(38px, 10.4vw, 60px); } }
 
 /* 페이지 이동: 로고의 세로 막대로 화면 전환 */
 .pt { position: fixed; inset: 0; z-index: 200; display: flex; pointer-events: none; }
