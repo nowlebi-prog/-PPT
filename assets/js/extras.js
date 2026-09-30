@@ -140,6 +140,39 @@
     tick();
   })();
 
+  /* ---------- 3-1. 작업 과정: 스크롤하면 단계가 진행되고 화면이 바뀜 ---------- */
+  (() => {
+    const sec = $("[data-process]");
+    if (!sec) return;
+    const texts = $$(".pv-text", sec), layers = $$(".pv__layer", sec), rail = $$(".pv-rail li", sec), line = $(".pv-rail__line", sec);
+    const N = texts.length;
+    let cur = -1, playing = null;
+    const set = (i, play) => {
+      if (i !== cur) {
+        cur = i;
+        texts.forEach((el, n) => el.classList.toggle("is-cur", n === i));
+        rail.forEach((el, n) => { el.classList.toggle("is-cur", n === i); el.classList.toggle("is-done", n < i); });
+      }
+      // 화면에 들어왔을 때만 장면 애니메이션 재생
+      const want = play ? i : -1;
+      if (want !== playing) { playing = want; layers.forEach((el, n) => el.classList.toggle("is-active", n === want)); }
+    };
+    if (rm) { sec.classList.add("is-static"); texts.forEach((t) => t.classList.add("is-cur")); return; }
+    const tick = () => {
+      const r = sec.getBoundingClientRect(), total = sec.offsetHeight - innerHeight;
+      const p = clamp(-r.top / (total || 1), 0, 1);
+      line?.style.setProperty("--p", p.toFixed(3));
+      set(Math.min(N - 1, Math.floor(p * N * 0.999)), r.top < innerHeight * 0.35 && r.bottom > innerHeight * 0.5);
+    };
+    rail.forEach((li, n) => li.addEventListener("click", () => {
+      const top = sec.getBoundingClientRect().top + scrollY, total = sec.offsetHeight - innerHeight;
+      scrollTo({ top: top + total * ((n + 0.5) / N), behavior: "smooth" });
+    }));
+    addEventListener("scroll", tick, { passive: true });
+    addEventListener("resize", tick);
+    tick();
+  })();
+
   /* ---------- 4. 페이지 이동할 때 로고 막대로 화면 전환 ---------- */
   (() => {
     if (rm) return;
