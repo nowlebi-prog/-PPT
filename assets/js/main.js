@@ -2,70 +2,77 @@
    유별난PPT - 공통 스크립트
    ========================================================== */
 
-// 문의 폼 전송 주소 (Formspree 등). 비워두면 방문자의 메일 앱으로 작성됩니다.
+// 문의 폼 전송 주소 (Formspree, Getform, 자체 API 등)
+// 비워두면 방문자의 메일 앱으로 youstar_ppt@naver.com 앞 메일이 작성됩니다.
 const FORM_ENDPOINT = "";
 const CONTACT_EMAIL = "youstar_ppt@naver.com";
-// 후기 원문 페이지 주소 (크몽 · 숨고 등). 넣으면 후기 아래에 '원문 보기' 링크가 생깁니다.
-const REVIEW_SOURCE_URL = "";
 
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-const wait = (ms) => new Promise((r) => setTimeout(r, ms));
-const loadable = (src) =>
-  new Promise((ok) => {
-    const img = new Image();
-    img.onload = () => ok(true);
-    img.onerror = () => ok(false);
-    img.src = src;
-  });
 
-/* ---------- 마퀴(로고 · 후기): 끊김 없게 복제 ---------- */
-document.querySelectorAll(".marquee__row, .rv-row").forEach((row) => {
+// 사이트 장식용 샘플 슬라이드 (assets/img/slides/*.svg)
+const SLIDES = [
+  "ir-cover", "prop-cover", "prof-cover", "ir-traction", "prop-process", "prof-vision",
+  "ir-market", "demo-day", "prop-schedule", "prof-history", "ir-bm", "edu-guide",
+  "prop-org", "prof-clients", "ir-team", "annual-report",
+];
+const slideSrc = (name) => `assets/img/slides/${name}.svg`;
+const slideImg = (name, lazy = true) =>
+  `<img src="${slideSrc(name)}" alt="" ${lazy ? 'loading="lazy"' : ""} decoding="async">`;
+const pickSlides = (offset, count) => Array.from({ length: count }, (_, i) => SLIDES[(offset + i) % SLIDES.length]);
+
+/* ---------- Hero 슬라이드 벽 ---------- */
+document.querySelectorAll("[data-wall]").forEach((wall) => {
+  const cols = +wall.dataset.wall || 6;
+  wall.innerHTML = Array.from({ length: cols }, (_, c) => {
+    const list = pickSlides(c * 3, 6);
+    return `<div class="wall__col">${[...list, ...list].map((n) => slideImg(n, false)).join("")}</div>`;
+  }).join("");
+});
+
+/* ---------- 가로로 흐르는 슬라이드 릴 ---------- */
+document.querySelectorAll("[data-reel]").forEach((row) => {
+  const list = pickSlides(+row.dataset.reel || 0, 8);
+  row.innerHTML = [...list, ...list].map((n) => slideImg(n)).join("");
+  row.querySelectorAll("img").forEach((img, i) => i >= list.length && img.setAttribute("aria-hidden", "true"));
+});
+
+/* ---------- 고객사 마퀴 (끊김 없는 반복을 위해 복제) ---------- */
+document.querySelectorAll(".marquee__row").forEach((row) => {
   const n = row.children.length;
   row.innerHTML += row.innerHTML;
   [...row.children].forEach((c, i) => i >= n && c.setAttribute("aria-hidden", "true"));
 });
 
-/* ---------- 메인 포트폴리오 가로 갤러리 ---------- */
+/* ---------- 메인 페이지 포트폴리오 미리보기 ---------- */
 (() => {
   const box = document.querySelector("[data-pf-preview]");
   if (!box || !window.PORTFOLIO) return;
   const esc = window.pfEsc;
-  const byCat = window.PORTFOLIO_CATEGORIES.map((c) => window.PORTFOLIO.filter((p) => p.category === c.id));
-  const picks = [0, 1, 2].flatMap((i) => byCat.map((l) => l[i])).filter(Boolean).slice(0, 8);
+  // 카테고리별로 2개씩 골라 섞어서 보여줌
+  const byCat = window.PORTFOLIO_CATEGORIES.map((c) => window.PORTFOLIO.filter((p) => p.category === c.id).slice(0, 2));
+  const picks = [0, 1].flatMap((i) => byCat.map((list) => list[i])).filter(Boolean);
   box.innerHTML = picks
     .map(
-      (p) => `
-    <a class="card" href="portfolio.html?p=${encodeURIComponent(p.id)}">
+      (p, i) => `
+    <a class="card reveal" data-delay="${i % 3}" href="portfolio.html?p=${encodeURIComponent(p.id)}">
       <div class="card__thumb">${window.pfThumb(p)}</div>
-      <div class="card__meta"><b>${esc(p.name)}</b><span>${esc(window.pfCategory(p).label)} · ${esc(p.year)}</span></div>
+      <div class="card__meta"><b>${esc(p.name)}</b><span>${esc(window.pfCategory(p).en)} · ${esc(p.year)}</span></div>
     </a>`
     )
     .join("");
 })();
 
-/* ---------- 후기 원문 링크 ---------- */
-(() => {
-  const note = document.querySelector("[data-review-note]");
-  if (note && REVIEW_SOURCE_URL) note.insertAdjacentHTML("beforeend", ` <a href="${REVIEW_SOURCE_URL}" target="_blank" rel="noopener">후기 원문 보기 ↗</a>`);
-})();
-
-/* ---------- Header: 스크롤 내리면 숨고, 올리면 나타남 ---------- */
+/* ---------- Header ---------- */
 (() => {
   const header = document.querySelector(".header");
   if (!header) return;
-  let lastY = scrollY;
-  const onScroll = () => {
-    const y = scrollY;
-    header.classList.toggle("is-scrolled", y > 20);
-    if (!header.classList.contains("is-open")) header.classList.toggle("is-hidden", y > lastY && y > 400);
-    lastY = y;
-  };
+  const onScroll = () => header.classList.toggle("is-scrolled", window.scrollY > 20);
   onScroll();
   window.addEventListener("scroll", onScroll, { passive: true });
+
   const toggle = header.querySelector(".nav-toggle");
   const setOpen = (open) => {
     header.classList.toggle("is-open", open);
-    header.classList.remove("is-hidden");
     toggle?.setAttribute("aria-expanded", String(open));
     toggle?.setAttribute("aria-label", open ? "메뉴 닫기" : "메뉴 열기");
   };
@@ -74,201 +81,198 @@ document.querySelectorAll(".marquee__row, .rv-row").forEach((row) => {
   document.addEventListener("keydown", (e) => e.key === "Escape" && setOpen(false));
 })();
 
-/* ---------- Reveal ---------- */
+/* ---------- Reveal on scroll ---------- */
 const revealIO =
   "IntersectionObserver" in window && !reduceMotion
     ? new IntersectionObserver(
-        (es) => es.forEach((e) => e.isIntersecting && (e.target.classList.add("is-in"), revealIO.unobserve(e.target))),
+        (entries) =>
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add("is-in");
+              revealIO.unobserve(e.target);
+            }
+          }),
         { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
       )
     : null;
 window.observeReveal = (root = document) =>
   root.querySelectorAll(".reveal:not(.is-in)").forEach((el) => (revealIO ? revealIO.observe(el) : el.classList.add("is-in")));
+window.observeReveal();
 
-/* ---------- 숫자 카운트업 (최종 숫자는 HTML에 그대로 있음) ---------- */
+/* ---------- 숫자 카운트업 ---------- */
 (() => {
   const els = document.querySelectorAll("[data-count]");
-  if (!els.length || reduceMotion || !("IntersectionObserver" in window)) return;
+  if (!els.length) return;
   const run = (el) => {
-    const end = parseFloat(el.dataset.count), dec = +(el.dataset.decimals || 0), t0 = performance.now();
+    const end = parseFloat(el.dataset.count);
+    const dec = +(el.dataset.decimals || 0);
+    if (reduceMotion) return (el.textContent = end.toFixed(dec));
+    const t0 = performance.now();
     const tick = (t) => {
-      const p = Math.min(1, (t - t0) / 1600);
-      el.textContent = (end * (1 - Math.pow(1 - p, 4))).toFixed(dec);
+      const p = Math.min(1, (t - t0) / 1800);
+      el.textContent = (end * (1 - Math.pow(1 - p, 3))).toFixed(dec);
       if (p < 1) requestAnimationFrame(tick);
-      else el.textContent = end.toFixed(dec);
     };
     requestAnimationFrame(tick);
   };
-  const io = new IntersectionObserver((es) => es.forEach((e) => e.isIntersecting && (run(e.target), io.unobserve(e.target))), { threshold: 0.5 });
+  if (!("IntersectionObserver" in window)) return;
+  const io = new IntersectionObserver(
+    (es) => es.forEach((e) => e.isIntersecting && (run(e.target), io.unobserve(e.target))),
+    { threshold: 0.4 }
+  );
   els.forEach((el) => io.observe(el));
 })();
 
-/* ---------- 별 (첫 화면) ---------- */
+/* ---------- Hero 영상 (파일이 있을 때만) ---------- */
+(() => {
+  const video = document.querySelector(".hero__video");
+  if (!video) return;
+  if (reduceMotion) return video.remove();
+  const sources = [...video.querySelectorAll("source")];
+  let failed = 0;
+  // 영상 파일이 아직 없으면 조용히 제거하고 배경 이미지 + 애니메이션만 사용
+  sources.forEach((s) => s.addEventListener("error", () => ++failed === sources.length && video.remove()));
+  video.addEventListener("error", () => video.remove());
+})();
+
+/* ---------- Starfield ---------- */
 (() => {
   const canvas = document.querySelector("#stars");
   if (!canvas) return;
   const ctx = canvas.getContext("2d");
-  let w, h, stars = [], raf;
+  let w, h, stars = [], shooting = null, raf;
+
   const resize = () => {
-    const dpr = Math.min(devicePixelRatio || 1, 2);
-    w = canvas.clientWidth; h = canvas.clientHeight;
-    canvas.width = w * dpr; canvas.height = h * dpr;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    w = canvas.clientWidth;
+    h = canvas.clientHeight;
+    canvas.width = w * dpr;
+    canvas.height = h * dpr;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    stars = Array.from({ length: Math.round((w * h) / 9000) }, () => ({
-      x: Math.random() * w, y: Math.random() * h, r: Math.random() * 1.1 + 0.2, a: Math.random() * 0.55 + 0.2,
-      tw: Math.random() * 0.02 + 0.004, ph: Math.random() * 6.28, vy: Math.random() * 0.04 + 0.01,
+    stars = Array.from({ length: Math.round((w * h) / 5200) }, () => ({
+      x: Math.random() * w, y: Math.random() * h, r: Math.random() * 1.2 + 0.2, a: Math.random() * 0.6 + 0.25,
+      tw: Math.random() * 0.02 + 0.004, ph: Math.random() * Math.PI * 2, vy: Math.random() * 0.05 + 0.01, blue: Math.random() < 0.2,
     }));
   };
+
   const draw = (t) => {
     ctx.clearRect(0, 0, w, h);
     for (const s of stars) {
       s.y -= s.vy;
       if (s.y < -2) { s.y = h + 2; s.x = Math.random() * w; }
-      ctx.globalAlpha = s.a * (0.6 + 0.4 * Math.sin(t * s.tw + s.ph));
-      ctx.fillStyle = "#fff";
-      ctx.fillRect(s.x, s.y, s.r * 1.6, s.r * 1.6);
+      const alpha = s.a * (0.6 + 0.4 * Math.sin(t * s.tw + s.ph));
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = s.blue ? `rgba(140,175,255,${alpha})` : `rgba(255,255,255,${alpha})`;
+      ctx.fill();
+    }
+    if (!shooting && Math.random() < 0.004) shooting = { x: Math.random() * w * 0.7 + w * 0.3, y: Math.random() * h * 0.4, life: 0 };
+    if (shooting) {
+      shooting.life += 1;
+      const len = Math.min(140, shooting.life * 6);
+      const sx = shooting.x - shooting.life * 7, sy = shooting.y + shooting.life * 3.5;
+      const fade = Math.max(0, 1 - shooting.life / 50);
+      const grad = ctx.createLinearGradient(sx, sy, sx + len, sy - len / 2);
+      grad.addColorStop(0, `rgba(255,255,255,${0.85 * fade})`);
+      grad.addColorStop(1, "rgba(255,255,255,0)");
+      ctx.strokeStyle = grad;
+      ctx.lineWidth = 1.3;
+      ctx.beginPath();
+      ctx.moveTo(sx, sy);
+      ctx.lineTo(sx + len, sy - len / 2);
+      ctx.stroke();
+      if (shooting.life > 50) shooting = null;
     }
     raf = requestAnimationFrame(draw);
   };
+
   resize();
-  addEventListener("resize", resize);
-  if (reduceMotion) return draw(0), cancelAnimationFrame(raf);
+  window.addEventListener("resize", resize);
+  if (reduceMotion) {
+    draw(0);
+    cancelAnimationFrame(raf);
+    return;
+  }
   raf = requestAnimationFrame(draw);
-  new IntersectionObserver(([e]) => { cancelAnimationFrame(raf); if (e.isIntersecting) raf = requestAnimationFrame(draw); }).observe(canvas);
+  new IntersectionObserver(([e]) => {
+    cancelAnimationFrame(raf);
+    if (e.isIntersecting) raf = requestAnimationFrame(draw);
+  }).observe(canvas);
 })();
 
-/* ---------- 비교 슬라이더 ---------- */
-const initBA = (ba) => {
+/* ---------- Before / After 비교 슬라이더 ---------- */
+document.querySelectorAll(".ba").forEach((ba) => {
   const range = ba.querySelector(".ba__range");
   const set = (v) => ba.style.setProperty("--pos", `${v}%`);
   range.addEventListener("input", () => set(range.value));
-  ba.setPos = (v) => { set(v); range.value = v; };
+  if (reduceMotion || !("IntersectionObserver" in window)) return;
+
+  // 처음 보일 때 한 번 좌우로 움직여서 드래그할 수 있다는 걸 알려줌
   let touched = false;
-  ["pointerdown", "keydown", "touchstart"].forEach((ev) => range.addEventListener(ev, () => { touched = true; ba.dispatchEvent(new Event("ba:touch")); }, { passive: true }));
-  // 처음 보일 때 좌우로 한 번 움직여 드래그할 수 있다는 걸 보여줌
-  ba.hint = async () => {
-    if (reduceMotion || touched) return;
-    const anim = (a, b, d) => new Promise((done) => {
+  ["pointerdown", "keydown", "touchstart"].forEach((ev) => range.addEventListener(ev, () => (touched = true), { passive: true }));
+  const anim = (from, to, dur) =>
+    new Promise((done) => {
       const t0 = performance.now();
       const step = (t) => {
         if (touched) return done();
-        const p = Math.min(1, (t - t0) / d), e = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
-        ba.setPos(a + (b - a) * e);
+        const p = Math.min(1, (t - t0) / dur);
+        const e = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
+        const v = from + (to - from) * e;
+        set(v);
+        range.value = v;
         p < 1 ? requestAnimationFrame(step) : done();
       };
       requestAnimationFrame(step);
     });
-    await anim(50, 18, 700); await anim(18, 82, 1100); await anim(82, 50, 700);
-  };
-};
-document.querySelectorAll(".ba").forEach(initBA);
+  const io = new IntersectionObserver(
+    async ([e]) => {
+      if (!e.isIntersecting) return;
+      io.disconnect();
+      await anim(50, 22, 800);
+      await anim(22, 78, 1200);
+      await anim(78, 50, 800);
+    },
+    { threshold: 0.6 }
+  );
+  io.observe(ba);
+});
 
-/* ---------- 변환 사례 (탭 + 비교 슬라이더) + 첫 화면 변환 비주얼 ---------- */
-(async () => {
-  const all = window.CASES || [];
-  const ok = await Promise.all(all.map((c) => (c.optional ? Promise.all([loadable(c.before), loadable(c.after)]).then((r) => r.every(Boolean)) : true)));
-  const cases = all.filter((_, i) => ok[i]);
-  if (!cases.length) return;
-
-  // 첫 화면: 받은 자료 → (막대 전환) → 완성본 반복
-  const tf = document.querySelector("[data-tf]");
-  if (tf) {
-    const before = tf.querySelector(".tf__before"), after = tf.querySelector(".tf__after");
-    const bars = tf.querySelector(".bars"), note = tf.querySelector("[data-tf-note]");
-    const sweep = async (swap) => {
-      bars.classList.remove("is-out"); bars.classList.add("is-in");
-      await wait(620); swap();
-      bars.classList.remove("is-in"); bars.classList.add("is-out");
-      await wait(560); bars.classList.remove("is-out");
-    };
-    const show = (c) => { before.src = c.before; after.src = c.after; note.textContent = c.example ? "제작 예시" : "실제 작업 사례"; };
-    show(cases[0]);
-    if (!reduceMotion) {
-      let i = 0;
-      (async function loop() {
-        await wait(2200);
-        await sweep(() => tf.classList.add("is-after"));
-        await wait(3400);
-        i = (i + 1) % cases.length;
-        await sweep(() => { tf.classList.remove("is-after"); show(cases[i]); });
-        loop();
-      })();
-    } else tf.classList.add("is-after");
-  }
-
-  // 변환 사례 섹션
-  const section = document.querySelector("#cases");
-  const tabs = document.querySelector("[data-case-tabs]");
-  const ba = document.querySelector("[data-case-ba]");
-  if (!section || !tabs || !ba) return;
-  const f = (k) => section.querySelector(`[data-f="${k}"]`);
-  const bars = ba.querySelector(".bars");
-  const DUR = 7000;
-  tabs.style.setProperty("--n", cases.length);
-  tabs.innerHTML = cases
-    .map((c, i) => `<button class="case-tab" role="tab" type="button" data-i="${i}" style="--dur:${DUR}ms"><b>0${i + 1}</b><span>${c.tab} <em>→</em> ${c.tabTo}</span></button>`)
-    .join("");
-  const btns = [...tabs.children];
-  let cur = -1, timer = null, paused = false, visible = false;
-
-  const fill = (c) => {
-    f("before").src = c.before;
-    f("after").src = c.after;
-    f("input").textContent = c.input;
-    f("output").textContent = c.output;
-    f("work").innerHTML = c.work.map((w) => `<li>${w}</li>`).join("");
-    f("ex").hidden = !c.example;
-    ba.setPos(50);
-  };
-  const go = async (i, animate = true) => {
-    if (i === cur) return;
-    cur = i;
-    btns.forEach((b, n) => { b.classList.toggle("is-active", n === i); b.setAttribute("aria-selected", n === i); });
-    // 진행 막대 애니메이션 다시 시작
-    btns[i].style.animation = "none"; void btns[i].offsetWidth; btns[i].style.animation = "";
-    if (animate && !reduceMotion) {
-      bars.classList.remove("is-out"); bars.classList.add("is-in");
-      await wait(560); fill(cases[i]);
-      bars.classList.remove("is-in"); bars.classList.add("is-out");
-      await wait(520); bars.classList.remove("is-out");
-    } else fill(cases[i]);
-    schedule();
-  };
-  const schedule = () => {
-    clearTimeout(timer);
-    if (paused || !visible || cases.length < 2) return;
-    timer = setTimeout(() => go((cur + 1) % cases.length), DUR);
-  };
-  btns.forEach((b) => b.addEventListener("click", () => { paused = false; section.classList.remove("is-paused"); go(+b.dataset.i); }));
-  const pause = () => { paused = true; section.classList.add("is-paused"); clearTimeout(timer); };
-  ba.addEventListener("ba:touch", pause);
-  ba.addEventListener("pointerenter", pause);
-  ba.addEventListener("pointerleave", () => { paused = false; section.classList.remove("is-paused"); schedule(); });
-  go(0, false);
-  new IntersectionObserver(([e]) => {
-    visible = e.isIntersecting;
-    if (visible && !ba.dataset.hinted) { ba.dataset.hinted = 1; ba.hint(); }
-    schedule();
-  }, { threshold: 0.35 }).observe(ba);
+/* ---------- 작업 종류 목록: 마우스를 올리면 미리보기 ---------- */
+(() => {
+  const list = document.querySelector(".works__list");
+  const pv = document.querySelector(".works__preview");
+  if (!list || !pv) return;
+  if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return pv.remove();
+  list.addEventListener("pointermove", (e) => {
+    pv.style.left = `${e.clientX}px`;
+    pv.style.top = `${e.clientY}px`;
+    pv.classList.toggle("is-left", e.clientX + 400 > window.innerWidth);
+  });
+  list.querySelectorAll("li[data-img]").forEach((li) => {
+    li.addEventListener("pointerenter", () => {
+      pv.src = slideSrc(li.dataset.img);
+      pv.classList.add("is-on");
+    });
+    li.addEventListener("pointerleave", () => pv.classList.remove("is-on"));
+  });
 })();
 
-/* ---------- 보안 흐름: 단계가 순서대로 켜짐 ---------- */
+/* ---------- Review slider ---------- */
 (() => {
-  const flow = document.querySelector("[data-flow]");
-  if (!flow) return;
-  const items = [...flow.children];
-  if (reduceMotion) return items.forEach((li) => li.classList.add("is-on"));
-  let t = null;
-  const play = () => {
-    let i = 0;
-    items.forEach((li) => li.classList.remove("is-on"));
-    clearInterval(t);
-    t = setInterval(() => {
-      if (i < items.length) items[i++].classList.add("is-on");
-      else if (i++ > items.length + 3) { items.forEach((li) => li.classList.remove("is-on")); i = 0; }
-    }, 550);
+  const track = document.querySelector(".reviews__track");
+  if (!track) return;
+  const prev = document.querySelector("[data-review-prev]");
+  const next = document.querySelector("[data-review-next]");
+  const step = () => track.querySelector(".review").offsetWidth + 20;
+  const update = () => {
+    prev.disabled = track.scrollLeft <= 4;
+    next.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4;
   };
-  new IntersectionObserver(([e]) => (e.isIntersecting ? play() : clearInterval(t)), { threshold: 0.4 }).observe(flow);
+  prev.addEventListener("click", () => track.scrollBy({ left: -step() }));
+  next.addEventListener("click", () => track.scrollBy({ left: step() }));
+  track.addEventListener("scroll", update, { passive: true });
+  window.addEventListener("resize", update);
+  update();
 })();
 
 /* ---------- Contact form ---------- */
@@ -300,7 +304,9 @@ document.querySelectorAll(".ba").forEach(initBA);
       } catch {
         status.textContent = `전송에 실패했습니다. ${CONTACT_EMAIL} 로 직접 보내주세요.`;
         status.classList.add("err");
-      } finally { btn.disabled = false; }
+      } finally {
+        btn.disabled = false;
+      }
       return;
     }
 
