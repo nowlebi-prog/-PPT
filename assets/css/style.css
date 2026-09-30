@@ -139,8 +139,9 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .marquee__row { display: flex; width: max-content; animation: marquee 55s linear infinite; }
 .marquee--rev .marquee__row { animation-direction: reverse; }
 .marquee:hover .marquee__row { animation-play-state: paused; }
-.logo-chip { flex: none; height: 60px; min-width: 150px; padding: 0 28px; margin-right: 12px; border-radius: 12px; display: grid; place-items: center; background: var(--surface); border: 1px solid var(--line); color: var(--text-2); font-weight: 700; font-size: 15px; white-space: nowrap; }
-.logo-chip img { max-height: 30px; width: auto; }
+.logo-chip { flex: none; height: 64px; min-width: 150px; padding: 0 26px; margin-right: 12px; border-radius: 14px; display: flex; align-items: center; justify-content: center; gap: 10px; background: #f3f4f6; color: #1b2430; font-weight: 800; font-size: 15px; white-space: nowrap; letter-spacing: -.01em; }
+.logo-chip img { height: 32px; width: auto; flex: none; }
+.logo-chip--img img { height: 30px; }
 @keyframes marquee { to { transform: translateX(-50%); } }
 
 /* ---------- Problem ---------- */
@@ -474,7 +475,8 @@ body.no-scroll { overflow: hidden; }
   .wall__col { width: 230px; }
   .wall__col img { margin-bottom: 16px; border-radius: 8px; }
   .trust { padding: 48px 0 56px; }
-  .logo-chip { height: 50px; min-width: 120px; padding: 0 20px; font-size: 14px; }
+  .logo-chip { height: 54px; min-width: 120px; padding: 0 18px; font-size: 14px; }
+  .logo-chip img { height: 26px; }
   .cta { padding: 110px 0; }
 }
 @media (max-width: 640px) {
