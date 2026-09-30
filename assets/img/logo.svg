@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 230" fill="currentColor" aria-hidden="true">
+  <defs>
+    <clipPath id="u">
+      <path d="M0 0H200V130A100 100 0 0 1 0 130Z"/>
+    </clipPath>
+  </defs>
+  <g clip-path="url(#u)">
+    <polygon points="0,14 20,0 20,230 0,230"/>
+    <polygon points="30,30 50,16 50,230 30,230"/>
+    <polygon points="60,96 80,82 80,230 60,230"/>
+    <polygon points="90,110 110,96 110,230 90,230"/>
+    <polygon points="120,96 140,82 140,230 120,230"/>
+    <polygon points="150,30 170,16 170,230 150,230"/>
+    <polygon points="180,14 200,0 200,230 180,230"/>
+  </g>
+</svg>
