@@ -116,24 +116,27 @@
     }, 2300);
   })();
 
-  /* ---------- 3. 스크롤 고정 큰 글자: 읽고, → 설계하고, → 만듭니다. ---------- */
+  /* ---------- 3. 한 문장이 스크롤에 맞춰 단어별로 채워짐: 읽고, 설계하고, 만듭니다. ---------- */
   (() => {
     const sec = $("[data-impact]");
     if (!sec) return;
-    const steps = $$(".impact__step", sec), nav = $$(".impact__nav li", sec);
-    let cur = -1;
+    const words = $$(".imp__w", sec), caps = $$(".imp__caps p", sec), num = $(".imp__count b", sec), bar = $(".imp__count i", sec);
+    const N = words.length;
+    let cur = -2;
     const set = (i) => {
       if (i === cur) return;
       cur = i;
-      steps.forEach((el, n) => { el.classList.toggle("is-cur", n === i); el.classList.toggle("is-past", n < i); });
-      nav.forEach((el, n) => el.classList.toggle("is-cur", n === i));
+      words.forEach((w, n) => { w.classList.toggle("is-on", n <= i); w.classList.toggle("is-cur", n === i); });
+      caps.forEach((c, n) => c.classList.toggle("is-cur", n === Math.max(i, 0)));
+      if (num) num.textContent = String(Math.max(i, 0) + 1).padStart(2, "0");
     };
-    if (rm) { sec.classList.add("is-static"); steps.forEach((el) => el.classList.add("is-cur")); return; }
+    if (rm) { sec.classList.add("is-static"); return; }
     const tick = () => {
       const r = sec.getBoundingClientRect(), total = sec.offsetHeight - innerHeight;
       const p = clamp(-r.top / (total || 1), 0, 1);
-      sec.style.setProperty("--p", p.toFixed(3));
-      set(Math.min(steps.length - 1, Math.floor(p * steps.length * 0.999)));
+      bar?.style.setProperty("--p", p.toFixed(3));
+      // 고정되기 전(화면에 들어오는 중)에는 아직 비어 있다가, 고정되면 첫 단어부터 채워짐
+      set(r.top > innerHeight * 0.15 ? -1 : Math.min(N - 1, Math.floor(p * N * 0.999)));
     };
     addEventListener("scroll", tick, { passive: true });
     addEventListener("resize", tick);
@@ -171,6 +174,33 @@
     addEventListener("scroll", tick, { passive: true });
     addEventListener("resize", tick);
     tick();
+  })();
+
+  /* ---------- 3-2. 모바일: 제작 역량 화면은 장면을 자동으로 넘기고, 글은 그대로 읽히게 ---------- */
+  (() => {
+    const why = $(".why");
+    if (!why) return;
+    const mq = matchMedia("(max-width: 900px)");
+    const scenes = $$(".scene", why), dots = $$(".why__dots button", why), stage = $(".why__screen", why);
+    if (!scenes.length || !stage) return;
+    let i = 0, t = null, seen = false;
+    const show = (n) => {
+      i = (n + scenes.length) % scenes.length;
+      scenes.forEach((el, k) => el.classList.toggle("is-active", k === i));
+      dots.forEach((el, k) => el.classList.toggle("is-active", k === i));
+    };
+    const run = () => { clearInterval(t); if (mq.matches && seen && !rm) t = setInterval(() => show(i + 1), 8000); };
+    // 모바일에서는 점을 누르면 글로 스크롤하지 않고 장면만 바꿈
+    $(".why__dots", why)?.addEventListener("click", (e) => {
+      if (!mq.matches) return;
+      const b = e.target.closest("button");
+      if (!b) return;
+      e.stopPropagation();
+      show(dots.indexOf(b));
+      run();
+    }, true);
+    new IntersectionObserver(([e]) => { seen = e.isIntersecting; run(); }, { threshold: 0.4 }).observe(stage);
+    mq.addEventListener?.("change", run);
   })();
 
   /* ---------- 4. 페이지 이동할 때 로고 막대로 화면 전환 ---------- */
