@@ -1,0 +1,43 @@
+<!doctype html>
+<!-- 공유 미리보기 이미지(og.png) 원본. 1200x630 으로 스크린샷해서 assets/img/og.png 로 저장 -->
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; background: #0b0d10; font-family: "Pretendard", "Helvetica Neue", Arial, sans-serif; color: #fff; }
+  .bg { position: absolute; inset: 0; background: radial-gradient(ellipse 60% 70% at 80% 100%, rgba(61,123,255,.45), transparent 70%), radial-gradient(ellipse 50% 60% at 100% 0%, rgba(10,58,92,.7), transparent 70%); }
+  .stack { position: absolute; right: -40px; top: 70px; width: 620px; height: 500px; transform: perspective(1400px) rotateY(-18deg) rotateX(6deg); }
+  .stack img { position: absolute; width: 470px; border-radius: 14px; box-shadow: 0 30px 60px rgba(0,0,0,.6); border: 1px solid rgba(255,255,255,.1); }
+  .stack img:nth-child(1) { left: 0; top: 0; transform: rotate(-6deg); }
+  .stack img:nth-child(2) { left: 70px; top: 120px; transform: rotate(2deg); }
+  .stack img:nth-child(3) { left: 140px; top: 240px; transform: rotate(7deg); }
+  .text { position: absolute; left: 72px; top: 0; bottom: 0; width: 560px; display: flex; flex-direction: column; justify-content: center; }
+  .logo { display: flex; align-items: center; gap: 14px; margin-bottom: 44px; }
+  .logo svg { width: 44px; height: 50px; color: #6b9bff; }
+  .logo b { font-size: 26px; letter-spacing: .02em; }
+  .logo small { display: block; font-size: 11px; letter-spacing: .34em; color: #7d858f; font-weight: 600; }
+  h1 { margin: 0 0 26px; font-size: 58px; line-height: 1.08; letter-spacing: -.03em; font-weight: 800; }
+  h1 em { font-style: normal; background: linear-gradient(90deg, #fff, #6b9bff 60%, #3d7bff); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  p { margin: 0; font-size: 22px; color: #b4bac3; }
+  .chips { display: flex; gap: 10px; margin-top: 30px; }
+  .chips span { padding: 9px 16px; border-radius: 999px; border: 1px solid rgba(255,255,255,.18); font-size: 16px; color: #eceef1; background: rgba(255,255,255,.05); }
+</style>
+</head>
+<body>
+  <div class="bg"></div>
+  <div class="stack">
+    <img src="../assets/img/slides/prop-cover.svg" alt="">
+    <img src="../assets/img/slides/prof-cover.svg" alt="">
+    <img src="../assets/img/slides/ir-cover.svg" alt="">
+  </div>
+  <div class="text">
+    <div class="logo">
+      <svg viewBox="0 0 200 230" fill="currentColor"><defs><clipPath id="u"><path d="M0 0H200V130A100 100 0 0 1 0 130Z"/></clipPath></defs><g clip-path="url(#u)"><polygon points="0,14 20,0 20,230 0,230"/><polygon points="30,30 50,16 50,230 30,230"/><polygon points="60,96 80,82 80,230 60,230"/><polygon points="90,110 110,96 110,230 90,230"/><polygon points="120,96 140,82 140,230 120,230"/><polygon points="150,30 170,16 170,230 150,230"/><polygon points="180,14 200,0 200,230 180,230"/></g></svg>
+      <div><b>YOUSTAR PPT</b><small>PRESENTATION</small></div>
+    </div>
+    <h1>Beyond the Ordinary,<br><em>Perfection in Detail.</em></h1>
+    <p>800+ presentations delivered · Rated 4.9 / 5</p>
+    <div class="chips"><span>IR Pitch Deck</span><span>Proposal</span><span>Company Profile</span></div>
+  </div>
+</body>
+</html>

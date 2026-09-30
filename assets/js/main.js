@@ -3,11 +3,64 @@
    ========================================================== */
 
 // 문의 폼 전송 주소 (Formspree, Getform, 자체 API 등)
-// 비워두면 메일 앱(youstar_ppt@naver.com)으로 내용을 작성해 보냅니다.
+// 비워두면 방문자의 메일 앱으로 youstar_ppt@naver.com 앞 메일이 작성됩니다.
 const FORM_ENDPOINT = "";
 const CONTACT_EMAIL = "youstar_ppt@naver.com";
 
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+// 사이트 장식용 샘플 슬라이드 (assets/img/slides/*.svg)
+const SLIDES = [
+  "ir-cover", "prop-cover", "prof-cover", "ir-traction", "prop-process", "prof-vision",
+  "ir-market", "demo-day", "prop-schedule", "prof-history", "ir-bm", "edu-guide",
+  "prop-org", "prof-clients", "ir-team", "annual-report",
+];
+const slideSrc = (name) => `assets/img/slides/${name}.svg`;
+const slideImg = (name, lazy = true) =>
+  `<img src="${slideSrc(name)}" alt="" ${lazy ? 'loading="lazy"' : ""} decoding="async">`;
+const pickSlides = (offset, count) => Array.from({ length: count }, (_, i) => SLIDES[(offset + i) % SLIDES.length]);
+
+/* ---------- Hero 슬라이드 벽 ---------- */
+document.querySelectorAll("[data-wall]").forEach((wall) => {
+  const cols = +wall.dataset.wall || 6;
+  wall.innerHTML = Array.from({ length: cols }, (_, c) => {
+    const list = pickSlides(c * 3, 6);
+    return `<div class="wall__col">${[...list, ...list].map((n) => slideImg(n, false)).join("")}</div>`;
+  }).join("");
+});
+
+/* ---------- 가로로 흐르는 슬라이드 릴 ---------- */
+document.querySelectorAll("[data-reel]").forEach((row) => {
+  const list = pickSlides(+row.dataset.reel || 0, 8);
+  row.innerHTML = [...list, ...list].map((n) => slideImg(n)).join("");
+  row.querySelectorAll("img").forEach((img, i) => i >= list.length && img.setAttribute("aria-hidden", "true"));
+});
+
+/* ---------- 고객사 마퀴 (끊김 없는 반복을 위해 복제) ---------- */
+document.querySelectorAll(".marquee__row").forEach((row) => {
+  const n = row.children.length;
+  row.innerHTML += row.innerHTML;
+  [...row.children].forEach((c, i) => i >= n && c.setAttribute("aria-hidden", "true"));
+});
+
+/* ---------- 메인 페이지 포트폴리오 미리보기 ---------- */
+(() => {
+  const box = document.querySelector("[data-pf-preview]");
+  if (!box || !window.PORTFOLIO) return;
+  const esc = window.pfEsc;
+  // 카테고리별로 2개씩 골라 섞어서 보여줌
+  const byCat = window.PORTFOLIO_CATEGORIES.map((c) => window.PORTFOLIO.filter((p) => p.category === c.id).slice(0, 2));
+  const picks = [0, 1].flatMap((i) => byCat.map((list) => list[i])).filter(Boolean);
+  box.innerHTML = picks
+    .map(
+      (p, i) => `
+    <a class="card reveal" data-delay="${i % 3}" href="portfolio.html?p=${encodeURIComponent(p.id)}">
+      <div class="card__thumb">${window.pfThumb(p)}</div>
+      <div class="card__meta"><b>${esc(p.name)}</b><span>${esc(window.pfCategory(p).en)} · ${esc(p.year)}</span></div>
+    </a>`
+    )
+    .join("");
+})();
 
 /* ---------- Header ---------- */
 (() => {
@@ -18,62 +71,87 @@ const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").match
   window.addEventListener("scroll", onScroll, { passive: true });
 
   const toggle = header.querySelector(".nav-toggle");
-  toggle?.addEventListener("click", () => {
-    const open = header.classList.toggle("is-open");
-    toggle.setAttribute("aria-expanded", String(open));
-  });
-  header.querySelectorAll(".nav a").forEach((a) =>
-    a.addEventListener("click", () => {
-      header.classList.remove("is-open");
-      toggle?.setAttribute("aria-expanded", "false");
-    })
-  );
+  const setOpen = (open) => {
+    header.classList.toggle("is-open", open);
+    toggle?.setAttribute("aria-expanded", String(open));
+    toggle?.setAttribute("aria-label", open ? "메뉴 닫기" : "메뉴 열기");
+  };
+  toggle?.addEventListener("click", () => setOpen(!header.classList.contains("is-open")));
+  header.querySelectorAll(".nav a").forEach((a) => a.addEventListener("click", () => setOpen(false)));
+  document.addEventListener("keydown", (e) => e.key === "Escape" && setOpen(false));
 })();
 
 /* ---------- Reveal on scroll ---------- */
+const revealIO =
+  "IntersectionObserver" in window && !reduceMotion
+    ? new IntersectionObserver(
+        (entries) =>
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add("is-in");
+              revealIO.unobserve(e.target);
+            }
+          }),
+        { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+      )
+    : null;
+window.observeReveal = (root = document) =>
+  root.querySelectorAll(".reveal:not(.is-in)").forEach((el) => (revealIO ? revealIO.observe(el) : el.classList.add("is-in")));
+window.observeReveal();
+
+/* ---------- 숫자 카운트업 ---------- */
 (() => {
-  const els = document.querySelectorAll(".reveal");
-  if (!("IntersectionObserver" in window) || reduceMotion) {
-    els.forEach((el) => el.classList.add("is-in"));
-    return;
-  }
+  const els = document.querySelectorAll("[data-count]");
+  if (!els.length) return;
+  const run = (el) => {
+    const end = parseFloat(el.dataset.count);
+    const dec = +(el.dataset.decimals || 0);
+    if (reduceMotion) return (el.textContent = end.toFixed(dec));
+    const t0 = performance.now();
+    const tick = (t) => {
+      const p = Math.min(1, (t - t0) / 1800);
+      el.textContent = (end * (1 - Math.pow(1 - p, 3))).toFixed(dec);
+      if (p < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  };
+  if (!("IntersectionObserver" in window)) return;
   const io = new IntersectionObserver(
-    (entries) =>
-      entries.forEach((e) => {
-        if (e.isIntersecting) {
-          e.target.classList.add("is-in");
-          io.unobserve(e.target);
-        }
-      }),
-    { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+    (es) => es.forEach((e) => e.isIntersecting && (run(e.target), io.unobserve(e.target))),
+    { threshold: 0.4 }
   );
   els.forEach((el) => io.observe(el));
 })();
 
-/* ---------- Starfield (hero background) ---------- */
+/* ---------- Hero 영상 (파일이 있을 때만) ---------- */
+(() => {
+  const video = document.querySelector(".hero__video");
+  if (!video) return;
+  if (reduceMotion) return video.remove();
+  const sources = [...video.querySelectorAll("source")];
+  let failed = 0;
+  // 영상 파일이 아직 없으면 조용히 제거하고 배경 이미지 + 애니메이션만 사용
+  sources.forEach((s) => s.addEventListener("error", () => ++failed === sources.length && video.remove()));
+  video.addEventListener("error", () => video.remove());
+})();
+
+/* ---------- Starfield ---------- */
 (() => {
   const canvas = document.querySelector("#stars");
   if (!canvas) return;
   const ctx = canvas.getContext("2d");
-  let w, h, dpr, stars = [], shooting = null, raf;
+  let w, h, stars = [], shooting = null, raf;
 
   const resize = () => {
-    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
     w = canvas.clientWidth;
     h = canvas.clientHeight;
     canvas.width = w * dpr;
     canvas.height = h * dpr;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    const count = Math.round((w * h) / 4200);
-    stars = Array.from({ length: count }, () => ({
-      x: Math.random() * w,
-      y: Math.random() * h,
-      r: Math.random() * 1.2 + 0.2,
-      a: Math.random() * 0.6 + 0.2,
-      tw: Math.random() * 0.02 + 0.004,
-      ph: Math.random() * Math.PI * 2,
-      vy: Math.random() * 0.05 + 0.01,
-      blue: Math.random() < 0.18,
+    stars = Array.from({ length: Math.round((w * h) / 5200) }, () => ({
+      x: Math.random() * w, y: Math.random() * h, r: Math.random() * 1.2 + 0.2, a: Math.random() * 0.6 + 0.25,
+      tw: Math.random() * 0.02 + 0.004, ph: Math.random() * Math.PI * 2, vy: Math.random() * 0.05 + 0.01, blue: Math.random() < 0.2,
     }));
   };
 
@@ -88,24 +166,20 @@ const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").match
       ctx.fillStyle = s.blue ? `rgba(140,175,255,${alpha})` : `rgba(255,255,255,${alpha})`;
       ctx.fill();
     }
-    // 가끔 지나가는 별똥별
-    if (!shooting && Math.random() < 0.003) {
-      shooting = { x: Math.random() * w * 0.7 + w * 0.3, y: Math.random() * h * 0.4, len: 0, life: 0 };
-    }
+    if (!shooting && Math.random() < 0.004) shooting = { x: Math.random() * w * 0.7 + w * 0.3, y: Math.random() * h * 0.4, life: 0 };
     if (shooting) {
       shooting.life += 1;
-      shooting.len = Math.min(120, shooting.len + 6);
-      const sx = shooting.x - shooting.life * 7;
-      const sy = shooting.y + shooting.life * 3.5;
-      const grad = ctx.createLinearGradient(sx, sy, sx + shooting.len, sy - shooting.len / 2);
+      const len = Math.min(140, shooting.life * 6);
+      const sx = shooting.x - shooting.life * 7, sy = shooting.y + shooting.life * 3.5;
       const fade = Math.max(0, 1 - shooting.life / 50);
-      grad.addColorStop(0, `rgba(255,255,255,${0.8 * fade})`);
+      const grad = ctx.createLinearGradient(sx, sy, sx + len, sy - len / 2);
+      grad.addColorStop(0, `rgba(255,255,255,${0.85 * fade})`);
       grad.addColorStop(1, "rgba(255,255,255,0)");
       ctx.strokeStyle = grad;
-      ctx.lineWidth = 1.2;
+      ctx.lineWidth = 1.3;
       ctx.beginPath();
       ctx.moveTo(sx, sy);
-      ctx.lineTo(sx + shooting.len, sy - shooting.len / 2);
+      ctx.lineTo(sx + len, sy - len / 2);
       ctx.stroke();
       if (shooting.life > 50) shooting = null;
     }
@@ -117,14 +191,70 @@ const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").match
   if (reduceMotion) {
     draw(0);
     cancelAnimationFrame(raf);
-  } else {
-    raf = requestAnimationFrame(draw);
-    // 화면 밖이면 애니메이션 정지 (배터리 절약)
-    new IntersectionObserver(([e]) => {
-      cancelAnimationFrame(raf);
-      if (e.isIntersecting) raf = requestAnimationFrame(draw);
-    }).observe(canvas);
+    return;
   }
+  raf = requestAnimationFrame(draw);
+  new IntersectionObserver(([e]) => {
+    cancelAnimationFrame(raf);
+    if (e.isIntersecting) raf = requestAnimationFrame(draw);
+  }).observe(canvas);
+})();
+
+/* ---------- Before / After 비교 슬라이더 ---------- */
+document.querySelectorAll(".ba").forEach((ba) => {
+  const range = ba.querySelector(".ba__range");
+  const set = (v) => ba.style.setProperty("--pos", `${v}%`);
+  range.addEventListener("input", () => set(range.value));
+  if (reduceMotion || !("IntersectionObserver" in window)) return;
+
+  // 처음 보일 때 한 번 좌우로 움직여서 드래그할 수 있다는 걸 알려줌
+  let touched = false;
+  ["pointerdown", "keydown", "touchstart"].forEach((ev) => range.addEventListener(ev, () => (touched = true), { passive: true }));
+  const anim = (from, to, dur) =>
+    new Promise((done) => {
+      const t0 = performance.now();
+      const step = (t) => {
+        if (touched) return done();
+        const p = Math.min(1, (t - t0) / dur);
+        const e = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
+        const v = from + (to - from) * e;
+        set(v);
+        range.value = v;
+        p < 1 ? requestAnimationFrame(step) : done();
+      };
+      requestAnimationFrame(step);
+    });
+  const io = new IntersectionObserver(
+    async ([e]) => {
+      if (!e.isIntersecting) return;
+      io.disconnect();
+      await anim(50, 22, 800);
+      await anim(22, 78, 1200);
+      await anim(78, 50, 800);
+    },
+    { threshold: 0.6 }
+  );
+  io.observe(ba);
+});
+
+/* ---------- 작업 종류 목록: 마우스를 올리면 미리보기 ---------- */
+(() => {
+  const list = document.querySelector(".works__list");
+  const pv = document.querySelector(".works__preview");
+  if (!list || !pv) return;
+  if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return pv.remove();
+  list.addEventListener("pointermove", (e) => {
+    pv.style.left = `${e.clientX}px`;
+    pv.style.top = `${e.clientY}px`;
+    pv.classList.toggle("is-left", e.clientX + 400 > window.innerWidth);
+  });
+  list.querySelectorAll("li[data-img]").forEach((li) => {
+    li.addEventListener("pointerenter", () => {
+      pv.src = slideSrc(li.dataset.img);
+      pv.classList.add("is-on");
+    });
+    li.addEventListener("pointerleave", () => pv.classList.remove("is-on"));
+  });
 })();
 
 /* ---------- Review slider ---------- */
@@ -145,14 +275,6 @@ const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").match
   update();
 })();
 
-/* ---------- Client marquee (끊김 없는 반복을 위해 복제) ---------- */
-document.querySelectorAll(".marquee__row").forEach((row) => {
-  row.innerHTML += row.innerHTML;
-  row.querySelectorAll(".logo-chip").forEach((c, i, all) => {
-    if (i >= all.length / 2) c.setAttribute("aria-hidden", "true");
-  });
-});
-
 /* ---------- Contact form ---------- */
 (() => {
   const form = document.querySelector("#contact-form");
@@ -162,7 +284,6 @@ document.querySelectorAll(".marquee__row").forEach((row) => {
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     status.className = "form__status";
-
     const types = [...form.querySelectorAll('input[name="type"]:checked')].map((i) => i.value);
     if (!types.length) {
       status.textContent = "문의 유형을 하나 이상 선택해 주세요.";
@@ -185,7 +306,7 @@ document.querySelectorAll(".marquee__row").forEach((row) => {
         });
         if (!res.ok) throw new Error(res.status);
         form.reset();
-        status.textContent = "문의가 접수되었습니다. 영업일 기준 24시간 안에 연락드릴게요.";
+        status.textContent = "문의가 접수되었습니다. 빠르게 연락드릴게요.";
         status.classList.add("ok");
       } catch {
         status.textContent = `전송에 실패했습니다. ${CONTACT_EMAIL} 로 직접 보내주세요.`;
@@ -196,18 +317,10 @@ document.querySelectorAll(".marquee__row").forEach((row) => {
       return;
     }
 
-    // 전송 주소가 없으면 메일 앱으로 작성
     const body = [
-      `성함: ${data.name}`,
-      `회사명: ${data.company}`,
-      `이메일: ${data.email}`,
-      `연락처: ${data.phone}`,
-      `예산 범위: ${data.budget || "-"}`,
-      `문의 유형: ${data.type}`,
-      `자료 공유 링크: ${data.link || "-"}`,
-      "",
-      "[문의 내용]",
-      data.message,
+      `성함: ${data.name}`, `회사명: ${data.company}`, `이메일: ${data.email}`, `연락처: ${data.phone}`,
+      `예산 범위: ${data.budget || "-"}`, `문의 유형: ${data.type}`, `자료 공유 링크: ${data.link || "-"}`,
+      "", "[문의 내용]", data.message,
     ].join("\n");
     const subject = `[홈페이지 견적 문의] ${data.company} / ${data.type}`;
     window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
@@ -216,5 +329,4 @@ document.querySelectorAll(".marquee__row").forEach((row) => {
   });
 })();
 
-/* ---------- Footer year ---------- */
 document.querySelectorAll("[data-year]").forEach((el) => (el.textContent = new Date().getFullYear()));

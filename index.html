@@ -2,19 +2,20 @@
 <html lang="ko">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>유별난PPT | IR · 제안서 · 회사소개서 PPT 제작 전문</title>
-  <meta name="description" content="누적 작업 800건 이상. IR 피칭덱, 공공기관 제안서, 회사소개서 제작 전문 유별난PPT. AI 워크플로우로 빠르게, 디렉터의 기획과 디테일로 유별나게 완성합니다.">
-  <meta property="og:title" content="유별난PPT - Beyond the Ordinary, Perfection in Detail.">
-  <meta property="og:description" content="타협하지 않는 유별난 디테일이 성공을 만듭니다. IR · 제안서 · 회사소개서 제작 전문.">
+  <meta name="description" content="누적 작업 800건 이상, 만족도 4.9점. IR 피칭덱, 데모데이, 공공기관 제안서, 회사소개서까지. 기획부터 디자인까지 책임지는 PPT 제작 전문 유별난PPT.">
+  <meta property="og:title" content="유별난PPT — Beyond the Ordinary, Perfection in Detail.">
+  <meta property="og:description" content="타협하지 않는 유별난 디테일이 성공을 만듭니다. IR · 제안서 · 회사소개서 PPT 제작 전문.">
   <meta property="og:type" content="website">
+  <meta property="og:image" content="https://nowlebi-prog.github.io/-PPT/assets/img/og.png">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#0b0d10">
   <link rel="icon" href="assets/img/logo.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 
-<!-- ============ Header ============ -->
 <header class="header">
   <div class="container">
     <a class="brand" href="index.html" aria-label="유별난PPT 홈">
@@ -26,7 +27,6 @@
       <a href="about.html">회사소개</a>
       <a href="#services">서비스</a>
       <a href="portfolio.html">포트폴리오</a>
-      <a href="#ai">AI 워크플로우</a>
       <a href="#reviews">고객 후기</a>
       <a class="btn btn--primary btn--sm" href="#contact">빠른 견적 문의</a>
     </nav>
@@ -35,27 +35,54 @@
 
 <main>
 
-<!-- ============ 01 Hero ============ -->
+<!-- ============ Hero ============ -->
 <section class="hero" id="top">
+  <video class="hero__video" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
+    <source src="assets/video/hero-loop.webm" type="video/webm">
+    <source src="assets/video/hero-loop.mp4" type="video/mp4">
+  </video>
+  <div class="wall" data-wall="7" aria-hidden="true"></div>
   <canvas id="stars" aria-hidden="true"></canvas>
+  <div class="hero__shade" aria-hidden="true"></div>
+
   <div class="container hero__inner">
-    <p class="hero__badge reveal">누적 작업 800건 이상 <i></i> IR · 데모데이 · 공공기관 제작 전문</p>
+    <p class="hero__badge reveal"><span>누적 작업 <b>800건 이상</b></span><i></i><span>IR · 데모데이 · 공공기관 제작 전문</span></p>
     <p class="hero__en reveal" data-delay="1">Beyond the Ordinary, Perfection in Detail.</p>
-    <h1 class="hero__ko reveal" data-delay="2">타협하지 않는 <em>유별난 디테일</em>이<br>성공을 만듭니다.</h1>
+    <h1 class="hero__ko reveal" data-delay="2">타협하지 않는<br class="m-only"> <em>유별난 디테일</em>이<br>성공을 만듭니다.</h1>
     <div class="hero__cta reveal" data-delay="3">
       <a class="btn btn--ghost" href="portfolio.html">포트폴리오 보기</a>
       <a class="btn btn--primary" href="#contact">빠른 견적 문의하기</a>
     </div>
   </div>
-  <div class="scroll-cue" aria-hidden="true">SCROLL</div>
+
+  <div class="container">
+    <div class="hero__stats reveal" data-delay="3">
+      <div class="stat"><div class="stat__num"><span data-count="800">800</span><small>+</small></div><p>누적 작업 건수</p></div>
+      <div class="stat"><div class="stat__num"><span data-count="300">300</span><small>+</small></div><p>누적 클라이언트</p></div>
+      <div class="stat"><div class="stat__num"><span data-count="4.9" data-decimals="1">4.9</span><small>/5</small></div><p>평균 만족도</p></div>
+      <div class="stat"><div class="stat__num"><span data-count="458">458</span><small>+</small></div><p>공식 후기</p></div>
+    </div>
+  </div>
 </section>
 
-<!-- ============ 02-1 Problem ============ -->
-<section class="section problem">
+<!-- ============ Trust (고객사) ============ -->
+<section class="trust" id="clients" aria-label="함께한 기업과 기관">
+  <p class="trust__label">Trusted by 300+ clients · 함께한 기업 · 기관</p>
+  <div class="marquee"><div class="marquee__row">
+    <span class="logo-chip">과학기술정보통신부</span><span class="logo-chip">행정안전부</span><span class="logo-chip">농협</span><span class="logo-chip">삼성물산</span><span class="logo-chip">현대</span><span class="logo-chip">전라북도</span><span class="logo-chip">LH</span><span class="logo-chip">NIPA</span><span class="logo-chip">유네스코 I-WSSM</span><span class="logo-chip">우리은행</span><span class="logo-chip">산림청</span><span class="logo-chip">금융보안원</span><span class="logo-chip">KAIST</span><span class="logo-chip">경기콘텐츠진흥원</span>
+  </div></div>
+  <div class="marquee marquee--rev"><div class="marquee__row">
+    <span class="logo-chip">소풍커넥트</span><span class="logo-chip">경희대 산학협력단</span><span class="logo-chip">고려대 산학협력단</span><span class="logo-chip">한국청년기업가정신재단</span><span class="logo-chip">마인즈그라운드</span><span class="logo-chip">에이랩스</span><span class="logo-chip">쓰리아이솔루션</span><span class="logo-chip">A by plus</span><span class="logo-chip">한국자활연수원</span><span class="logo-chip">우리들hrd</span><span class="logo-chip">언어발전소</span><span class="logo-chip">크레아큐브</span><span class="logo-chip">사쿠라테이엔</span><span class="logo-chip">법무법인 성암</span><span class="logo-chip">노무법인 사월</span><span class="logo-chip">멋쟁이사자처럼</span><span class="logo-chip">국립부경대학교</span>
+  </div></div>
+</section>
+
+<!-- ============ Problem ============ -->
+<section class="section">
   <div class="container problem__grid">
     <div class="reveal">
       <span class="eyebrow">Problem</span>
       <h2 class="h2">중요한 발표를 앞두고,<br>혹시 이런 고민 중이신가요?</h2>
+      <figure class="problem__img"><img src="assets/img/gen/pitch.jpg" alt="중요한 발표를 준비하는 모습" loading="lazy" onerror="this.parentNode.remove()"></figure>
     </div>
     <ul class="problem__list">
       <li class="reveal" data-delay="1"><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="m5 12 5 5 9-10"/></svg></span>머릿속에 아이디어는 많은데, PPT로 어떻게 정리해야 할지 막막합니다.</li>
@@ -65,16 +92,36 @@
   </div>
 </section>
 
-<!-- ============ 02-2 Solution ============ -->
+<!-- ============ Before / After ============ -->
+<section class="section section--alt">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="eyebrow">Before &amp; After</span>
+      <h2 class="h2">같은 내용, <em>완전히 다른 설득력</em></h2>
+      <p class="lead">정리되지 않은 초안도 괜찮습니다. 핵심을 뽑아내고, 한눈에 읽히는 구조로 다시 설계합니다.</p>
+    </div>
+    <div class="ba reveal">
+      <img src="assets/img/slides/before.svg" alt="작업 전: 글자만 빽빽한 초안 슬라이드" loading="lazy">
+      <div class="ba__after"><img src="assets/img/slides/after.svg" alt="작업 후: 핵심 수치가 한눈에 보이는 슬라이드" loading="lazy"></div>
+      <span class="ba__tag ba__tag--l">BEFORE</span>
+      <span class="ba__tag ba__tag--r">AFTER</span>
+      <div class="ba__handle" aria-hidden="true"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6-6 6 6 6M15 6l6 6-6 6"/></svg></span></div>
+      <input class="ba__range" type="range" min="0" max="100" value="50" aria-label="작업 전후 비교: 좌우로 움직여 보세요">
+    </div>
+    <p class="ba__hint">← 좌우로 드래그해서 비교해 보세요 →</p>
+  </div>
+</section>
+
+<!-- ============ Solution ============ -->
 <section class="section">
   <div class="container">
     <div class="section-head reveal">
-      <span class="eyebrow">Solution</span>
+      <span class="eyebrow">Why Youstar</span>
       <h2 class="h2"><span class="dim">유별난PPT는 단순한 '디자인 외주'가 아닙니다.</span><br>성공을 위한 '비즈니스 파트너'입니다.</h2>
     </div>
     <div class="solution__list">
       <article class="solution__item reveal">
-        <span class="solution__num">01</span>
+        <div class="solution__num"><span>01</span><img src="assets/img/gen/sol-strategy.png" alt="" loading="lazy" onerror="this.remove()"></div>
         <div>
           <p class="solution__q">"예쁘긴 한데, 뭔 말인지 하나도 안 읽혀요.."</p>
           <h3 class="solution__a">단순 디자인 NO,<br>비즈니스 기획 컨설팅 기본 탑재</h3>
@@ -82,7 +129,7 @@
         <p class="solution__desc">알맹이 없는 화려한 디자인은 진짜 실력이 아닙니다. 작업 전 고객님의 비즈니스 모델과 목적을 완벽히 이해하는 것부터 시작하고, IR·제안서의 흐름이 어색하다면 더 설득력 있는 스토리라인과 카피라이팅을 먼저 역제안해 드립니다.</p>
       </article>
       <article class="solution__item reveal">
-        <span class="solution__num">02</span>
+        <div class="solution__num"><span>02</span><img src="assets/img/gen/sol-file.png" alt="" loading="lazy" onerror="this.remove()"></div>
         <div>
           <p class="solution__q">"나중에 글자 하나 고치려 해도 돈 내야 하나요?"</p>
           <h3 class="solution__a">추가금 없는<br>'100% 원본 파일(수정 가능)' 무상 제공</h3>
@@ -90,7 +137,7 @@
         <p class="solution__desc">텍스트 수정조차 못 하게 막아두고 추가 결제를 유도하지 않습니다. 납품 후에도 고객사 내부에서 텍스트와 수치를 자유롭게 고칠 수 있도록, 사용 폰트 안내와 함께 100% 편집 가능한 원본 파일을 기본으로 드립니다.</p>
       </article>
       <article class="solution__item reveal">
-        <span class="solution__num">03</span>
+        <div class="solution__num"><span>03</span><img src="assets/img/gen/sol-chat.png" alt="" loading="lazy" onerror="this.remove()"></div>
         <div>
           <p class="solution__q">"담당자가 누군지도 모르겠고, 소통이 답답해요"</p>
           <h3 class="solution__a">답답함 ZERO,<br>1:1 다이렉트 전담 소통 창구</h3>
@@ -101,115 +148,128 @@
   </div>
 </section>
 
-<!-- ============ AI Workflow ============ -->
-<section class="section ai" id="ai">
+<!-- ============ Works (다양한 작업) ============ -->
+<section class="section section--alt works" id="works">
   <div class="container">
-    <div class="section-head center reveal">
-      <span class="eyebrow">AI-Powered Studio</span>
-      <h2 class="ai__title">AI로 더 빠르게.<br>디테일은 더 <em>유별나게.</em></h2>
-      <p class="lead">유별난PPT는 AI를 가장 잘 다루는 PPT 스튜디오입니다.<br>반복 작업은 AI에게 맡기고, 아낀 시간은 전부 기획과 디테일에 씁니다.</p>
+    <div class="section-head reveal">
+      <span class="eyebrow">What We Make</span>
+      <h2 class="h2">IR부터 회사소개서까지,<br><em>발표가 필요한 모든 순간에.</em></h2>
+      <p class="lead">투자 유치, 입찰 수주, 브랜딩, 교육까지. 목적에 맞는 설득 구조로 설계합니다.</p>
     </div>
-
-    <div class="ai__grid">
-      <article class="ai-card reveal">
-        <span class="ai-card__no">01</span>
-        <h3>촉박한 마감도<br>퀄리티 그대로</h3>
-        <p>자료 정리와 서식 작업은 AI가 순식간에 끝냅니다. 다음 주 마감이어도 디자인 완성도는 타협하지 않습니다.</p>
-      </article>
-      <article class="ai-card reveal" data-delay="1">
-        <span class="ai-card__no">02</span>
-        <h3>시안은 더 많이,<br>선택은 더 정확하게</h3>
-        <p>레이아웃과 도해 아이디어를 여러 방향으로 빠르게 뽑아 비교합니다. 그중 가장 설득력 있는 안만 골라 다듬습니다.</p>
-      </article>
-      <article class="ai-card reveal" data-delay="2">
-        <span class="ai-card__no">03</span>
-        <h3>카피는 더<br>날카롭게</h3>
-        <p>한 문장을 여러 버전으로 검토하고, 디렉터가 투자자와 심사위원에게 가장 강하게 꽂히는 한 줄을 고릅니다.</p>
-      </article>
-    </div>
-
-    <div class="ai__combo reveal">
-      <div class="ai__combo-side">
-        <span class="ai__chip">AI</span>
-        <p>속도 · 아이디어 · 반복 작업</p>
-      </div>
-      <span class="ai__plus" aria-hidden="true">+</span>
-      <div class="ai__combo-side">
-        <span class="ai__chip ai__chip--human">DIRECTOR</span>
-        <p>기획 · 카피 · 디자인 판단 · 최종 검수</p>
-      </div>
-      <span class="ai__plus" aria-hidden="true">=</span>
-      <div class="ai__combo-side ai__combo-result">
-        <b>빠르고, 유별난 결과물</b>
-      </div>
-    </div>
-
-    <div class="safe reveal" id="security">
-      <div class="safe__head">
-        <div class="safe__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/><path d="m9 12 2 2 4-4"/></svg></div>
-        <div>
-          <h3>AI를 써도, 보안 걱정은 하지 마세요.</h3>
-          <p>고객사의 아이디어와 데이터는 철저히 보호됩니다.</p>
-        </div>
-      </div>
-      <ul class="safe__list">
-        <li>원본 파일은 AI에 통째로 넣지 않습니다</li>
-        <li>회사명 · 수치 등 민감 정보는 가린 뒤 사용</li>
-        <li>학습에 쓰이지 않도록 설정한 환경만 사용</li>
-        <li>NDA 체결 가능 · 요청 시 납품 후 자료 파기</li>
-      </ul>
-    </div>
+    <ul class="works__list reveal">
+      <li data-img="ir-cover"><span class="works__no">01</span><b>IR 피칭덱</b><em>Investor Pitch Deck</em></li>
+      <li data-img="demo-day"><span class="works__no">02</span><b>데모데이 발표자료</b><em>Demo Day</em></li>
+      <li data-img="ir-bm"><span class="works__no">03</span><b>정부지원사업 발표자료</b><em>Government Program</em></li>
+      <li data-img="prop-cover"><span class="works__no">04</span><b>공공기관 입찰 제안서</b><em>Public Bid Proposal</em></li>
+      <li data-img="prop-process"><span class="works__no">05</span><b>B2B 영업 제안서</b><em>Sales Proposal</em></li>
+      <li data-img="annual-report"><span class="works__no">06</span><b>사업계획서 · 보고서</b><em>Business Plan &amp; Report</em></li>
+      <li data-img="prof-cover"><span class="works__no">07</span><b>회사소개서</b><em>Company Profile</em></li>
+      <li data-img="prof-vision"><span class="works__no">08</span><b>브랜드 소개서</b><em>Brand Book</em></li>
+      <li data-img="ir-traction"><span class="works__no">09</span><b>제품 · 서비스 소개서</b><em>Product Deck</em></li>
+      <li data-img="ir-team"><span class="works__no">10</span><b>세미나 · 컨퍼런스 발표</b><em>Keynote</em></li>
+      <li data-img="edu-guide"><span class="works__no">11</span><b>교육 교안 · 강의자료</b><em>Training Material</em></li>
+      <li data-img="prof-history"><span class="works__no">12</span><b>교육안내책자 · 편집 디자인</b><em>Editorial Design</em></li>
+    </ul>
   </div>
+  <div class="reels" aria-hidden="true">
+    <div class="reel"><div class="reel__row" data-reel="0"></div></div>
+    <div class="reel reel--rev"><div class="reel__row" data-reel="8"></div></div>
+  </div>
+  <img class="works__preview" alt="" aria-hidden="true">
 </section>
 
-<!-- ============ 03 Services ============ -->
-<section class="section section--alt" id="services">
+<!-- ============ Services ============ -->
+<section class="section" id="services">
   <div class="container">
     <div class="section-head reveal">
       <span class="eyebrow">Services</span>
       <h2 class="h2">목적에 맞는 단 하나의 프레젠테이션</h2>
-      <p class="lead">투자 유치, 입찰 수주, 브랜딩까지. 목적이 다르면 설득하는 방식도 달라야 합니다.</p>
+      <p class="lead">목적이 다르면 설득하는 방식도 달라야 합니다.</p>
     </div>
-    <div class="services">
-      <article class="service reveal">
-        <span class="service__num">01</span>
-        <div>
-          <h3>IR Pitch Deck<small>투자유치 / 데모데이</small></h3>
-          <p>비즈니스 모델의 핵심을 찌르는 스토리텔링과 압도적인 시각화로 투자자의 마음을 움직이는 피칭덱을 완성합니다.</p>
-          <span class="service__target"><b>TARGET</b>스타트업 대표, 투자 유치를 앞둔 기업</span>
-        </div>
-        <a class="btn btn--ghost btn--sm" href="portfolio.html#ir">Portfolio →</a>
-      </article>
-      <article class="service reveal">
-        <span class="service__num">02</span>
-        <div>
-          <h3>Business Proposal<small>B2B 제안서 / 공공기관 입찰</small></h3>
-          <p>복잡한 정보는 직관적인 도해로, 텍스트는 설득력 있는 카피로. 심사위원이 고개를 끄덕이는 필승 제안서를 설계합니다.</p>
-          <span class="service__target"><b>TARGET</b>공기업 · 관공서 입찰 참여 기업, 사기업 제안 영업 담당자</span>
-        </div>
-        <a class="btn btn--ghost btn--sm" href="portfolio.html#proposal">Portfolio →</a>
-      </article>
-      <article class="service reveal">
-        <span class="service__num">03</span>
-        <div>
-          <h3>Company Profile<small>회사소개서 / 브랜드 소개서</small></h3>
-          <p>우리 회사의 철학과 가치를 가장 돋보이게 담아냅니다. 누구에게 보여줘도 자랑스러운 브랜드의 얼굴을 만들어 드립니다.</p>
-          <span class="service__target"><b>TARGET</b>자사 브랜딩이 필요한 모든 기업</span>
-        </div>
-        <a class="btn btn--ghost btn--sm" href="portfolio.html#profile">Portfolio →</a>
-      </article>
-    </div>
+
+    <article class="svc">
+      <div class="svc__media reveal">
+        <div class="device"><div class="device__screen"><img src="assets/img/slides/ir-cover.svg" alt="IR 피칭덱 샘플 디자인" loading="lazy"><img src="assets/img/slides/ir-traction.svg" alt="" loading="lazy"><img src="assets/img/slides/ir-market.svg" alt="" loading="lazy"></div><div class="device__base"></div></div>
+      </div>
+      <div class="svc__body reveal" data-delay="1">
+        <span class="svc__no">01</span>
+        <h3>IR Pitch Deck</h3>
+        <p class="svc__ko">투자유치 / 데모데이</p>
+        <p class="svc__desc">비즈니스 모델의 핵심을 찌르는 스토리텔링과 압도적인 시각화로 투자자의 마음을 움직이는 피칭덱을 완성합니다.</p>
+        <ul class="svc__tags"><li>시리즈 투자 IR</li><li>데모데이 피칭</li><li>정부지원사업 발표</li><li>투자 설명회</li></ul>
+        <p class="svc__target"><b>TARGET</b>스타트업 대표, 투자 유치를 앞둔 기업</p>
+        <a class="btn btn--ghost btn--sm" href="portfolio.html#ir">IR 포트폴리오 보기 →</a>
+      </div>
+    </article>
+
+    <article class="svc svc--rev">
+      <div class="svc__media reveal">
+        <div class="device"><div class="device__screen"><img src="assets/img/slides/prop-cover.svg" alt="제안서 샘플 디자인" loading="lazy"><img src="assets/img/slides/prop-process.svg" alt="" loading="lazy"><img src="assets/img/slides/prop-schedule.svg" alt="" loading="lazy"></div><div class="device__base"></div></div>
+      </div>
+      <div class="svc__body reveal" data-delay="1">
+        <span class="svc__no">02</span>
+        <h3>Business Proposal</h3>
+        <p class="svc__ko">B2B 제안서 / 공공기관 입찰</p>
+        <p class="svc__desc">복잡한 정보는 직관적인 도해로, 텍스트는 설득력 있는 카피로. 심사위원이 고개를 끄덕이는 필승 제안서를 설계합니다.</p>
+        <ul class="svc__tags"><li>공공기관 입찰</li><li>기술 제안서</li><li>B2B 영업 제안</li><li>정성평가 발표</li></ul>
+        <p class="svc__target"><b>TARGET</b>공기업 · 관공서 입찰 참여 기업, 사기업 제안 영업 담당자</p>
+        <a class="btn btn--ghost btn--sm" href="portfolio.html#proposal">제안서 포트폴리오 보기 →</a>
+      </div>
+    </article>
+
+    <article class="svc">
+      <div class="svc__media reveal">
+        <div class="device"><div class="device__screen"><img src="assets/img/slides/prof-cover.svg" alt="회사소개서 샘플 디자인" loading="lazy"><img src="assets/img/slides/prof-vision.svg" alt="" loading="lazy"><img src="assets/img/slides/prof-history.svg" alt="" loading="lazy"></div><div class="device__base"></div></div>
+      </div>
+      <div class="svc__body reveal" data-delay="1">
+        <span class="svc__no">03</span>
+        <h3>Company Profile</h3>
+        <p class="svc__ko">회사소개서 / 브랜드 소개서</p>
+        <p class="svc__desc">우리 회사의 철학과 가치를 가장 돋보이게 담아냅니다. 누구에게 보여줘도 자랑스러운 브랜드의 얼굴을 만들어 드립니다.</p>
+        <ul class="svc__tags"><li>회사소개서</li><li>브랜드 소개서</li><li>제품 · 서비스 소개서</li></ul>
+        <p class="svc__target"><b>TARGET</b>자사 브랜딩이 필요한 모든 기업</p>
+        <a class="btn btn--ghost btn--sm" href="portfolio.html#profile">소개서 포트폴리오 보기 →</a>
+      </div>
+    </article>
   </div>
 </section>
 
-<!-- ============ 05 Reviews ============ -->
-<section class="section" id="reviews">
+<!-- ============ Portfolio preview ============ -->
+<section class="section section--alt" id="portfolio">
+  <div class="container">
+    <div class="pf-head reveal">
+      <div><span class="eyebrow">Portfolio</span><h2 class="h2">디테일이 증명하는 결과물</h2></div>
+      <a class="btn btn--ghost" href="portfolio.html">전체 포트폴리오 보기 →</a>
+    </div>
+    <div class="pf-preview" data-pf-preview></div>
+  </div>
+</section>
+
+<!-- ============ Workflow (AI는 이 섹션 하나만) ============ -->
+<section class="section" id="workflow">
+  <div class="container ai__grid">
+    <div class="reveal">
+      <span class="eyebrow">Workflow</span>
+      <h2 class="h2">AI로 속도를 높이고,<br>디테일은 디렉터가 끝까지.</h2>
+      <p class="lead">자료 정리와 시안 탐색처럼 반복되는 작업은 AI로 빠르게 처리하고, 아낀 시간을 기획과 디테일에 더 씁니다.</p>
+      <figure class="ai__visual"><img src="assets/img/gen/ai-visual.png" alt="" loading="lazy" onerror="this.parentNode.remove()"></figure>
+    </div>
+    <ul class="ai__list reveal" data-delay="1">
+      <li><b>급한 일정에도 퀄리티 그대로</b><span>정리 · 서식 작업 시간을 줄여, 마감이 촉박해도 완성도를 지킵니다.</span></li>
+      <li><b>기획 · 카피 · 디자인 · 검수는 사람이</b><span>설득의 핵심은 담당 디렉터가 직접 책임집니다.</span></li>
+      <li><b>보안 걱정은 하지 마세요</b><span>원본 파일은 AI에 통째로 넣지 않고, 민감 정보는 가린 뒤에만 사용합니다. NDA 체결도 가능합니다.</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ Reviews ============ -->
+<section class="section section--alt" id="reviews">
   <div class="container">
     <div class="reviews__top reveal">
       <div>
         <span class="eyebrow">Reviews</span>
         <h2 class="h2">100% 실제 고객 리뷰</h2>
-        <p class="lead">수많은 기업이 유별난PPT의 디테일을 경험하고 만족했습니다.</p>
+        <p class="reviews__score"><b>★ 4.9</b> 공식 후기 458건+ · 재의뢰가 이어지는 PPT</p>
       </div>
       <div class="reviews__nav">
         <button class="icon-btn" data-review-prev aria-label="이전 후기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg></button>
@@ -217,69 +277,31 @@
       </div>
     </div>
     <div class="reviews__track reveal" tabindex="0" aria-label="고객 후기 목록">
-      <article class="review">
-        <div class="review__stars" aria-label="별점 5점">★★★★★</div>
-        <h3>정리가 덜 된 자료도 찰떡같이 이해하는 알잘딱깔센!</h3>
-        <p>정리가 완벽히 안 된 PPT 초안을 드렸는데도, 찰떡같이 알아들어주시고 정말 '알잘딱깔센'으로 작업해 주셨습니다! 책임감 있게 끝까지 빠른 작업해 주셔서 너무 감사합니다.</p>
-      </article>
-      <article class="review">
-        <div class="review__stars" aria-label="별점 5점">★★★★★</div>
-        <h3>벌써 8번째 의뢰, 자료의 톤앤매너를 완벽하게 캐치합니다.</h3>
-        <p>벌써 8번째 작업 의뢰네요. 이번에도 역시 작업 결과물이 기대 이상이었습니다~! 시각적으로도 뛰어나고, 자료의 톤앤매너를 정확하게 반영해 주셔서 만족도가 매우 높았습니다.</p>
-      </article>
-      <article class="review">
-        <div class="review__stars" aria-label="별점 5점">★★★★★</div>
-        <h3>디자인 퀄리티, 피드백 속도, 소통 모두 완벽합니다.</h3>
-        <p>매번 디자이너님께만 작업을 맡기게 되네요~! 요청 사항을 정확히 이해하고 감각적으로 완성해 주셔서 늘 다시 찾게 됩니다. 다음 작업도 계속 부탁드릴 예정입니다.</p>
-      </article>
-      <article class="review">
-        <div class="review__stars" aria-label="별점 5점">★★★★★</div>
-        <h3>단순 의뢰를 넘어, 전문가의 적극적인 의견 개진까지!</h3>
-        <p>의뢰자가 원하는 걸 완벽하게 적용시켜 주는 건 물론이고 적극적인 의견 개진 또한 너무나 감사합니다. 갑작스러운 의뢰에도 최선을 다해 최고의 결과물을 보여주셨습니다. 주변에 자신 있게 말씀드릴 수 있는 전문가입니다.</p>
-      </article>
-      <article class="review">
-        <div class="review__stars" aria-label="별점 5점">★★★★★</div>
-        <h3>촉박한 일정에도 빛을 발하는 정확한 납기일</h3>
-        <p>촉박한 일정 때문에 걱정했는데 최대한 편의를 봐주셔서 너무 감사해요. 결과물도 너무 만족스럽고요. 약속 정확하고 센스 있으시고 정말 잘 이용했습니다. 앞으로도 종종 이용할게요^^</p>
-      </article>
-      <article class="review">
-        <div class="review__stars" aria-label="별점 5점">★★★★★</div>
-        <h3>세대 불문 취향 저격, 세련되고 깔끔한 디자인</h3>
-        <p>항상 만족하며 이용하고 있습니다. 그 어떤 곳보다도 디자인이 세련되고 깔끔해요. 적은 텍스트도, 많은 텍스트도 가독성 좋게 정리해 주십니다. 확실한 결과물을 원하신다면 적극 추천합니다!</p>
-      </article>
-      <article class="review">
-        <div class="review__stars" aria-label="별점 5점">★★★★★</div>
-        <h3>작업물이 완벽 그 자체네요!</h3>
-        <p>작업물이 완벽 그 자체네요. 너무 좋고 친절하시고 다음에도 무조건 이용할 것 같습니다. 성심성의껏 해주셔서 정말 감사합니다!</p>
-      </article>
+      <article class="review"><div class="review__stars" aria-label="별점 5점">★★★★★</div><h3>정리가 덜 된 자료도 찰떡같이 이해하는 알잘딱깔센!</h3><p>정리가 완벽히 안 된 PPT 초안을 드렸는데도, 찰떡같이 알아들어주시고 정말 '알잘딱깔센'으로 작업해 주셨습니다! 책임감 있게 끝까지 빠른 작업해 주셔서 너무 감사합니다.</p></article>
+      <article class="review"><div class="review__stars" aria-label="별점 5점">★★★★★</div><h3>벌써 8번째 의뢰, 자료의 톤앤매너를 완벽하게 캐치합니다.</h3><p>벌써 8번째 작업 의뢰네요. 이번에도 역시 작업 결과물이 기대 이상이었습니다~! 시각적으로도 뛰어나고, 자료의 톤앤매너를 정확하게 반영해 주셔서 만족도가 매우 높았습니다.</p></article>
+      <article class="review"><div class="review__stars" aria-label="별점 5점">★★★★★</div><h3>디자인 퀄리티, 피드백 속도, 소통 모두 완벽합니다.</h3><p>매번 디자이너님께만 작업을 맡기게 되네요~! 요청 사항을 정확히 이해하고 감각적으로 완성해 주셔서 늘 다시 찾게 됩니다. 다음 작업도 계속 부탁드릴 예정입니다.</p></article>
+      <article class="review"><div class="review__stars" aria-label="별점 5점">★★★★★</div><h3>단순 의뢰를 넘어, 전문가의 적극적인 의견 개진까지!</h3><p>의뢰자가 원하는 걸 완벽하게 적용시켜 주는 건 물론이고 적극적인 의견 개진 또한 너무나 감사합니다. 갑작스러운 의뢰에도 최선을 다해 최고의 결과물을 보여주셨습니다.</p></article>
+      <article class="review"><div class="review__stars" aria-label="별점 5점">★★★★★</div><h3>촉박한 일정에도 빛을 발하는 정확한 납기일</h3><p>촉박한 일정 때문에 걱정했는데 최대한 편의를 봐주셔서 너무 감사해요. 결과물도 너무 만족스럽고요. 약속 정확하고 센스 있으시고 정말 잘 이용했습니다.</p></article>
+      <article class="review"><div class="review__stars" aria-label="별점 5점">★★★★★</div><h3>세대 불문 취향 저격, 세련되고 깔끔한 디자인</h3><p>항상 만족하며 이용하고 있습니다. 그 어떤 곳보다도 디자인이 세련되고 깔끔해요. 적은 텍스트도, 많은 텍스트도 가독성 좋게 정리해 주십니다.</p></article>
+      <article class="review"><div class="review__stars" aria-label="별점 5점">★★★★★</div><h3>작업물이 완벽 그 자체네요!</h3><p>작업물이 완벽 그 자체네요. 너무 좋고 친절하시고 다음에도 무조건 이용할 것 같습니다. 성심성의껏 해주셔서 정말 감사합니다!</p></article>
     </div>
     <p class="reviews__note">※ 해당 리뷰는 유별난PPT 외부 판매 페이지에서 확인 가능한 실제 리뷰입니다.</p>
   </div>
 </section>
 
-<!-- ============ 06 Clients ============ -->
-<section class="section section--alt" id="clients">
-  <div class="container">
-    <div class="section-head center reveal">
-      <span class="eyebrow">Clients</span>
-      <h2 class="h2">함께한 기업과 기관</h2>
-    </div>
-    <div class="clients__group reveal">
-      <p class="clients__label">Experience</p>
-      <div class="marquee"><div class="marquee__row">
-        <span class="logo-chip">과학기술정보통신부</span><span class="logo-chip">행정안전부</span><span class="logo-chip">농협</span><span class="logo-chip">삼성물산</span><span class="logo-chip">현대</span><span class="logo-chip">전라북도</span><span class="logo-chip">LH</span><span class="logo-chip">NIPA</span><span class="logo-chip">유네스코 I-WSSM</span><span class="logo-chip">우리은행</span><span class="logo-chip">산림청</span><span class="logo-chip">금융보안원</span><span class="logo-chip">KAIST</span><span class="logo-chip">경기콘텐츠진흥원</span>
-      </div></div>
-    </div>
-    <div class="clients__group reveal">
-      <p class="clients__label">Main Client</p>
-      <div class="marquee marquee--rev"><div class="marquee__row">
-        <span class="logo-chip">소풍커넥트</span><span class="logo-chip">경희대 산학협력단</span><span class="logo-chip">고려대 산학협력단</span><span class="logo-chip">한국청년기업가정신재단</span><span class="logo-chip">마인즈그라운드</span><span class="logo-chip">에이랩스</span><span class="logo-chip">쓰리아이솔루션</span><span class="logo-chip">A by plus</span><span class="logo-chip">한국자활연수원</span><span class="logo-chip">우리들hrd</span><span class="logo-chip">언어발전소</span><span class="logo-chip">크레아큐브</span><span class="logo-chip">사쿠라테이엔</span><span class="logo-chip">법무법인 성암</span><span class="logo-chip">노무법인 사월</span><span class="logo-chip">멋쟁이사자처럼</span><span class="logo-chip">국립부경대학교</span>
-      </div></div>
+<!-- ============ Big CTA ============ -->
+<section class="cta">
+  <div class="container reveal">
+    <h2>다음 발표,<br><span class="grad">유별나게</span> 준비하세요.</h2>
+    <p>IR · 제안서 · 회사소개서. 지금 상담을 남기시면 일정과 견적을 빠르게 안내해 드립니다.</p>
+    <div class="hero__cta">
+      <a class="btn btn--kakao" href="http://pf.kakao.com/_XgRWxj/chat" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.8 1.9 5.3 4.7 6.7l-1 3.7c-.1.3.3.6.6.4l4.4-2.9c.4 0 .9.1 1.3.1 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg>카카오톡 상담하기</a>
+      <a class="btn btn--primary" href="#contact">빠른 견적 문의하기</a>
     </div>
   </div>
 </section>
 
-<!-- ============ 07 Contact ============ -->
+<!-- ============ Contact ============ -->
 <section class="section contact" id="contact">
   <div class="container contact__grid">
     <div class="contact__info reveal">
@@ -288,14 +310,9 @@
       <p class="lead">현재 준비된 자료의 상태와 비즈니스 목적을 남겨주시면, 꼼꼼히 확인한 뒤 가장 확실하고 유별난 솔루션을 제안해 드립니다.</p>
       <dl>
         <div><dt>Email</dt><dd><a href="mailto:youstar_ppt@naver.com">youstar_ppt@naver.com</a></dd></div>
-        <div><dt>Phone</dt><dd><a href="tel:010-2690-8553">010-2690-8553</a></dd></div>
-        <div><dt>상담 가능 시간</dt><dd>09:00 – 17:00</dd></div>
         <div><dt>Kakao</dt><dd><a href="http://pf.kakao.com/_XgRWxj/chat" target="_blank" rel="noopener">카카오톡 채널 상담하기 ↗</a></dd></div>
+        <div><dt>상담 가능 시간</dt><dd>09:00 – 17:00</dd></div>
       </dl>
-      <div class="contact__safe">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/></svg>
-        <span>자료 파일은 폼에 직접 올리지 않고 <b>공유 링크</b>로만 받습니다. 기밀 자료라면 NDA 체결 후 전달해 주셔도 됩니다.</span>
-      </div>
       <div class="contact__meta">
         개인정보보호책임자 : 이은비<br>
         사업자등록번호 : 202-13-66345
@@ -309,7 +326,7 @@
       </div>
       <div class="form__row">
         <div class="field"><label for="f-email">이메일<span class="req">*</span></label><input id="f-email" name="email" type="email" required autocomplete="email" placeholder="example@company.co.kr"></div>
-        <div class="field"><label for="f-phone">연락처<span class="req">*</span></label><input id="f-phone" name="phone" type="tel" required autocomplete="tel" placeholder="010-0000-0000"></div>
+        <div class="field"><label for="f-phone">연락처<span class="req">*</span></label><input id="f-phone" name="phone" type="tel" required autocomplete="tel" placeholder="연락 받으실 번호"></div>
       </div>
       <div class="field">
         <label for="f-budget">예산 범위</label>
@@ -337,7 +354,7 @@
       <div class="field">
         <label for="f-link">자료 공유 링크</label>
         <input id="f-link" name="link" type="url" placeholder="Google Drive, 네이버 MYBOX, Dropbox 등 공유 링크">
-        <p class="hint">링크 공유 권한은 '링크가 있는 사용자'로, 가능하면 만료 기한을 설정해 주세요.</p>
+        <p class="hint">파일은 공유 링크로 보내주세요. 기밀 자료라면 상담 때 NDA 체결을 요청하실 수 있습니다.</p>
       </div>
       <label class="consent">
         <input type="checkbox" name="agree" required>
@@ -353,25 +370,23 @@
 
 </main>
 
-<!-- ============ Footer ============ -->
 <footer class="footer">
   <div class="container">
     <div>
       <p><b style="color:var(--text)">유별난PPT</b> YOUSTAR PRESENTATION</p>
       <p>사업자등록번호 202-13-66345 · 개인정보보호책임자 이은비</p>
-      <p>youstar_ppt@naver.com · 010-2690-8553</p>
+      <p>youstar_ppt@naver.com</p>
       <p>© <span data-year>2026</span> 유별난PPT. All rights reserved.</p>
     </div>
     <div class="footer__links">
       <a href="about.html">회사소개</a>
       <a href="portfolio.html">포트폴리오</a>
-      <a href="#ai">AI 워크플로우</a>
+      <a href="#reviews">고객 후기</a>
       <a href="#contact">문의하기</a>
     </div>
   </div>
 </footer>
 
-<!-- ============ Floating CTA ============ -->
 <div class="floating" aria-label="빠른 상담">
   <a class="fab fab--kakao" href="http://pf.kakao.com/_XgRWxj/chat" target="_blank" rel="noopener">
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.8 1.9 5.3 4.7 6.7l-1 3.7c-.1.3.3.6.6.4l4.4-2.9c.4 0 .9.1 1.3.1 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg>
@@ -383,6 +398,7 @@
   </a>
 </div>
 
+<script src="assets/js/portfolio-data.js"></script>
 <script src="assets/js/main.js"></script>
 </body>
 </html>

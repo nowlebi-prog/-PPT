@@ -6,7 +6,7 @@
    - thumb: 목록 썸네일 (16:9 권장, 예: "assets/img/portfolio/gears/thumb.jpg")
    - cover: 팝업 상단 대표 이미지 (비우면 thumb 사용)
    - slides: 팝업 안 슬라이드 이미지 (4장 권장, 개수 자유)
-   이미지가 비어 있으면 임시 그래픽이 표시됩니다.
+   이미지가 비어 있으면 브랜드 표지 카드가 자동으로 표시됩니다.
    ※ category / summary 는 임시 값입니다. 실제 내용으로 바꿔주세요.
    ========================================================== */
 
@@ -36,3 +36,21 @@ window.PORTFOLIO = [
   { id: "langplant", name: "언어발전소", category: "profile", year: "2025", summary: "Company Profile", thumb: "", cover: "", slides: [] },
   { id: "mfference", name: "메이퍼런스", category: "profile", year: "2025", summary: "Company Profile", thumb: "", cover: "", slides: [] },
 ];
+
+/* 공통 렌더링 도우미 (메인 · 포트폴리오 페이지에서 같이 사용) */
+window.pfEsc = (s) =>
+  String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
+
+window.pfCategory = (item) => window.PORTFOLIO_CATEGORIES.find((c) => c.id === item.category) || { en: "", label: "" };
+
+// 이미지가 있으면 이미지, 없으면 브랜드 표지 카드
+window.pfThumb = (item, big = false) => {
+  const esc = window.pfEsc;
+  const src = big ? item.cover || item.thumb : item.thumb;
+  if (src) return `<img src="${esc(src)}" alt="${esc(item.name)}" loading="lazy" decoding="async">`;
+  return `<div class="cover cover--${esc(item.category)}">
+      <span class="cover__brand">YOUSTAR PPT</span>
+      <span class="cover__cat">${esc(window.pfCategory(item).en)}</span>
+      <b class="cover__name">${esc(item.name)}</b>
+    </div>`;
+};
