@@ -411,6 +411,23 @@ def _():
     return doc(b, defs)
 
 
+@slide("tech-before")
+def _():
+    """텍스트로만 된 기술 설명 초안 (사례 2 입력 자료 예시)"""
+    fam = "Calibri, 'Malgun Gothic', Arial, sans-serif"
+    b = rect(0, 0, W, H, "#FFFFFF")
+    b += text(80, 110, "System Architecture (Draft)", 52, "#222222", 400, fam=fam)
+    random.seed(21)
+    y = 170
+    for _p in range(4):
+        for _k in range(random.randint(4, 5)):
+            b += rect(80, y, random.randint(1100, 1440), 13, "#8a8a8a", rx=2, op=.75)
+            y += 26
+        y += 26
+    b += text(1540, 885, "7", 20, "#999", 400, "end", fam=fam)
+    return doc(b)
+
+
 if __name__ == "__main__":
     os.makedirs(OUT, exist_ok=True)
     for name, fn in SLIDES.items():
