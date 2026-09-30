@@ -77,17 +77,17 @@
 </section>
 
 <!-- ============ Problem ============ -->
-<section class="section">
+<section class="section problem">
   <div class="container problem__grid">
     <div class="reveal">
       <span class="eyebrow">Problem</span>
-      <h2 class="h2">중요한 발표를 앞두고,<br>혹시 이런 고민 중이신가요?</h2>
-      <figure class="problem__img"><img src="assets/img/gen/pitch.jpg" alt="중요한 발표를 준비하는 모습" loading="lazy" onerror="this.parentNode.remove()"></figure>
+      <h2 class="h2" data-split>중요한 발표를 앞두고,<br>혹시 이런 고민 중이신가요?</h2>
+      <figure class="problem__img"><img src="assets/img/gen/pitch.jpg" alt="중요한 발표를 준비하는 모습" loading="lazy" data-parallax="0.08" onerror="this.parentNode.remove()"></figure>
     </div>
     <ul class="problem__list">
-      <li class="reveal" data-delay="1"><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="m5 12 5 5 9-10"/></svg></span>머릿속에 아이디어는 많은데, PPT로 어떻게 정리해야 할지 막막합니다.</li>
-      <li class="reveal" data-delay="2"><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="m5 12 5 5 9-10"/></svg></span>예쁘기만 한 디자인 말고, 심사위원을 설득할 '기획력'이 필요합니다.</li>
-      <li class="reveal" data-delay="3"><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="m5 12 5 5 9-10"/></svg></span>당장 다음 주가 마감인데, 퀄리티를 믿고 맡길 곳이 없어요.</li>
+      <li class="reveal" data-reveal="right" data-delay="1" data-drift="50"><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="m5 12 5 5 9-10"/></svg></span>머릿속에 아이디어는 많은데, PPT로 어떻게 정리해야 할지 막막합니다.</li>
+      <li class="reveal" data-reveal="right" data-delay="2" data-drift="100"><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="m5 12 5 5 9-10"/></svg></span>예쁘기만 한 디자인 말고, 심사위원을 설득할 '기획력'이 필요합니다.</li>
+      <li class="reveal" data-reveal="right" data-delay="3" data-drift="150"><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="m5 12 5 5 9-10"/></svg></span>당장 다음 주가 마감인데, 퀄리티를 믿고 맡길 곳이 없어요.</li>
     </ul>
   </div>
 </section>
@@ -97,7 +97,7 @@
   <div class="container">
     <div class="section-head center reveal">
       <span class="eyebrow">Before &amp; After</span>
-      <h2 class="h2">같은 내용, <em>완전히 다른 설득력</em></h2>
+      <h2 class="h2" data-split>같은 내용, <em>완전히 다른 설득력</em></h2>
       <p class="lead">정리되지 않은 초안도 괜찮습니다. 핵심을 뽑아내고, 한눈에 읽히는 구조로 다시 설계합니다.</p>
     </div>
     <div class="ba reveal">
@@ -112,38 +112,73 @@
   </div>
 </section>
 
-<!-- ============ Solution ============ -->
-<section class="section">
+<!-- ============ Why (스크롤 모션그래픽) ============ -->
+<section class="section why" id="why">
   <div class="container">
     <div class="section-head reveal">
       <span class="eyebrow">Why Youstar</span>
-      <h2 class="h2"><span class="dim">유별난PPT는 단순한 '디자인 외주'가 아닙니다.</span><br>성공을 위한 '비즈니스 파트너'입니다.</h2>
+      <h2 class="h2" data-split><span class="dim">유별난PPT는 단순한 '디자인 외주'가 아닙니다.</span><br>성공을 위한 '비즈니스 파트너'입니다.</h2>
     </div>
-    <div class="solution__list">
-      <article class="solution__item reveal">
-        <div class="solution__num"><span>01</span><img src="assets/img/gen/sol-strategy.png" alt="" loading="lazy" onerror="this.remove()"></div>
-        <div>
+    <div class="why__grid">
+      <div class="why__stage">
+        <div class="why__screen" aria-hidden="true">
+          <div class="scene scene--plan is-active">
+            <div class="sc-frame">
+              <span class="sc-t" style="--x:22cqw;--y:30cqw;--r:12deg"></span>
+              <span class="sc-l sc-l1" style="--x:40cqw;--y:10cqw;--r:-18deg"></span>
+              <span class="sc-l sc-l2" style="--x:12cqw;--y:38cqw;--r:24deg"></span>
+              <svg class="sc-chart" viewBox="0 0 300 78" preserveAspectRatio="none"><defs><linearGradient id="scg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3d7bff" stop-opacity=".45"/><stop offset="1" stop-color="#3d7bff" stop-opacity="0"/></linearGradient></defs><polygon class="sc-area" points="0,70 50,58 100,62 150,40 200,30 250,18 300,4 300,78 0,78"/><polyline points="0,70 50,58 100,62 150,40 200,30 250,18 300,4"/></svg>
+              <span class="sc-card sc-c1" style="--x:30cqw;--y:-30cqw;--r:-16deg">문제 정의</span>
+              <span class="sc-card sc-c2" style="--x:-18cqw;--y:-36cqw;--r:10deg">해결 방안</span>
+              <span class="sc-card sc-c3" style="--x:-40cqw;--y:-14cqw;--r:-8deg">성장 전략</span>
+              <span class="sc-badge">✓ 스토리라인 완성</span>
+            </div>
+          </div>
+          <div class="scene scene--file">
+            <div class="sc-win">
+              <div class="sc-bar"><i></i><i></i><i></i><span>IR_Deck_최종.pptx</span><em>편집 가능</em></div>
+              <div class="sc-body">
+                <span class="sc-kicker">REVENUE 2026</span>
+                <div class="sc-num"><b class="old">32억</b><b class="new">45억</b><span class="caret"></span></div>
+                <span class="sc-sub"></span><span class="sc-sub"></span>
+                <div class="sc-bars2"><b style="--h:34%"></b><b style="--h:50%"></b><b style="--h:66%"></b><b style="--h:100%"></b></div>
+              </div>
+              <div class="sc-toast">✓ 원본 PPT + 폰트 안내까지 그대로</div>
+            </div>
+            <span class="sc-ripple"></span>
+            <svg class="sc-cursor" viewBox="0 0 24 24"><path d="M4 2l16 9-7 2-3 7z" fill="#fff" stroke="#0e1624" stroke-width="1.5" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="scene scene--chat">
+            <div class="sc-chat">
+              <div class="sc-head"><span class="sc-ava">Y</span><div>담당 디렉터<small>● 지금 응답 중</small></div></div>
+              <div class="sc-msg sc-msg--in">표지 컬러를 조금 더 밝게 바꿀 수 있을까요?</div>
+              <div class="sc-reply"><div class="sc-typing"><i></i><i></i><i></i></div><div class="sc-msg sc-msg--out">네! 바로 반영해서 보내드릴게요.</div></div>
+              <div class="sc-thumb"><span class="sc-thumb__t"></span><span class="sc-thumb__l"></span><span class="sc-done">✓ 반영 완료</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="why__dots"><button class="is-active" aria-label="이유 1"></button><button aria-label="이유 2"></button><button aria-label="이유 3"></button></div>
+      </div>
+      <div class="why__items">
+        <article class="why__item is-active" data-step="0">
+          <div class="why__no"><span>01</span><img src="assets/img/gen/sol-strategy.png" alt="" loading="lazy" onerror="this.remove()"></div>
           <p class="solution__q">"예쁘긴 한데, 뭔 말인지 하나도 안 읽혀요.."</p>
           <h3 class="solution__a">단순 디자인 NO,<br>비즈니스 기획 컨설팅 기본 탑재</h3>
-        </div>
-        <p class="solution__desc">알맹이 없는 화려한 디자인은 진짜 실력이 아닙니다. 작업 전 고객님의 비즈니스 모델과 목적을 완벽히 이해하는 것부터 시작하고, IR·제안서의 흐름이 어색하다면 더 설득력 있는 스토리라인과 카피라이팅을 먼저 역제안해 드립니다.</p>
-      </article>
-      <article class="solution__item reveal">
-        <div class="solution__num"><span>02</span><img src="assets/img/gen/sol-file.png" alt="" loading="lazy" onerror="this.remove()"></div>
-        <div>
+          <p class="solution__desc">알맹이 없는 화려한 디자인은 진짜 실력이 아닙니다. 작업 전 고객님의 비즈니스 모델과 목적을 완벽히 이해하는 것부터 시작하고, IR·제안서의 흐름이 어색하다면 더 설득력 있는 스토리라인과 카피라이팅을 먼저 역제안해 드립니다.</p>
+        </article>
+        <article class="why__item" data-step="1">
+          <div class="why__no"><span>02</span><img src="assets/img/gen/sol-file.png" alt="" loading="lazy" onerror="this.remove()"></div>
           <p class="solution__q">"나중에 글자 하나 고치려 해도 돈 내야 하나요?"</p>
           <h3 class="solution__a">추가금 없는<br>'100% 원본 파일(수정 가능)' 무상 제공</h3>
-        </div>
-        <p class="solution__desc">텍스트 수정조차 못 하게 막아두고 추가 결제를 유도하지 않습니다. 납품 후에도 고객사 내부에서 텍스트와 수치를 자유롭게 고칠 수 있도록, 사용 폰트 안내와 함께 100% 편집 가능한 원본 파일을 기본으로 드립니다.</p>
-      </article>
-      <article class="solution__item reveal">
-        <div class="solution__num"><span>03</span><img src="assets/img/gen/sol-chat.png" alt="" loading="lazy" onerror="this.remove()"></div>
-        <div>
+          <p class="solution__desc">텍스트 수정조차 못 하게 막아두고 추가 결제를 유도하지 않습니다. 납품 후에도 고객사 내부에서 텍스트와 수치를 자유롭게 고칠 수 있도록, 사용 폰트 안내와 함께 100% 편집 가능한 원본 파일을 기본으로 드립니다.</p>
+        </article>
+        <article class="why__item" data-step="2">
+          <div class="why__no"><span>03</span><img src="assets/img/gen/sol-chat.png" alt="" loading="lazy" onerror="this.remove()"></div>
           <p class="solution__q">"담당자가 누군지도 모르겠고, 소통이 답답해요"</p>
           <h3 class="solution__a">답답함 ZERO,<br>1:1 다이렉트 전담 소통 창구</h3>
-        </div>
-        <p class="solution__desc">영업 사원 따로, 디자이너 따로? 소통 단계가 늘어날수록 의도는 왜곡됩니다. 계약과 동시에 실무를 총괄하는 디렉터와 직접 소통하는 1:1 핫라인을 열고, 작업 현황을 투명하게 공유하며 피드백을 즉시 반영합니다.</p>
-      </article>
+          <p class="solution__desc">영업 사원 따로, 디자이너 따로? 소통 단계가 늘어날수록 의도는 왜곡됩니다. 계약과 동시에 실무를 총괄하는 디렉터와 직접 소통하는 1:1 핫라인을 열고, 작업 현황을 투명하게 공유하며 피드백을 즉시 반영합니다.</p>
+        </article>
+      </div>
     </div>
   </div>
 </section>
@@ -153,10 +188,10 @@
   <div class="container">
     <div class="section-head reveal">
       <span class="eyebrow">What We Make</span>
-      <h2 class="h2">IR부터 회사소개서까지,<br><em>발표가 필요한 모든 순간에.</em></h2>
+      <h2 class="h2" data-split>IR부터 회사소개서까지,<br><em>발표가 필요한 모든 순간에.</em></h2>
       <p class="lead">투자 유치, 입찰 수주, 브랜딩, 교육까지. 목적에 맞는 설득 구조로 설계합니다.</p>
     </div>
-    <ul class="works__list reveal">
+    <ul class="works__list">
       <li data-img="ir-cover"><span class="works__no">01</span><b>IR 피칭덱</b><em>Investor Pitch Deck</em></li>
       <li data-img="demo-day"><span class="works__no">02</span><b>데모데이 발표자료</b><em>Demo Day</em></li>
       <li data-img="ir-bm"><span class="works__no">03</span><b>정부지원사업 발표자료</b><em>Government Program</em></li>
@@ -178,20 +213,26 @@
   <img class="works__preview" alt="" aria-hidden="true">
 </section>
 
+<!-- ============ 큰 글자 흐름 ============ -->
+<div class="kinetic" aria-hidden="true">
+  <div class="kinetic__row" data-speed="1"><span>IR PITCH DECK</span><i></i><span class="o">BUSINESS PROPOSAL</span><i></i><span>COMPANY PROFILE</span><i></i><span class="o">DEMO DAY</span><i></i></div>
+  <div class="kinetic__row" data-speed="-0.8"><span class="o">회사소개서</span><i></i><span>제안서</span><i></i><span class="o">IR 피칭덱</span><i></i><span>데모데이</span><i></i><span class="o">브랜드 소개서</span><i></i></div>
+</div>
+
 <!-- ============ Services ============ -->
 <section class="section" id="services">
   <div class="container">
     <div class="section-head reveal">
       <span class="eyebrow">Services</span>
-      <h2 class="h2">목적에 맞는 단 하나의 프레젠테이션</h2>
+      <h2 class="h2" data-split>목적에 맞는 단 하나의 프레젠테이션</h2>
       <p class="lead">목적이 다르면 설득하는 방식도 달라야 합니다.</p>
     </div>
 
     <article class="svc">
-      <div class="svc__media reveal">
-        <div class="device"><div class="device__screen"><img src="assets/img/slides/ir-cover.svg" alt="IR 피칭덱 샘플 디자인" loading="lazy"><img src="assets/img/slides/ir-traction.svg" alt="" loading="lazy"><img src="assets/img/slides/ir-market.svg" alt="" loading="lazy"></div><div class="device__base"></div></div>
+      <div class="svc__media reveal" data-reveal="left">
+        <div class="device" data-tilt-in><div class="device__screen"><img src="assets/img/slides/ir-cover.svg" alt="IR 피칭덱 샘플 디자인" loading="lazy"><img src="assets/img/slides/ir-traction.svg" alt="" loading="lazy"><img src="assets/img/slides/ir-market.svg" alt="" loading="lazy"></div><div class="device__base"></div></div>
       </div>
-      <div class="svc__body reveal" data-delay="1">
+      <div class="svc__body reveal" data-reveal="right" data-delay="1">
         <span class="svc__no">01</span>
         <h3>IR Pitch Deck</h3>
         <p class="svc__ko">투자유치 / 데모데이</p>
@@ -203,10 +244,10 @@
     </article>
 
     <article class="svc svc--rev">
-      <div class="svc__media reveal">
-        <div class="device"><div class="device__screen"><img src="assets/img/slides/prop-cover.svg" alt="제안서 샘플 디자인" loading="lazy"><img src="assets/img/slides/prop-process.svg" alt="" loading="lazy"><img src="assets/img/slides/prop-schedule.svg" alt="" loading="lazy"></div><div class="device__base"></div></div>
+      <div class="svc__media reveal" data-reveal="right">
+        <div class="device" data-tilt-in><div class="device__screen"><img src="assets/img/slides/prop-cover.svg" alt="제안서 샘플 디자인" loading="lazy"><img src="assets/img/slides/prop-process.svg" alt="" loading="lazy"><img src="assets/img/slides/prop-schedule.svg" alt="" loading="lazy"></div><div class="device__base"></div></div>
       </div>
-      <div class="svc__body reveal" data-delay="1">
+      <div class="svc__body reveal" data-reveal="left" data-delay="1">
         <span class="svc__no">02</span>
         <h3>Business Proposal</h3>
         <p class="svc__ko">B2B 제안서 / 공공기관 입찰</p>
@@ -218,10 +259,10 @@
     </article>
 
     <article class="svc">
-      <div class="svc__media reveal">
-        <div class="device"><div class="device__screen"><img src="assets/img/slides/prof-cover.svg" alt="회사소개서 샘플 디자인" loading="lazy"><img src="assets/img/slides/prof-vision.svg" alt="" loading="lazy"><img src="assets/img/slides/prof-history.svg" alt="" loading="lazy"></div><div class="device__base"></div></div>
+      <div class="svc__media reveal" data-reveal="left">
+        <div class="device" data-tilt-in><div class="device__screen"><img src="assets/img/slides/prof-cover.svg" alt="회사소개서 샘플 디자인" loading="lazy"><img src="assets/img/slides/prof-vision.svg" alt="" loading="lazy"><img src="assets/img/slides/prof-history.svg" alt="" loading="lazy"></div><div class="device__base"></div></div>
       </div>
-      <div class="svc__body reveal" data-delay="1">
+      <div class="svc__body reveal" data-reveal="right" data-delay="1">
         <span class="svc__no">03</span>
         <h3>Company Profile</h3>
         <p class="svc__ko">회사소개서 / 브랜드 소개서</p>
@@ -238,7 +279,7 @@
 <section class="section section--alt" id="portfolio">
   <div class="container">
     <div class="pf-head reveal">
-      <div><span class="eyebrow">Portfolio</span><h2 class="h2">디테일이 증명하는 결과물</h2></div>
+      <div><span class="eyebrow">Portfolio</span><h2 class="h2" data-split>디테일이 증명하는 결과물</h2></div>
       <a class="btn btn--ghost" href="portfolio.html">전체 포트폴리오 보기 →</a>
     </div>
     <div class="pf-preview" data-pf-preview></div>
@@ -250,7 +291,7 @@
   <div class="container ai__grid">
     <div class="reveal">
       <span class="eyebrow">Workflow</span>
-      <h2 class="h2">AI로 속도를 높이고,<br>디테일은 디렉터가 끝까지.</h2>
+      <h2 class="h2" data-split>AI로 속도를 높이고,<br>디테일은 디렉터가 끝까지.</h2>
       <p class="lead">자료 정리와 시안 탐색처럼 반복되는 작업은 AI로 빠르게 처리하고, 아낀 시간을 기획과 디테일에 더 씁니다.</p>
       <figure class="ai__visual"><img src="assets/img/gen/ai-visual.png" alt="" loading="lazy" onerror="this.parentNode.remove()"></figure>
     </div>
@@ -268,7 +309,7 @@
     <div class="reviews__top reveal">
       <div>
         <span class="eyebrow">Reviews</span>
-        <h2 class="h2">100% 실제 고객 리뷰</h2>
+        <h2 class="h2" data-split>100% 실제 고객 리뷰</h2>
         <p class="reviews__score"><b>★ 4.9</b> 공식 후기 458건+ · 재의뢰가 이어지는 PPT</p>
       </div>
       <div class="reviews__nav">
@@ -291,8 +332,14 @@
 
 <!-- ============ Big CTA ============ -->
 <section class="cta">
+  <div class="cta__float" aria-hidden="true">
+    <img class="f1" src="assets/img/slides/ir-cover.svg" alt="" loading="lazy" data-parallax="0.12">
+    <img class="f2" src="assets/img/slides/prop-process.svg" alt="" loading="lazy" data-parallax="-0.1">
+    <img class="f3" src="assets/img/slides/prof-vision.svg" alt="" loading="lazy" data-parallax="0.2">
+    <img class="f4" src="assets/img/slides/ir-traction.svg" alt="" loading="lazy" data-parallax="-0.16">
+  </div>
   <div class="container reveal">
-    <h2>다음 발표,<br><span class="grad">유별나게</span> 준비하세요.</h2>
+    <h2 data-split>다음 발표,<br><span class="grad">유별나게</span> 준비하세요.</h2>
     <p>IR · 제안서 · 회사소개서. 지금 상담을 남기시면 일정과 견적을 빠르게 안내해 드립니다.</p>
     <div class="hero__cta">
       <a class="btn btn--kakao" href="http://pf.kakao.com/_XgRWxj/chat" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.8 1.9 5.3 4.7 6.7l-1 3.7c-.1.3.3.6.6.4l4.4-2.9c.4 0 .9.1 1.3.1 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg>카카오톡 상담하기</a>
@@ -306,7 +353,7 @@
   <div class="container contact__grid">
     <div class="contact__info reveal">
       <span class="eyebrow">Contact</span>
-      <h2 class="h2">성공적인 수주와 투자 유치,<br>유별난PPT가 증명하겠습니다.</h2>
+      <h2 class="h2" data-split>성공적인 수주와 투자 유치,<br>유별난PPT가 증명하겠습니다.</h2>
       <p class="lead">현재 준비된 자료의 상태와 비즈니스 목적을 남겨주시면, 꼼꼼히 확인한 뒤 가장 확실하고 유별난 솔루션을 제안해 드립니다.</p>
       <dl>
         <div><dt>Email</dt><dd><a href="mailto:youstar_ppt@naver.com">youstar_ppt@naver.com</a></dd></div>
@@ -400,5 +447,6 @@
 
 <script src="assets/js/portfolio-data.js"></script>
 <script src="assets/js/main.js"></script>
+<script src="assets/js/motion.js"></script>
 </body>
 </html>
