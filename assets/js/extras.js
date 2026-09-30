@@ -203,6 +203,15 @@
     mq.addEventListener?.("change", run);
   })();
 
+  /* ---------- 3-3. 왜 유별난PPT: 고민(BEFORE) → 해결(AFTER) 등장 ---------- */
+  (() => {
+    const items = $$(".bax");
+    if (!items.length) return;
+    if (rm || !("IntersectionObserver" in window)) return items.forEach((el) => el.classList.add("is-shown"));
+    const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("is-shown"); io.unobserve(e.target); } }), { threshold: 0.35 });
+    items.forEach((el) => io.observe(el));
+  })();
+
   /* ---------- 4. 페이지 이동할 때 로고 막대로 화면 전환 ---------- */
   (() => {
     if (rm) return;
