@@ -53,7 +53,7 @@
     const cat = window.pfCategory(i);
     const slides = i.slides.length
       ? `<div class="modal__slides">${i.slides.map((s, n) => `<img src="${esc(s)}" alt="${esc(i.name)} 슬라이드 ${n + 1}" loading="lazy">`).join("")}</div>`
-      : `<div class="modal__cta"><p>이 프로젝트와 비슷한 작업이 필요하신가요?</p><a class="btn btn--primary btn--sm" href="index.html#contact">빠른 견적 문의하기</a></div>`;
+      : `<div class="modal__cta"><p>이 프로젝트와 비슷한 작업이 필요하신가요?</p><div class="modal__acts"><button class="btn btn--ghost btn--sm" type="button" data-share="${esc(i.id)}">링크 공유</button><a class="btn btn--primary btn--sm" href="index.html?ref=${encodeURIComponent(i.id)}#contact">이 작업처럼 문의하기</a></div></div>`;
     content.innerHTML = `
       <div class="modal__hero">${window.pfThumb(i, true)}</div>
       <div class="modal__body">
@@ -66,7 +66,7 @@
           <div><dt>Year</dt><dd>${esc(i.year)}</dd></div>
         </dl>
         ${slides}
-        ${i.slides.length ? `<div class="modal__cta" style="margin-top:24px"><p>이 프로젝트와 비슷한 작업이 필요하신가요?</p><a class="btn btn--primary btn--sm" href="index.html#contact">빠른 견적 문의하기</a></div>` : ""}
+        ${i.slides.length ? `<div class="modal__cta" style="margin-top:24px"><p>이 프로젝트와 비슷한 작업이 필요하신가요?</p><div class="modal__acts"><button class="btn btn--ghost btn--sm" type="button" data-share="${esc(i.id)}">링크 공유</button><a class="btn btn--primary btn--sm" href="index.html?ref=${encodeURIComponent(i.id)}#contact">이 작업처럼 문의하기</a></div></div>` : ""}
       </div>`;
     lastFocus = document.activeElement;
     modal.classList.add("is-open");

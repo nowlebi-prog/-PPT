@@ -311,7 +311,7 @@ document.querySelectorAll(".ba").forEach((ba) => {
     }
 
     const body = [
-      `성함: ${d.name}`, `회사명: ${d.company}`, `이메일: ${d.email}`, `연락처: ${d.phone}`,
+      `성함: ${d.name}`, `회사명: ${d.company}`, `이메일: ${d.email}`, `연락처: ${d.phone}`, `선호 연락 방법: ${d.contact_pref || "-"}`, `연락 가능 시간: ${d.contact_time || "-"}`,
       `발표 목적: ${d.goal || "-"}`, `희망 납기: ${d.due || "-"}`, `예상 페이지 수: ${d.pages || "-"}`, `예산 범위: ${d.budget || "-"}`,
       `준비된 자료: ${d.ready}`, `필요한 작업: ${d.need}`, `NDA 사전 체결 요청: ${d.nda}`, `자료 공유 링크: ${d.link || "-"}`,
       "", "[문의 내용]", d.message,

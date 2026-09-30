@@ -48,7 +48,7 @@
     track.after(dots);
 
     let pages = 1, timer = null, paused = false, visible = false, idleT = null, scrollT = null;
-    const step = () => cards[0].offsetWidth + GAP;
+    const step = () => cards[0].offsetWidth + (parseFloat(getComputedStyle(track).columnGap) || GAP);
     const idx = () => clamp(Math.round(track.scrollLeft / step()), 0, pages - 1);
     const go = (i) => track.scrollTo({ left: i * step(), behavior: rm ? "auto" : "smooth" });
     const mark = () => {
@@ -131,7 +131,15 @@
       if (num) num.textContent = String(Math.max(i, 0) + 1).padStart(2, "0");
     };
     if (rm) { sec.classList.add("is-static"); return; }
+    const mob = matchMedia("(max-width: 760px)");
+    let played = false;
+    new IntersectionObserver(([e]) => {
+      if (!e.isIntersecting || !mob.matches || played) return;
+      played = true;
+      words.forEach((w, k) => setTimeout(() => { w.classList.add("is-on"); caps[k]?.classList.add("is-lit"); }, 200 + k * 420));
+    }, { threshold: 0.35 }).observe(sec);
     const tick = () => {
+      if (mob.matches) return;
       const r = sec.getBoundingClientRect(), total = sec.offsetHeight - innerHeight;
       const p = clamp(-r.top / (total || 1), 0, 1);
       bar?.style.setProperty("--p", p.toFixed(3));
@@ -270,7 +278,10 @@
         const s = steps[n];
         body.innerHTML = `<div class="qz__step"><small>${n + 1} / ${steps.length}</small><h3>${s.q}</h3><div class="qz__opts">${s.opts.map((o) => `<button type="button" data-v="${esc(o)}">${esc(o)}</button>`).join("")}</div>${n ? '<button class="qz__back" type="button" data-back>← 이전</button>' : ""}</div>`;
       } else {
-        body.innerHTML = `<div class="qz__step"><small>완료</small><h3>이렇게 정리됐어요</h3><ul class="qz__sum">${steps.map((s) => `<li>${esc(ans[s.key])}</li>`).join("")}</ul><div class="qz__acts"><button class="btn btn--primary" type="button" data-fill>이 내용으로 상담 요청서 작성하기</button><button class="btn btn--kakao" type="button" data-kakao>카카오톡으로 바로 상담하기</button></div><p class="qz__hint">카카오톡을 누르면 정리된 내용이 복사돼요. 대화창에 붙여넣기만 하세요.</p><button class="qz__back" type="button" data-back>← 이전</button></div>`;
+        const urgent = /^1주/.test(ans.due || "");
+        const fillB = '<button class="btn btn--primary" type="button" data-fill>이 내용으로 상담 요청서 작성하기</button>';
+        const kakaoB = '<button class="btn btn--kakao" type="button" data-kakao>카카오톡으로 바로 상담하기</button>';
+        body.innerHTML = `<div class="qz__step"><small>완료</small><h3>이렇게 정리됐어요</h3><ul class="qz__sum">${steps.map((s) => `<li>${esc(ans[s.key])}</li>`).join("")}</ul>${urgent ? '<p class="qz__tip">⚡ 급한 일정이라면 카카오톡 상담이 가장 빨라요.</p>' : ""}<div class="qz__acts">${urgent ? kakaoB + fillB : fillB + kakaoB}</div><p class="qz__hint">카카오톡을 누르면 정리된 내용이 복사돼요. 대화창에 붙여넣기만 하세요.</p><button class="qz__guide" type="button" data-guide-open>무엇을 준비하면 될까요? 준비 가이드 보기 →</button><button class="qz__back" type="button" data-back>← 이전</button></div>`;
       }
       $("button:not(.qz__back)", body)?.focus({ preventScroll: true });
     };
@@ -289,6 +300,13 @@
       const opt = e.target.closest("[data-v]");
       if (opt) { ans[steps[n].key] = opt.dataset.v; n++; return render(); }
       if (e.target.closest("[data-back]")) { n = Math.max(0, n - 1); return render(); }
+      if (e.target.closest("[data-guide-open]")) {
+        const g = ans.goal || "";
+        const type = /입찰|제안/.test(g) ? "proposal" : /소개/.test(g) ? "profile" : "ir";
+        close();
+        document.dispatchEvent(new CustomEvent("yb:guide", { detail: { type } }));
+        return;
+      }
       if (e.target.closest("[data-fill]")) {
         const goal = form.querySelector('[name="goal"]');
         if (goal && [...goal.options].some((o) => o.value === ans.goal || o.text === ans.goal)) goal.value = ans.goal;
@@ -342,6 +360,7 @@
       const d = {};
       fields().forEach((el) => {
         if (el.type === "checkbox") { d[el.name] = d[el.name] || []; if (el.checked) d[el.name].push(el.value); }
+        else if (el.type === "radio") { if (el.checked) d[el.name] = el.value; else if (!(el.name in d)) d[el.name] = ""; }
         else d[el.name] = el.value;
       });
       try { localStorage.setItem(KEY, JSON.stringify(d)); } catch {}
@@ -353,6 +372,7 @@
           const v = d[el.name];
           if (v == null) return;
           if (el.type === "checkbox") el.checked = v.includes(el.value);
+          else if (el.type === "radio") el.checked = el.value === v;
           else el.value = v;
         });
         const note = document.createElement("p");

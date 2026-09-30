@@ -75,10 +75,20 @@
     const btn = $(".form__more-btn", fold);
     const set = (open) => { fold.classList.toggle("is-open", open); btn?.setAttribute("aria-expanded", String(open)); };
     btn?.addEventListener("click", () => set(!fold.classList.contains("is-open")));
-    const filled = () => $$("input, select, textarea", fold).some((el) => (el.type === "checkbox" ? el.checked : el.value.trim()));
+    const filled = () => $$("input, select, textarea", fold).some((el) => (el.type === "checkbox" || el.type === "radio" ? el.checked : el.value.trim()));
     const form = fold.closest("form");
     ["input", "change"].forEach((ev) => form?.addEventListener(ev, () => filled() && set(true)));
     if (filled()) set(true);
+  }
+
+  /* ---------- 3-1. 작업 과정 타임라인: 화면에 들어오면 단계가 차례로 켜짐 ---------- */
+  const steps = $$(".pv-text");
+  if (steps.length) {
+    if (rm || !("IntersectionObserver" in window)) steps.forEach((el) => el.classList.add("is-lit"));
+    else {
+      const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("is-lit"); io.unobserve(e.target); } }), { threshold: 0.5 });
+      steps.forEach((el) => io.observe(el));
+    }
   }
 
   /* ---------- 4. 헤더: 아래로 스크롤하면 숨기고, 위로 올리면 다시 보임 ---------- */
