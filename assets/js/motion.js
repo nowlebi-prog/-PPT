@@ -222,19 +222,4 @@
       dev.style.setProperty("--my", "0deg");
     });
   });
-
-  /* ---------- 8. 후기 자동 넘김 ---------- */
-  const track = $(".reviews__track");
-  if (track) {
-    let hold = false;
-    ["pointerenter", "focusin", "touchstart"].forEach((ev) => track.addEventListener(ev, () => (hold = true), { passive: true }));
-    ["pointerleave", "focusout"].forEach((ev) => track.addEventListener(ev, () => (hold = false)));
-    setInterval(() => {
-      if (hold || document.hidden) return;
-      const r = track.getBoundingClientRect();
-      if (r.bottom < 0 || r.top > innerHeight) return;
-      const atEnd = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4;
-      track.scrollTo({ left: atEnd ? 0 : track.scrollLeft + track.querySelector(".review").offsetWidth + 20 });
-    }, 4500);
-  }
 })();
