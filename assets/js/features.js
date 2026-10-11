@@ -15,8 +15,8 @@
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
   const norm = (s) => String(s).toLowerCase().replace(/\s+/g, "");
-  const KAKAO = "http://pf.kakao.com/_XgRWxj/chat";
-  const MAIL = "youstar_ppt@naver.com";
+  const KAKAO = window.SITE?.kakao || "https://pf.kakao.com/_XgRWxj/chat";
+  const MAIL = window.SITE?.email || "youstar_ppt@naver.com";
   const form = $("#contact-form");
   const SEARCH_ICO = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>';
 
@@ -196,7 +196,7 @@
     const item = ref && window.PORTFOLIO?.find((p) => p.id === ref);
     if (item) {
       const cat = window.pfCategory ? window.pfCategory(item) : { label: "" };
-      const goalMap = { ir: "투자 유치 (IR)", proposal: "입찰 · 제안", profile: "회사 · 브랜드 · 제품 소개" };
+      const goalMap = { ir: "투자 유치 (IR)", proposal: "입찰 · 제안", profile: "회사 · 브랜드 · 제품 소개", editorial: "기타" };
       setTimeout(() => applyFill(
         { goal: goalMap[item.category], note: `포트폴리오의 '${item.name}'(${cat.label}) 작업과 비슷한 방향으로 문의드립니다.` },
         `‘${item.name}’ 작업을 참고로 문의서를 채웠어요.`
@@ -321,7 +321,7 @@
   /* ---------- 7. PC 섹션 바로가기 (오른쪽 점 표시) ---------- */
   (() => {
     if (!form) return;
-    const secs = [["#cases", "제작 사례"], ["#why", "왜 유별난PPT"], ["#services", "서비스"], ["#portfolio", "포트폴리오"], ["#process", "작업 과정"], ["#security", "자료 보안"], ["#reviews", "고객 후기"], ["#faq", "자주 묻는 질문"], ["#contact", "상담 문의"]]
+    const secs = [["#services", "서비스"], ["#visual", "제품 비주얼"], ["#ir", "IR은 더 깊게"], ["#portfolio", "포트폴리오"], ["#process", "작업 과정"], ["#pricing", "가격"], ["#reviews", "고객 후기"], ["#faq", "자주 묻는 질문"], ["#contact", "상담 문의"]]
       .map(([s, l]) => [$(s), s, l]).filter(([el]) => el);
     if (!secs.length) return;
     const nav = document.createElement("nav");

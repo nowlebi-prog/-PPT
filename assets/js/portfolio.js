@@ -1,7 +1,8 @@
 /* 포트폴리오 페이지: 카테고리별 그리드 + 스크롤 연동 사이드 내비 + 상세 팝업 */
 (() => {
-  const cats = window.PORTFOLIO_CATEGORIES;
-  const items = window.PORTFOLIO;
+  const items = window.pfVisible();
+  // 보여 줄 작업이 없는 분류는 제목까지 숨김
+  const cats = window.PORTFOLIO_CATEGORIES.filter((c) => items.some((i) => i.category === c.id));
   const esc = window.pfEsc;
   const nav = document.querySelector(".pf__nav ol");
   const main = document.querySelector(".pf__main");
@@ -20,7 +21,7 @@
           (i, n) => `
         <button class="card reveal" data-delay="${n % 2}" type="button" data-id="${esc(i.id)}" aria-haspopup="dialog">
           <div class="card__thumb">${window.pfThumb(i)}</div>
-          <div class="card__meta"><b>${esc(i.name)}</b><span>${esc(i.summary)} · ${esc(i.year)}</span></div>
+          <div class="card__meta"><b>${esc(i.name)}</b><span>${esc(i.summary)}${i.year ? " · " + esc(i.year) : ""}</span></div>
         </button>`
         )
         .join("");
@@ -48,11 +49,12 @@
   let lastFocus = null;
 
   const open = (id, push = true) => {
+    id = window.PORTFOLIO_ALIAS?.[id] || id;
     const i = items.find((x) => x.id === id);
     if (!i) return;
     const cat = window.pfCategory(i);
     const slides = i.slides.length
-      ? `<div class="modal__slides">${i.slides.map((s, n) => `<img src="${esc(s)}" alt="${esc(i.name)} 슬라이드 ${n + 1}" loading="lazy">`).join("")}</div>`
+      ? `<div class="modal__slides">${i.slides.map((s, n) => `<img src="${esc(s)}" alt="${esc(`${i.name} ${i.summary} 내지 ${n + 1}`)}" ${i.orient === "portrait" ? "" : 'width="1600" height="900"'} loading="lazy" decoding="async" onerror="this.remove()">`).join("")}</div>`
       : `<div class="modal__cta"><p>이 프로젝트와 비슷한 작업이 필요하신가요?</p><div class="modal__acts"><button class="btn btn--ghost btn--sm" type="button" data-share="${esc(i.id)}">링크 공유</button><a class="btn btn--primary btn--sm" href="index.html?ref=${encodeURIComponent(i.id)}#contact">이 작업처럼 문의하기</a></div></div>`;
     content.innerHTML = `
       <div class="modal__hero">${window.pfThumb(i, true)}</div>
@@ -63,11 +65,12 @@
         <dl class="modal__facts">
           <div><dt>Client</dt><dd>${esc(i.name)}</dd></div>
           <div><dt>Category</dt><dd>${esc(cat.label)}</dd></div>
-          <div><dt>Year</dt><dd>${esc(i.year)}</dd></div>
+          ${i.year ? `<div><dt>Year</dt><dd>${esc(i.year)}</dd></div>` : ""}
         </dl>
         ${slides}
         ${i.slides.length ? `<div class="modal__cta" style="margin-top:24px"><p>이 프로젝트와 비슷한 작업이 필요하신가요?</p><div class="modal__acts"><button class="btn btn--ghost btn--sm" type="button" data-share="${esc(i.id)}">링크 공유</button><a class="btn btn--primary btn--sm" href="index.html?ref=${encodeURIComponent(i.id)}#contact">이 작업처럼 문의하기</a></div></div>` : ""}
       </div>`;
+    modal.classList.toggle("is-portrait", i.orient === "portrait");
     lastFocus = document.activeElement;
     modal.classList.add("is-open");
     document.body.classList.add("no-scroll");

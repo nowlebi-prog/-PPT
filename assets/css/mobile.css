@@ -281,3 +281,54 @@
   .pv-text { opacity: 1 !important; transform: none !important; }
   .imp__caps p { opacity: 1; transform: none; }
 }
+
+/* =========================================================
+   리디자인 v3 (2026-10-11): 새 섹션 모바일
+   ========================================================= */
+@media (max-width: 767px) {
+  /* 비교 표 → 항목별 카드 */
+  .vs, .vs tbody, .vs tr, .vs th, .vs td { display: block; width: auto; }
+  .vs { border: 0; border-radius: 0; overflow: visible; font-size: 14px; }
+  .vs thead { display: none; }
+  .vs tr { margin-bottom: 12px; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+  .vs th, .vs td { padding: 14px 16px; border-top: 0; }
+  .vs tbody th { width: auto; font-size: 15px; background: var(--surface); border-bottom: 1px solid var(--line); }
+  .vs td::before { content: attr(data-label); display: block; margin-bottom: 4px; font-size: 12px; font-weight: 800; letter-spacing: .02em; }
+  .vs td.vs__raw::before { color: var(--text-2); }
+  .vs td.vs__ours::before { color: var(--accent-2); }
+
+  /* 스트립 → 1열 (4칸이면 2x2) · 화살표 숨김 */
+  .vstrip-head { margin-top: 48px; }
+  .vstrip { grid-auto-flow: row; grid-template-columns: 1fr; gap: 12px; }
+  .vstrip:has(> li:nth-child(4)) { grid-template-columns: repeat(2, 1fr); }
+  .vstrip__item:not(:last-child)::after { display: none; }
+
+  /* IR · 가격 1열 */
+  .ir__top { grid-template-columns: 1fr; gap: 24px; margin-bottom: 28px; }
+  .ir__num { padding: 20px; }
+  .ir__steps { grid-template-columns: 1fr; gap: 12px; }
+  .ir__steps li { padding: 20px; }
+  .price-grid { grid-template-columns: 1fr; gap: 12px; }
+  .price { padding: 22px 20px 20px; }
+  .price-foot { padding: 20px 18px; }
+  .price-where .btn { margin-left: 0; width: 100%; }
+
+  /* 히어로 실적 3칸 */
+  .hero__stats--3 { grid-template-columns: repeat(3, 1fr); row-gap: 0; }
+  .hero__stats--3 .stat { padding: 0 6px; }
+  .hero__stats--3 .stat + .stat { border-left: 1px solid rgba(255, 255, 255, .08); }
+  .hero__stats--3 .stat__num { font-size: 26px; }
+  .hero__stats--3 .stat p { font-size: 12.5px; }
+  .hero__moon { width: 90vmax; right: -40vmax; top: -30vmax; }
+
+  .svc-chips { margin-top: 28px; gap: 6px; }
+  .svc-chips li { padding: 6px 11px; font-size: 12.5px; }
+  .pf-ba { margin-bottom: 44px; }
+  .logo-chip--text { min-width: 120px; }
+  .sec-cta { margin-top: 28px; }
+  .sec-cta .btn { flex: 1 1 100%; }
+
+  /* iOS 확대 방지: 입력 글자 16px 이상, 버튼 44px 이상 */
+  .sbox input, .field input, .field select, .field textarea { font-size: 16px; }
+  .btn--sm { min-height: 44px; }
+}
