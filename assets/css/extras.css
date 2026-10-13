@@ -392,3 +392,157 @@ body.has-view-cursor .card__thumb::after { opacity: 0 !important; }
   .bax__arrow i { transform: none; }
   .bax__after { opacity: 1; transform: none; }
 }
+
+/* =========================================================
+   리디자인 v3 (2026-10-11): 새 섹션 · 공통 요소
+   ========================================================= */
+
+/* JS가 늦거나 꺼져 있으면 처음부터 보이게 (헤드리스 캡처 대비) */
+html:not(.js) .reveal { opacity: 1 !important; transform: none !important; filter: none !important; }
+html:not(.js) .ln__in { transform: none !important; }
+
+/* 내비: 항목이 늘어 1100px 이하에서는 햄버거 메뉴로 */
+.nav { gap: 24px; }
+.nav__acts { display: flex; align-items: center; gap: 8px; }
+.nav__acts .btn--ghost { color: #fff; }
+@media (min-width: 1101px) and (max-width: 1240px) { .nav { gap: 18px; } .nav a { font-size: 14px; } }
+@media (max-width: 1100px) {
+  .nav-toggle { display: block; }
+  .nav {
+    position: fixed; inset: var(--header-h) 0 auto; flex-direction: column; align-items: stretch; gap: 0;
+    background: rgba(11,13,16,.98); border-bottom: 1px solid var(--line); padding: 8px 24px 24px;
+    max-height: calc(100dvh - var(--header-h)); overflow-y: auto;
+    transform: translateY(-8px); opacity: 0; pointer-events: none; transition: .25s var(--ease);
+  }
+  .nav a { padding: 16px 0; border-bottom: 1px solid var(--line); font-size: 17px; }
+  .nav__acts { margin-top: 18px; }
+  .nav__acts .btn { flex: 1; margin: 0; height: 52px; font-size: 16px; padding: 0 12px; border-bottom: 0; }
+  .nav__acts .btn--ghost { border: 1px solid rgba(255,255,255,.28); }
+  .header.is-open .nav { transform: none; opacity: 1; pointer-events: auto; }
+  .header.is-open { background: rgba(11,13,16,.98); }
+  .header.is-open .nav-toggle span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .header.is-open .nav-toggle span:nth-child(2) { opacity: 0; }
+  .header.is-open .nav-toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+}
+
+/* 히어로: 별 · 달 배경, 실적 3개 */
+.hero__moon {
+  position: absolute; z-index: -1; right: -12vmax; top: -16vmax; width: 52vmax; aspect-ratio: 1; border-radius: 50%; pointer-events: none;
+  border: 1px solid rgba(111,160,255,.35);
+  box-shadow: 0 0 0 1px rgba(61,123,255,.06), inset 0 0 120px rgba(61,123,255,.12), 0 0 160px rgba(61,123,255,.12);
+}
+.hero__ko { word-break: keep-all; }
+.hero__stats--3 { grid-template-columns: repeat(3, 1fr); margin-bottom: 14px; }
+.hero__basis { margin: 0 0 44px; text-align: center; font-size: 13px; color: var(--muted); }
+
+/* 글자 배지 (크몽 · 숨고) */
+.platform-badge {
+  display: inline-flex; align-items: center; height: 26px; padding: 0 11px; border: 1px solid rgba(255,255,255,.3); border-radius: 999px;
+  font-size: 12.5px; font-weight: 700; line-height: 1; color: var(--text); vertical-align: middle; white-space: nowrap;
+}
+a.platform-badge:hover { border-color: var(--accent-2); color: #fff; }
+.platform-badge[hidden] { display: none; }
+
+/* 고객사 띠: 글자만 있는 칩도 로고 칩과 같은 크기 */
+.logo-chip--text { min-width: 150px; }
+.logo-chip__name { display: inline; }
+
+/* 서비스: 만드는 자료 칩 한 줄 */
+.svc-chips { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin: 56px 0 0; padding: 0; }
+.svc-chips li { padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); font-size: 14px; color: var(--text-2); }
+.device__screen img { object-fit: cover; }
+
+/* 섹션 아래 버튼 줄 */
+.sec-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin-top: 40px; }
+.text-link { color: var(--accent-2); font-weight: 700; font-size: 15px; }
+.text-link:hover { color: #fff; }
+
+/* 제품 비주얼: 비교 표 */
+.vs { width: 100%; border-collapse: separate; border-spacing: 0; border: 1px solid var(--line); border-radius: 18px; overflow: hidden; font-size: 15px; line-height: 1.65; }
+.vs th, .vs td { padding: 20px 22px; text-align: left; vertical-align: top; border-top: 1px solid var(--line); }
+.vs thead th { border-top: 0; font-size: 13px; letter-spacing: .04em; font-weight: 800; }
+.vs thead th:first-child, .vs tbody th { width: 16%; color: var(--text); }
+.vs tbody th { font-weight: 800; white-space: nowrap; }
+.vs .vs__raw { background: rgba(255,255,255,.025); color: var(--muted); }
+.vs thead .vs__raw { color: var(--text-2); }
+.vs .vs__ours { background: rgba(61,123,255,.08); color: var(--text); }
+.vs thead .vs__ours { color: var(--accent-2); }
+
+/* 제품 비주얼: 사진 → 연출 컷 → 장표 스트립 */
+.vstrip-head { margin: 72px 0 24px; }
+.vstrip-head h3 { margin: 0 0 6px; font-size: clamp(20px, 2.2vw, 26px); letter-spacing: -.02em; }
+.vstrip-head p { margin: 0; color: var(--text-2); }
+.vstrip { list-style: none; margin: 0; padding: 0; display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 48px; counter-reset: vstrip; }
+.vstrip__item { position: relative; counter-increment: vstrip; padding: 12px 12px 18px; border-radius: 16px; background: var(--surface); border: 1px solid var(--line); }
+.vstrip__item:not(:last-child)::after { content: "→"; position: absolute; right: -36px; top: calc(12px + 37.5%); transform: translateY(-50%); color: var(--accent-2); font-size: 22px; font-weight: 700; }
+.vstrip__img { aspect-ratio: 4 / 3; border-radius: 10px; overflow: hidden; background: #e9ebef; display: grid; place-items: center; margin-bottom: 14px; }
+.vstrip__img img { width: 100%; height: 100%; object-fit: contain; }
+.vstrip__item b { display: block; font-size: 16px; }
+.vstrip__item b::before { content: counter(vstrip) " "; color: var(--accent-2); }
+.vstrip__item span { display: block; margin-top: 2px; font-size: 14px; color: var(--text-2); }
+.vstrip-note { margin: 18px 0 0; font-size: 12.5px; line-height: 1.6; color: var(--muted); text-align: left; }
+
+/* IR은 더 깊게 */
+.ir__top { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 32px 56px; margin-bottom: 48px; }
+.ir__top .section-head { margin-bottom: 0; }
+.ir__num { margin: 0; padding: 26px 32px; border-radius: 18px; border: 1px solid var(--line); background: var(--surface); text-align: center; }
+.ir__num > span { display: block; font-size: 13px; color: var(--muted); }
+.ir__num b { display: block; font-size: clamp(44px, 5vw, 64px); font-weight: 800; letter-spacing: -.03em; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.ir__num small { font-size: 13px; color: var(--muted); }
+.ir__steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; counter-reset: irstep; }
+.ir__steps li { counter-increment: irstep; padding: 28px 26px; border-radius: 18px; border: 1px solid var(--line); background: var(--bg-2); }
+.ir__steps li::before { content: counter(irstep); display: grid; place-items: center; width: 32px; height: 32px; margin-bottom: 16px; border-radius: 50%; background: var(--accent); color: #fff; font-size: 14px; font-weight: 800; }
+.ir__steps b { display: block; font-size: 18px; margin-bottom: 8px; }
+.ir__steps p { margin: 0; color: var(--text-2); font-size: 15px; }
+
+/* 포트폴리오: 맨 위 Before/After 블록 */
+.pf-ba { margin-bottom: 72px; }
+.pf-ba__head { margin-bottom: 24px; }
+.pf-ba__head h3 { margin: 0 0 6px; font-size: clamp(20px, 2.2vw, 26px); letter-spacing: -.02em; }
+.pf-ba__head p { margin: 0; color: var(--text-2); }
+#portfolio .sec-cta { justify-content: center; }
+
+/* 가격 */
+.price-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.price { position: relative; display: flex; flex-direction: column; padding: 28px 24px 24px; border-radius: 18px; border: 1px solid var(--line); background: var(--surface); }
+.price--pick { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent), 0 20px 50px rgba(61,123,255,.18); }
+.price h3 { display: flex; align-items: center; gap: 8px; margin: 0 0 10px; font-size: 20px; letter-spacing: -.02em; }
+.price__badge { display: inline-flex; align-items: center; height: 22px; padding: 0 9px; border-radius: 999px; background: var(--accent); color: #fff; font-size: 12px; font-weight: 800; }
+.price__for { margin: 0 0 4px; font-size: 14px; color: var(--text-2); }
+.price__inc { margin: 0 0 22px; font-size: 13.5px; color: var(--muted); }
+.price__num { margin: auto 0 2px; font-size: 15px; color: var(--text-2); font-variant-numeric: tabular-nums; }
+.price__num b { font-size: 22px; color: var(--text); letter-spacing: -.02em; margin-right: 2px; }
+.price__base { min-height: 1.5em; margin: 0 0 18px; font-size: 12.5px; color: var(--muted); }
+.price .btn { width: 100%; }
+.price-foot { margin-top: 28px; padding: 24px 26px; border-radius: 18px; border: 1px solid var(--line); background: rgba(255,255,255,.02); }
+.price-foot__title { margin: 0 0 10px; font-weight: 800; font-size: 15px; }
+.price-incl { list-style: none; margin: 0 0 16px; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 22px; }
+.price-incl li { position: relative; padding-left: 18px; font-size: 14px; color: var(--text-2); }
+.price-incl li::before { content: ""; position: absolute; left: 0; top: .5em; width: 9px; height: 5px; border-left: 2px solid var(--accent-2); border-bottom: 2px solid var(--accent-2); transform: rotate(-45deg); }
+.price-ex { margin: 0; font-size: 14.5px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.price-basis { margin: 4px 0 18px; font-size: 12.5px; color: var(--muted); }
+.price-where { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; font-size: 14px; color: var(--text-2); }
+.price-where .btn { margin-left: auto; }
+
+/* 후기: 가격 바로 아래 이어지는 블록 */
+.section--follow { padding-top: 40px; }
+.reviews__note .text-link { font-size: inherit; margin-left: 6px; white-space: nowrap; }
+
+/* 문의: 의뢰 가능한 곳 배지 */
+.contact__info .platforms { display: flex; flex-wrap: wrap; gap: 6px; }
+
+/* 포트폴리오: 실제 이미지 썸네일 · 세로형 팝업 */
+.card__thumb img { object-fit: cover; }
+.stack img { object-fit: cover; background: var(--surface); }
+.modal__hero { aspect-ratio: 16 / 9; background: #0e1116; }
+.modal.is-portrait .modal__hero { aspect-ratio: auto; display: flex; justify-content: center; background: #eef0f3; }
+.modal.is-portrait .modal__hero > img,
+.modal.is-portrait .modal__slides img { max-height: 80vh; width: auto; height: auto; max-width: 100%; margin: 0 auto; object-fit: contain; aspect-ratio: auto; }
+.modal.is-portrait .modal__slides { grid-template-columns: 1fr; }
+.modal.is-portrait .modal__slides img { background: #eef0f3; }
+
+@media (max-width: 1024px) {
+  .price-grid { grid-template-columns: repeat(2, 1fr); }
+  .vstrip { gap: 36px; }
+  .vstrip__item:not(:last-child)::after { right: -28px; }
+}

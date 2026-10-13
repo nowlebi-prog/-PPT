@@ -8,7 +8,7 @@
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
   const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
-  const KAKAO = "http://pf.kakao.com/_XgRWxj/chat";
+  const KAKAO = window.SITE?.kakao || "https://pf.kakao.com/_XgRWxj/chat";
 
   /* ---------- 공통: 알림 · 복사 ---------- */
   let toastEl, toastT;
@@ -281,7 +281,7 @@
         const urgent = /^1주/.test(ans.due || "");
         const fillB = '<button class="btn btn--primary" type="button" data-fill>이 내용으로 상담 요청서 작성하기</button>';
         const kakaoB = '<button class="btn btn--kakao" type="button" data-kakao>카카오톡으로 바로 상담하기</button>';
-        body.innerHTML = `<div class="qz__step"><small>완료</small><h3>이렇게 정리됐어요</h3><ul class="qz__sum">${steps.map((s) => `<li>${esc(ans[s.key])}</li>`).join("")}</ul>${urgent ? '<p class="qz__tip">⚡ 급한 일정이라면 카카오톡 상담이 가장 빨라요.</p>' : ""}<div class="qz__acts">${urgent ? kakaoB + fillB : fillB + kakaoB}</div><p class="qz__hint">카카오톡을 누르면 정리된 내용이 복사돼요. 대화창에 붙여넣기만 하세요.</p><button class="qz__guide" type="button" data-guide-open>무엇을 준비하면 될까요? 준비 가이드 보기 →</button><button class="qz__back" type="button" data-back>← 이전</button></div>`;
+        body.innerHTML = `<div class="qz__step"><small>완료</small><h3>이렇게 정리됐어요</h3><ul class="qz__sum">${steps.map((s) => `<li>${esc(ans[s.key])}</li>`).join("")}</ul>${urgent ? '<p class="qz__tip">급한 일정이라면 카카오톡 상담이 가장 빨라요.</p>' : ""}<div class="qz__acts">${urgent ? kakaoB + fillB : fillB + kakaoB}</div><p class="qz__hint">카카오톡을 누르면 정리된 내용이 복사돼요. 대화창에 붙여넣기만 하세요.</p><button class="qz__guide" type="button" data-guide-open>무엇을 준비하면 될까요? 준비 가이드 보기 →</button><button class="qz__back" type="button" data-back>← 이전</button></div>`;
       }
       $("button:not(.qz__back)", body)?.focus({ preventScroll: true });
     };
@@ -293,7 +293,7 @@
       render();
     };
     const close = () => { qz.classList.remove("is-open"); document.body.style.overflow = ""; last?.focus?.({ preventScroll: true }); };
-    $$('.fab--quote, .nav .btn[href="#contact"], [data-quote]').forEach((t) => t.addEventListener("click", open));
+    $$('.fab--quote, [data-quote]').forEach((t) => t.addEventListener("click", open));
 
     qz.addEventListener("click", (e) => {
       if (e.target.closest("[data-qz-close]")) return close();

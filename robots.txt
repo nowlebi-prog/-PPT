@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /preview/
+Sitemap: https://nowlebi-prog.github.io/-PPT/sitemap.xml

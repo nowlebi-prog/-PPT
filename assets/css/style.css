@@ -654,7 +654,7 @@ body.no-scroll { overflow: hidden; }
 @keyframes sc-grow { 0%, 52% { transform: scaleY(.62); } 64%, 92% { transform: scaleY(1); } 100% { transform: scaleY(.62); } }
 @keyframes sc-toast { 0%, 60% { opacity: 0; transform: translate(-50%, 140%); } 66%, 92% { opacity: 1; transform: translate(-50%, 0); } 100% { opacity: 0; transform: translate(-50%, 0); } }
 
-/* scene 3: 1:1 디렉터 채팅 */
+/* scene 3: 1:1 담당자 채팅 */
 .sc-chat { position: absolute; inset: 7%; display: flex; flex-direction: column; gap: 2.2cqw; }
 .sc-head { display: flex; align-items: center; gap: 1.6cqw; padding-bottom: 2cqw; border-bottom: 1px solid rgba(255,255,255,.1); font-size: clamp(10px, 2.1cqw, 15px); font-weight: 800; }
 .sc-head small { display: block; font-size: .8em; font-weight: 600; color: #7fd6a4; }

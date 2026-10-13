@@ -5,7 +5,7 @@
 // 문의 폼 전송 주소 (Formspree, Getform, 자체 API 등)
 // 비워두면 방문자의 메일 앱으로 youstar_ppt@naver.com 앞 메일이 작성됩니다.
 const FORM_ENDPOINT = "";
-const CONTACT_EMAIL = "youstar_ppt@naver.com";
+const CONTACT_EMAIL = window.SITE?.email || "youstar_ppt@naver.com";
 
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -48,15 +48,14 @@ document.querySelectorAll(".marquee__row").forEach((row) => {
   const box = document.querySelector("[data-pf-preview]");
   if (!box || !window.PORTFOLIO) return;
   const esc = window.pfEsc;
-  // 카테고리별로 2개씩 골라 섞어서 보여줌
-  const byCat = window.PORTFOLIO_CATEGORIES.map((c) => window.PORTFOLIO.filter((p) => p.category === c.id).slice(0, 2));
-  const picks = [0, 1].flatMap((i) => byCat.map((list) => list[i])).filter(Boolean);
+  // featured 항목을 데이터 순서대로 6개
+  const picks = window.pfVisible().filter((p) => p.featured).slice(0, 6);
   box.innerHTML = picks
     .map(
       (p, i) => `
     <a class="card reveal" data-delay="${i % 3}" href="portfolio.html?p=${encodeURIComponent(p.id)}">
       <div class="card__thumb">${window.pfThumb(p)}</div>
-      <div class="card__meta"><b>${esc(p.name)}</b><span>${esc(window.pfCategory(p).en)} · ${esc(p.year)}</span></div>
+      <div class="card__meta"><b>${esc(p.name)}</b><span>${esc(window.pfCategory(p).en)}${p.year ? " · " + esc(p.year) : ""}</span></div>
     </a>`
     )
     .join("");
@@ -77,7 +76,7 @@ document.querySelectorAll(".marquee__row").forEach((row) => {
     toggle?.setAttribute("aria-label", open ? "메뉴 닫기" : "메뉴 열기");
   };
   toggle?.addEventListener("click", () => setOpen(!header.classList.contains("is-open")));
-  header.querySelectorAll(".nav a").forEach((a) => a.addEventListener("click", () => setOpen(false)));
+  header.querySelectorAll(".nav a, .nav button").forEach((a) => a.addEventListener("click", () => setOpen(false)));
   document.addEventListener("keydown", (e) => e.key === "Escape" && setOpen(false));
 })();
 
@@ -98,6 +97,7 @@ const revealIO =
 window.observeReveal = (root = document) =>
   root.querySelectorAll(".reveal:not(.is-in)").forEach((el) => (revealIO ? revealIO.observe(el) : el.classList.add("is-in")));
 window.observeReveal();
+document.documentElement.classList.add("reveal-ready");
 
 /* ---------- 숫자 카운트업 ---------- */
 (() => {
@@ -121,18 +121,6 @@ window.observeReveal();
     { threshold: 0.4 }
   );
   els.forEach((el) => io.observe(el));
-})();
-
-/* ---------- Hero 영상 (파일이 있을 때만) ---------- */
-(() => {
-  const video = document.querySelector(".hero__video");
-  if (!video) return;
-  if (reduceMotion) return video.remove();
-  const sources = [...video.querySelectorAll("source")];
-  let failed = 0;
-  // 영상 파일이 아직 없으면 조용히 제거하고 배경 이미지 + 애니메이션만 사용
-  sources.forEach((s) => s.addEventListener("error", () => ++failed === sources.length && video.remove()));
-  video.addEventListener("error", () => video.remove());
 })();
 
 /* ---------- Starfield ---------- */
@@ -237,26 +225,6 @@ document.querySelectorAll(".ba").forEach((ba) => {
   io.observe(ba);
 });
 
-/* ---------- 작업 종류 목록: 마우스를 올리면 미리보기 ---------- */
-(() => {
-  const list = document.querySelector(".works__list");
-  const pv = document.querySelector(".works__preview");
-  if (!list || !pv) return;
-  if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return pv.remove();
-  list.addEventListener("pointermove", (e) => {
-    pv.style.left = `${e.clientX}px`;
-    pv.style.top = `${e.clientY}px`;
-    pv.classList.toggle("is-left", e.clientX + 400 > window.innerWidth);
-  });
-  list.querySelectorAll("li[data-img]").forEach((li) => {
-    li.addEventListener("pointerenter", () => {
-      pv.src = slideSrc(li.dataset.img);
-      pv.classList.add("is-on");
-    });
-    li.addEventListener("pointerleave", () => pv.classList.remove("is-on"));
-  });
-})();
-
 /* ---------- Review slider ---------- */
 (() => {
   const track = document.querySelector(".reviews__track");
@@ -273,6 +241,31 @@ document.querySelectorAll(".ba").forEach((ba) => {
   track.addEventListener("scroll", update, { passive: true });
   window.addEventListener("resize", update);
   update();
+})();
+
+/* ---------- IR 상담 · 가격 카드 버튼 → 문의서 미리 채우기 ---------- */
+(() => {
+  const form = document.querySelector("#contact-form");
+  if (!form) return;
+  document.addEventListener("click", (e) => {
+    const b = e.target.closest("[data-purpose], [data-package], [data-need]");
+    if (!b) return;
+    e.preventDefault();
+    const { purpose, package: pkg, need } = b.dataset;
+    if (purpose) {
+      const goal = form.querySelector('select[name="goal"]');
+      if (goal && [...goal.options].some((o) => o.value === purpose)) goal.value = purpose;
+    }
+    if (need) form.querySelectorAll('input[name="need"]').forEach((c) => c.value === need && (c.checked = true));
+    if (pkg) {
+      const m = form.querySelector('textarea[name="message"]');
+      const line = `[${pkg}] 견적 요청`;
+      if (m && !m.value.includes(line)) m.value = m.value.trim() ? `${line}\n\n${m.value.trim()}` : line;
+    }
+    form.dispatchEvent(new Event("input", { bubbles: true }));
+    document.querySelector("#contact")?.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth" });
+    setTimeout(() => form.querySelector('[name="name"]')?.focus({ preventScroll: true }), 700);
+  });
 })();
 
 /* ---------- Contact form ---------- */
