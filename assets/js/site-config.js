@@ -11,6 +11,20 @@ window.SITE = {
   stats: { deals: 442, rating: 4.9, reviews: 359, asOf: "2026.10", demodayTeams: 44, demodayYears: "2024–2025" },
 };
 
+/* 고객사 로고가 안 뜨면: 이름이 적힌 로고는 글자 칩으로 바꾸고, 심볼은 지워 글자만 남김 */
+window.logoFail = (img) => {
+  const chip = img.closest(".logo-chip");
+  const name = img.getAttribute("alt");
+  if (name) {
+    const span = document.createElement("span");
+    span.textContent = name;
+    img.replaceWith(span);
+  } else {
+    img.remove();
+  }
+  chip?.classList.add("logo-chip--text");
+};
+
 /* data-site-link="kmong.ir" 처럼 SITE 값으로 링크를 채우고, 값이 비면 그 요소를 숨김 */
 (() => {
   const get = (path) => path.split(".").reduce((o, k) => (o == null ? o : o[k]), window.SITE);

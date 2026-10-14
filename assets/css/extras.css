@@ -443,9 +443,10 @@ html:not(.js) .ln__in { transform: none !important; }
 a.platform-badge:hover { border-color: var(--accent-2); color: #fff; }
 .platform-badge[hidden] { display: none; }
 
-/* 고객사 띠: 글자만 있는 칩도 로고 칩과 같은 크기 */
+/* 고객사 띠: 칩 크기를 맞추고, 로고가 길어도 칩이 늘어나지 않게 */
 .logo-chip--text { min-width: 150px; }
-.logo-chip__name { display: inline; }
+.logo-chip--img { padding: 0 20px; }
+.logo-chip--img img { height: 30px; width: auto; max-width: 170px; object-fit: contain; }
 
 /* 서비스: 만드는 자료 칩 한 줄 */
 .svc-chips { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin: 56px 0 0; padding: 0; }

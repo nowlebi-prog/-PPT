@@ -325,6 +325,8 @@
   .svc-chips li { padding: 6px 11px; font-size: 12.5px; }
   .pf-ba { margin-bottom: 44px; }
   .logo-chip--text { min-width: 120px; }
+  .logo-chip--img { padding: 0 14px; }
+  .logo-chip--img img { height: 24px; max-width: 120px; }
   .sec-cta { margin-top: 28px; }
   .sec-cta .btn { flex: 1 1 100%; }
 
