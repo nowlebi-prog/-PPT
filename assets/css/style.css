@@ -143,6 +143,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .logo-chip { flex: none; height: 64px; min-width: 150px; padding: 0 26px; margin-right: 12px; border-radius: 14px; display: flex; align-items: center; justify-content: center; gap: 10px; background: #f3f4f6; color: #1b2430; font-weight: 800; font-size: 15px; white-space: nowrap; letter-spacing: -.01em; }
 .logo-chip img { height: 32px; width: auto; flex: none; }
 .logo-chip--img img { height: 30px; }
+.logo-chip--dark { background: #111923; }
 @keyframes marquee { to { transform: translateX(-50%); } }
 
 /* ---------- Problem ---------- */
