@@ -308,7 +308,8 @@
   .price-grid { grid-template-columns: 1fr; gap: 12px; }
   .price { padding: 22px 20px 20px; }
   .price-foot { padding: 20px 18px; }
-  .price-where .btn { margin-left: 0; width: 100%; }
+  .price-where__actions { width: 100%; margin-left: 0; }
+  .price-where__actions .btn { width: 100%; }
 
   /* 히어로 실적 3칸 */
   .hero__stats--3 { grid-template-columns: repeat(3, 1fr); row-gap: 0; }

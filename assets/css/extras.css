@@ -507,9 +507,8 @@ a.platform-badge:hover { border-color: var(--accent-2); color: #fff; }
 .price__badge { display: inline-flex; align-items: center; height: 22px; padding: 0 9px; border-radius: 999px; background: var(--accent); color: #fff; font-size: 12px; font-weight: 800; }
 .price__for { margin: 0 0 4px; font-size: 14px; color: var(--text-2); }
 .price__inc { margin: 0 0 22px; font-size: 13.5px; color: var(--muted); }
-.price__num { margin: auto 0 2px; font-size: 15px; color: var(--text-2); font-variant-numeric: tabular-nums; }
+.price__num { margin: auto 0 18px; font-size: 15px; color: var(--text-2); font-variant-numeric: tabular-nums; }
 .price__num b { font-size: 22px; color: var(--text); letter-spacing: -.02em; margin-right: 2px; }
-.price__base { min-height: 1.5em; margin: 0 0 18px; font-size: 12.5px; color: var(--muted); }
 .price .btn { width: 100%; }
 .price-foot { margin-top: 28px; padding: 24px 26px; border-radius: 18px; border: 1px solid var(--line); background: rgba(255,255,255,.02); }
 .price-foot__title { margin: 0 0 10px; font-weight: 800; font-size: 15px; }
@@ -519,14 +518,11 @@ a.platform-badge:hover { border-color: var(--accent-2); color: #fff; }
 .price-ex { margin: 0; font-size: 14.5px; font-weight: 700; font-variant-numeric: tabular-nums; }
 .price-basis { margin: 4px 0 18px; font-size: 12.5px; color: var(--muted); }
 .price-where { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; font-size: 14px; color: var(--text-2); }
-.price-where .btn { margin-left: auto; }
+.price-where__actions { display: flex; flex-wrap: wrap; gap: 8px; margin-left: auto; }
 
 /* 후기: 가격 바로 아래 이어지는 블록 */
 .section--follow { padding-top: 40px; }
 .reviews__note .text-link { font-size: inherit; margin-left: 6px; white-space: nowrap; }
-
-/* 문의: 의뢰 가능한 곳 배지 */
-.contact__info .platforms { display: flex; flex-wrap: wrap; gap: 6px; }
 
 /* 포트폴리오: 실제 이미지 썸네일 · 세로형 팝업 */
 .card__thumb img { object-fit: cover; }
