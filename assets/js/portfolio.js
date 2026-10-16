@@ -73,6 +73,7 @@
         ${i.slides.length ? `<div class="modal__cta" style="margin-top:24px"><p>이 프로젝트와 비슷한 작업이 필요하신가요?</p><div class="modal__acts"><button class="btn btn--ghost btn--sm" type="button" data-share="${esc(i.id)}">링크 공유</button><a class="btn btn--primary btn--sm" href="index.html?ref=${encodeURIComponent(i.id)}#contact">이 작업처럼 문의하기</a></div></div>` : ""}
       </div>`;
     modal.classList.toggle("is-portrait", i.orient === "portrait");
+    modal.classList.toggle("is-web", i.category === "web");
     lastFocus = document.activeElement;
     modal.classList.add("is-open");
     document.body.classList.add("no-scroll");

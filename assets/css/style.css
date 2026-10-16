@@ -731,3 +731,5 @@ br.mo { display: none; }
 .pf-secondary p { margin: 8px 0 0; color: var(--text-2); line-height: 1.65; }
 .pf-secondary .btn { flex: none; }
 @media (max-width: 700px) { .pf-secondary { align-items: flex-start; flex-direction: column; padding: 22px; } }
+.modal.is-web .modal__hero { aspect-ratio: 16 / 5; }
+@media (max-width: 620px) { .modal.is-web .modal__hero { aspect-ratio: 16 / 7; } }
