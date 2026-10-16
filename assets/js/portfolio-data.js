@@ -1,5 +1,5 @@
 /* 포트폴리오 데이터 (v3 · 2026-10-11)
-   - category: "ir" | "proposal" | "profile" | "editorial"
+   - category: "ir" | "proposal" | "profile" | "editorial" | "web"
    - orient: "landscape" | "portrait"  (세로형은 썸네일에 여백, 팝업은 contain)
    - featured: 메인(index) 미리보기 6개
    - hidden: true면 어디에도 보이지 않음 (이미지가 없는 항목)
@@ -9,6 +9,7 @@ window.PORTFOLIO_CATEGORIES = [
   { id: "proposal",  label: "제안서",     en: "Business Proposal", desc: "제안서 · 사업계획서 · 정부지원사업 발표" },
   { id: "profile",   label: "소개서",     en: "Company Profile",   desc: "회사소개서 · 제품 소개서 · 브랜드 소개서" },
   { id: "editorial", label: "편집 디자인", en: "Editorial Design",  desc: "교육 안내책자 · 다이어리" },
+  { id: "web",       label: "웹·UI/UX·툴 개발", en: "Web · UI/UX · Tools", desc: "웹사이트 · 웹앱 · 업무 자동화 도구" },
 ];
 const pf = (id, n) => ({
   thumb: `assets/img/portfolio/${id}/thumb.jpg`,
@@ -42,12 +43,16 @@ window.PORTFOLIO = [
   // 편집 디자인
   { id: "jahwal",      name: "한국자활연수원",   category: "editorial", year: "2024–2026", summary: "교육프로그램 안내책자",            orient: "portrait", ...pf("jahwal", 5) },
   { id: "diary",       name: "잘될거야 다이어리", category: "editorial", year: "",          summary: "다이어리 편집 디자인",              orient: "portrait", ...pf("diary", 2) },
+  // 직접 기획·디자인·개발·운영한 웹·툴 작업
+  { id: "peumoa", name: "프모아", category: "web", year: "", summary: "웹사이트 · 서비스 UI/UX", orient: "landscape", thumb: "", cover: "", slides: [], url: "https://peumoa.com/" },
+  { id: "clover-desk", name: "Clover Desk", category: "web", year: "", summary: "일정 · 업무 · 기록 웹앱", orient: "landscape", thumb: "", cover: "", slides: [], url: "https://clover-diary-orpin.vercel.app/" },
+  { id: "ai-hub", name: "AI Hub", category: "web", year: "", summary: "AI 업무 자동화 도구", orient: "landscape", thumb: "", cover: "", slides: [], url: "https://ai-production-6a83.up.railway.app/" },
   // 이미지 없음 → 숨김 (데이터만 보관)
   { id: "farm360",     name: "팜360",     category: "ir", year: "",          summary: "IR Pitch Deck",                  hidden: true, thumb: "", cover: "", slides: [] },
   { id: "sopoong",     name: "소풍",      category: "ir", year: "2024–2025", summary: "데모데이 참가팀 IR Deck 제작",     hidden: true, thumb: "", cover: "", slides: [] },
   { id: "khu",         name: "경희대학교", category: "ir", year: "2024–2025", summary: "캠퍼스타운 데모데이 IR Deck 제작", hidden: true, thumb: "", cover: "", slides: [] },
 ];
-window.pfVisible = () => window.PORTFOLIO.filter((p) => !p.hidden && p.thumb);
+window.pfVisible = () => window.PORTFOLIO.filter((p) => !p.hidden && (p.thumb || p.category === "web"));
 
 // 예전 공유 링크(?p=dr-oregonin)를 새 id로 연결
 window.PORTFOLIO_ALIAS = { "dr-oregonin": "drbelab" };
@@ -62,7 +67,7 @@ window.pfCategory = (item) => window.PORTFOLIO_CATEGORIES.find((c) => c.id === i
 window.pfCoverCard = (item) => {
   const esc = window.pfEsc;
   return `<div class="cover cover--${esc(item.category)}">
-      <span class="cover__brand">YOUSTAR PPT</span>
+      <span class="cover__brand">${item.category === "web" ? "WEB · UI/UX · TOOLS" : "YOUSTAR PPT"}</span>
       <span class="cover__cat">${esc(window.pfCategory(item).en)}</span>
       <b class="cover__name">${esc(item.name)}</b>
     </div>`;

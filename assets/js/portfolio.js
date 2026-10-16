@@ -62,11 +62,13 @@
         <span class="tag">${esc(cat.en)}</span>
         <h2 id="pf-modal-title">${esc(i.name)}</h2>
         <p>${esc(i.summary)}</p>
+        ${i.category === "web" ? "<p>기획 · 디자인 · 개발 · 운영을 직접 담당했습니다.</p>" : ""}
         <dl class="modal__facts">
-          <div><dt>Client</dt><dd>${esc(i.name)}</dd></div>
+          <div><dt>${i.category === "web" ? "Project" : "Client"}</dt><dd>${esc(i.name)}</dd></div>
           <div><dt>Category</dt><dd>${esc(cat.label)}</dd></div>
           ${i.year ? `<div><dt>Year</dt><dd>${esc(i.year)}</dd></div>` : ""}
         </dl>
+        ${i.url ? `<p><a class="btn btn--ghost btn--sm" href="${esc(i.url)}" target="_blank" rel="noopener noreferrer">서비스 살펴보기 ↗</a></p>` : ""}
         ${slides}
         ${i.slides.length ? `<div class="modal__cta" style="margin-top:24px"><p>이 프로젝트와 비슷한 작업이 필요하신가요?</p><div class="modal__acts"><button class="btn btn--ghost btn--sm" type="button" data-share="${esc(i.id)}">링크 공유</button><a class="btn btn--primary btn--sm" href="index.html?ref=${encodeURIComponent(i.id)}#contact">이 작업처럼 문의하기</a></div></div>` : ""}
       </div>`;

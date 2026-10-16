@@ -556,15 +556,6 @@ body.no-scroll { overflow: hidden; }
 .works__list li::after { content: "→"; position: absolute; right: 24px; top: 50%; translate: -8px -50%; opacity: 0; color: var(--accent-2); font-weight: 800; transition: translate .3s var(--ease), opacity .3s; }
 .works__list li:hover::after { translate: 0 -50%; opacity: 1; }
 
-/* 큰 글자 흐름 밴드 */
-.kinetic { overflow: hidden; padding: 56px 0; border-block: 1px solid var(--line); background: var(--bg); }
-.kinetic__row { display: flex; align-items: center; width: max-content; white-space: nowrap; font-size: clamp(46px, 9vw, 140px); font-weight: 900; letter-spacing: -.045em; line-height: 1.08; will-change: transform; }
-.kinetic__row + .kinetic__row { margin-top: 6px; }
-.kinetic__row span { color: #fff; }
-.kinetic__row span.o { color: transparent; -webkit-text-stroke: 1.5px rgba(255,255,255,.4); }
-.kinetic__row i { flex: none; display: inline-block; width: .34em; height: .34em; margin: 0 .55em; background: var(--accent); clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%); }
-@media (max-width: 640px) { .kinetic { padding: 36px 0; } .kinetic__row span.o { -webkit-text-stroke-width: 1px; } }
-
 /* 2) 왜 유별난PPT: 스크롤하면 바뀌는 모션그래픽 */
 .why__grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 80px; align-items: start; }
 .why__stage { position: sticky; top: calc(var(--header-h) + 48px); }
@@ -730,3 +721,13 @@ br.mo { display: none; }
 .svc-note { margin: 36px 0 0; font-size: 14px; color: var(--muted); }
 #process .process { counter-reset: none; }
 #faq .faq { margin-top: 0; }
+
+.logo-chip--img img { max-width: 190px; max-height: 42px; height: auto; object-fit: contain; }
+.cover--web { background: linear-gradient(135deg, #112A35, #1F6470); }
+.cover--web::before { width: 60%; aspect-ratio: 1; right: -8%; top: -25%; border-radius: 28%; border: 2px solid rgba(181,244,236,.34); transform: rotate(24deg); }
+.cover--web::after { width: 34%; aspect-ratio: 1; right: 14%; bottom: -24%; border-radius: 50%; background: rgba(136,240,224,.14); }
+.pf-secondary { margin-top: 30px; padding: 24px 28px; border: 1px solid var(--line); border-radius: 18px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.pf-secondary b { font-size: 19px; }
+.pf-secondary p { margin: 8px 0 0; color: var(--text-2); line-height: 1.65; }
+.pf-secondary .btn { flex: none; }
+@media (max-width: 700px) { .pf-secondary { align-items: flex-start; flex-direction: column; padding: 22px; } }

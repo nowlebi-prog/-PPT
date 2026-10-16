@@ -125,9 +125,6 @@
   .works__no { grid-row: auto !important; margin: 0 !important; font-size: 10.5px; }
   .works__list b { font-size: 13.5px; }
   .reels, .works__preview { display: none !important; }
-  .kinetic { padding: 18px 0; }
-  .kinetic__row { font-size: 34px; }
-  .kinetic__row + .kinetic__row { display: none; }
 
   /* ---------- 서비스 (탭 + 옆으로 넘기는 카드) ---------- */
   #services .section-head { margin-bottom: 16px; }

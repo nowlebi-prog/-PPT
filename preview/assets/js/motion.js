@@ -76,16 +76,6 @@
   const tilts = $$("[data-tilt-in]");
   const showWin = $(".showcase__win");
 
-  // 큰 글자 밴드: 복제해서 끊김 없이, 스크롤 속도에 따라 빨라지고 방향도 바뀜
-  const rows = $$(".kinetic__row").map((row) => {
-    row.innerHTML += row.innerHTML;
-    return { row, x: 0, half: 0, sp: +row.dataset.speed || 1 };
-  });
-  const measure = () => rows.forEach((k) => (k.half = k.row.scrollWidth / 2));
-  measure();
-  window.addEventListener("resize", measure);
-  document.fonts?.ready.then(measure);
-
   // 마우스
   let mx = 0, my = 0, tmx = 0, tmy = 0;
   let gx = innerWidth / 2, gy = innerHeight / 2, tgx = gx, tgy = gy;
@@ -157,15 +147,6 @@
         }
         hero.style.setProperty("--zoom", (1 + k * 0.18).toFixed(3));
       }
-    }
-
-    // 큰 글자 밴드
-    for (const k of rows) {
-      if (!k.half) continue;
-      k.x -= (0.7 + vel * 0.45) * k.sp * dir;
-      if (k.x <= -k.half) k.x += k.half;
-      if (k.x > 0) k.x -= k.half;
-      k.row.style.transform = `translate3d(${k.x.toFixed(1)}px,0,0)`;
     }
 
     // 마우스 따라 움직이는 효과

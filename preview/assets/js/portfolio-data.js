@@ -2,7 +2,7 @@
    포트폴리오 데이터
    ----------------------------------------------------------
    - 프로젝트 추가: 아래 배열에 객체를 하나 더 넣으면 끝 (개수 제한 없음)
-   - category: "ir" | "proposal" | "profile"
+   - category: "ir" | "proposal" | "profile" | "web"
    - thumb: 목록 썸네일 (16:9 권장, 예: "assets/img/portfolio/gears/thumb.jpg")
    - cover: 팝업 상단 대표 이미지 (비우면 thumb 사용)
    - slides: 팝업 안 슬라이드 이미지 (4장 권장, 개수 자유)
@@ -14,6 +14,7 @@ window.PORTFOLIO_CATEGORIES = [
   { id: "ir", label: "IR", en: "IR Pitch Deck", desc: "투자유치 · 데모데이 피칭덱" },
   { id: "proposal", label: "제안서", en: "Business Proposal", desc: "B2B 제안서 · 공공기관 입찰" },
   { id: "profile", label: "소개서", en: "Company Profile", desc: "회사소개서 · 브랜드 소개서" },
+  { id: "web", label: "웹·UI/UX·툴 개발", en: "Web · UI/UX · Tools", desc: "웹사이트 · 웹앱 · 업무 자동화 도구" },
 ];
 
 window.PORTFOLIO = [
@@ -35,6 +36,9 @@ window.PORTFOLIO = [
 
   { id: "langplant", name: "언어발전소", category: "profile", year: "2025", summary: "Company Profile", thumb: "", cover: "", slides: [] },
   { id: "mfference", name: "메이퍼런스", category: "profile", year: "2025", summary: "Company Profile", thumb: "", cover: "", slides: [] },
+  { id: "peumoa", name: "프모아", category: "web", year: "", summary: "웹사이트 · 서비스 UI/UX", thumb: "", cover: "", slides: [], url: "https://peumoa.com/" },
+  { id: "clover-desk", name: "Clover Desk", category: "web", year: "", summary: "일정 · 업무 · 기록 웹앱", thumb: "", cover: "", slides: [], url: "https://clover-diary-orpin.vercel.app/" },
+  { id: "ai-hub", name: "AI Hub", category: "web", year: "", summary: "AI 업무 자동화 도구", thumb: "", cover: "", slides: [], url: "https://ai-production-6a83.up.railway.app/" },
 ];
 
 /* 공통 렌더링 도우미 (메인 · 포트폴리오 페이지에서 같이 사용) */
@@ -49,7 +53,7 @@ window.pfThumb = (item, big = false) => {
   const src = big ? item.cover || item.thumb : item.thumb;
   if (src) return `<img src="${esc(src)}" alt="${esc(item.name)}" loading="lazy" decoding="async">`;
   return `<div class="cover cover--${esc(item.category)}">
-      <span class="cover__brand">YOUSTAR PPT</span>
+      <span class="cover__brand">${item.category === "web" ? "WEB · UI/UX · TOOLS" : "YOUSTAR PPT"}</span>
       <span class="cover__cat">${esc(window.pfCategory(item).en)}</span>
       <b class="cover__name">${esc(item.name)}</b>
     </div>`;

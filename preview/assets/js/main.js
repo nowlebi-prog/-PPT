@@ -49,7 +49,7 @@ document.querySelectorAll(".marquee__row").forEach((row) => {
   if (!box || !window.PORTFOLIO) return;
   const esc = window.pfEsc;
   // 카테고리별로 2개씩 골라 섞어서 보여줌
-  const byCat = window.PORTFOLIO_CATEGORIES.map((c) => window.PORTFOLIO.filter((p) => p.category === c.id).slice(0, 2));
+  const byCat = window.PORTFOLIO_CATEGORIES.filter((c) => c.id !== "web").map((c) => window.PORTFOLIO.filter((p) => p.category === c.id).slice(0, 2));
   const picks = [0, 1].flatMap((i) => byCat.map((list) => list[i])).filter(Boolean);
   box.innerHTML = picks
     .map(

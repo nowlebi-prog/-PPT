@@ -346,9 +346,6 @@ body.has-view-cursor .card__thumb::after { opacity: 0 !important; }
   .hero__sub { font-size: 15px; }
 }
 
-/* 큰 글자 흐름 밴드: 외곽선 글자는 폰트 윤곽이 겹쳐 보여서 흐린 채움으로 교체 */
-.kinetic__row span.o { color: rgba(255,255,255,.15); -webkit-text-stroke: 0; }
-
 /* 모바일: 고정 화면 아래로 글이 가려지지 않게 */
 @media (max-width: 900px) {
   .why__stage { position: relative; top: auto; z-index: auto; padding: 0 0 6px; background: none; }

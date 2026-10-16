@@ -196,7 +196,7 @@
     const item = ref && window.PORTFOLIO?.find((p) => p.id === ref);
     if (item) {
       const cat = window.pfCategory ? window.pfCategory(item) : { label: "" };
-      const goalMap = { ir: "투자 유치 (IR)", proposal: "입찰 · 제안", profile: "회사 · 브랜드 · 제품 소개", editorial: "기타" };
+      const goalMap = { ir: "투자 유치 (IR)", proposal: "입찰 · 제안", profile: "회사 · 브랜드 · 제품 소개", editorial: "기타", web: "웹·UI/UX·툴 개발" };
       setTimeout(() => applyFill(
         { goal: goalMap[item.category], note: `포트폴리오의 '${item.name}'(${cat.label}) 작업과 비슷한 방향으로 문의드립니다.` },
         `‘${item.name}’ 작업을 참고로 문의서를 채웠어요.`
