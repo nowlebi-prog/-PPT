@@ -223,43 +223,42 @@ a{color:inherit;text-decoration:none}
   .ext .gbtn{width:100%}
 }
 
-/* 일곱 번째: 가격 — 한 줄 4칸 표, 추천 칸만 빛 테두리, 아래 공통 포함 한 줄 */
+/* 일곱 번째: 가격 — 기존 사이트 표 그대로(4칸 카드 + 공통 포함 + 예시 + 상담), 추천은 작은 배지만 */
 .prc{position:relative;padding:140px 0 120px;isolation:isolate}
-.prc::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse 50% 45% at 50% 60%,rgba(31,75,255,.26),transparent 70%),radial-gradient(ellipse 35% 35% at 85% 15%,rgba(63,208,240,.12),transparent 70%)}
+.prc::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse 50% 45% at 50% 55%,rgba(31,75,255,.22),transparent 70%),radial-gradient(ellipse 35% 35% at 85% 15%,rgba(63,208,240,.1),transparent 70%)}
 .prc__head{text-align:center}
 .prc small.k{display:block;font-size:12px;font-weight:600;letter-spacing:.28em;color:#3fd0f0;text-transform:uppercase}
 .prc h2{margin:16px 0 0;font-size:clamp(28px,3.2vw,46px);line-height:1.18;letter-spacing:-.045em}
 .prc h2 b{font-weight:800}.prc h2 span{font-weight:250}
 .prc__head p{margin:16px 0 0;font-size:15.5px;color:var(--ink-2)}
-.ptab{display:grid;grid-template-columns:repeat(4,1fr);margin-top:56px;border-top:1px solid rgba(255,255,255,.12);border-bottom:1px solid rgba(255,255,255,.12)}
-.pcol{position:relative;display:flex;flex-direction:column;padding:34px 28px 30px;opacity:0;transform:translateY(16px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.ptab{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:56px}
+.pcol{position:relative;display:flex;flex-direction:column;padding:30px 26px 26px;border-radius:20px;border:1px solid rgba(255,255,255,.1);background:linear-gradient(170deg,rgba(20,32,80,.35),rgba(6,10,24,.5));opacity:0;transform:translateY(16px);transition:opacity .9s var(--ease),transform .9s var(--ease),border-color .4s}
+.pcol:hover{border-color:rgba(63,208,240,.45)}
 .ptab.is-in .pcol{opacity:1;transform:none}
 .ptab.is-in .pcol:nth-child(2){transition-delay:.1s}.ptab.is-in .pcol:nth-child(3){transition-delay:.2s}.ptab.is-in .pcol:nth-child(4){transition-delay:.3s}
-.pcol+.pcol::before{content:"";position:absolute;left:0;top:28px;bottom:28px;width:1px;background:rgba(255,255,255,.1)}
-.pcol--pick{margin:-1px 0;border-radius:20px;background:linear-gradient(170deg,rgba(31,75,255,.22),rgba(6,10,28,.6)) padding-box,linear-gradient(150deg,#3fd0f0,#1f4bff 55%,rgba(255,255,255,.15)) border-box;border:1px solid transparent;box-shadow:0 30px 80px -30px rgba(31,90,255,.8)}
-.pcol--pick::before,.pcol--pick+.pcol::before{display:none}
-.pcol__badge{position:absolute;top:-12px;left:28px;padding:4px 10px;border-radius:999px;font-size:11px;font-weight:700;color:#fff;background:linear-gradient(120deg,#16b6dc,#1f4bff)}
-.pcol h3{margin:0;font-size:20px;font-weight:800;letter-spacing:-.03em}
-.pcol__for{margin:6px 0 0;font-size:13px;color:var(--ink-3)}
-.pcol__num{margin:26px 0 0;font-size:13px;color:var(--ink-3)}
-.pcol__num b{font-size:30px;font-weight:800;letter-spacing:-.04em;color:#fff;font-variant-numeric:tabular-nums;margin:0 2px}
-.pcol--pick .pcol__num b{background:linear-gradient(180deg,#fff 30%,#8fdcff);-webkit-background-clip:text;background-clip:text;color:transparent}
-.pcol__inc{margin:14px 0 0;font-size:13.5px;line-height:1.65;color:var(--ink-2)}
-.pcol .gbtn{margin-top:auto;height:42px;padding:0 18px;font-size:13px;align-self:flex-start}
-.pcol__inc{margin-bottom:24px}
-.prc__foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px 26px;margin-top:30px;font-size:13px;color:var(--ink-3)}
-.prc__foot b{color:#fff;font-weight:600}
-.prc__foot i{font-style:normal;color:#3fd0f0;margin-right:6px}
-@media (max-width:980px){.ptab{grid-template-columns:1fr 1fr}.pcol:nth-child(3)::before{display:none}}
+.pcol h3{display:flex;align-items:center;gap:8px;margin:0;font-size:20px;font-weight:800;letter-spacing:-.03em}
+.pcol__badge{padding:3px 9px;border-radius:999px;font-size:11px;font-weight:700;color:#3fd0f0;border:1px solid rgba(63,208,240,.5)}
+.pcol__for{margin:8px 0 0;font-size:13.5px;color:var(--ink-3)}
+.pcol__inc{margin:18px 0 0;padding-top:18px;border-top:1px solid rgba(255,255,255,.08);font-size:14px;line-height:1.65;color:var(--ink-2)}
+.pcol__num{margin:22px 0 24px;font-size:13px;color:var(--ink-3)}
+.pcol__num b{font-size:24px;font-weight:800;letter-spacing:-.03em;color:#fff;margin-right:2px}
+.pcol .gbtn{margin-top:auto;height:42px;padding:0 18px;font-size:13px;align-self:stretch}
+.pfoot{margin-top:28px;padding:26px 30px;border-radius:20px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.02);display:grid;grid-template-columns:1fr auto;gap:18px 30px;align-items:center}
+.pfoot__t{font-size:13px;font-weight:700;color:#3fd0f0;letter-spacing:.06em}
+.pincl{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 0;padding:0;list-style:none}
+.pincl li{height:30px;display:inline-flex;align-items:center;padding:0 12px;border-radius:999px;font-size:12.5px;color:var(--ink-2);background:rgba(255,255,255,.05)}
+.pfoot__ex{margin:14px 0 0;font-size:14px;color:#fff;font-weight:600}
+.pfoot__basis{margin:4px 0 0;font-size:12.5px;color:var(--ink-3)}
+.pfoot__acts{display:flex;flex-direction:column;gap:8px;align-items:stretch}
+.pfoot__acts span{font-size:12px;color:var(--ink-3);text-align:center}
+.pfoot__acts .gbtn{height:44px;font-size:13.5px}
+.gbtn.gbtn--kakao{background:#fee500!important;border-color:#fee500!important;color:#191600!important;backdrop-filter:none}
+@media (max-width:980px){.ptab{grid-template-columns:1fr 1fr}}
 @media (max-width:860px){
   .prc{padding:96px 0 80px}
   .prc h2{font-size:clamp(26px,7.6vw,34px)}
-  .ptab{grid-template-columns:1fr;border:0;margin-top:40px;gap:12px}
-  .pcol{padding:24px 22px;border-radius:18px;background:rgba(255,255,255,.03)}
-  .pcol::before{display:none}
-  .pcol--pick{margin:8px 0 0}
-  .pcol__num{margin-top:16px}
-  .prc__foot{justify-content:flex-start;flex-direction:column;align-items:flex-start;gap:6px}
+  .ptab{grid-template-columns:1fr;margin-top:40px;gap:12px}
+  .pfoot{grid-template-columns:1fr;padding:22px 20px}
 }
 
 /* 섹션마다 핵심 요소에 첫 화면 빛과 같은 청록·파랑 네온을 은은하게 */
@@ -478,8 +477,16 @@ a{color:inherit;text-decoration:none}
       <h2><b>가격은 장 수와</b> <span>자료 상태로 정해집니다.</span></h2>
       <p>자료를 보내 주시면 장 수와 일정에 맞춘 견적서를 드립니다.</p>
     </div>
-    <div class="ptab" id="ptab"><article class="pcol"><h3>리디자인</h3><p class="pcol__for">디자인된 PPT가 있다면</p><p class="pcol__num">장당 <b>30,000</b>원부터</p><p class="pcol__inc">톤 통일 · 도형 · 폰트 정리</p><a class="gbtn" href="#contact" data-package="리디자인">견적 받기<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></article><article class="pcol pcol--pick"><span class="pcol__badge">추천</span><h3>풀디자인</h3><p class="pcol__for">장 구분된 초안이 있다면</p><p class="pcol__num">장당 <b>35,000</b>원부터</p><p class="pcol__inc">템플릿 · 전체 디자인 · 문장 정리</p><a class="gbtn gbtn--fill" href="#contact" data-package="풀디자인">견적 받기<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></article><article class="pcol"><h3>기획 + 디자인</h3><p class="pcol__for">텍스트만 있다면</p><p class="pcol__num">장당 <b>45,000</b>원부터</p><p class="pcol__inc">방향 · 장 순서 · 문구 · 디자인</p><a class="gbtn" href="#contact" data-package="기획 + 디자인">견적 받기<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></article><article class="pcol"><h3>데모데이 · 기관</h3><p class="pcol__for">여러 팀을 한 번에</p><p class="pcol__num"><b>별도 견적</b></p><p class="pcol__inc">팀별 IR · 일정 관리</p><a class="gbtn" href="#contact" data-package="데모데이 · 기관">견적 받기<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></article></div>
-    <p class="prc__foot"><span><i>공통 포함</i><b>PPTX 원본 + PDF · 수정 2회 · 숫자·오탈자 검수 · NDA 가능</b></span><span>시작가 기준 · 부가세 별도</span></p>
+    <div class="ptab" id="ptab"><article class="pcol"><h3>리디자인</h3><p class="pcol__for">디자인된 PPT가 있는 분</p><p class="pcol__inc">톤 통일 · 도형·폰트 정리</p><p class="pcol__num"><b>장당 30,000원</b>부터</p><a class="gbtn" href="#contact" data-package="리디자인">이 구성으로 견적 받기</a></article><article class="pcol"><h3>풀디자인<span class="pcol__badge">추천</span></h3><p class="pcol__for">장 구분만 된 초안이 있는 분</p><p class="pcol__inc">템플릿 제작 · 전체 디자인 · 텍스트 정리</p><p class="pcol__num"><b>장당 35,000원</b>부터</p><a class="gbtn" href="#contact" data-package="풀디자인">이 구성으로 견적 받기</a></article><article class="pcol"><h3>기획 + 디자인</h3><p class="pcol__for">텍스트만 있는 분</p><p class="pcol__inc">방향 설정 · 장 순서 · 문구 정리 · 디자인</p><p class="pcol__num"><b>장당 45,000원</b>부터</p><a class="gbtn" href="#contact" data-package="기획 + 디자인">이 구성으로 견적 받기</a></article><article class="pcol"><h3>데모데이 · 기관</h3><p class="pcol__for">여러 팀 IR을 한 번에 맡기실 때</p><p class="pcol__inc">팀별 IR · 일정 관리</p><p class="pcol__num"><b>별도 견적</b></p><a class="gbtn" href="#contact" data-package="데모데이 · 기관">이 구성으로 견적 받기</a></article></div>
+    <div class="pfoot">
+      <div>
+        <p class="pfoot__t">공통 포함</p>
+        <ul class="pincl"><li>편집 가능한 PPTX 원본 + PDF</li><li>폰트 안내</li><li>수정 2회</li><li>숫자·오탈자 검수</li><li>담당자와 1:1 소통</li><li>NDA 가능</li></ul>
+        <p class="pfoot__ex">예) 투자 IR 15장 · 기획 + 디자인 = 675,000원부터 (부가세 별도)</p>
+        <p class="pfoot__basis">표시 금액은 시작가이며, 작업 범위에 따라 최종 견적이 달라집니다.</p>
+      </div>
+      <div class="pfoot__acts"><span>상담 · 견적 문의</span><a class="gbtn gbtn--kakao" href="https://pf.kakao.com/_XgRWxj/chat" target="_blank" rel="noopener">카카오톡 상담하기 ↗</a><a class="gbtn gbtn--fill" href="#contact">견적 문의하기<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+    </div>
   </div>
 </section>
 </main>
