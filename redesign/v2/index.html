@@ -22,7 +22,7 @@ a{color:inherit;text-decoration:none}
 .hdr{position:fixed;inset:0 0 auto;z-index:10;transition:background .4s,backdrop-filter .4s}
 .hdr.is-solid{background:rgba(0,0,0,.6);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
 .hdr .wrap{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:76px}
-.hdr nav{display:flex;gap:28px;font-size:14px;font-weight:600}
+.hdr nav{display:flex;align-items:center;gap:28px;font-size:14px;font-weight:600}
 .hdr nav:last-child{justify-content:flex-end}
 .hdr nav a{opacity:.92;transition:opacity .2s}
 .hdr nav a:hover{opacity:1}
@@ -53,26 +53,68 @@ a{color:inherit;text-decoration:none}
 .is-in .rise{opacity:1;transform:none}
 .is-in .rise:nth-child(2){transition-delay:.15s}.is-in .rise:nth-child(3){transition-delay:.3s}.is-in .rise:nth-child(4){transition-delay:.45s}
 
-.note{padding:120px 0;text-align:center;color:var(--ink-3);font-size:13px}
+/* 버튼: 청록→파랑 결의 얇은 빛 테두리 */
+.gbtn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:10px;height:50px;padding:0 28px;border-radius:999px;font-size:15px;font-weight:600;letter-spacing:-.01em;color:#fff;border:1px solid transparent;background:linear-gradient(rgba(6,10,24,.55),rgba(6,10,24,.55)) padding-box,linear-gradient(120deg,rgba(63,208,240,.9),rgba(31,75,255,.9) 55%,rgba(255,255,255,.25)) border-box;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:box-shadow .4s var(--ease),transform .4s var(--ease),background .4s}
+.gbtn svg{width:16px;height:16px;transition:transform .4s var(--ease)}
+.gbtn:hover{transform:translateY(-2px);box-shadow:0 0 0 1px rgba(63,208,240,.15),0 10px 40px -8px rgba(31,110,255,.55)}
+.gbtn:hover svg{transform:translateX(3px)}
+.gbtn--fill{background:linear-gradient(120deg,#16b6dc,#1f4bff 70%) padding-box,linear-gradient(120deg,rgba(255,255,255,.55),rgba(255,255,255,.1)) border-box;box-shadow:0 10px 36px -12px rgba(31,90,255,.7)}
+.gbtn--fill:hover{box-shadow:0 0 0 1px rgba(255,255,255,.1),0 14px 50px -10px rgba(31,110,255,.85)}
+.hero__acts{display:flex;justify-content:center;gap:12px;margin-top:40px}
+/* 헤더 오른쪽: Portfolio | Contact 한 알약 */
+.seg{display:inline-flex;align-items:center;height:40px;padding:0 4px;border-radius:999px;border:1px solid transparent;background:linear-gradient(rgba(6,10,24,.6),rgba(6,10,24,.6)) padding-box,linear-gradient(120deg,rgba(63,208,240,.7),rgba(31,75,255,.7) 60%,rgba(255,255,255,.18)) border-box;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.seg a{display:inline-flex;align-items:center;height:32px;padding:0 16px;border-radius:999px;font-size:13px;font-weight:600;opacity:1!important;transition:background .3s,color .3s}
+.seg a:hover{background:rgba(255,255,255,.08)}
+.seg a:last-child{background:#fff;color:#000}
+.seg a:last-child:hover{background:linear-gradient(120deg,#7fe3ff,#fff)}
+.seg i{width:1px;height:14px;background:rgba(255,255,255,.22);margin:0 2px}
+
+/* 두 번째: 3D 쇼룸 — 장표가 걸린 공간을 스크롤로 걸어 들어간다 */
+.show{position:relative;height:240vh}
+.show__stage{position:sticky;top:0;height:100svh;overflow:hidden;isolation:isolate}
+#room{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:-1}
+.show__stage::before{content:"";position:absolute;inset:0 0 auto;height:28%;z-index:0;background:linear-gradient(#000,transparent);pointer-events:none}
+.show__stage::after{content:"";position:absolute;inset:auto 0 0;height:22%;z-index:0;background:linear-gradient(transparent,#000);pointer-events:none}
+.show__copy{position:relative;z-index:1;padding-top:112px}
+.show__copy small{display:block;font-size:12px;font-weight:600;letter-spacing:.28em;color:#3fd0f0;text-transform:uppercase}
+.show__copy h2{margin:16px 0 0;font-size:clamp(30px,3.6vw,52px);line-height:1.16;letter-spacing:-.04em}
+.show__copy h2 b{font-weight:800}.show__copy h2 span{font-weight:250}
+.show__copy p{margin:18px 0 0;font-size:15.5px;color:var(--ink-2);font-weight:500}
+.show__copy .gbtn{margin-top:28px;height:46px;font-size:14px}
+.show__cap{position:absolute;z-index:1;right:max(24px,calc((100vw - 1200px) / 2 + 24px));bottom:40px;display:flex;align-items:center;gap:12px;font-size:12px;color:var(--ink-3)}
+.show__cap b{font-size:13px;color:#fff;font-weight:600;transition:opacity .4s}
+.show__bar{width:120px;height:2px;border-radius:2px;background:rgba(255,255,255,.14);overflow:hidden}
+.show__bar i{display:block;height:100%;width:100%;transform-origin:left;transform:scaleX(var(--k,0));background:linear-gradient(90deg,#3fd0f0,#1f4bff)}
+.show__fallback{position:absolute;inset:0;z-index:-1;display:none;background:radial-gradient(ellipse 60% 50% at 60% 60%,rgba(31,75,255,.25),transparent 70%)}
+.no3d .show__fallback{display:block}
 
 @media (max-width:860px){
   .hdr .wrap{grid-template-columns:auto 1fr;height:60px}
   .hdr nav:first-child{display:none}
-  .hdr nav:last-child a:not(:last-child){display:none}
   .hero{align-items:flex-end;text-align:left}
   .hero__in{padding-block:140px 72px}
   .hero h1{font-size:clamp(38px,11vw,46px)}
   .hero p{margin-left:0;font-size:14.5px}
   .down{margin-left:0}
+  .hero__acts{justify-content:flex-start}
+  .hero__acts .gbtn{flex:1;height:52px;padding:0 16px}
+  .hdr nav:last-child > a{display:none}
+  .seg{height:36px}.seg a{height:28px;padding:0 12px;font-size:12px}
+  .show{height:200vh}
+  .show__copy{padding-top:92px}
+  .show__copy h2{font-size:clamp(28px,8vw,34px)}
+  .show__copy p{font-size:14px}
+  .show__copy .gbtn{display:none}
+  .show__cap{left:20px;right:auto;bottom:32px}
 }
 @media (prefers-reduced-motion:reduce){.rise{opacity:1;transform:none;transition:none}#beam{transition:none}}
 </style>
 
 <header class="hdr" id="hdr">
   <div class="wrap">
-    <nav><a href="#work">작업 사례</a><a href="#services">서비스</a></nav>
+    <nav><a href="#work">작업 사례</a><a href="#services">서비스</a><a href="#ir">IR</a></nav>
     <a class="logo" href="#top" aria-label="유별난PPT 홈"><svg viewBox="0 0 200 230" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3fd0f0"/><stop offset="1" stop-color="#1f4bff"/></linearGradient><clipPath id="hu"><path d="M0 0H200V130A100 100 0 0 1 0 130Z"/></clipPath></defs><g clip-path="url(#hu)" fill="url(#lg)"><polygon points="0,14 20,0 20,230 0,230"/><polygon points="30,30 50,16 50,230 30,230"/><polygon points="60,96 80,82 80,230 60,230"/><polygon points="90,110 110,96 110,230 90,230"/><polygon points="120,96 140,82 140,230 120,230"/><polygon points="150,30 170,16 170,230 150,230"/><polygon points="180,14 200,0 200,230 180,230"/></g></svg><span><em><b>유별난</b>PPT</em><small>YOUSTAR PRESENTATION</small></span></a>
-    <nav><a href="#pricing">가격</a><a href="#contact">문의</a></nav>
+    <nav><a href="#pricing">가격</a><span class="seg"><a href="#work">Portfolio</a><i></i><a href="#contact">Contact</a></span></nav>
   </div>
 </header>
 
@@ -82,10 +124,24 @@ a{color:inherit;text-decoration:none}
   <div class="wrap hero__in" id="heroIn">
     <h1 class="rise"><b>같은 초안도,</b><span>차원이 다르게.</span></h1>
     <p class="rise">정리 안 된 초안도, 읽히는 장표로.</p>
+    <div class="hero__acts rise"><a class="gbtn gbtn--fill" href="#work">Portfolio<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="gbtn" href="#contact">Contact</a></div>
     <a class="down rise" href="#work" aria-label="아래로"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
   </div>
 </section>
-<section class="note" id="work">— 다음 섹션 자리 —</section>
+<section class="show" id="work">
+  <div class="show__stage">
+    <canvas id="room" aria-hidden="true"></canvas>
+    <div class="show__fallback" aria-hidden="true"></div>
+    <div class="wrap show__copy">
+      <small>On Stage</small>
+      <h2><b>띄워지는 순간,</b><br><span>완성은 달라집니다.</span></h2>
+      <p>발표장의 큰 스크린까지 생각하고 만듭니다.</p>
+      <a class="gbtn" href="../../portfolio.html">작업 사례 보기<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+    <div class="show__cap" aria-live="polite"><span class="show__bar"><i id="showBar"></i></span><b id="showName"></b></div>
+  </div>
+</section>
+<section style="height:60vh"></section>
 </main>
 
 <script>
@@ -153,3 +209,143 @@ a{color:inherit;text-decoration:none}
   requestAnimationFrame((n) => { f(n); cv.classList.add("is-on"); });
 })();
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/* 두 번째 섹션: 3D 발표장. 객석 뒤에서 시작해 스크롤하면 무대 스크린 앞까지 걸어 들어간다.
+   큰 스크린에는 실제 작업 장표가 차례로 띄워진다 */
+(() => {
+  const stage = document.querySelector(".show__stage"), sec = document.getElementById("work"), cv = document.getElementById("room");
+  const copy = document.querySelector(".show__copy");
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!window.THREE) { stage.classList.add("no3d"); return; }
+  const T = THREE;
+  let R;
+  try { R = new T.WebGLRenderer({ canvas: cv, antialias: true }); } catch (e) { stage.classList.add("no3d"); return; }
+  R.setPixelRatio(Math.min(devicePixelRatio || 1, innerWidth <= 860 ? 1.5 : 1.75)); // 휴대폰은 해상도를 낮춰 가볍게
+  R.outputEncoding = T.sRGBEncoding; R.toneMapping = T.ACESFilmicToneMapping; R.toneMappingExposure = 1.05;
+  R.setClearColor(0x000000);
+  const S = new T.Scene(); S.fog = new T.Fog(0x000000, 18, 46);
+  const cam = new T.PerspectiveCamera(40, 1, .1, 120);
+  const SL = "assets/slides/";
+  const ss = (x) => x * x * (3 - 2 * x);
+  const deck = [["mindsground", "마인즈그라운드 · IR"], ["refilly", "리필리 · IR"], ["toff", "토프모빌리티 · 사업계획"], ["geogrid", "지오그리드 · IR"], ["sakura", "사쿠라테이엔 · 브랜드 소개"], ["blos", "지오그리드 BLOS · 제품 소개"], ["mfference", "메이퍼런스 · 회사소개"]];
+
+  // 빛: 아주 어두운 홀 + 무대를 비추는 차가운 조명
+  S.add(new T.HemisphereLight(0x6f8fff, 0x020309, .28));
+  const key = new T.SpotLight(0xcfe0ff, 2.2, 40, .42, .6, 1.2); key.position.set(0, 13, 4); key.target.position.set(0, 0, -4); S.add(key, key.target);
+
+  const mat = (c, r = .6, m = .1) => new T.MeshStandardMaterial({ color: c, roughness: r, metalness: m });
+  const glowTex = (() => { const c = document.createElement("canvas"); c.width = c.height = 256; const x = c.getContext("2d"); const g = x.createRadialGradient(128, 128, 0, 128, 128, 128); g.addColorStop(0, "rgba(140,190,255,.6)"); g.addColorStop(.45, "rgba(60,110,255,.2)"); g.addColorStop(1, "rgba(0,0,0,0)"); x.fillStyle = g; x.fillRect(0, 0, 256, 256); return new T.CanvasTexture(c); })();
+  const addGlow = (w, h, pos, rx = 0, ry = 0, op = 1) => { const m = new T.Mesh(new T.PlaneGeometry(w, h), new T.MeshBasicMaterial({ map: glowTex, transparent: true, opacity: op, blending: T.AdditiveBlending, depthWrite: false })); m.position.copy(pos); m.rotation.set(rx, ry, 0); S.add(m); return m; };
+
+  // 바닥 + 은은한 격자
+  const floor = new T.Mesh(new T.PlaneGeometry(80, 80), mat(0x060a1c, .38, .35)); floor.rotation.x = -Math.PI / 2; S.add(floor);
+  const grid = new T.GridHelper(80, 80, 0x16357a, 0x16357a); grid.material.transparent = true; grid.material.opacity = .28; grid.position.y = .002; S.add(grid);
+
+  // 무대: 단 + 앞쪽 빛 띠
+  const st = new T.Mesh(new T.BoxGeometry(18, .7, 6), mat(0x0d1330, .45, .2)); st.position.set(0, .35, -6); S.add(st);
+  const strip = new T.Mesh(new T.BoxGeometry(18, .05, .05), new T.MeshBasicMaterial({ color: 0x2fa8ff })); strip.position.set(0, .68, -2.98); S.add(strip);
+  addGlow(22, 2.2, new T.Vector3(0, .02, -1.6), -Math.PI / 2, 0, .55);
+  // 뒷벽
+  const back = new T.Mesh(new T.PlaneGeometry(40, 16), mat(0x070b1e, .9)); back.position.set(0, 8, -9.2); S.add(back);
+
+  // 큰 스크린: 두 장표를 겹쳐 그려 부드럽게 넘긴다
+  const cvs = document.createElement("canvas"); cvs.width = 1600; cvs.height = 900; const cx = cvs.getContext("2d");
+  const scTex = new T.CanvasTexture(cvs); scTex.encoding = T.sRGBEncoding; scTex.anisotropy = R.capabilities.getMaxAnisotropy();
+  const imgs = deck.map(([n]) => { const im = new Image(); im.src = SL + n + ".webp"; return im; });
+  const W = 11.2, Hh = W * 9 / 16;
+  const frame = new T.Mesh(new T.BoxGeometry(W + .3, Hh + .3, .2), mat(0x03050b, .3, .7)); frame.position.set(0, 4.6, -8.6); S.add(frame);
+  const scr = new T.Mesh(new T.PlaneGeometry(W, Hh), new T.MeshBasicMaterial({ map: scTex, toneMapped: false })); scr.position.set(0, 4.6, -8.48); S.add(scr);
+  addGlow(W * 2.2, Hh * 2.2, new T.Vector3(0, 4.6, -8.72), 0, 0, .9);
+  const spill = addGlow(16, 14, new T.Vector3(0, .03, 0), -Math.PI / 2, 0, .35); // 객석 바닥에 번지는 스크린 빛
+
+  // 양옆 보조 스크린 (세로로 긴 LED)
+  function side(name, x, ry) {
+    const t = new T.TextureLoader().load(SL + name + ".webp"); t.encoding = T.sRGBEncoding;
+    const g = new T.Group(); g.position.set(x, 4.2, -6.6); g.rotation.y = ry; S.add(g);
+    const f = new T.Mesh(new T.BoxGeometry(4.5, 2.65, .15), mat(0x03050b, .3, .7)); g.add(f);
+    const s = new T.Mesh(new T.PlaneGeometry(4.3, 2.42), new T.MeshBasicMaterial({ map: t, toneMapped: false })); s.position.z = .08; g.add(s);
+  }
+  side("drbelab", -9.6, .42); side("gears", 9.6, -.42);
+
+  // 연단 + 앞면 로고 빛
+  const pod = new T.Group(); pod.position.set(-5.2, .7, -4.4); pod.rotation.y = .25; S.add(pod);
+  const pb = new T.Mesh(new T.BoxGeometry(1, 1.2, .62), mat(0x111a42, .4, .3)); pb.position.y = .6; pod.add(pb);
+  const pt = new T.Mesh(new T.BoxGeometry(1.15, .06, .75), mat(0xc9d3f2, .35)); pt.position.y = 1.23; pod.add(pt);
+  const plogo = new T.Mesh(new T.PlaneGeometry(.5, .5), new T.MeshBasicMaterial({ map: (() => { const c = document.createElement("canvas"); c.width = c.height = 256; const x = c.getContext("2d"); const g = x.createLinearGradient(0, 0, 256, 256); g.addColorStop(0, "#3fd0f0"); g.addColorStop(1, "#1f4bff"); x.fillStyle = g; x.beginPath(); x.save(); x.rect(0, 0, 256, 150); x.arc(128, 150, 128, 0, Math.PI); x.clip(); [[0,14],[33,30],[66,96],[99,110],[132,96],[165,30],[198,14]].forEach(([bx, by]) => { x.fillRect(bx + 18, by * .9 + 10, 22, 260); }); x.restore(); const t = new T.CanvasTexture(c); t.encoding = T.sRGBEncoding; return t; })(), transparent: true, toneMapped: false }));
+  plogo.position.set(0, .7, .32); pod.add(plogo);
+  const mic = new T.Mesh(new T.CylinderGeometry(.015, .015, .45, 8), mat(0x888fa0, .3, .8)); mic.position.set(.2, 1.45, .05); mic.rotation.z = -.4; pod.add(mic);
+
+  // 천장 트러스 + 조명 기둥(빛줄기)
+  const truss = new T.Mesh(new T.BoxGeometry(20, .22, .22), mat(0x1a2244, .5, .6)); truss.position.set(0, 9.4, 1.2); S.add(truss);
+  const coneMat = (c) => new T.MeshBasicMaterial({ color: c, transparent: true, opacity: .045, blending: T.AdditiveBlending, depthWrite: false, side: T.DoubleSide });
+  const beams = [];
+  [[-7, 0x3fd0f0], [-3.5, 0x2a5cff], [0, 0xbfd6ff], [3.5, 0x2a5cff], [7, 0x3fd0f0]].forEach(([x, c], i) => {
+    const head = new T.Mesh(new T.CylinderGeometry(.16, .22, .4, 16), mat(0x0b0f20, .4, .7)); head.position.set(x, 9.1, 1.2); S.add(head);
+    const cone = new T.Mesh(new T.ConeGeometry(1.5, 8.6, 32, 1, true), coneMat(c)); cone.geometry.translate(0, -4.3, 0);
+    cone.position.set(x, 9.1, 1.2); cone.rotation.x = .3; S.add(cone); beams.push({ cone, ph: i * 1.3 });
+    addGlow(2.6, 2.6, new T.Vector3(x * .95, .72, -2.0), -Math.PI / 2, 0, .3);
+  });
+
+  // 객석: 의자와 앉아 있는 사람들 (인스턴스로 가볍게)
+  const seatG = new T.BoxGeometry(.56, .1, .5), backG = new T.BoxGeometry(.56, .7, .08), headG = new T.SphereGeometry(.15, 12, 10), bodyG = new T.CylinderGeometry(.17, .22, .55, 10);
+  const seats = [], heads = [];
+  for (let r = 0; r < 8; r++) for (let c = 0; c < 16; c++) {
+    if (c === 7 || c === 8) continue; // 가운데 통로
+    const x = (c - 7.5) * .78, z = 2.2 + r * 1.15, y = r * .12;
+    seats.push([x, y, z]); if ((r * 7 + c * 3) % 5 !== 0 && r < 7) heads.push([x, y, z]);
+  }
+  const inst = (g, m, list, f) => { const im = new T.InstancedMesh(g, m, list.length), o = new T.Object3D(); list.forEach((p, i) => { f(o, p); o.updateMatrix(); im.setMatrixAt(i, o.matrix); }); S.add(im); };
+  const chairM = mat(0x121a3e, .55, .2), personM = mat(0x05070f, .8, 0);
+  inst(seatG, chairM, seats, (o, [x, y, z]) => o.position.set(x, y + .45, z));
+  inst(backG, chairM, seats, (o, [x, y, z]) => o.position.set(x, y + .85, z + .25));
+  inst(bodyG, personM, heads, (o, [x, y, z]) => o.position.set(x, y + .78, z + .02));
+  inst(headG, personM, heads, (o, [x, y, z]) => o.position.set(x, y + 1.2, z));
+  // 객석 단 (계단식)
+  for (let r = 0; r < 8; r++) { const p = new T.Mesh(new T.BoxGeometry(13.5, .12, 1.15), mat(0x080d22, .6)); p.position.set(0, r * .12 - .06 + .12, 2.2 + r * 1.15); if (r) S.add(p); }
+
+  // 스크롤 경로: 객석 뒤 → 객석 중간 → 스크린 앞
+  const P = [[0, 7.2, 24, 0, 3.8, -8], [5.5, 3.6, 11.5, 0, 4.4, -8.5], [0, 4.5, 2.6, 0, 4.6, -8.5]];
+  const bar = document.getElementById("showBar"), nm = document.getElementById("showName");
+  let kk = 0, mx = 0, my = 0, tx = 0, ty = 0, on = false, cur = 0, nxt = 0, fade = 1, lastSwap = 0;
+  if (matchMedia("(pointer: fine)").matches) addEventListener("pointermove", (e) => { tx = e.clientX / innerWidth - .5; ty = e.clientY / innerHeight - .5; }, { passive: true });
+  const size = () => { const w = stage.clientWidth, h = stage.clientHeight; R.setSize(w, h, false); cam.aspect = w / h; cam.fov = cam.aspect < 1 ? 62 : 40; cam.updateProjectionMatrix(); };
+  // 데스크톱: 처음엔 장면을 오른쪽으로 밀어 두고, 스크린 앞에 가까워질수록 가운데로
+  const offset = (k) => { const w = stage.clientWidth, h = stage.clientHeight; if (w > 860) cam.setViewOffset(w, h, -w * .16 * (1 - ss(Math.max(0, (k - .55) / .45))), 0, w, h); else cam.clearViewOffset(); };
+  size(); addEventListener("resize", size);
+  const prog = () => { const r = sec.getBoundingClientRect(); return Math.min(1, Math.max(0, -r.top / (r.height - innerHeight))); };
+  new IntersectionObserver(([e]) => { on = e.isIntersecting; if (on) requestAnimationFrame(loop); }, { rootMargin: "200px" }).observe(sec);
+  const drawScreen = () => {
+    cx.fillStyle = "#050814"; cx.fillRect(0, 0, 1600, 900);
+    const a = imgs[cur], b = imgs[nxt];
+    if (a.complete && a.naturalWidth) { cx.globalAlpha = 1; cx.drawImage(a, 0, 0, 1600, 900); }
+    if (fade < 1 && b.complete && b.naturalWidth) { cx.globalAlpha = ss(fade); cx.drawImage(b, 0, 0, 1600, 900); }
+    cx.globalAlpha = 1; scTex.needsUpdate = true;
+  };
+  imgs.forEach((im) => im.addEventListener("load", drawScreen));
+  const v = new T.Vector3(), L = new T.Vector3();
+  function loop(t) {
+    if (!on) return;
+    kk += (prog() - kk) * (reduce ? 1 : .08);
+    mx += (tx - mx) * .05; my += (ty - my) * .05;
+    const seg = kk < .5 ? 0 : 1, f = ss(Math.min(1, (kk - seg * .5) / .5)), a = P[seg], b = P[seg + 1];
+    v.set(a[0] + (b[0] - a[0]) * f, a[1] + (b[1] - a[1]) * f, a[2] + (b[2] - a[2]) * f);
+    L.set(a[3] + (b[3] - a[3]) * f, a[4] + (b[4] - a[4]) * f, a[5] + (b[5] - a[5]) * f);
+    const s = reduce ? 0 : t / 1000;
+    v.x += Math.sin(s * .22) * .3 + mx * 1.4; v.y += -my * .7;
+    offset(kk); cam.position.copy(v); cam.lookAt(L);
+    // 장표 넘기기: 3.4초마다, 0.9초 동안 겹쳐서
+    if (!reduce && fade >= 1 && t - lastSwap > 3400) { nxt = (cur + 1) % deck.length; fade = 0; lastSwap = t; nm.textContent = deck[nxt][1]; }
+    if (fade < 1) { fade = Math.min(1, (t - lastSwap) / 900); drawScreen(); if (fade >= 1) { cur = nxt; } }
+    beams.forEach((bm) => { bm.cone.material.opacity = .03 + .022 * Math.sin(s * .8 + bm.ph); bm.cone.rotation.z = Math.sin(s * .3 + bm.ph) * .12; });
+    spill.material.opacity = .3 + .08 * Math.sin(s * 1.3);
+    bar.style.setProperty("--k", kk.toFixed(3));
+    copy.style.opacity = innerWidth > 860 ? String(1 - Math.max(0, (kk - .7) / .3) * .85) : "1";
+    R.render(S, cam);
+    requestAnimationFrame(loop);
+  }
+  nm.textContent = deck[0][1];
+  requestAnimationFrame(loop);
+})();
+</script>
+
