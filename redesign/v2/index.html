@@ -228,7 +228,7 @@ a{color:inherit;text-decoration:none}
   const cam = new T.PerspectiveCamera(40, 1, .1, 120);
   const SL = "assets/slides/";
   const ss = (x) => x * x * (3 - 2 * x);
-  const deck = [["mindsground", "마인즈그라운드 · IR"], ["refilly", "리필리 · IR"], ["toff", "토프모빌리티 · 사업계획"], ["geogrid", "지오그리드 · IR"], ["sakura", "사쿠라테이엔 · 브랜드 소개"], ["blos", "지오그리드 BLOS · 제품 소개"], ["mfference", "메이퍼런스 · 회사소개"]];
+  const deck = [["toff-flight", "토프모빌리티 · 사업계획"], ["gears-candy", "기어스컴퍼니 · 제품 소개"], ["sakura-brand", "사쿠라테이엔 · 브랜드 소개"], ["drbelab-cover", "닥터비랩 · IR"], ["farmkit-data", "팜킷 · IR"], ["refilly", "리필리 · IR"], ["blos", "지오그리드 BLOS · 제품 소개"]];
 
   // 빛: 아주 어두운 홀 + 무대를 비추는 차가운 조명
   S.add(new T.HemisphereLight(0x6f8fff, 0x020309, .28));
@@ -266,7 +266,7 @@ a{color:inherit;text-decoration:none}
     const f = new T.Mesh(new T.BoxGeometry(4.5, 2.65, .15), mat(0x03050b, .3, .7)); g.add(f);
     const s = new T.Mesh(new T.PlaneGeometry(4.3, 2.42), new T.MeshBasicMaterial({ map: t, toneMapped: false })); s.position.z = .08; g.add(s);
   }
-  side("drbelab", -9.6, .42); side("gears", 9.6, -.42);
+  side("geogrid", -9.6, .42); side("invigo", 9.6, -.42);
 
   // 연단 + 앞면 로고 빛
   const pod = new T.Group(); pod.position.set(-5.2, .7, -4.4); pod.rotation.y = .25; S.add(pod);
@@ -335,8 +335,8 @@ a{color:inherit;text-decoration:none}
     v.x += Math.sin(s * .22) * .3 + mx * 1.4; v.y += -my * .7;
     offset(kk); cam.position.copy(v); cam.lookAt(L);
     // 장표 넘기기: 3.4초마다, 0.9초 동안 겹쳐서
-    if (!reduce && fade >= 1 && t - lastSwap > 3400) { nxt = (cur + 1) % deck.length; fade = 0; lastSwap = t; nm.textContent = deck[nxt][1]; }
-    if (fade < 1) { fade = Math.min(1, (t - lastSwap) / 900); drawScreen(); if (fade >= 1) { cur = nxt; } }
+    if (!reduce && fade >= 1 && t - lastSwap > 3400) { nxt = (cur + 1) % deck.length; fade = 0; lastSwap = t; }
+    if (fade < 1) { fade = Math.min(1, (t - lastSwap) / 900); drawScreen(); if (fade > .5) nm.textContent = deck[nxt][1]; if (fade >= 1) { cur = nxt; } }
     beams.forEach((bm) => { bm.cone.material.opacity = .03 + .022 * Math.sin(s * .8 + bm.ph); bm.cone.rotation.z = Math.sin(s * .3 + bm.ph) * .12; });
     spill.material.opacity = .3 + .08 * Math.sin(s * 1.3);
     bar.style.setProperty("--k", kk.toFixed(3));
