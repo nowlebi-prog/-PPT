@@ -110,7 +110,7 @@ a{color:inherit;text-decoration:none}
   .ah{padding:120px 0 60px}.ah h1{white-space:normal}.ah .wrap{grid-template-columns:1fr;gap:40px}
   .anums{gap:24px}.anums b{font-size:34px}
   .asec{padding:80px 0}
-  .yr{grid-template-columns:1fr;gap:12px}
+  .yr{grid-template-columns:72px minmax(0,1fr);gap:14px}
   .steps5{grid-template-columns:1fr;gap:26px}
   .steps5::before,.steps5::after{left:21px;right:auto;top:22px;bottom:22px;width:2px;height:auto}
   .steps5::after{transform:scaleY(0);transform-origin:top}.steps5.is-in::after{transform:scaleY(1)}
@@ -138,6 +138,27 @@ a{color:inherit;text-decoration:none}
 .menu-open .hdr{background:transparent!important;backdrop-filter:none!important}
 .menu-open .qfab{opacity:0!important;pointer-events:none!important}
 @media (max-width:860px){.mbtn{display:flex;flex-direction:column;justify-content:center;align-items:center}.logo small{white-space:nowrap;letter-spacing:.2em}.hdr{z-index:60}.hdr nav:last-child{gap:0}}
+@media (max-width:600px){
+  .ah{padding:104px 0 52px}.ah .wrap{gap:20px}
+  .ah h1{font-size:clamp(26px,7.3vw,32px)}
+  .ah p.lead{font-size:14px;line-height:1.65}
+  .anums{justify-content:space-between;gap:10px;margin-top:26px}
+  .anums b{font-size:30px}.anums span{font-size:11.5px}
+  .stack{aspect-ratio:16/9}
+  .stack img{width:55%}.stack img:nth-child(2){top:10%}.stack img:nth-child(3){bottom:0}
+  .asec{padding:70px 0}
+  .tl{margin-top:30px}
+  .yr{grid-template-columns:58px minmax(0,1fr);gap:10px;padding:18px 0}
+  .yr h3{font-size:21px}.yr ul{gap:12px}.yr li b{font-size:13.5px}.yr li span{font-size:11.5px}
+  .steps5{display:flex;gap:18px;margin:38px -24px 0;padding:0 24px 12px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:24px;scrollbar-width:none}
+  .steps5::-webkit-scrollbar{display:none}
+  .steps5::before,.steps5::after{display:none}
+  .steps5 li{display:block;flex:0 0 min(67vw,245px);scroll-snap-align:start;border-top:1px solid rgba(255,255,255,.18)}
+  .steps5 em{width:36px;height:36px;margin-top:15px;font-size:11px}
+  .steps5 h3{margin-top:14px;font-size:15px}.steps5 p{margin-top:7px;font-size:12.5px;line-height:1.6}
+  .aband{padding:82px 0}.aband .acts{flex-direction:row;gap:8px;margin-top:26px}
+  .aband .gbtn{flex:1;min-width:0;height:46px;padding:0 10px;font-size:12px;white-space:nowrap}
+}
 </style>
 <header class="hdr" id="hdr">
   <div class="wrap">
