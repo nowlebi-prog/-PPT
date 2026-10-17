@@ -188,59 +188,49 @@ a{color:inherit;text-decoration:none}
 @keyframes statsbeam{50%{--bx:70%}}
 @media (prefers-reduced-motion:reduce){.neon-btn,.neon-txt,.stats::before{animation:none}}
 
-/* 다섯 번째: IR · 데모데이 — 왼쪽 큰 숫자 + 이력, 오른쪽 세 가지가 하나씩 떠오른다 */
-.irx{position:relative;padding:150px 0;isolation:isolate;overflow-x:clip}
-.irx::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse 50% 55% at 18% 55%,rgba(31,75,255,.3),transparent 70%),radial-gradient(ellipse 45% 45% at 90% 20%,rgba(63,208,240,.16),transparent 70%)}
-.irx .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:80px;align-items:start}
-.irx__left{position:sticky;top:120px}
+/* 다섯 번째: IR · 데모데이 — 왼쪽 노트북 목업(장표가 바뀜) + 300건+ 배지, 오른쪽 짧은 세 줄, 아래 이력 띠 */
+.irx{position:relative;padding:140px 0 120px;isolation:isolate;overflow-x:clip}
+.irx::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse 50% 55% at 25% 50%,rgba(31,75,255,.28),transparent 70%),radial-gradient(ellipse 40% 40% at 88% 25%,rgba(63,208,240,.14),transparent 70%)}
+.irx .wrap{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:72px;align-items:center}
+.lap{position:relative}
+.lap__frame{position:relative;aspect-ratio:1400/868;border-radius:20px;overflow:hidden;box-shadow:0 40px 100px -40px rgba(31,90,255,.7),0 0 0 1px rgba(255,255,255,.08)}
+.lap__frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.03);transition:opacity 1.2s var(--ease),transform 6s linear}
+.lap__frame img.on{opacity:1;transform:scale(1)}
+.lap__frame::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(3,6,18,.75));pointer-events:none}
+.lap__name{position:absolute;right:20px;bottom:18px;z-index:2;font-size:12.5px;font-weight:600;color:rgba(255,255,255,.85);transition:opacity .4s}
+.badge300{position:absolute;left:-28px;bottom:-34px;z-index:3;padding:20px 26px 18px;border-radius:18px;background:rgba(8,14,40,.72);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 24px 60px -20px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.08)}
+.badge300 b{display:block;font-size:56px;font-weight:800;letter-spacing:-.05em;line-height:1;background:linear-gradient(180deg,#fff 30%,#8fdcff);-webkit-background-clip:text;background-clip:text;color:transparent;font-variant-numeric:tabular-nums}
+.badge300 b em{font-style:normal;font-size:.4em;font-weight:700;margin-left:4px}
+.badge300 span{display:block;margin-top:8px;font-size:12.5px;font-weight:600;color:var(--ink-2)}
 .irx small.k{display:block;font-size:12px;font-weight:600;letter-spacing:.28em;color:#3fd0f0;text-transform:uppercase}
 .irx h2{margin:16px 0 0;font-size:clamp(30px,3.2vw,46px);line-height:1.18;letter-spacing:-.045em}
 .irx h2 b{font-weight:800}.irx h2 span{font-weight:250}
-.irx__big{display:flex;align-items:baseline;gap:8px;margin:40px 0 0}
-.irx__big b{font-size:clamp(84px,9vw,136px);font-weight:800;letter-spacing:-.06em;line-height:.9;background:linear-gradient(180deg,#fff 30%,#8fdcff);-webkit-background-clip:text;background-clip:text;color:transparent;font-variant-numeric:tabular-nums}
-.irx__big b em{font-style:normal;font-size:.3em;font-weight:700;letter-spacing:-.02em;margin-left:6px}
-.irx__big span{font-size:15px;font-weight:600;color:var(--ink-2)}
-.hbox{position:relative;height:230px;margin-top:36px;border-radius:18px;border:1px solid rgba(255,255,255,.1);background:linear-gradient(170deg,rgba(20,32,80,.55),rgba(5,7,15,.6));overflow:hidden}
-.hbox__cap{position:absolute;left:22px;top:16px;z-index:1;font-size:11px;font-weight:600;letter-spacing:.22em;color:var(--ink-3)}
-.hist{position:absolute;inset:36px 0 0;-webkit-mask:linear-gradient(transparent,#000 18%,#000 82%,transparent);mask:linear-gradient(transparent,#000 18%,#000 82%,transparent)}
-.hist ul{margin:0;padding:0 22px;list-style:none;animation:histup 20s linear infinite}
-.hbox:hover .hist ul{animation-play-state:paused}
-@keyframes histup{to{transform:translateY(-50%)}}
-.hist li{display:grid;grid-template-columns:48px 1fr auto;gap:12px;align-items:center;height:46px;border-bottom:1px solid rgba(255,255,255,.07);font-size:14px;color:var(--ink-2);white-space:nowrap}
-.hist li span{overflow:hidden;text-overflow:ellipsis}
-.hist li b{font-size:13px;color:#3fd0f0;font-weight:700}
-.hist li em{font-style:normal;font-weight:800;color:#fff}
-.irx__left .gbtn{margin-top:28px;height:48px;font-size:14px}
-.pts{margin:0;padding:0;list-style:none}
-.pt{position:relative;padding:44px 0 44px 36px;border-bottom:1px solid rgba(255,255,255,.1);opacity:0;transform:translateX(60px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
-.pt:first-child{padding-top:8px}
+.pts{margin:34px 0 0;padding:0;list-style:none;border-top:1px solid rgba(255,255,255,.1)}
+.pt{display:grid;grid-template-columns:44px 1fr;gap:16px;align-items:start;padding:20px 0;border-bottom:1px solid rgba(255,255,255,.1);opacity:0;transform:translateY(14px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
 .pts.is-in .pt{opacity:1;transform:none}
-.pts.is-in .pt:nth-child(2){transition-delay:.25s}.pts.is-in .pt:nth-child(3){transition-delay:.5s}
-.pt::before{content:"";position:absolute;left:0;top:50px;bottom:50px;width:2px;border-radius:2px;background:rgba(255,255,255,.1)}
-.pt:first-child::before{top:14px}
-.pt::after{content:"";position:absolute;left:0;top:50px;bottom:50px;width:2px;border-radius:2px;background:linear-gradient(#3fd0f0,#1f4bff);box-shadow:0 0 14px rgba(63,208,240,.8);transform:scaleY(0);transform-origin:top;transition:transform .9s var(--ease)}
-.pt:first-child::after{top:14px}
-.pt.is-act::after{transform:scaleY(1)}
-.pt i.t{font-style:normal;font-size:12px;font-weight:600;letter-spacing:.22em;color:#3fd0f0}
-.pt h3{margin:14px 0 0;font-size:clamp(26px,2.6vw,38px);font-weight:800;letter-spacing:-.045em;line-height:1.2;color:rgba(255,255,255,.45);transition:color .6s}
-.pt.is-act h3{color:#fff}
-.pt p{margin:14px 0 0;font-size:16px;line-height:1.75;color:var(--ink-3);transition:color .6s;max-width:520px}
-.pt.is-act p{color:var(--ink-2)}
-.pt ul{display:flex;flex-wrap:wrap;gap:6px;margin:18px 0 0;padding:0;list-style:none}
-.pt ul li{height:30px;display:inline-flex;align-items:center;padding:0 12px;border-radius:999px;font-size:12.5px;color:var(--ink-3);border:1px solid rgba(255,255,255,.1);transition:all .6s var(--ease)}
-.pt.is-act ul li{color:#fff;border-color:rgba(63,208,240,.45);background:rgba(63,208,240,.08)}
+.pts.is-in .pt:nth-child(2){transition-delay:.18s}.pts.is-in .pt:nth-child(3){transition-delay:.36s}
+.pt__ic{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;color:#3fd0f0;background:radial-gradient(circle at 50% 30%,rgba(63,208,240,.18),rgba(31,75,255,.06));box-shadow:inset 0 0 0 1px rgba(63,208,240,.35)}
+.pt__ic svg{width:20px;height:20px}
+.pt i.t{display:block;font-style:normal;font-size:11px;font-weight:600;letter-spacing:.2em;color:#3fd0f0}
+.pt h3{margin:6px 0 0;font-size:17px;font-weight:700;letter-spacing:-.025em;line-height:1.45}
+.pt p{margin:5px 0 0;font-size:14px;line-height:1.7;color:var(--ink-3)}
+.irx .gbtn{margin-top:30px;height:48px;font-size:14px}
+/* 이력 띠: 둥근 테두리 없이 위아래 가는 선만 */
+.hstrip{position:relative;margin-top:96px;padding:18px 0;border-top:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.08);overflow:hidden;-webkit-mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.hstrip__row{display:flex;width:max-content;animation:wallmove 60s linear infinite}
+.hstrip:hover .hstrip__row{animation-play-state:paused}
+.hstrip__row span{display:inline-flex;align-items:center;gap:12px;padding:0 28px;font-size:14px;color:var(--ink-2);white-space:nowrap}
+.hstrip__row span b{font-size:12.5px;color:#3fd0f0;font-weight:700;letter-spacing:.02em}
+.hstrip__row span::after{content:"";width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,.3);margin-left:28px}
+.hstrip__row span.cap{color:#fff;font-size:11.5px;font-weight:700;letter-spacing:.24em}
 @media (max-width:860px){
-  .irx{padding:96px 0}
-  .irx .wrap{grid-template-columns:1fr;gap:48px}
-  .irx__left{position:static}
-  .irx h2{font-size:clamp(30px,8.4vw,38px)}
-  .irx__big b{font-size:88px}
-  .hbox{height:200px}
-  .hist li{font-size:13px}
-  .irx__left .gbtn{width:100%}
-  .pt{padding:30px 0 30px 22px}
-  .pt h3{font-size:26px;color:#fff}
-  .pt p{font-size:14.5px;color:var(--ink-2)}
+  .irx{padding:96px 0 80px}
+  .irx .wrap{grid-template-columns:1fr;gap:72px}
+  .badge300{left:14px;bottom:-40px;padding:14px 18px}
+  .badge300 b{font-size:42px}
+  .irx h2{font-size:clamp(28px,8vw,36px)}
+  .irx .gbtn{width:100%}
+  .hstrip{margin-top:64px}
 }
 
 @media (max-width:860px){
@@ -336,20 +326,28 @@ a{color:inherit;text-decoration:none}
 </section>
 <section class="irx" id="ir">
   <div class="wrap">
-    <div class="irx__left">
+    <div class="lap">
+      <div class="lap__frame" id="lap">
+        <img class="on" src="assets/slides/lap-toff.webp" alt="토프모빌리티 IR 목업" data-n="토프모빌리티 · IR">
+        <img src="assets/slides/lap-refilly.webp" alt="리필리 IR 목업" data-n="리필리 · IR" loading="lazy">
+        <img src="assets/slides/lap-geogrid.webp" alt="지오그리드 IR 목업" data-n="지오그리드 · IR" loading="lazy">
+        <img src="assets/slides/lap-drbelab.webp" alt="닥터비랩 IR 목업" data-n="닥터비랩 · IR" loading="lazy">
+        <span class="lap__name" id="lapName">토프모빌리티 · IR</span>
+      </div>
+      <div class="badge300"><b class="neon-txt" id="n300" data-to="300">300<em>건+</em></b><span>IR · 데모데이 누적 제작</span></div>
+    </div>
+    <div>
       <small class="k">IR · Demo Day</small>
-      <h2><b>데모데이 IR,</b><br><span>이렇게 다릅니다.</span></h2>
-      <div class="irx__big"><b class="neon-txt">300<em>건+</em></b></div>
-      <div class="irx__big" style="margin-top:12px"><span>IR · 데모데이 누적 제작</span></div>
-      <div class="hbox"><span class="hbox__cap">DEMO DAY HISTORY</span><div class="hist" aria-label="데모데이 이력"><ul><li><b>2025</b><span>SWITCH : Growth Stage 성과공유회</span><em>7팀</em></li><li><b>2025</b><span>Nharvest X 데모데이</span><em>3팀</em></li><li><b>2025</b><span>FutureScape 데모데이</span><em>6팀</em></li><li><b>2025</b><span>경희대 캠퍼스타운 데모데이</span><em>6팀</em></li><li><b>2024</b><span>타이푼 데모데이</span><em>9팀</em></li><li><b>2024</b><span>SWITCH 데모데이</span><em>3팀</em></li><li><b>2024</b><span>경희대 캠퍼스타운 데모데이</span><em>10팀</em></li><li aria-hidden="true"><b>2025</b><span>SWITCH : Growth Stage 성과공유회</span><em>7팀</em></li><li aria-hidden="true"><b>2025</b><span>Nharvest X 데모데이</span><em>3팀</em></li><li aria-hidden="true"><b>2025</b><span>FutureScape 데모데이</span><em>6팀</em></li><li aria-hidden="true"><b>2025</b><span>경희대 캠퍼스타운 데모데이</span><em>6팀</em></li><li aria-hidden="true"><b>2024</b><span>타이푼 데모데이</span><em>9팀</em></li><li aria-hidden="true"><b>2024</b><span>SWITCH 데모데이</span><em>3팀</em></li><li aria-hidden="true"><b>2024</b><span>경희대 캠퍼스타운 데모데이</span><em>10팀</em></li></ul></div></div>
+      <h2><b>팀마다 다른 사업,</b><br><span>팀마다 다른 IR.</span></h2>
+      <ol class="pts" id="pts">
+        <li class="pt"><span class="pt__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5M4 19h16M8 15l3-4 3 2 5-6"/></svg></span><div><i class="t">IR 이해도</i><h3>투자자가 묻는 순서로 기획합니다.</h3><p>심사 흐름에 맞춰 장표 순서부터 다시 잡습니다.</p></div></li>
+        <li class="pt"><span class="pt__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="7" height="7" rx="1.5"/><rect x="14" y="4" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><path d="M14 17.5h7M17.5 14v7"/></svg></span><div><i class="t">팀별 맞춤</i><h3>산업도 팀도 달라도, 각자에 맞게.</h3><p>팀마다 사업을 이해하고 기획과 디자인을 따로 잡아 드립니다.</p></div></li>
+        <li class="pt"><span class="pt__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10z"/></svg></span><div><i class="t">100% 소개</i><h3>광고비 0원, 모두 소개로 이어졌습니다.</h3><p>결과물이 다음 의뢰를 데려옵니다.</p></div></li>
+      </ol>
       <a class="gbtn gbtn--fill" href="#contact">IR · 데모데이 상담하기<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     </div>
-    <ol class="pts" id="pts">
-      <li class="pt is-act"><i class="t">IR · 산업 이해도</i><h3>투자자가 묻는 순서로,<br>업계가 쓰는 언어로.</h3><p>심사 흐름에 맞춰 장표 순서부터 다시 잡고, 기술과 시장 숫자를 이해한 뒤 만듭니다.</p><ul><li>왜 지금</li><li>시장</li><li>수익 구조</li><li>증명</li><li>팀</li></ul></li>
-      <li class="pt"><i class="t">팀 · 고객 관리</i><h3>10팀이어도,<br>한 팀처럼.</h3><p>여러 팀의 자료 수집부터 시안 · 수정 · 납품까지 한 진행표로 관리합니다. 주최 측은 한 창구로만 소통하면 됩니다.</p><ul><li>팀별 일정표</li><li>단일 소통 창구</li><li>납기 준수</li></ul></li>
-      <li class="pt"><i class="t">타협 없는 퀄리티</i><h3>마지막 팀까지,<br>같은 완성도.</h3><p>팀 수가 많아도 템플릿을 돌려 쓰지 않습니다. 팀마다 다른 톤으로, 끝까지 같은 기준으로 검수합니다.</p><ul><li>팀별 톤앤매너</li><li>숫자 · 출처 대조</li><li>오탈자 검수</li><li>편집 가능한 원본</li></ul></li>
-    </ol>
   </div>
+  <div class="hstrip" aria-label="데모데이 이력"><div class="hstrip__row"><span class="cap">DEMO DAY HISTORY</span><span><b>2025</b>SWITCH : Growth Stage 성과공유회</span><span><b>2025</b>Nharvest X 데모데이</span><span><b>2025</b>FutureScape 데모데이</span><span><b>2025</b>경희대학교 캠퍼스타운 데모데이</span><span><b>2024</b>타이푼 데모데이</span><span><b>2024</b>SWITCH 데모데이</span><span><b>2024</b>경희대학교 캠퍼스타운 데모데이</span><span aria-hidden="true" class="cap">DEMO DAY HISTORY</span><span aria-hidden="true"><b>2025</b>SWITCH : Growth Stage 성과공유회</span><span aria-hidden="true"><b>2025</b>Nharvest X 데모데이</span><span aria-hidden="true"><b>2025</b>FutureScape 데모데이</span><span aria-hidden="true"><b>2025</b>경희대학교 캠퍼스타운 데모데이</span><span aria-hidden="true"><b>2024</b>타이푼 데모데이</span><span aria-hidden="true"><b>2024</b>SWITCH 데모데이</span><span aria-hidden="true"><b>2024</b>경희대학교 캠퍼스타운 데모데이</span></div></div>
 </section>
 </main>
 
@@ -590,16 +588,19 @@ a{color:inherit;text-decoration:none}
 </script>
 <script>
 (() => {
-  const pts = document.getElementById("pts"); if (!pts) return;
+  const pts = document.getElementById("pts"), lap = document.getElementById("lap"); if (!pts || !lap) return;
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const items = [...pts.querySelectorAll(".pt")]; let act = 0, timer = 0;
-  const set = (i) => { act = i; items.forEach((e, k) => e.classList.toggle("is-act", k === i)); };
-  items.forEach((e, i) => e.addEventListener("pointerenter", () => { set(i); clearInterval(timer); timer = 0; }));
-  pts.addEventListener("pointerleave", () => { if (!timer && !reduce) timer = setInterval(() => set((act + 1) % items.length), 3800); });
+  const imgs = [...lap.querySelectorAll("img")], nm = document.getElementById("lapName"), n300 = document.getElementById("n300");
+  let i = 0, timer = 0, counted = false;
+  const next = () => { imgs[i].classList.remove("on"); i = (i + 1) % imgs.length; imgs[i].classList.add("on"); nm.textContent = imgs[i].dataset.n; };
   new IntersectionObserver(([e]) => {
-    if (e.isIntersecting) { pts.classList.add("is-in"); if (!timer && !reduce) timer = setInterval(() => set((act + 1) % items.length), 3800); }
-    else if (timer) { clearInterval(timer); timer = 0; }
-  }, { threshold: .25 }).observe(pts);
+    if (e.isIntersecting) {
+      pts.classList.add("is-in");
+      if (!counted) { counted = true; const em = n300.querySelector("em").outerHTML, t0 = performance.now();
+        const st = (t) => { const k = reduce ? 1 : Math.min(1, (t - t0) / 1600); n300.innerHTML = Math.round(300 * (1 - Math.pow(1 - k, 3))) + em; if (k < 1) requestAnimationFrame(st); }; requestAnimationFrame(st); }
+      if (!timer && !reduce) timer = setInterval(next, 3600);
+    } else if (timer) { clearInterval(timer); timer = 0; }
+  }, { threshold: .3 }).observe(lap);
 })();
 </script>
 
