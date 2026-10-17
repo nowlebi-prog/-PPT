@@ -433,6 +433,41 @@ a{color:inherit;text-decoration:none}
   .qz__step h3{font-size:21px}
 }
 
+/* 상담 준비 가이드: 오른쪽에서 열리는 패널 */
+.gcard{display:flex;align-items:center;gap:14px;width:100%;margin-top:22px;padding:18px 20px;border-radius:16px;border:1px solid rgba(63,208,240,.3);background:linear-gradient(120deg,rgba(63,208,240,.08),rgba(31,75,255,.06));color:#fff;font:inherit;text-align:left;cursor:pointer;transition:border-color .3s,box-shadow .3s}
+.gcard:hover{border-color:#3fd0f0;box-shadow:0 0 24px -8px rgba(63,208,240,.8)}
+.gcard span{flex:1}.gcard b{display:block;font-size:15px}.gcard small{display:block;margin-top:3px;font-size:12.5px;color:var(--ink-3)}
+.gcard i{font-style:normal;color:#3fd0f0}
+.gd{position:fixed;inset:0;z-index:60;visibility:hidden}
+.gd.open{visibility:visible}
+.gd__bg{position:absolute;inset:0;background:rgba(2,4,12,.7);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);opacity:0;transition:opacity .35s}
+.gd.open .gd__bg{opacity:1}
+.gd__panel{position:absolute;top:0;right:0;bottom:0;width:min(480px,100%);display:flex;flex-direction:column;background:linear-gradient(170deg,#0b1438,#060a1c 60%);border-left:1px solid rgba(63,208,240,.3);box-shadow:-30px 0 80px -20px rgba(31,90,255,.6);transform:translateX(100%);transition:transform .45s var(--ease)}
+.gd.open .gd__panel{transform:none}
+.gd__scroll{flex:1;overflow:auto;padding:40px 32px 24px}
+.gd__x{position:absolute;top:16px;right:16px;width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.15);background:transparent;color:#fff;font-size:20px;cursor:pointer;z-index:1}
+.gd small.k{font-size:11.5px;font-weight:600;letter-spacing:.24em;color:#3fd0f0}
+.gd h3{margin:10px 0 0;font-size:24px;font-weight:800;letter-spacing:-.035em}
+.gd__lead{margin:10px 0 0;font-size:14px;line-height:1.7;color:var(--ink-2)}
+.gd__tabs{display:flex;gap:6px;margin-top:22px;flex-wrap:wrap}
+.gd__tabs button{height:38px;padding:0 15px;border-radius:999px;border:1px solid rgba(255,255,255,.14);background:transparent;color:var(--ink-2);font:inherit;font-size:13px;font-weight:600;cursor:pointer}
+.gd__tabs button[aria-selected="true"]{color:#fff;border-color:transparent;background:linear-gradient(120deg,#16b6dc,#1f4bff)}
+.gd h4{margin:28px 0 12px;font-size:14px;font-weight:700}
+.gd h4 span{margin-left:6px;font-size:12px;font-weight:400;color:var(--ink-3)}
+.gd__flow{display:flex;flex-wrap:wrap;gap:6px;margin:0;padding:0;list-style:none;counter-reset:f}
+.gd__flow li{counter-increment:f;height:32px;display:inline-flex;align-items:center;gap:6px;padding:0 12px;border-radius:999px;font-size:12.5px;color:var(--ink-2);background:rgba(255,255,255,.05)}
+.gd__flow li::before{content:counter(f);font-size:11px;font-weight:700;color:#3fd0f0}
+.gd__list{margin:0;padding:0;list-style:none;border-top:1px solid rgba(255,255,255,.08)}
+.gd__list label{display:flex;align-items:center;gap:12px;padding:13px 2px;border-bottom:1px solid rgba(255,255,255,.08);font-size:14px;cursor:pointer}
+.gd__list input{width:18px;height:18px;accent-color:#1f4bff;flex:none}
+.gd__note{margin:16px 0 0;font-size:12px;color:var(--ink-3)}
+.gd__foot{display:grid;gap:8px;padding:18px 32px calc(22px + env(safe-area-inset-bottom,0px));border-top:1px solid rgba(255,255,255,.08)}
+.gd__foot .gbtn{height:48px;font-size:14px}
+.qz__guide{display:block;margin:14px auto 0;background:none;border:0;color:#3fd0f0;font:inherit;font-size:13px;cursor:pointer}
+.draft{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:0 0 18px;padding:12px 16px;border-radius:12px;background:rgba(63,208,240,.08);font-size:13px;color:var(--ink-2)}
+.draft button{background:none;border:0;color:#3fd0f0;font:inherit;font-size:13px;cursor:pointer}
+@media (max-width:860px){.gd__panel{top:auto;width:100%;max-height:88vh;border-left:0;border-top:1px solid rgba(63,208,240,.3);border-radius:22px 22px 0 0;transform:translateY(100%)}.gd__scroll{padding:32px 20px 20px}.gd__foot{padding:14px 20px calc(18px + env(safe-area-inset-bottom,0px))}}
+
 /* 섹션마다 핵심 요소에 첫 화면 빛과 같은 청록·파랑 네온을 은은하게 */
 @keyframes neonbtn{0%,100%{box-shadow:0 0 0 0 rgba(63,208,240,0),0 0 0 0 rgba(31,75,255,0)}45%,60%{box-shadow:0 0 26px 3px rgba(63,208,240,.5),0 0 70px 14px rgba(31,75,255,.3)}}
 .neon-btn{animation:neonbtn 5.5s ease-in-out infinite}
@@ -586,9 +621,9 @@ a{color:inherit;text-decoration:none}
       <p>내용을 이해하고, 기획하며, 목적에 맞게 완성합니다.</p>
     </div>
     <div class="cards" id="cards">
-      <a class="card" href="#contact"><div class="card__in"><div class="card__img"><img src="assets/slides/svc-ir.webp" alt="토프모빌리티 사업계획 장표 목업" loading="lazy"></div><div class="card__body"><i>IR · DEMO DAY</i><h3>IR · 데모데이</h3><p>투자자가 묻는 순서대로.</p><ul><li>투자 IR</li><li>데모데이</li><li>정부지원사업</li><li>IR 컨설팅</li></ul><span class="card__more">IR 상담하기<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></div></a>
-      <a class="card" href="#contact"><div class="card__in"><div class="card__img"><img src="assets/slides/svc-prop.webp" alt="특허법인 성암 회사소개 장표 목업" loading="lazy"></div><div class="card__body"><i>PROPOSAL · BID</i><h3>제안서 · 입찰</h3><p>심사위원이 찾기 쉽게.</p><ul><li>입찰 제안서</li><li>사업계획서</li><li>정량·정성 평가 대응</li></ul><span class="card__more">제안서 상담하기<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></div></a>
-      <a class="card" href="#contact"><div class="card__in"><div class="card__img"><img src="assets/slides/svc-intro.webp" alt="사쿠라테이엔 브랜드 소개 장표 목업" loading="lazy"></div><div class="card__body"><i>COMPANY · PRODUCT</i><h3>회사 · 제품 소개서</h3><p>처음 보는 사람도 한 번에.</p><ul><li>회사소개서</li><li>제품·서비스 소개</li><li>브랜드북</li></ul><span class="card__more">소개서 상담하기<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></div></a>
+      <a class="card" href="#contact" data-goal="투자 유치 (IR)" data-msg="[IR · 데모데이] 상담을 원합니다."><div class="card__in"><div class="card__img"><img src="assets/slides/svc-ir.webp" alt="토프모빌리티 사업계획 장표 목업" loading="lazy"></div><div class="card__body"><i>IR · DEMO DAY</i><h3>IR · 데모데이</h3><p>투자자가 묻는 순서대로.</p><ul><li>투자 IR</li><li>데모데이</li><li>정부지원사업</li><li>IR 컨설팅</li></ul><span class="card__more">IR 상담하기<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></div></a>
+      <a class="card" href="#contact" data-goal="입찰 · 제안" data-msg="[제안서 · 입찰] 상담을 원합니다."><div class="card__in"><div class="card__img"><img src="assets/slides/svc-prop.webp" alt="특허법인 성암 회사소개 장표 목업" loading="lazy"></div><div class="card__body"><i>PROPOSAL · BID</i><h3>제안서 · 입찰</h3><p>심사위원이 찾기 쉽게.</p><ul><li>입찰 제안서</li><li>사업계획서</li><li>정량·정성 평가 대응</li></ul><span class="card__more">제안서 상담하기<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></div></a>
+      <a class="card" href="#contact" data-goal="회사 · 브랜드 · 제품 소개" data-msg="[회사 · 제품 소개서] 상담을 원합니다."><div class="card__in"><div class="card__img"><img src="assets/slides/svc-intro.webp" alt="사쿠라테이엔 브랜드 소개 장표 목업" loading="lazy"></div><div class="card__body"><i>COMPANY · PRODUCT</i><h3>회사 · 제품 소개서</h3><p>처음 보는 사람도 한 번에.</p><ul><li>회사소개서</li><li>제품·서비스 소개</li><li>브랜드북</li></ul><span class="card__more">소개서 상담하기<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></div></a>
     </div>
     <p class="svc__foot">세미나 · 교육 교안 · 편집 디자인도 만듭니다. <b>모든 작업은 편집 가능한 PPTX 원본과 PDF로 드립니다.</b></p>
   </div>
@@ -617,7 +652,7 @@ a{color:inherit;text-decoration:none}
         <li class="pt"><span class="pt__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="7" height="7" rx="1.5"/><rect x="14" y="4" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><path d="M14 17.5h7M17.5 14v7"/></svg></span><div><i class="t">팀별 맞춤</i><h3>산업도 팀도 달라도, 각자에 맞게.</h3><p>팀마다 사업을 이해하고 기획과 디자인을 따로 잡아 드립니다.</p></div></li>
         <li class="pt"><span class="pt__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10z"/></svg></span><div><i class="t">100% 소개</i><h3>광고비 0원, 모두 소개로 이어졌습니다.</h3><p>결과물이 다음 의뢰를 데려옵니다.</p></div></li>
       </ol>
-      <a class="gbtn gbtn--fill" href="#contact">IR · 데모데이 상담하기<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a class="gbtn gbtn--fill" href="#contact" data-goal="데모데이" data-msg="[IR · 데모데이] 상담을 원합니다.">IR · 데모데이 상담하기<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     </div>
   </div>
   <div class="hstrip" aria-label="데모데이 이력"><div class="hstrip__row"><span class="cap">DEMO DAY HISTORY</span><span><b>2025</b>SWITCH : Growth Stage 성과공유회</span><span><b>2025</b>Nharvest X 데모데이</span><span><b>2025</b>FutureScape 데모데이</span><span><b>2025</b>경희대학교 캠퍼스타운 데모데이</span><span><b>2024</b>타이푼 데모데이</span><span><b>2024</b>SWITCH 데모데이</span><span><b>2024</b>경희대학교 캠퍼스타운 데모데이</span><span aria-hidden="true" class="cap">DEMO DAY HISTORY</span><span aria-hidden="true"><b>2025</b>SWITCH : Growth Stage 성과공유회</span><span aria-hidden="true"><b>2025</b>Nharvest X 데모데이</span><span aria-hidden="true"><b>2025</b>FutureScape 데모데이</span><span aria-hidden="true"><b>2025</b>경희대학교 캠퍼스타운 데모데이</span><span aria-hidden="true"><b>2024</b>타이푼 데모데이</span><span aria-hidden="true"><b>2024</b>SWITCH 데모데이</span><span aria-hidden="true"><b>2024</b>경희대학교 캠퍼스타운 데모데이</span></div></div>
@@ -638,7 +673,7 @@ a{color:inherit;text-decoration:none}
     <div class="ext">
       <div class="ext__t"><b>사업에 필요한 제작도 이어서.</b><span>범위에 맞춰 진행하며, 금액은 별도 협의합니다.</span></div>
       <div class="ext__flow" aria-label="PPT 외 제작 가능 범위"><div class="ext__row"><span>제품 · 서비스 연출컷</span><span>사진 보정 · 합성</span><span>상세페이지</span><span>랜딩페이지 · 홈페이지</span><span>서비스 소개 인포그래픽</span><span>짧은 인포그래픽 영상</span><span>웹 · UI/UX</span><span>AI 업무 자동화 툴</span><span>Android · iOS 앱 상담</span><span aria-hidden="true">제품 · 서비스 연출컷</span><span aria-hidden="true">사진 보정 · 합성</span><span aria-hidden="true">상세페이지</span><span aria-hidden="true">랜딩페이지 · 홈페이지</span><span aria-hidden="true">서비스 소개 인포그래픽</span><span aria-hidden="true">짧은 인포그래픽 영상</span><span aria-hidden="true">웹 · UI/UX</span><span aria-hidden="true">AI 업무 자동화 툴</span><span aria-hidden="true">Android · iOS 앱 상담</span></div></div>
-      <a class="gbtn" href="#contact">확장 제작 문의하기<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a class="gbtn" href="#contact" data-goal="기타" data-msg="[확장 제작] PPT 외 제작(별도 협의)을 상담하고 싶습니다.">확장 제작 문의하기<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     </div>
   </div>
 </section>
@@ -674,7 +709,7 @@ a{color:inherit;text-decoration:none}
 <section class="fqx" id="faq">
   <div class="wrap">
     <div class="fqx__head"><small>FAQ</small><h2>자주 묻는 질문</h2><p>궁금한 게 없으면,<br>바로 상담으로 넘어가셔도 됩니다.</p><a class="gbtn" href="#contact">상담 요청하기<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
-    <div class="faq"><details><summary>정리가 덜 된 초안이나 텍스트만 있어도 되나요?</summary><p>네. 내용에서 핵심 문장을 뽑고 장 순서를 잡은 뒤 디자인합니다.</p></details><details><summary>상담 전에 무엇을 준비하면 되나요?</summary><p>발표 유형별 기본 구성과 준비하면 좋은 자료를 정리해 두었어요. 없는 자료가 있어도 괜찮아요.</p></details><details><summary>제품 사진 한 장만 있어도 제작할 수 있나요?</summary><p>네. 보내 주신 사진으로 연출 컷과 장표 방향을 제안해 드립니다. 제품 특징과 발표 목적, 필요한 정확도를 확인한 뒤 가능한 범위를 안내합니다.</p></details><details><summary>요즘 AI로 직접 만들어도 되지 않나요?</summary><p>초안과 아이디어 정리에는 유용합니다. 사실관계와 숫자를 확인하고, 내용의 흐름과 장표 디자인까지 다듬어 전달합니다.</p></details><details><summary>납품 후에 직접 수정할 수 있나요?</summary><p>네. 추가금 없이 편집 가능한 PPT 원본을 드립니다. 이미지로 들어가는 요소의 수정 범위는 작업 전에 안내합니다.</p></details><details><summary>NDA(비밀유지계약)를 맺을 수 있나요?</summary><p>가능합니다. 기밀 자료를 보내시기 전에 요청해 주세요. 계약 내용과 자료 취급 범위를 협의한 뒤 진행합니다.</p></details><details><summary>어디로 문의하면 되나요?</summary><p><a href="https://pf.kakao.com/_XgRWxj/chat" target="_blank" rel="noopener">카카오톡 상담</a> 또는 <a href="#contact">견적 문의</a>로 자료와 일정을 알려 주세요.</p></details><details><summary>IR은 어떤 분야까지 해 보셨나요?</summary><p>기후테크, 농업·푸드, 헬스케어, IT 플랫폼, 제조, 게임 등 여러 분야의 IR을 만들었습니다. 비슷한 분야 사례는 상담 때 보여 드립니다.</p></details><details><summary>세금계산서 발행이 되나요?</summary><p>네. 기업 고객을 위한 세금계산서와 현금영수증 발행이 모두 가능합니다.</p></details></div>
+    <div class="faq"><details><summary>정리가 덜 된 초안이나 텍스트만 있어도 되나요?</summary><p>네. 내용에서 핵심 문장을 뽑고 장 순서를 잡은 뒤 디자인합니다.</p></details><details><summary>상담 전에 무엇을 준비하면 되나요?</summary><p>발표 유형별 기본 구성과 준비하면 좋은 자료를 정리해 두었어요. 없는 자료가 있어도 괜찮아요. <a href="#contact" data-guide="ir">준비 가이드 열기 →</a></p></details><details><summary>제품 사진 한 장만 있어도 제작할 수 있나요?</summary><p>네. 보내 주신 사진으로 연출 컷과 장표 방향을 제안해 드립니다. 제품 특징과 발표 목적, 필요한 정확도를 확인한 뒤 가능한 범위를 안내합니다.</p></details><details><summary>요즘 AI로 직접 만들어도 되지 않나요?</summary><p>초안과 아이디어 정리에는 유용합니다. 사실관계와 숫자를 확인하고, 내용의 흐름과 장표 디자인까지 다듬어 전달합니다.</p></details><details><summary>납품 후에 직접 수정할 수 있나요?</summary><p>네. 추가금 없이 편집 가능한 PPT 원본을 드립니다. 이미지로 들어가는 요소의 수정 범위는 작업 전에 안내합니다.</p></details><details><summary>NDA(비밀유지계약)를 맺을 수 있나요?</summary><p>가능합니다. 기밀 자료를 보내시기 전에 요청해 주세요. 계약 내용과 자료 취급 범위를 협의한 뒤 진행합니다.</p></details><details><summary>어디로 문의하면 되나요?</summary><p><a href="https://pf.kakao.com/_XgRWxj/chat" target="_blank" rel="noopener">카카오톡 상담</a> 또는 <a href="#contact">견적 문의</a>로 자료와 일정을 알려 주세요.</p></details><details><summary>IR은 어떤 분야까지 해 보셨나요?</summary><p>기후테크, 농업·푸드, 헬스케어, IT 플랫폼, 제조, 게임 등 여러 분야의 IR을 만들었습니다. 비슷한 분야 사례는 상담 때 보여 드립니다.</p></details><details><summary>세금계산서 발행이 되나요?</summary><p>네. 기업 고객을 위한 세금계산서와 현금영수증 발행이 모두 가능합니다.</p></details></div>
   </div>
 </section>
 
@@ -705,6 +740,7 @@ a{color:inherit;text-decoration:none}
         <div><dt>카카오톡</dt><dd><a href="https://pf.kakao.com/_XgRWxj/chat" target="_blank" rel="noopener">채널에서 상담하기 ↗</a></dd></div>
         <div><dt>상담 시간</dt><dd>09:00 – 17:00</dd></div>
       </dl>
+      <button class="gcard" type="button" data-guide="ir"><span><b>상담 전 준비 가이드</b><small>발표 유형별 기본 구성과 준비 자료 체크리스트</small></span><i>→</i></button>
       <p class="cmeta">개인정보보호책임자 이은비 · 사업자등록번호 202-13-66345</p>
     </div>
     <form class="form" id="cform" novalidate>
@@ -753,6 +789,7 @@ a{color:inherit;text-decoration:none}
 </footer>
 <div class="qfab" id="qfab"><button class="gbtn gbtn--fill" type="button" data-quote>빠른 견적 받기</button></div>
 <div class="qz" id="qz" role="dialog" aria-modal="true" aria-label="빠른 견적 문의"><div class="qz__bg" data-close></div><div class="qz__panel"><button class="qz__x" type="button" data-close aria-label="닫기">×</button><div class="qz__prog"><i></i></div><div id="qzBody"></div></div></div>
+<div class="gd" id="gd" role="dialog" aria-modal="true" aria-labelledby="gdTitle"><div class="gd__bg" data-gclose></div><aside class="gd__panel"><button class="gd__x" type="button" data-gclose aria-label="닫기">×</button><div class="gd__scroll"><small class="k">READY GUIDE</small><h3 id="gdTitle">상담 전 준비 가이드</h3><p class="gd__lead">발표 유형을 고르면 기본 구성과 준비하면 좋은 자료를 알려 드려요. 없는 자료가 있어도 괜찮아요.</p><div class="gd__tabs" role="tablist"></div><div id="gdBody"></div></div><div class="gd__foot"><button class="gbtn gbtn--fill" type="button" data-gfill></button><button class="gbtn gbtn--kakao" type="button" data-gkakao>카카오톡으로 보내기 ↗</button></div></aside></div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 
@@ -1020,7 +1057,6 @@ a{color:inherit;text-decoration:none}
   const st = document.getElementById("steps5"); io(st, () => st.classList.add("is-in"));
   const btn = document.querySelector(".more__btn"), body = document.getElementById("moreBody");
   btn && btn.addEventListener("click", () => { const o = btn.getAttribute("aria-expanded") === "true"; btn.setAttribute("aria-expanded", !o); body.classList.toggle("open", !o); });
-  document.querySelectorAll("[data-package]").forEach((a) => a.addEventListener("click", () => { const m = document.getElementById("f-message"); if (m && !m.value) m.value = `[${a.dataset.package}] 구성으로 견적 문의드립니다.\n`; }));
   const f = document.getElementById("cform"), out = document.getElementById("fstatus"); if (!f) return;
   f.addEventListener("submit", (e) => {
     e.preventDefault(); let bad = null;
@@ -1055,7 +1091,7 @@ a{color:inherit;text-decoration:none}
     } else {
       const urgent = /^1주/.test(ans.due || "");
       const fill = '<button class="gbtn gbtn--fill" type="button" data-fill>이 내용으로 문의서 작성하기</button>', kakao = '<button class="gbtn gbtn--kakao" type="button" data-kakao>카카오톡으로 바로 상담하기 ↗</button>';
-      body.innerHTML = `<div class="qz__step"><small>완료</small><h3>이렇게 정리됐어요.</h3><ul class="qz__sum">${steps.map((st) => `<li><span>${st.label}</span><b>${esc(ans[st.key])}</b></li>`).join("")}</ul>${urgent ? '<p class="qz__tip">급한 일정이라면 카카오톡 상담이 가장 빨라요.</p>' : ""}<div class="qz__acts">${urgent ? kakao + fill : fill + kakao}</div><p class="qz__hint">카카오톡을 누르면 정리된 내용이 복사돼요. 대화창에 붙여넣기만 하세요.</p><button class="qz__back" type="button" data-back>← 이전</button></div>`;
+      body.innerHTML = `<div class="qz__step"><small>완료</small><h3>이렇게 정리됐어요.</h3><ul class="qz__sum">${steps.map((st) => `<li><span>${st.label}</span><b>${esc(ans[st.key])}</b></li>`).join("")}</ul>${urgent ? '<p class="qz__tip">급한 일정이라면 카카오톡 상담이 가장 빨라요.</p>' : ""}<div class="qz__acts">${urgent ? kakao + fill : fill + kakao}</div><p class="qz__hint">카카오톡을 누르면 정리된 내용이 복사돼요. 대화창에 붙여넣기만 하세요.</p><button class="qz__guide" type="button" data-qguide>무엇을 준비하면 될까요? 준비 가이드 보기 →</button><button class="qz__back" type="button" data-back>← 이전</button></div>`;
     }
     body.querySelector("button:not(.qz__back)")?.focus({ preventScroll: true });
   };
@@ -1066,6 +1102,7 @@ a{color:inherit;text-decoration:none}
     if (e.target.closest("[data-close]")) return close();
     const o = e.target.closest("[data-v]"); if (o) { ans[steps[n].key] = o.dataset.v; n++; return render(); }
     if (e.target.closest("[data-back]")) { n = Math.max(0, n - 1); return render(); }
+    if (e.target.closest("[data-qguide]")) { const g = ans.goal || ""; close(); return document.dispatchEvent(new CustomEvent("yb:guide", { detail: /입찰|제안/.test(g) ? "proposal" : /소개/.test(g) ? "profile" : "ir" })); }
     if (e.target.closest("[data-fill]") && form) {
       const goal = form.querySelector('[name="goal"]'); if (goal && [...goal.options].some((op) => op.text === ans.goal)) goal.value = ans.goal;
       form.querySelector('[name="pages"]').value = ans.pages; form.querySelector('[name="due"]').value = ans.due;
@@ -1087,6 +1124,73 @@ a{color:inherit;text-decoration:none}
   const fab = document.getElementById("qfab"), hero = document.getElementById("top"), contact = document.getElementById("contact");
   const upd = () => { const past = hero.getBoundingClientRect().bottom < 0, r = contact.getBoundingClientRect(), inC = r.top < innerHeight && r.bottom > 0; fab.classList.toggle("on", past && !inC); };
   addEventListener("scroll", upd, { passive: true }); upd();
+})();
+</script>
+<script>
+(() => {
+  const form = document.getElementById("cform"); if (!form) return;
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches, KAKAO = "https://pf.kakao.com/_XgRWxj/chat";
+  const toastEl = document.getElementById("toast"); let tt;
+  const toast = (m) => { toastEl.textContent = m; toastEl.classList.add("on"); clearTimeout(tt); tt = setTimeout(() => toastEl.classList.remove("on"), 2800); };
+  const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const msg = form.querySelector('[name="message"]'), goalSel = form.querySelector('[name="goal"]');
+  const addMsg = (t) => { if (t && !msg.value.includes(t)) msg.value = (msg.value.trim() ? msg.value.trim() + "\n\n" : "") + t + "\n"; };
+  const setGoal = (g) => { if (g && [...goalSel.options].some((o) => o.text === g)) { goalSel.value = g; const mb = form.querySelector(".more__btn"); if (mb.getAttribute("aria-expanded") !== "true") mb.click(); } };
+  const go = (m) => { form.dispatchEvent(new Event("input", { bubbles: true })); document.getElementById("contact").scrollIntoView({ behavior: reduce ? "auto" : "smooth" }); setTimeout(() => form.querySelector('[name="name"]').focus({ preventScroll: true }), 800); if (m) toast(m); };
+
+  /* 1. 문의 내용 임시 저장 */
+  const KEY = "yb-v2-draft";
+  const fields = () => [...form.elements].filter((el) => el.name && el.name !== "agree" && el.type !== "submit");
+  const save = () => { const d = {}; fields().forEach((el) => { if (el.type === "checkbox") { d[el.name] = d[el.name] || []; if (el.checked) d[el.name].push(el.value); } else if (el.type === "radio") { if (el.checked) d[el.name] = el.value; } else d[el.name] = el.value; }); try { localStorage.setItem(KEY, JSON.stringify(d)); } catch (e) {} };
+  try {
+    const d = JSON.parse(localStorage.getItem(KEY) || "null");
+    if (d && Object.values(d).some((v) => (Array.isArray(v) ? v.length : v))) {
+      fields().forEach((el) => { const v = d[el.name]; if (v == null) return; if (el.type === "checkbox") el.checked = v.includes(el.value); else if (el.type === "radio") el.checked = el.value === v; else el.value = v; });
+      const note = document.createElement("p"); note.className = "draft"; note.innerHTML = '<span>작성하던 내용을 불러왔어요.</span><button type="button">지우기</button>';
+      note.querySelector("button").addEventListener("click", () => { try { localStorage.removeItem(KEY); } catch (e) {} form.reset(); note.remove(); });
+      form.prepend(note);
+    }
+  } catch (e) {}
+  let st; form.addEventListener("input", () => { clearTimeout(st); st = setTimeout(save, 300); }); form.addEventListener("change", save);
+  form.addEventListener("submit", () => setTimeout(() => { if (!form.querySelector(".fld.err")) { try { localStorage.removeItem(KEY); } catch (e) {} } }, 80));
+
+  /* 2. 작업 사례 · 서비스 · 가격 버튼 → 문의 자동 입력 */
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest("[data-goal],[data-msg],[data-package]"); if (!a || a.closest("#qz,#gd")) return;
+    e.preventDefault(); setGoal(a.dataset.goal);
+    addMsg(a.dataset.msg || (a.dataset.package ? `[${a.dataset.package}] 구성으로 견적 문의드립니다.` : ""));
+    go("선택하신 내용을 문의서에 채워 두었어요.");
+  });
+  const ref = new URLSearchParams(location.search).get("ref");
+  if (ref) { addMsg(`[${ref}] 같은 작업으로 상담을 원합니다.`); setTimeout(() => go("작업 사례를 문의서에 담아 두었어요."), 400); history.replaceState(null, "", location.pathname + "#contact"); }
+
+  /* 3. 상담 전 준비 가이드 */
+  const G = {
+    ir: { label: "IR · 데모데이", goal: "투자 유치 (IR)", flow: ["문제 정의", "해결책 · 제품", "시장 규모", "비즈니스 모델", "트랙션 · 성과", "경쟁 우위", "팀 소개", "재무 · 투자 요청"], items: ["기존 IR · 사업계획서 초안", "회사 · 제품 소개 자료", "주요 지표 (매출 · 사용자 · 성장률)", "팀 구성 · 주요 이력", "로고 · 브랜드 가이드", "발표 시간과 형식 (예: 데모데이 5분)", "참고하고 싶은 레퍼런스"] },
+    proposal: { label: "제안서 · 입찰", goal: "입찰 · 제안", flow: ["제안 개요", "사업 이해 · 과업 분석", "추진 전략", "세부 수행 방안", "추진 일정", "투입 인력 · 조직", "유사 수행 실적", "기대 효과"], items: ["제안요청서(RFP) · 과업지시서", "평가 기준표 · 배점표", "기존 제안서 · 수행 실적 자료", "회사 소개 · 인증 자료", "분량 · 양식 제한 사항", "제출 마감일 · 발표 일정", "로고 · CI"] },
+    profile: { label: "회사 · 브랜드 소개", goal: "회사 · 브랜드 · 제품 소개", flow: ["회사 소개 · 비전", "연혁", "사업 영역", "제품 · 서비스", "주요 실적 · 고객사", "경쟁력", "조직 · 파트너", "연락처"], items: ["기존 소개서 · 홈페이지 문구", "로고 · 브랜드 가이드", "제품 · 현장 사진", "주요 실적 · 고객사 목록", "회사 연혁", "사용 목적 (영업 · 채용 · 투자 등)", "참고하고 싶은 레퍼런스"] },
+  };
+  const gd = document.getElementById("gd"), gb = document.getElementById("gdBody"), tabs = gd.querySelector(".gd__tabs"), fillB = gd.querySelector("[data-gfill]");
+  const checked = Object.fromEntries(Object.keys(G).map((k) => [k, new Set()])); let type = "ir", lastF = null;
+  tabs.innerHTML = Object.keys(G).map((k) => `<button type="button" role="tab" data-t="${k}">${G[k].label}</button>`).join("");
+  const label = () => { const n = checked[type].size; fillB.textContent = n ? `체크한 ${n}개로 상담 요청하기` : "이 유형으로 상담 요청하기"; };
+  const render = () => { const g = G[type];
+    tabs.querySelectorAll("button").forEach((b) => b.setAttribute("aria-selected", b.dataset.t === type));
+    gb.innerHTML = `<h4>일반적인 기본 구성</h4><ol class="gd__flow">${g.flow.map((f) => `<li>${esc(f)}</li>`).join("")}</ol><h4>준비하면 좋은 자료<span>있는 것만 체크하세요</span></h4><ul class="gd__list">${g.items.map((it) => `<li><label><input type="checkbox" value="${esc(it)}"${checked[type].has(it) ? " checked" : ""}><span>${esc(it)}</span></label></li>`).join("")}</ul><p class="gd__note">※ 일반적인 구성 예시예요. 발표 목적에 맞게 상담 때 조정해 드려요.</p>`; label(); };
+  const open = (t) => { if (G[t]) type = t; lastF = document.activeElement; render(); gd.classList.add("open"); document.body.style.overflow = "hidden"; gd.querySelector(".gd__scroll").scrollTop = 0; };
+  const close = () => { gd.classList.remove("open"); document.body.style.overflow = ""; lastF?.focus?.({ preventScroll: true }); };
+  document.addEventListener("click", (e) => { const t = e.target.closest("[data-guide]"); if (t) { e.preventDefault(); open(t.dataset.guide); } });
+  document.addEventListener("yb:guide", (e) => open(e.detail));
+  addEventListener("keydown", (e) => { if (e.key === "Escape" && gd.classList.contains("open")) close(); });
+  gd.addEventListener("change", (e) => { const c = e.target.closest('input[type="checkbox"]'); if (!c) return; c.checked ? checked[type].add(c.value) : checked[type].delete(c.value); label(); });
+  gd.addEventListener("click", (e) => {
+    if (e.target.closest("[data-gclose]")) return close();
+    const t = e.target.closest("[data-t]"); if (t) { type = t.dataset.t; return render(); }
+    const ready = [...checked[type]];
+    if (e.target.closest("[data-gfill]")) { setGoal(G[type].goal); addMsg(`[준비 가이드 · ${G[type].label}]` + (ready.length ? `\n준비된 자료: ${ready.join(", ")}` : "")); close(); go("가이드 내용을 문의서에 담아 두었어요."); }
+    if (e.target.closest("[data-gkakao]")) { const text = `[유별난PPT 상담 · ${G[type].label}]\n준비된 자료: ${ready.length ? ready.join(", ") : "상담 후 정리"}`;
+      (navigator.clipboard ? navigator.clipboard.writeText(text) : Promise.reject()).then(() => toast("내용을 복사했어요. 카카오톡에 붙여넣어 주세요."), () => {}); window.open(KAKAO, "_blank", "noopener"); }
+  });
 })();
 </script>
 
