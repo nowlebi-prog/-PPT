@@ -1,4 +1,8 @@
-<title>유별난PPT 히어로 시안</title>
+<!doctype html>
+<html lang="ko">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>유별난PPT 리뉴얼 시안</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <style>
 @font-face{font-family:"Pretendard Variable";font-weight:100 900;font-style:normal;font-display:swap;src:url(data:font/woff2;base64,{{FONT}}) format("woff2")}
@@ -399,6 +403,103 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .next p{margin:0;font-size:12.5px;color:var(--silver-dim)}
 .next h2{margin:12px 0 0;font-size:clamp(22px,2vw,28px);font-weight:620;letter-spacing:-.035em;color:var(--silver)}
 
+/* ---------- IR 특화: 큰 숫자 + 여러 팀 진행표 ---------- */
+.ir{background:radial-gradient(ellipse 44% 58% at 72% 56%,rgba(150,170,205,.09),transparent 70%)}
+.irnum{display:flex;align-items:baseline;gap:4px;margin:30px 0 0}
+.irnum b{font-size:46px;font-weight:640;letter-spacing:-.04em;line-height:1;color:var(--white);font-variant-numeric:tabular-nums}
+.irnum span{font-size:16px;font-weight:600;color:var(--white)}
+.irnum small{margin-left:14px;padding-left:14px;border-left:1px solid var(--line-2);font-size:12px;color:var(--silver-dim);align-self:center}
+.ir .rows{margin-top:28px}
+.ir .rows a{grid-template-columns:112px minmax(0,1fr) auto}
+.ir .rows b{font-size:14px;font-weight:500}
+.acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
+.irb{border-radius:18px;padding:6px;background:linear-gradient(150deg,rgba(255,255,255,.3),rgba(255,255,255,.05) 40%,rgba(255,255,255,.12));box-shadow:0 40px 90px -36px rgba(0,0,0,1),0 0 80px -20px rgba(205,218,240,.14)}
+.irb__in{border-radius:13px;background:linear-gradient(170deg,#0d0f13,#08090b 70%);padding:30px 30px 22px}
+.irb__head,.irb__row{display:grid;grid-template-columns:72px repeat(5,minmax(0,1fr));align-items:center}
+.irb__head{padding-bottom:14px;border-bottom:1px solid var(--line)}
+.irb__head span{font-size:10.5px;letter-spacing:.06em;color:var(--silver-dim);text-align:center;transition:color .3s}
+.irb__head span:first-child{text-align:left;letter-spacing:.2em}
+.irb__row{position:relative;height:52px;border-bottom:1px solid rgba(214,220,230,.05)}
+.irb__row:last-of-type{border-bottom:0}
+.irb__row > span{font-size:11.5px;color:var(--silver-dim);transition:color .3s;font-variant-numeric:tabular-nums}
+.irb__row i{position:relative;z-index:1;justify-self:center;width:7px;height:7px;border-radius:50%;border:1px solid rgba(230,235,245,.22);background:#0b0c0f;transition:background .35s,border-color .35s,box-shadow .35s,opacity .3s;transition-delay:calc(var(--i) * .25s + var(--r) * .06s)}
+.irb__row::before,.irb__row::after{content:"";position:absolute;left:calc(72px + (100% - 72px) / 10);top:50%;height:1px}
+.irb__row::before{right:calc((100% - 72px) / 10);background:rgba(230,235,245,.08)}
+.irb__row::after{width:0;background:linear-gradient(90deg,rgba(255,255,255,.35),rgba(255,255,255,.75));box-shadow:0 0 8px rgba(255,255,255,.35);transition:width calc((var(--p) - 1) * .25s) linear calc(var(--r) * .06s)}
+.irb.is-on .irb__row::after{width:calc((100% - 72px) * (var(--p) - 1) / 5)}
+.irb.is-on .irb__row i.is-done{background:#fff;border-color:#fff;box-shadow:0 0 8px 2px rgba(255,255,255,.55),0 0 20px 5px rgba(214,224,240,.22)}
+.irb__row i.is-now::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:1px solid rgba(255,255,255,.6);opacity:0}
+.irb.is-on .irb__row i.is-now::after{animation:ping 2.4s var(--ease) infinite 1.6s}
+@keyframes ping{0%{opacity:.9;transform:scale(.6)}80%,100%{opacity:0;transform:scale(1.8)}}
+.irb__cap{display:flex;justify-content:space-between;gap:12px;margin:18px 0 0;padding-top:14px;border-top:1px solid var(--line);font-size:11px;color:var(--silver-dim)}
+.irb__cap em{font-style:normal;display:inline-flex;align-items:center;gap:6px;margin-left:14px}
+.irb__cap em::before{content:"";width:5px;height:5px;border-radius:50%;background:#fff;box-shadow:0 0 6px 1px rgba(255,255,255,.6)}
+.irb__cap em+em::before{background:transparent;border:1px solid rgba(230,235,245,.3);box-shadow:none}
+/* 목록에 올리면 관련 단계만 밝게 */
+.irb.is-hl .irb__row i:not(.hl){opacity:.28}
+.irb.is-hl .irb__head span.hl,.irb.is-hl .irb__row > span.hl{color:var(--white)}
+
+/* ---------- AI 리터치: 비포·애프터 하나 ---------- */
+.ai{background:radial-gradient(ellipse 46% 56% at 76% 40%,rgba(150,170,205,.10),transparent 70%)}
+.diff{margin-top:28px;border-top:1px solid var(--line);max-width:440px}
+.diff summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;padding:16px 2px;font-size:13px;font-weight:600;color:var(--silver)}
+.diff summary::-webkit-details-marker{display:none}
+.diff summary::after{content:"+";font-weight:400;font-size:18px;color:var(--silver-dim);transition:transform .3s}
+.diff[open] summary::after{transform:rotate(45deg)}
+.diff dl{margin:0;padding:0 2px 6px}
+.diff dt{font-size:12.5px;font-weight:600;color:var(--white)}
+.diff dd{margin:6px 0 16px;font-size:12px;line-height:1.7;color:var(--silver-dim)}
+.diff dd s{text-decoration:none;display:block;opacity:.7}
+.diff dd span{display:block;color:var(--silver)}
+.ba{position:relative;border-radius:18px;padding:6px;background:linear-gradient(150deg,rgba(255,255,255,.3),rgba(255,255,255,.05) 40%,rgba(255,255,255,.12));box-shadow:0 40px 90px -36px rgba(0,0,0,1),0 0 80px -20px rgba(205,218,240,.14)}
+.ba__view{position:relative;aspect-ratio:16/9;border-radius:13px;overflow:hidden;background:#fff;touch-action:pan-y;cursor:ew-resize}
+.ba__view img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;user-select:none;-webkit-user-drag:none}
+.ba__after{clip-path:inset(0 0 0 var(--x,50%))}
+.ba__line{position:absolute;top:0;bottom:0;left:var(--x,50%);width:1px;margin-left:-.5px;background:#fff;box-shadow:0 0 10px 2px rgba(255,255,255,.7),0 0 34px 8px rgba(214,224,240,.35);pointer-events:none}
+.ba__knob{position:absolute;top:50%;left:var(--x,50%);width:36px;height:36px;margin:-18px 0 0 -18px;border-radius:50%;display:grid;place-items:center;background:rgba(5,6,8,.55);border:1px solid rgba(255,255,255,.7);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);color:#fff;font-size:12px;pointer-events:none;box-shadow:0 8px 20px -6px rgba(0,0,0,.6)}
+.ba.is-anim .ba__after{transition:clip-path 1.2s var(--ease)}
+.ba.is-anim .ba__line,.ba.is-anim .ba__knob{transition:left 1.2s var(--ease)}
+.ba__tag{position:absolute;bottom:14px;z-index:2;padding:4px 10px;border-radius:999px;font-size:10px;letter-spacing:.2em;color:#fff;background:rgba(5,6,8,.6);pointer-events:none}
+.ba__tag--l{left:14px}.ba__tag--r{right:14px}
+.ba__range{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:ew-resize}
+.ba:focus-within{outline:none}
+.ba:has(.ba__range:focus-visible) .ba__knob{box-shadow:0 0 0 3px rgba(214,224,240,.4)}
+.ba__foot{display:flex;justify-content:space-between;gap:12px;margin:14px 4px 0;font-size:11.5px;color:var(--silver-dim)}
+/* 확장 제작: 가장 조용한 띠 */
+.ext{margin-top:calc(var(--gap) * .6);padding-top:32px;border-top:1px solid var(--line);align-items:start}
+.ext h3{margin:0;font-size:16px;font-weight:600;letter-spacing:-.02em;color:var(--white)}
+.ext p{margin:8px 0 0;font-size:12.5px;color:var(--silver-dim)}
+.ext .split__text{position:static}
+.ext__chips{display:flex;flex-wrap:wrap;gap:6px;margin:0;padding:0;list-style:none}
+.ext__chips li{display:inline-flex;align-items:center;height:30px;padding:0 12px;border:1px solid var(--line);border-radius:999px;font-size:12px;color:var(--silver)}
+.ext .btn{margin-top:16px}
+@media (max-width:860px){
+  .irnum b{font-size:40px}
+  .ir .rows a{grid-template-columns:88px minmax(0,1fr) auto}
+  .ir .rows b{font-size:13px}
+  .acts{display:grid;grid-template-columns:1fr 1fr}
+  .acts .btn{height:44px;padding:0 10px}
+  .irb__in{padding:20px 16px 16px}
+  .irb__head,.irb__row{grid-template-columns:52px repeat(5,minmax(0,1fr))}
+  .irb__row{height:42px}
+  .irb__row::before,.irb__row::after{left:calc(52px + (100% - 52px) / 10)}
+  .irb__row::before{right:calc((100% - 52px) / 10)}
+  .irb.is-on .irb__row::after{width:calc((100% - 52px) * (var(--p) - 1) / 5)}
+  .irb__head span{font-size:10px;letter-spacing:0}
+  .irb__head span:first-child{letter-spacing:.1em}
+  .irb__row > span{font-size:10.5px}
+  .irb__cap{flex-direction:column;gap:6px}
+  .irb__cap em:first-child{margin-left:0}
+  .diff{max-width:none}
+  .ba__foot{flex-direction:column;gap:4px;align-items:flex-start}
+  .ba__tag{bottom:10px;padding:3px 8px;font-size:9px;letter-spacing:.16em}
+  .ba__tag--l{left:10px}.ba__tag--r{right:10px}
+  .ba__knob{width:32px;height:32px;margin:-16px 0 0 -16px}
+  .ext{padding-top:28px}
+  .ext .split__el{margin-top:18px}
+  .ext .btn{width:100%;height:44px}
+}
+
 /* ---------- 상담 버튼 ---------- */
 .fabs{position:fixed;right:calc(20px + env(safe-area-inset-right,0px));bottom:calc(20px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:8px;z-index:20}
 .fab{height:42px;padding:0 16px;border-radius:999px;display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:650;box-shadow:0 16px 36px -12px rgba(0,0,0,.8)}
@@ -496,7 +597,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
       <span>유별난PPT<small>YOUSTAR PRESENTATION</small></span>
     </a>
     <nav class="nav" aria-label="주요 메뉴">
-      <a href="#services">서비스</a><a href="#next">기획·과정</a><a href="#next">작업 사례</a><a href="#next">IR 특화</a><a href="#next">AI·확장 제작</a><a href="#next">가격</a><a href="#next">FAQ</a><a href="#next">회사소개</a>
+      <a href="#work">작업 사례</a><a href="#services">서비스</a><a href="#ir">IR 특화</a><a href="#visual">AI·확장 제작</a><a href="#pricing">가격</a><a href="#next">FAQ</a><a href="#next">진행 방식</a><a href="#next">회사소개</a>
       <span class="nav__acts"><button class="btn btn--line btn--sm" type="button">빠른 견적</button><a class="btn btn--solid btn--sm" href="#next">문의</a></span>
     </nav>
     <button class="menu-btn" id="menuBtn" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="sheet"><span></span><span></span><span></span></button>
@@ -505,7 +606,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 
 <div class="sheet" id="sheet">
   <nav aria-label="모바일 메뉴">
-    <a href="#services">서비스</a><a href="#next">기획·과정</a><a href="#next">작업 사례</a><a href="#next">IR 특화</a><a href="#next">AI·확장 제작</a><a href="#next">가격</a><a href="#next">FAQ</a><a href="#next">회사소개</a>
+    <a href="#work">작업 사례</a><a href="#services">서비스</a><a href="#ir">IR 특화</a><a href="#visual">AI·확장 제작</a><a href="#pricing">가격</a><a href="#next">FAQ</a><a href="#next">진행 방식</a><a href="#next">회사소개</a>
   </nav>
   <div class="sheet__acts">
     <a class="btn btn--kakao" href="#next">카카오톡 상담하기</a>
@@ -605,7 +706,71 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
   </div>
 </section>
 
-<section class="ph" aria-label="다음 시안 자리"><div class="wrap"><div class="ph__box">05 IR 특화 · 06–07 AI 리터치 · 확장 제작 — 다음 시안에서 이 자리에 들어갑니다</div></div></section>
+<section class="sec ir" id="ir">
+  <div class="wrap split">
+    <div class="split__text">
+      <span class="eyebrow">IR · Demo Day</span>
+      <h2 class="h2">IR 특화 기획·디자인.</h2>
+      <p class="lead">TIPS·예창패·초창패 등 지원사업과<br>투자 발표 자료를 다뤄 왔습니다.</p>
+      <p class="irnum"><b id="irCount">44</b><span>팀</span><small>데모데이 IR 제작 · 2024–2025</small></p>
+      <ul class="rows" id="irRows">
+        <li><a href="#next" data-c="0,1"><small>기획·컨설팅</small><b>투자자가 묻는 순서로.</b><i>→</i></a></li>
+        <li><a href="#next" data-c="2,3"><small>팀별 디자인</small><b>사업마다 맞는 톤으로.</b><i>→</i></a></li>
+        <li><a href="#next" data-c="t"><small>다팀 일정 관리</small><b>한 진행표로 끝까지.</b><i>→</i></a></li>
+      </ul>
+      <div class="acts"><a class="btn btn--solid btn--sm" href="#next">IR · 데모데이 상담하기</a><a class="btn btn--line btn--sm" href="#work">IR 작업 보기 →</a></div>
+    </div>
+    <div class="split__el">
+      <div class="irb" id="irb" aria-label="여러 팀 IR 진행표 예시">
+        <div class="irb__in">
+          <div class="irb__head" aria-hidden="true"><span class="t">TEAM</span><span>자료 수집</span><span>흐름 기획</span><span>시안</span><span>수정</span><span>납품</span></div>
+          <div id="irbRows"></div>
+          <p class="irb__cap"><span>여러 팀을 한 진행표로 · 구조 예시</span><span><em>완료</em><em>진행 예정</em></span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec ai" id="visual">
+  <div class="wrap split">
+    <div class="split__text">
+      <span class="eyebrow">AI Retouch</span>
+      <h2 class="h2">AI로 만든 초안에도,<br>기획자의 시선이 필요합니다.</h2>
+      <p class="lead">수치를 확인하고, 흐름을 다시 잡고,<br>흔한 AI 디자인을 걷어냅니다.</p>
+      <details class="diff">
+        <summary>무엇이 달라지나요</summary>
+        <dl>
+          <dt>숫자와 글자</dt><dd><s>AI 초안 · 수치·출처가 달라지거나 한글이 깨질 수 있습니다.</s><span>원본 자료와 대조하고, 확인이 필요한 부분은 먼저 묻습니다.</span></dd>
+          <dt>제품 모양</dt><dd><s>AI 초안 · 제품의 모양과 세부가 실제와 다르게 보일 수 있습니다.</s><span>원본 사진과 비교해 제품 표현을 확인합니다.</span></dd>
+          <dt>장표 전체</dt><dd><s>AI 초안 · 장마다 톤이 달라지고 익숙한 AI 이미지가 반복됩니다.</s><span>글꼴·여백·이미지 톤을 통일하고 편집 가능한 PPTX로 드립니다.</span></dd>
+        </dl>
+      </details>
+    </div>
+    <div class="split__el">
+      <div class="ba" id="ba">
+        <div class="ba__view">
+          <img src="{{ASSET:slides/before.svg}}" alt="작업 전: 글자만 빽빽한 초안 슬라이드">
+          <img class="ba__after" src="{{ASSET:slides/after.svg}}" alt="작업 후: 핵심 수치가 한눈에 보이는 슬라이드">
+          <span class="ba__line"></span><span class="ba__knob" aria-hidden="true">↔</span>
+          <span class="ba__tag ba__tag--l">BEFORE</span><span class="ba__tag ba__tag--r">AFTER</span>
+          <input class="ba__range" type="range" min="0" max="100" value="50" aria-label="작업 전후 비교: 좌우로 움직여 보세요">
+        </div>
+      </div>
+      <p class="ba__foot"><span>← 끌어서 비교해 보세요 →</span><span>※ 자체 제작 예시입니다.</span></p>
+    </div>
+  </div>
+  <div class="wrap"><div class="split ext">
+    <div class="split__text">
+      <h3>사업에 필요한 제작도 이어서 가능합니다.</h3>
+      <p>필요한 범위에 맞춰 진행하며, 금액은 별도 협의합니다.</p>
+    </div>
+    <div class="split__el">
+      <ul class="ext__chips" aria-label="PPT 외 제작 가능 범위"><li>제품·서비스 연출컷</li><li>사진 보정·합성</li><li>상세페이지</li><li>랜딩페이지·홈페이지</li><li>서비스 소개 인포그래픽</li><li>짧은 인포그래픽 영상</li><li>웹·UI/UX</li><li>AI 업무 자동화 툴</li><li>Android·iOS 앱 상담 (하이브리드·크로스)</li></ul>
+      <a class="btn btn--line btn--sm" href="#next">확장 제작 문의하기</a>
+    </div>
+  </div></div>
+</section>
 
 <section class="sec pricing" id="pricing">
   <div class="wrap split">
@@ -963,6 +1128,59 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
   let rt; addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(() => { layout(); start(); onScroll(); }, 120); });
   layout(); start();
   if (reduce) frame(0);
+
+  /* 화면에 들어오면 한 번 실행 */
+  const once = (el, fn, th = 0.35) => {
+    if (!el) return;
+    if (reduce || !("IntersectionObserver" in window)) return fn(true);
+    new IntersectionObserver((es, o) => es.forEach((e) => { if (e.isIntersecting) { fn(false); o.disconnect(); } }), { threshold: th }).observe(el);
+  };
+
+  /* IR: 여러 팀 진행표 (구조 예시, 실제 데이터 아님) */
+  (function irBoard() {
+    const box = document.getElementById("irbRows"), irb = document.getElementById("irb");
+    if (!box) return;
+    const prog = [5, 5, 4, 3, 3, 2];
+    box.innerHTML = prog.map((p, r) => `<div class="irb__row" style="--p:${p};--r:${r}"><span class="t">Team ${"ABCDEF"[r]}</span>` +
+      [0, 1, 2, 3, 4].map((i) => `<i data-c="${i}" style="--i:${i}" class="${i < p ? "is-done" : ""}${i === p - 1 && p < 5 ? " is-now" : ""}"></i>`).join("") + `</div>`).join("");
+    once(irb, () => irb.classList.add("is-on"));
+    // 숫자 올라가기
+    const n = document.getElementById("irCount");
+    once(n, (still) => {
+      if (still) return;
+      const t0 = performance.now();
+      const step = (t) => { const k = Math.min(1, (t - t0) / 1200); n.textContent = Math.round(44 * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(step); };
+      n.textContent = "0"; requestAnimationFrame(step);
+    }, 0.8);
+    // 목록에 올리면 관련 단계만 밝게
+    const head = irb.querySelectorAll(".irb__head span");
+    document.querySelectorAll("#irRows a").forEach((a) => {
+      const on = () => {
+        const c = a.dataset.c.split(",");
+        irb.classList.add("is-hl");
+        head.forEach((s, k) => s.classList.toggle("hl", k === 0 ? c.includes("t") : c.includes(String(k - 1))));
+        irb.querySelectorAll(".irb__row > span").forEach((s) => s.classList.toggle("hl", c.includes("t")));
+        irb.querySelectorAll(".irb__row i").forEach((d) => d.classList.toggle("hl", c.includes("t") || c.includes(d.dataset.c)));
+      };
+      const off = () => irb.classList.remove("is-hl");
+      a.addEventListener("pointerenter", on); a.addEventListener("focus", on);
+      a.addEventListener("pointerleave", off); a.addEventListener("blur", off);
+    });
+  })();
+
+  /* AI: 비포·애프터 — 드래그·클릭·키보드·터치 모두 range 하나로 */
+  (function compare() {
+    const ba = document.getElementById("ba");
+    if (!ba) return;
+    const range = ba.querySelector(".ba__range");
+    const set = (v) => ba.style.setProperty("--x", v + "%");
+    range.addEventListener("input", () => { ba.classList.remove("is-anim"); set(range.value); });
+    set(reduce ? 50 : 92); range.value = reduce ? 50 : 92;
+    once(ba, (still) => {
+      if (still) return;
+      setTimeout(() => { ba.classList.add("is-anim"); set(50); range.value = 50; setTimeout(() => ba.classList.remove("is-anim"), 1300); }, 250);
+    }, 0.55);
+  })();
 
 })();
 </script>
