@@ -195,19 +195,14 @@ a{color:inherit;text-decoration:none}
 .cmp i svg{width:14px;height:14px}
 .cmp b{font-size:15.5px;font-weight:600;line-height:1.55;letter-spacing:-.02em;color:#fff}
 .cmp b small{display:block;margin-bottom:4px;font-size:10.5px;font-weight:600;letter-spacing:.2em;color:#3fd0f0}
-.ba{position:relative;border-radius:18px;overflow:hidden;box-shadow:0 40px 100px -40px rgba(31,90,255,.75),0 0 0 1px rgba(255,255,255,.1)}
-.ba__view{position:relative;aspect-ratio:16/9;background:#fff;touch-action:pan-y;cursor:ew-resize}
-.ba__view img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;user-select:none;-webkit-user-drag:none}
-.ba__after{clip-path:inset(0 0 0 var(--x,50%))}
-.ba__line{position:absolute;top:0;bottom:0;left:var(--x,50%);width:2px;margin-left:-1px;background:linear-gradient(#3fd0f0,#1f4bff);box-shadow:0 0 12px 2px rgba(63,208,240,.8),0 0 30px 6px rgba(31,75,255,.4);pointer-events:none}
-.ba__knob{position:absolute;top:50%;left:var(--x,50%);width:40px;height:40px;margin:-20px 0 0 -20px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#16b6dc,#1f4bff);color:#fff;pointer-events:none;box-shadow:0 0 0 5px rgba(63,208,240,.18),0 8px 24px -6px rgba(31,90,255,.9)}
-.ba__knob svg{width:18px;height:18px}
-.ba.is-anim .ba__after{transition:clip-path 1.2s var(--ease)}
-.ba.is-anim .ba__line,.ba.is-anim .ba__knob{transition:left 1.2s var(--ease)}
-.ba__tag{position:absolute;bottom:12px;z-index:2;padding:5px 10px;border-radius:999px;font-size:10px;font-weight:700;letter-spacing:.2em;color:#fff;background:rgba(5,8,20,.65);pointer-events:none}
-.ba__tag--l{left:12px}.ba__tag--r{right:12px;background:linear-gradient(120deg,rgba(22,182,220,.9),rgba(31,75,255,.9))}
-.ba__range{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:ew-resize}
-.ba__hint{display:flex;justify-content:space-between;margin:14px 2px 0;font-size:12px;color:var(--ink-3)}
+/* 이미지 자리 (사용자 이미지로 교체 예정) */
+.slot{position:relative;aspect-ratio:16/9;border-radius:18px;display:grid;place-items:center;text-align:center;background:linear-gradient(160deg,rgba(20,32,80,.45),rgba(5,7,15,.6));box-shadow:0 40px 100px -40px rgba(31,90,255,.6),0 0 0 1px rgba(255,255,255,.08);color:var(--ink-3);font-size:13px}
+.slot span{display:block;margin-top:6px;font-size:11.5px;color:rgba(255,255,255,.3)}
+.slot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:18px}
+/* 왼쪽 비교 줄: 단계에 맞춰 켜짐 */
+.cmp li{transition:opacity .8s var(--ease),transform .8s var(--ease),background .4s}
+
+
 .ext{display:flex;align-items:center;gap:40px;margin-top:110px;padding-top:40px;border-top:1px solid rgba(255,255,255,.08)}
 .ext__t{flex:none}
 .ext__t b{display:block;font-size:18px;font-weight:700;letter-spacing:-.02em}
@@ -427,16 +422,7 @@ a{color:inherit;text-decoration:none}
         <ul class="cmp" id="cmp"><li><span class="cmp__a"><small>AI 초안</small><s>숫자가 그럴듯하지만, 틀릴 수 있습니다.</s></span><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i><b><small>유별난PPT</small>원본 자료와 하나하나 대조합니다.</b></li><li><span class="cmp__a"><small>AI 초안</small><s>내용이 순서 없이 나열됩니다.</s></span><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i><b><small>유별난PPT</small>심사위원이 읽는 순서로 다시 짭니다.</b></li><li><span class="cmp__a"><small>AI 초안</small><s>어디서 본 듯한 디자인입니다.</s></span><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i><b><small>유별난PPT</small>우리 회사 톤, 수정 가능한 PPTX로.</b></li></ul>
       </div>
       <div>
-        <div class="ba" id="ba">
-      <div class="ba__view">
-        <img src="assets/slides/before.svg" alt="작업 전: 글자만 빽빽한 초안 슬라이드">
-        <img class="ba__after" src="assets/slides/after.svg" alt="작업 후: 핵심 수치가 한눈에 보이는 슬라이드">
-        <span class="ba__line"></span><span class="ba__knob" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg></span>
-        <span class="ba__tag ba__tag--l">BEFORE</span><span class="ba__tag ba__tag--r">AFTER</span>
-        <input class="ba__range" type="range" min="0" max="100" value="50" aria-label="작업 전후 비교: 좌우로 움직여 보세요">
-      </div>
-    </div>
-        <p class="ba__hint"><span>← 끌어서 비교해 보세요 →</span><span>자체 제작 예시</span></p>
+        <div class="slot" id="aiSlot">이미지 자리<span>16:9 이미지를 받으면 여기에 넣습니다</span></div>
       </div>
     </div>
     <div class="ext">
@@ -701,15 +687,6 @@ a{color:inherit;text-decoration:none}
 })();
 </script>
 <script>
-(() => {
-  const ba = document.getElementById("ba"); if (!ba) return;
-  const cmp = document.getElementById("cmp"); if (cmp) new IntersectionObserver((es, o) => es.forEach((e) => { if (e.isIntersecting) { cmp.classList.add("is-in"); o.disconnect(); } }), { threshold: .3 }).observe(cmp);
-  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const r = ba.querySelector(".ba__range"), set = (v) => ba.style.setProperty("--x", v + "%");
-  r.addEventListener("input", () => { ba.classList.remove("is-anim"); set(r.value); });
-  set(reduce ? 50 : 90); r.value = reduce ? 50 : 90;
-  new IntersectionObserver((es, o) => es.forEach((e) => { if (!e.isIntersecting || reduce) return; o.disconnect();
-    setTimeout(() => { ba.classList.add("is-anim"); set(50); r.value = 50; setTimeout(() => ba.classList.remove("is-anim"), 1500); }, 300); }), { threshold: .5 }).observe(ba);
-})();
+(() => { const cmp = document.getElementById("cmp"); if (cmp) new IntersectionObserver((es, o) => es.forEach((e) => { if (e.isIntersecting) { cmp.classList.add("is-in"); o.disconnect(); } }), { threshold: .3 }).observe(cmp); })();
 </script>
 
