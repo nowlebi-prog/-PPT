@@ -133,6 +133,49 @@ a{color:inherit;text-decoration:none}
   .tile img{zoom:.72}
 }
 
+/* 네 번째: 서비스 — 큰 선언 + 세 장의 카드 (마우스에 따라 기울고 빛이 따라온다) */
+.svc{position:relative;padding:150px 0 140px;isolation:isolate}
+.svc::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse 50% 40% at 15% 20%,rgba(63,208,240,.10),transparent 70%),radial-gradient(ellipse 50% 45% at 90% 80%,rgba(31,75,255,.14),transparent 70%)}
+.svc__head{display:grid;grid-template-columns:1.25fr 1fr;align-items:end;gap:40px}
+.svc__head small{display:block;font-size:12px;font-weight:600;letter-spacing:.28em;color:#3fd0f0;text-transform:uppercase}
+.svc__head h2{margin:16px 0 0;font-size:clamp(34px,4.4vw,64px);line-height:1.12;letter-spacing:-.045em}
+.svc__head h2 b{font-weight:800}.svc__head h2 span{font-weight:250}
+.svc__head p{margin:0 0 10px;font-size:16px;line-height:1.8;color:var(--ink-2);font-weight:500}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:72px;perspective:1200px}
+.card{position:relative;display:flex;flex-direction:column;border-radius:22px;padding:1px;background:linear-gradient(150deg,rgba(63,208,240,.55),rgba(31,75,255,.35) 45%,rgba(255,255,255,.08));transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transform-style:preserve-3d;transition:transform .5s var(--ease),box-shadow .5s;opacity:0;translate:0 30px}
+.cards.is-in .card{opacity:1;translate:0 0;transition:transform .5s var(--ease),box-shadow .5s,opacity 1s var(--ease),translate 1s var(--ease)}
+.cards.is-in .card:nth-child(2){transition-delay:0s,0s,.15s,.15s}.cards.is-in .card:nth-child(3){transition-delay:0s,0s,.3s,.3s}
+.card:hover{box-shadow:0 30px 80px -30px rgba(31,90,255,.7)}
+.card__in{position:relative;flex:1;display:flex;flex-direction:column;border-radius:21px;overflow:hidden;background:linear-gradient(170deg,#0a1028,#05070f 60%)}
+.card__in::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(420px circle at var(--mx,50%) var(--my,0%),rgba(120,200,255,.16),transparent 60%);opacity:0;transition:opacity .4s}
+.card:hover .card__in::after{opacity:1}
+.card__img{position:relative;aspect-ratio:16/10;margin:14px 14px 0;border-radius:12px;overflow:hidden;box-shadow:0 20px 40px -20px rgba(0,0,0,.9)}
+.card__img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1.2s var(--ease)}
+.card:hover .card__img img{transform:scale(1.05)}
+.card__body{padding:26px 26px 28px;display:flex;flex-direction:column;flex:1}
+.card__body i{font-style:normal;font-size:11px;font-weight:600;letter-spacing:.22em;color:#3fd0f0}
+.card__body h3{margin:10px 0 0;font-size:24px;font-weight:800;letter-spacing:-.035em}
+.card__body p{margin:8px 0 0;font-size:16px;font-weight:300;color:#fff;letter-spacing:-.02em}
+.card__body ul{display:flex;flex-wrap:wrap;gap:6px;margin:22px 0 0;padding:0;list-style:none}
+.card__body li{height:28px;display:inline-flex;align-items:center;padding:0 11px;border-radius:999px;font-size:12px;color:var(--ink-2);border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.03)}
+.card__more{display:inline-flex;align-items:center;gap:8px;margin-top:auto;padding-top:26px;font-size:13.5px;font-weight:600;color:#fff}
+.card__more svg{width:15px;height:15px;transition:transform .4s var(--ease)}
+.card:hover .card__more svg{transform:translateX(4px)}
+.svc__foot{margin:40px 0 0;text-align:center;font-size:14px;color:var(--ink-3)}
+.svc__foot b{color:#fff;font-weight:600}
+@media (max-width:860px){
+  .svc{padding:96px 0 88px}
+  .svc__head{grid-template-columns:1fr;gap:16px}
+  .svc__head h2{font-size:clamp(32px,9vw,40px)}
+  .svc__head p{font-size:14.5px}
+  .cards{display:flex;gap:14px;margin:40px -20px 0;padding:0 20px 6px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:20px;scrollbar-width:none}
+  .cards::-webkit-scrollbar{display:none}
+  .card{flex:0 0 84%;scroll-snap-align:start;transform:none!important}
+  .card__body{padding:22px 20px 24px}
+  .card__body h3{font-size:21px}
+  .svc__foot{text-align:left;font-size:13px}
+}
+
 @media (max-width:860px){
   .hdr .wrap{grid-template-columns:auto 1fr;height:60px}
   .hdr nav:first-child{display:none}
@@ -208,6 +251,20 @@ a{color:inherit;text-decoration:none}
   <p class="wall__cap"><b>정부 부처 · 공공기관 · 대학 · 기업</b>이 함께했습니다</p>
   <div class="wall" aria-label="함께한 기업과 기관">
     <div class="wall__row"><div class="tile"><img src="assets/clients/msit.svg" alt="과학기술정보통신부" style="height:30px" loading="lazy"></div><div class="tile"><img src="assets/clients/compa.svg" alt="과학기술사업화진흥원" style="height:26px" loading="lazy"></div><div class="tile"><img src="assets/clients/samsungcnt.svg" alt="삼성물산" style="height:27px" loading="lazy"></div><div class="tile"><img src="assets/clients/nh.svg" alt="NH농협" style="height:46px" loading="lazy"><span>NH농협</span></div><div class="tile"><img src="assets/clients/kaist.svg" alt="KAIST" style="height:30px" loading="lazy"></div><div class="tile"><img src="assets/clients/kyunghee.svg" alt="경희대 산학협력단" style="height:46px" loading="lazy"><span>경희대 산학협력단</span></div><div class="tile"><img src="assets/clients/forest.svg" alt="산림청" style="height:40px" loading="lazy"></div><div class="tile"><img src="assets/clients/fsec.webp" alt="금융보안원" style="height:34px" loading="lazy"></div><div class="tile"><img src="assets/clients/iwssm.webp" alt="유네스코 I-WSSM" style="height:42px" loading="lazy"></div><div class="tile"><img src="assets/clients/jahwal.webp" alt="한국자활연수원" style="height:28px" loading="lazy"></div><div class="tile"><img src="assets/clients/sopoong.svg" alt="소풍커넥트" style="height:22px" loading="lazy"></div><div class="tile"><img src="assets/clients/woorihrd.webp" alt="우리들HRD" style="height:46px" loading="lazy"></div><div class="tile"><img src="assets/clients/langdev.webp" alt="언어발전소" style="height:46px" loading="lazy"><span>언어발전소</span></div><div aria-hidden="true" class="tile"><img src="assets/clients/msit.svg" alt="과학기술정보통신부" style="height:30px" loading="lazy"></div><div aria-hidden="true" class="tile"><img src="assets/clients/compa.svg" alt="과학기술사업화진흥원" style="height:26px" loading="lazy"></div><div aria-hidden="true" class="tile"><img src="assets/clients/samsungcnt.svg" alt="삼성물산" style="height:27px" loading="lazy"></div><div aria-hidden="true" class="tile"><img src="assets/clients/nh.svg" alt="NH농협" style="height:46px" loading="lazy"><span>NH농협</span></div><div aria-hidden="true" class="tile"><img src="assets/clients/kaist.svg" alt="KAIST" style="height:30px" loading="lazy"></div><div aria-hidden="true" class="tile"><img src="assets/clients/kyunghee.svg" alt="경희대 산학협력단" style="height:46px" loading="lazy"><span>경희대 산학협력단</span></div><div aria-hidden="true" class="tile"><img src="assets/clients/forest.svg" alt="산림청" style="height:40px" loading="lazy"></div><div aria-hidden="true" class="tile"><img src="assets/clients/fsec.webp" alt="금융보안원" style="height:34px" loading="lazy"></div><div aria-hidden="true" class="tile"><img src="assets/clients/iwssm.webp" alt="유네스코 I-WSSM" style="height:42px" loading="lazy"></div><div aria-hidden="true" class="tile"><img src="assets/clients/jahwal.webp" alt="한국자활연수원" style="height:28px" loading="lazy"></div><div aria-hidden="true" class="tile"><img src="assets/clients/sopoong.svg" alt="소풍커넥트" style="height:22px" loading="lazy"></div><div aria-hidden="true" class="tile"><img src="assets/clients/woorihrd.webp" alt="우리들HRD" style="height:46px" loading="lazy"></div><div aria-hidden="true" class="tile"><img src="assets/clients/langdev.webp" alt="언어발전소" style="height:46px" loading="lazy"><span>언어발전소</span></div></div><div class="wall__row"><div class="tile"><img src="assets/clients/mois.svg" alt="행정안전부" style="height:36px" loading="lazy"></div><div class="tile"><img src="assets/clients/nipa.webp" alt="정보통신산업진흥원" style="height:25px" loading="lazy"></div><div class="tile"><img src="assets/clients/woori.svg" alt="우리은행" style="height:46px" loading="lazy"><span>우리은행</span></div><div class="tile"><img src="assets/clients/lh.webp" alt="LH" style="height:46px" loading="lazy"></div><div class="tile"><img src="assets/clients/korea-univ.svg" alt="고려대 산학협력단" style="height:46px" loading="lazy"><span>고려대 산학협력단</span></div><div class="tile"><img src="assets/clients/pknu.webp" alt="국립부경대학교" style="height:30px" loading="lazy"></div><div class="tile"><img src="assets/clients/jeonbuk.svg" alt="전북특별자치도" style="height:46px" loading="lazy"></div><div class="tile"><img src="assets/clients/gcon.webp" alt="경기콘텐츠진흥원" style="height:33px" loading="lazy"></div><div class="tile"><img src="assets/clients/koef.webp" alt="한국청년기업가정신재단" style="height:22px" loading="lazy"></div><div class="tile"><img src="assets/clients/likelion.svg" alt="멋쟁이사자처럼" style="height:45px" loading="lazy"><span>멋쟁이사자처럼</span></div><div class="tile"><img src="assets/clients/abyplus.webp" alt="A by Plus" style="height:37px" loading="lazy"></div><div class="tile"><img src="assets/clients/creacube.webp" alt="크레아큐브" style="height:30px" loading="lazy"></div><div class="tile"><img src="assets/clients/sungam.webp" alt="특허법인 성암" style="height:28px" loading="lazy"></div><div aria-hidden="true" class="tile"><img src="assets/clients/mois.svg" alt="행정안전부" style="height:36px" loading="lazy"></div><div aria-hidden="true" class="tile"><img src="assets/clients/nipa.webp" alt="정보통신산업진흥원" style="height:25px" loading="lazy"></div><div aria-hidden="true" class="tile"><img src="assets/clients/woori.svg" alt="우리은행" style="height:46px" loading="lazy"><span>우리은행</span></div><div aria-hidden="true" class="tile"><img src="assets/clients/lh.webp" alt="LH" style="height:46px" loading="lazy"></div><div aria-hidden="true" class="tile"><img src="assets/clients/korea-univ.svg" alt="고려대 산학협력단" style="height:46px" loading="lazy"><span>고려대 산학협력단</span></div><div aria-hidden="true" class="tile"><img src="assets/clients/pknu.webp" alt="국립부경대학교" style="height:30px" loading="lazy"></div><div aria-hidden="true" class="tile"><img src="assets/clients/jeonbuk.svg" alt="전북특별자치도" style="height:46px" loading="lazy"></div><div aria-hidden="true" class="tile"><img src="assets/clients/gcon.webp" alt="경기콘텐츠진흥원" style="height:33px" loading="lazy"></div><div aria-hidden="true" class="tile"><img src="assets/clients/koef.webp" alt="한국청년기업가정신재단" style="height:22px" loading="lazy"></div><div aria-hidden="true" class="tile"><img src="assets/clients/likelion.svg" alt="멋쟁이사자처럼" style="height:45px" loading="lazy"><span>멋쟁이사자처럼</span></div><div aria-hidden="true" class="tile"><img src="assets/clients/abyplus.webp" alt="A by Plus" style="height:37px" loading="lazy"></div><div aria-hidden="true" class="tile"><img src="assets/clients/creacube.webp" alt="크레아큐브" style="height:30px" loading="lazy"></div><div aria-hidden="true" class="tile"><img src="assets/clients/sungam.webp" alt="특허법인 성암" style="height:28px" loading="lazy"></div></div>
+  </div>
+</section>
+<section class="svc" id="services">
+  <div class="wrap">
+    <div class="svc__head">
+      <div><small>Services</small><h2><b>단순히 디자인하지</b><br><span>않습니다.</span></h2></div>
+      <p>내용을 이해하고, 기획하며,<br>목적에 맞게 완성합니다.</p>
+    </div>
+    <div class="cards" id="cards">
+      <a class="card" href="#contact"><div class="card__in"><div class="card__img"><img src="assets/slides/svc-ir.webp" alt="토프모빌리티 사업계획 장표" loading="lazy"></div><div class="card__body"><i>IR · DEMO DAY</i><h3>IR · 데모데이</h3><p>투자자가 묻는 순서대로.</p><ul><li>투자 IR</li><li>데모데이</li><li>정부지원사업</li><li>IR 컨설팅</li></ul><span class="card__more">IR 상담하기<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></div></a>
+      <a class="card" href="#contact"><div class="card__in"><div class="card__img"><img src="assets/slides/svc-prop.webp" alt="특허법인 성암 실적 장표" loading="lazy"></div><div class="card__body"><i>PROPOSAL · BID</i><h3>제안서 · 입찰</h3><p>심사위원이 찾기 쉽게.</p><ul><li>입찰 제안서</li><li>사업계획서</li><li>정량·정성 평가 대응</li></ul><span class="card__more">제안서 상담하기<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></div></a>
+      <a class="card" href="#contact"><div class="card__in"><div class="card__img"><img src="assets/slides/svc-intro.webp" alt="사쿠라테이엔 브랜드 소개 장표" loading="lazy"></div><div class="card__body"><i>COMPANY · PRODUCT</i><h3>회사 · 제품 소개서</h3><p>처음 보는 사람도 한 번에.</p><ul><li>회사소개서</li><li>제품·서비스 소개</li><li>브랜드북</li></ul><span class="card__more">소개서 상담하기<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></div></a>
+    </div>
+    <p class="svc__foot">세미나 · 교육 교안 · 편집 디자인도 만듭니다. <b>모든 작업은 편집 가능한 PPTX 원본과 PDF로 드립니다.</b></p>
   </div>
 </section>
 </main>
@@ -432,6 +489,19 @@ a{color:inherit;text-decoration:none}
   new IntersectionObserver((es, o) => es.forEach((e) => { if (e.isIntersecting) { run(); o.disconnect(); } }), { threshold: .5 }).observe(stats);
   const qs = [...document.querySelectorAll("#quote p")]; let qi = 0;
   if (!reduce) setInterval(() => { if (document.hidden) return; qs[qi].classList.remove("is-on"); qi = (qi + 1) % qs.length; qs[qi].classList.add("is-on"); }, 4800);
+})();
+</script>
+<script>
+(() => {
+  const cards = document.getElementById("cards"); if (!cards) return;
+  new IntersectionObserver((es, o) => es.forEach((e) => { if (e.isIntersecting) { cards.classList.add("is-in"); o.disconnect(); } }), { threshold: .25 }).observe(cards);
+  if (!matchMedia("(pointer: fine)").matches || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  cards.querySelectorAll(".card").forEach((c) => {
+    c.addEventListener("pointermove", (e) => { const r = c.getBoundingClientRect(), x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+      c.style.setProperty("--ry", ((x - .5) * 8).toFixed(2) + "deg"); c.style.setProperty("--rx", ((.5 - y) * 6).toFixed(2) + "deg");
+      c.style.setProperty("--mx", (x * 100).toFixed(1) + "%"); c.style.setProperty("--my", (y * 100).toFixed(1) + "%"); });
+    c.addEventListener("pointerleave", () => { c.style.setProperty("--rx", "0deg"); c.style.setProperty("--ry", "0deg"); });
+  });
 })();
 </script>
 
