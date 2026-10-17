@@ -78,7 +78,7 @@ a{color:inherit;text-decoration:none}
 .show__copy{position:relative;z-index:1;padding-top:112px}
 .show__copy small{display:block;font-size:12px;font-weight:600;letter-spacing:.28em;color:#3fd0f0;text-transform:uppercase}
 .show__copy h2{margin:16px 0 0;font-size:clamp(30px,3.6vw,52px);line-height:1.16;letter-spacing:-.04em}
-.show__copy h2 b{font-weight:800}.show__copy h2 span{font-weight:250}
+.show__copy h2 b{font-weight:800}.show__copy h2 span{font-weight:500}
 .show__copy p{margin:18px 0 0;font-size:15.5px;color:var(--ink-2);font-weight:500}
 .show__copy .gbtn{margin-top:28px;height:46px;font-size:14px}
 .show__cap{position:absolute;z-index:1;right:max(24px,calc((100vw - 1200px) / 2 + 24px));bottom:40px;display:flex;align-items:center;gap:12px;font-size:12px;color:var(--ink-3)}
@@ -136,10 +136,10 @@ a{color:inherit;text-decoration:none}
 /* 네 번째: 서비스 — 큰 선언 + 세 장의 카드 (마우스에 따라 기울고 빛이 따라온다) */
 .svc{position:relative;padding:150px 0 140px;isolation:isolate}
 .svc::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse 55% 45% at 12% 18%,rgba(63,208,240,.2),transparent 70%),radial-gradient(ellipse 55% 50% at 92% 82%,rgba(31,75,255,.3),transparent 70%)}
-.svc__head{display:grid;grid-template-columns:1.25fr 1fr;align-items:end;gap:40px}
+.svc__head{display:block}
 .svc__head small{display:block;font-size:12px;font-weight:600;letter-spacing:.28em;color:#3fd0f0;text-transform:uppercase}
-.svc__head h2{margin:16px 0 0;font-size:clamp(34px,4.4vw,64px);line-height:1.12;letter-spacing:-.045em}
-.svc__head h2 b{font-weight:800}.svc__head h2 span{font-weight:250}
+.svc__head h2{margin:16px 0 0;font-size:clamp(32px,3.8vw,52px);line-height:1.16;letter-spacing:-.04em}
+.svc__head h2 b{font-weight:800}.svc__head h2 span{font-weight:500}
 .svc__head p{margin:0 0 10px;font-size:16px;line-height:1.8;color:var(--ink-2);font-weight:500}
 .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:72px;perspective:1200px}
 .card{position:relative;display:flex;flex-direction:column;border-radius:22px;padding:1px;background:linear-gradient(150deg,rgba(63,208,240,.55),rgba(31,75,255,.35) 45%,rgba(255,255,255,.08));transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transform-style:preserve-3d;transition:transform .5s var(--ease),box-shadow .5s;opacity:0;translate:0 30px}
@@ -165,7 +165,6 @@ a{color:inherit;text-decoration:none}
 .svc__foot b{color:#fff;font-weight:600}
 @media (max-width:860px){
   .svc{padding:96px 0 88px}
-  .svc__head{grid-template-columns:1fr;gap:16px}
   .svc__head h2{font-size:clamp(32px,9vw,40px)}
   .svc__head p{font-size:14.5px}
   .cards{display:flex;gap:14px;margin:40px -20px 0;padding:0 20px 6px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:20px;scrollbar-width:none}
@@ -604,8 +603,7 @@ a{color:inherit;text-decoration:none}
     <div class="show__fallback" aria-hidden="true"></div>
     <div class="wrap show__copy">
       <small>On Stage</small>
-      <h2><b>띄워지는 순간,</b><br><span>완성은 달라집니다.</span></h2>
-      <p>발표장의 큰 스크린까지 생각하고 만듭니다.</p>
+      <h2><b>유별난 완성도를</b><br><span>살펴보세요.</span></h2>
       <a class="gbtn neon-btn" href="portfolio.html">작업 사례 보기<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     </div>
     <div class="show__cap" aria-live="polite"><span class="show__bar"><i id="showBar"></i></span><b id="showName"></b></div>
@@ -638,8 +636,7 @@ a{color:inherit;text-decoration:none}
 <section class="svc" id="services">
   <div class="wrap">
     <div class="svc__head">
-      <div><small>Services</small><h2><b>단순히 디자인하지</b><br><span>않습니다.</span></h2></div>
-      <p>내용을 이해하고, 기획하며, 목적에 맞게 완성합니다.</p>
+      <div><small>Services</small><h2><span>내용을 이해하고, 기획하며,</span><br><b>목적에 맞게 완성합니다.</b></h2></div>
     </div>
     <div class="cards" id="cards">
       <a class="card" href="#contact" data-goal="투자 유치 (IR)" data-msg="[IR · 데모데이] 상담을 원합니다."><div class="card__in"><div class="card__img"><img src="assets/slides/svc-ir.webp" alt="토프모빌리티 사업계획 장표 목업" loading="lazy"></div><div class="card__body"><i>IR · DEMO DAY</i><h3>IR · 데모데이</h3><p>투자자가 묻는 순서대로.</p><ul><li>투자 IR</li><li>데모데이</li><li>정부지원사업</li><li>IR 컨설팅</li></ul><span class="card__more">IR 상담하기<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></div></a>
