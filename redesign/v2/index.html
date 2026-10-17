@@ -460,6 +460,8 @@ a{color:inherit;text-decoration:none}
 .gd__list label{display:flex;align-items:center;gap:12px;padding:13px 2px;border-bottom:1px solid rgba(255,255,255,.08);font-size:14px;cursor:pointer}
 .gd__list input{width:18px;height:18px;accent-color:#1f4bff;flex:none}
 .gd__note{margin:16px 0 0;font-size:12px;color:var(--ink-3)}
+.gd__other{margin:28px 0 40px;padding:28px 0;border-top:1px solid rgba(255,255,255,.12);border-bottom:1px solid rgba(255,255,255,.12)}
+.gd__other b{font-size:17px;font-weight:700}.gd__other p{margin:10px 0 0;font-size:14px;line-height:1.7;color:var(--ink-2)}
 .gd__foot{display:grid;gap:8px;padding:18px 32px calc(22px + env(safe-area-inset-bottom,0px));border-top:1px solid rgba(255,255,255,.08)}
 .gd__foot .gbtn{height:48px;font-size:14px}
 .qz__guide{display:block;margin:14px auto 0;background:none;border:0;color:#3fd0f0;font:inherit;font-size:13px;cursor:pointer}
@@ -479,33 +481,25 @@ a{color:inherit;text-decoration:none}
 @keyframes statsbeam{50%{--bx:70%}}
 @media (prefers-reduced-motion:reduce){.neon-btn,.neon-txt,.stats::before{animation:none}}
 
-/* 다섯 번째: IR · 데모데이 — 왼쪽 제목 + 배경 없는 노트북(장표가 바뀜) + 300건+ 배지, 오른쪽 세 줄, 아래 이력 띠 */
+/* IR · 데모데이 — 누적 팀 수와 연도별 행사 이력 */
 .irx{position:relative;padding:140px 0 120px;isolation:isolate;overflow-x:clip}
-.irx::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse 50% 55% at 28% 60%,rgba(31,75,255,.3),transparent 70%),radial-gradient(ellipse 40% 40% at 88% 25%,rgba(63,208,240,.14),transparent 70%)}
-.irx .wrap{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);grid-template-areas:"head ." "dev pts";column-gap:80px;row-gap:56px}
+.irx::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse 52% 58% at 22% 56%,rgba(31,75,255,.2),transparent 72%),radial-gradient(ellipse 40% 40% at 88% 25%,rgba(63,208,240,.1),transparent 70%)}
+.irx .wrap{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,1fr);grid-template-areas:"head ." "history pts";column-gap:88px;row-gap:54px}
 .irx__head{grid-area:head}
 .irx small.k{display:block;font-size:12px;font-weight:600;letter-spacing:.28em;color:#3fd0f0;text-transform:uppercase}
 .irx h2{margin:16px 0 0;font-size:clamp(30px,3.2vw,46px);line-height:1.18;letter-spacing:-.045em}
-.irx h2 b{font-weight:800}.irx h2 span{font-weight:250}
-/* 노트북: 배경 없이, 살짝 기울어진 채 떠 있다 */
-.dev{grid-area:dev;position:relative;perspective:1600px;padding:10px 0 30px 30%}
-.dev__body{position:relative;transform:rotateY(-12deg) rotateX(4deg);transform-style:preserve-3d;transition:transform 1s var(--ease)}
-.dev:hover .dev__body{transform:rotateY(-6deg) rotateX(2deg)}
-.dev__lid{position:relative;margin:0 6%;padding:2.2% 2.2% 3.2%;border-radius:18px 18px 6px 6px;background:linear-gradient(160deg,#2a2f3a,#0b0d12 40%,#15181f);box-shadow:inset 0 0 0 1px rgba(255,255,255,.14),0 30px 80px -30px rgba(31,90,255,.8)}
-.dev__lid::before{content:"";position:absolute;left:50%;top:1%;width:6px;height:6px;margin-left:-3px;border-radius:50%;background:#1d222c}
-.dev__scr{position:relative;aspect-ratio:16/10;border-radius:6px;overflow:hidden;background:#0b1230}
-.dev__scr img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.02);transition:opacity 1.1s var(--ease),transform 5s linear}
-.dev__scr img.on{opacity:1;transform:none}
-.dev__scr::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,rgba(255,255,255,.12),transparent 38%);pointer-events:none}
-.dev__base{position:relative;height:16px;margin-top:-1px;border-radius:0 0 18px 18px;background:linear-gradient(180deg,#c9ced8,#7b818d 45%,#3a3f49);clip-path:polygon(0 0,100% 0,97% 100%,3% 100%);box-shadow:0 20px 40px -10px rgba(0,0,0,.9)}
-.dev__base::before{content:"";position:absolute;left:50%;top:0;width:16%;height:6px;margin-left:-8%;border-radius:0 0 8px 8px;background:#5d636e}
-.dev__glow{position:absolute;left:8%;right:8%;bottom:0;height:40px;background:radial-gradient(ellipse 50% 50% at 50% 50%,rgba(31,110,255,.55),transparent 70%);filter:blur(12px);z-index:-1}
-.dev__name{position:absolute;right:8%;bottom:0;font-size:12.5px;font-weight:600;color:var(--ink-2)}
-.badge300{position:absolute;left:0;top:24px;z-index:3;padding:18px 22px 16px;border-radius:20px;background:linear-gradient(135deg,#16b6dc,#1f4bff 70%);box-shadow:0 24px 60px -16px rgba(31,90,255,.9),inset 0 1px 0 rgba(255,255,255,.35)}
-.badge300 b{display:block;font-size:54px;font-weight:800;letter-spacing:-.05em;line-height:1;color:#fff;font-variant-numeric:tabular-nums;text-shadow:0 2px 20px rgba(0,20,80,.35)}
-.badge300 b em{font-style:normal;font-size:.38em;font-weight:700;margin-left:4px}
-.badge300 span{display:block;margin-top:8px;font-size:13px;font-weight:700;color:rgba(255,255,255,.92)}
-.badge300.neon-btn{animation:neonbtn 5.5s ease-in-out infinite}
+.irx h2 span{font-weight:500}.irx h2 b{font-weight:800}
+.irx__history{grid-area:history;position:relative;padding:4px 0 4px 28px;border-left:1px solid rgba(95,171,224,.45)}
+.irx__history::before{content:"";position:absolute;left:-2px;top:0;width:3px;height:74px;background:linear-gradient(#3fd0f0,rgba(31,75,255,.2));box-shadow:0 0 18px rgba(63,208,240,.35)}
+.irx__history small{display:block;margin:0 0 26px;font-size:11px;font-weight:650;letter-spacing:.22em;color:#8bb8ca}
+.irx__year{display:grid;grid-template-columns:56px minmax(0,1fr);gap:18px;margin-top:26px}
+.irx__year:first-of-type{margin-top:0}
+.irx__year > b{padding-top:2px;font-size:14px;font-weight:750;color:#d7e5ed;font-variant-numeric:tabular-nums}
+.irx__year ul{margin:0;padding:0;list-style:none}
+.irx__year li{position:relative;padding:0 0 14px 16px;font-size:14px;line-height:1.5;color:rgba(255,255,255,.72);transition:color .3s,transform .3s}
+.irx__year li:last-child{padding-bottom:0}
+.irx__year li::before{content:"";position:absolute;left:0;top:.55em;width:4px;height:4px;border-radius:50%;background:#61cde6;box-shadow:0 0 9px rgba(63,208,240,.4)}
+.irx__year li:hover{color:#fff;transform:translateX(3px)}
 .irx__right{grid-area:pts;align-self:center}
 .pts{margin:0;padding:0;list-style:none;border-top:1px solid rgba(255,255,255,.1)}
 .pt{display:grid;grid-template-columns:44px 1fr;gap:16px;align-items:start;padding:22px 0;border-bottom:1px solid rgba(255,255,255,.1);opacity:0;transform:translateX(30px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
@@ -517,24 +511,16 @@ a{color:inherit;text-decoration:none}
 .pt h3{margin:6px 0 0;font-size:17px;font-weight:700;letter-spacing:-.025em;line-height:1.45}
 .pt p{margin:5px 0 0;font-size:14px;line-height:1.7;color:var(--ink-3)}
 .irx .gbtn{margin-top:30px;height:48px;font-size:14px}
-.hstrip{position:relative;margin-top:96px;padding:18px 0;border-top:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.08);overflow:hidden;-webkit-mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
-.hstrip__row{display:flex;width:max-content;animation:wallmove 60s linear infinite}
-.hstrip:hover .hstrip__row{animation-play-state:paused}
-.hstrip__row span{display:inline-flex;align-items:center;gap:12px;padding:0 28px;font-size:14px;color:var(--ink-2);white-space:nowrap}
-.hstrip__row span b{font-size:12.5px;color:#3fd0f0;font-weight:700;letter-spacing:.02em}
-.hstrip__row span::after{content:"";width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,.3);margin-left:28px}
-.hstrip__row span.cap{color:#fff;font-size:11.5px;font-weight:700;letter-spacing:.24em}
 @media (max-width:860px){
   .irx{padding:96px 0 80px}
-  .irx .wrap{grid-template-columns:1fr;grid-template-areas:"head" "dev" "pts";row-gap:48px}
+  .irx .wrap{grid-template-columns:1fr;grid-template-areas:"head" "history" "pts";row-gap:38px}
   .irx h2{font-size:clamp(28px,8vw,36px)}
-  .dev__body{transform:rotateY(-8deg) rotateX(3deg)}
-  .badge300{left:-6px;top:auto;bottom:6px;padding:12px 16px}
-  .dev{padding-left:0}
-  .badge300 b{font-size:44px}
+  .irx__history{padding-left:20px}
+  .irx__year{grid-template-columns:48px minmax(0,1fr);gap:10px}
+  .irx__year li{font-size:13.5px}
   .irx .gbtn{width:100%}
-  .hstrip{margin-top:64px}
 }
+@media (prefers-reduced-motion:reduce){.pt{opacity:1;transform:none;transition:none}.irx__year li{transition:none}}
 
 @media (max-width:860px){
   .hdr .wrap{grid-template-columns:auto 1fr;height:60px}
@@ -619,7 +605,7 @@ a{color:inherit;text-decoration:none}
       <div class="stat"><b class="neon-txt" data-to="642">0<em>건+</em></b><span>누적 작업</span><small>IR · 제안서 · 회사소개서</small></div>
       <div class="stat"><b class="neon-txt" data-to="4.9" data-dec="1">0<em>/5</em></b><span>고객 평점</span><small>외부 플랫폼 기준</small></div>
       <div class="stat"><b class="neon-txt" data-to="359">0<em>건</em></b><span>공식 고객후기</span><small>실제 의뢰 고객 작성</small></div>
-      <div class="stat"><b class="neon-txt" data-to="300">0<em>건+</em></b><span>IR · 데모데이</span><small>누적 제작</small></div>
+      <div class="stat"><b class="neon-txt" data-to="300">0<em>팀 이상</em></b><span>IR · 데모데이</span><small>누적 작업 팀</small></div>
     </div>
     <div class="quote" id="quote" aria-live="polite">
       <p class="is-on"><i>★★★★★</i><q>벌써 8번째 의뢰, 자료의 톤앤매너를 완벽하게 캐치합니다.</q></p>
@@ -648,21 +634,20 @@ a{color:inherit;text-decoration:none}
 </section>
 <section class="irx" id="ir">
   <div class="wrap">
-    <div class="irx__head"><small class="k">IR · Demo Day</small><h2><b>팀마다 다른 사업,</b><br><span>팀마다 다른 IR.</span></h2></div>
-    <div class="dev" id="lap">
-      <div class="badge300 neon-btn"><b id="n300" data-to="300">300<em>건+</em></b><span>IR · 데모데이 누적 제작</span></div>
-      <div class="dev__body">
-        <div class="dev__lid"><div class="dev__scr">
-          <img class="on" src="assets/slides/toff.webp" alt="토프모빌리티 IR" data-n="토프모빌리티 · IR">
-          <img src="assets/slides/refilly.webp" alt="리필리 IR" data-n="리필리 · IR" loading="lazy">
-          <img src="assets/slides/geogrid.webp" alt="지오그리드 IR" data-n="지오그리드 · IR" loading="lazy">
-          <img src="assets/slides/spne.webp" alt="에스피앤이 IR" data-n="에스피앤이 · IR" loading="lazy">
-          <img src="assets/slides/drbelab.webp" alt="닥터비랩 IR" data-n="닥터비랩 · IR" loading="lazy">
-        </div></div>
-        <div class="dev__base"></div>
-      </div>
-      <div class="dev__glow"></div>
-      <span class="dev__name" id="lapName">토프모빌리티 · IR</span>
+    <div class="irx__head"><small class="k">IR · Demo Day</small><h2><span>누적 작업 팀</span><br><b>300팀 이상.</b></h2></div>
+    <div class="irx__history" aria-label="연도별 데모데이 이력">
+      <small>DEMO DAY HISTORY · 연도별 이력</small>
+      <div class="irx__year"><b>2025</b><ul>
+        <li>SWITCH : Growth Stage 성과공유회</li>
+        <li>Nharvest X 데모데이</li>
+        <li>FutureScape 데모데이</li>
+        <li>경희대학교 캠퍼스타운 데모데이</li>
+      </ul></div>
+      <div class="irx__year"><b>2024</b><ul>
+        <li>타이푼 데모데이</li>
+        <li>SWITCH 데모데이</li>
+        <li>경희대학교 캠퍼스타운 데모데이</li>
+      </ul></div>
     </div>
     <div class="irx__right">
       <ol class="pts" id="pts">
@@ -673,7 +658,7 @@ a{color:inherit;text-decoration:none}
       <a class="gbtn gbtn--fill" href="#contact" data-goal="데모데이" data-msg="[IR · 데모데이] 상담을 원합니다.">IR · 데모데이 상담하기<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     </div>
   </div>
-  <div class="hstrip" aria-label="데모데이 이력"><div class="hstrip__row"><span class="cap">DEMO DAY HISTORY</span><span><b>2025</b>SWITCH : Growth Stage 성과공유회</span><span><b>2025</b>Nharvest X 데모데이</span><span><b>2025</b>FutureScape 데모데이</span><span><b>2025</b>경희대학교 캠퍼스타운 데모데이</span><span><b>2024</b>타이푼 데모데이</span><span><b>2024</b>SWITCH 데모데이</span><span><b>2024</b>경희대학교 캠퍼스타운 데모데이</span><span aria-hidden="true" class="cap">DEMO DAY HISTORY</span><span aria-hidden="true"><b>2025</b>SWITCH : Growth Stage 성과공유회</span><span aria-hidden="true"><b>2025</b>Nharvest X 데모데이</span><span aria-hidden="true"><b>2025</b>FutureScape 데모데이</span><span aria-hidden="true"><b>2025</b>경희대학교 캠퍼스타운 데모데이</span><span aria-hidden="true"><b>2024</b>타이푼 데모데이</span><span aria-hidden="true"><b>2024</b>SWITCH 데모데이</span><span aria-hidden="true"><b>2024</b>경희대학교 캠퍼스타운 데모데이</span></div></div>
+
 </section>
 <section class="aix" id="visual">
   <div class="wrap">
@@ -754,7 +739,8 @@ a{color:inherit;text-decoration:none}
       <h2><b>지금 가진 자료로,</b><br><span>어디까지 가능한지 물어보세요.</span></h2>
       <p>필요한 작업과 지금 상황만 알려 주세요. 목적과 일정에 맞춰 방향과 견적을 안내합니다.</p>
       <dl class="cdl">
-        <div><dt>이메일</dt><dd><a href="mailto:youstar_ppt@naver.com">youstar_ppt@naver.com</a></dd></div>
+        <div><dt>이메일</dt><dd><a href="mailto:contact@youstarppt.com">contact@youstarppt.com</a></dd></div>
+        <div><dt>팩스</dt><dd>0504-410-8553</dd></div>
         <div><dt>카카오톡</dt><dd><a href="https://pf.kakao.com/_XgRWxj/chat" target="_blank" rel="noopener">채널에서 상담하기 ↗</a></dd></div>
         <div><dt>상담 시간</dt><dd>09:00 – 17:00</dd></div>
       </dl>
@@ -799,7 +785,8 @@ a{color:inherit;text-decoration:none}
     <div>
       <p><b>유별난PPT</b> · YOUSTAR PRESENTATION</p>
       <p>운영 유어스타 · 사업자등록번호 202-13-66345 · 개인정보보호책임자 이은비</p>
-      <p>youstar_ppt@naver.com · © 2026 유별난PPT. All rights reserved.</p>
+      <p>contact@youstarppt.com · 팩스 0504-410-8553</p>
+      <p>© 2026 유별난PPT. All rights reserved.</p>
       <p class="src">거래·평점·후기 수치는 외부 플랫폼 기준입니다. (2026.10)</p>
     </div>
     <nav aria-label="하단 메뉴"><a href="about.html">회사소개</a><a href="portfolio.html">포트폴리오</a><a href="#reviews">고객 후기</a><a href="#contact">문의하기</a><a href="https://pf.kakao.com/_XgRWxj/chat" target="_blank" rel="noopener">카카오톡 상담 ↗</a></nav>
@@ -1048,19 +1035,8 @@ a{color:inherit;text-decoration:none}
 </script>
 <script>
 (() => {
-  const pts = document.getElementById("pts"), lap = document.getElementById("lap"); if (!pts || !lap) return;
-  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const imgs = [...lap.querySelectorAll(".dev__scr img")], nm = document.getElementById("lapName"), n300 = document.getElementById("n300");
-  let i = 0, timer = 0, counted = false;
-  const next = () => { imgs[i].classList.remove("on"); i = (i + 1) % imgs.length; imgs[i].classList.add("on"); nm.textContent = imgs[i].dataset.n; };
-  new IntersectionObserver(([e]) => {
-    if (e.isIntersecting) {
-      pts.classList.add("is-in");
-      if (!counted) { counted = true; const em = n300.querySelector("em").outerHTML, t0 = performance.now();
-        const st = (t) => { const k = reduce ? 1 : Math.min(1, (t - t0) / 1600); n300.innerHTML = Math.round(300 * (1 - Math.pow(1 - k, 3))) + em; if (k < 1) requestAnimationFrame(st); }; requestAnimationFrame(st); }
-      if (!timer && !reduce) timer = setInterval(next, 3600);
-    } else if (timer) { clearInterval(timer); timer = 0; }
-  }, { threshold: .3 }).observe(lap);
+  const pts = document.getElementById("pts");
+  if (pts) new IntersectionObserver((es, o) => es.forEach((e) => { if (e.isIntersecting) { pts.classList.add("is-in"); o.disconnect(); } }), { threshold: .25 }).observe(pts);
 })();
 </script>
 <script>
@@ -1082,7 +1058,7 @@ a{color:inherit;text-decoration:none}
     if (bad) { out.textContent = "필수 항목을 확인해 주세요."; bad.focus(); return; }
     const d = new FormData(f), g = (k) => d.getAll(k).join(", ");
     const body = `성함: ${g("name")}\n회사명: ${g("company")}\n이메일: ${g("email")}\n연락처: ${g("phone")}\n\n${g("message")}\n\n연락 방법: ${g("contact_pref")}\n의뢰 목적: ${g("goal")}\n희망 납기: ${g("due")}\n분량: ${g("pages")}\n준비된 자료: ${g("ready")}\nNDA: ${g("nda")}`;
-    location.href = `mailto:youstar_ppt@naver.com?subject=${encodeURIComponent("[유별난PPT 상담] " + g("company"))}&body=${encodeURIComponent(body)}`;
+    location.href = `mailto:contact@youstarppt.com?subject=${encodeURIComponent("[유별난PPT 상담] " + g("company"))}&body=${encodeURIComponent(body)}`;
     out.textContent = "메일 앱이 열렸습니다. 메일 앱에서 보내기를 눌러 주세요.";
   });
 })();
@@ -1187,6 +1163,7 @@ a{color:inherit;text-decoration:none}
     ir: { label: "IR · 데모데이", goal: "투자 유치 (IR)", flow: ["문제 정의", "해결책 · 제품", "시장 규모", "비즈니스 모델", "트랙션 · 성과", "경쟁 우위", "팀 소개", "재무 · 투자 요청"], items: ["기존 IR · 사업계획서 초안", "회사 · 제품 소개 자료", "주요 지표 (매출 · 사용자 · 성장률)", "팀 구성 · 주요 이력", "로고 · 브랜드 가이드", "발표 시간과 형식 (예: 데모데이 5분)", "참고하고 싶은 레퍼런스"] },
     proposal: { label: "제안서 · 입찰", goal: "입찰 · 제안", flow: ["제안 개요", "사업 이해 · 과업 분석", "추진 전략", "세부 수행 방안", "추진 일정", "투입 인력 · 조직", "유사 수행 실적", "기대 효과"], items: ["제안요청서(RFP) · 과업지시서", "평가 기준표 · 배점표", "기존 제안서 · 수행 실적 자료", "회사 소개 · 인증 자료", "분량 · 양식 제한 사항", "제출 마감일 · 발표 일정", "로고 · CI"] },
     profile: { label: "회사 · 브랜드 소개", goal: "회사 · 브랜드 · 제품 소개", flow: ["회사 소개 · 비전", "연혁", "사업 영역", "제품 · 서비스", "주요 실적 · 고객사", "경쟁력", "조직 · 파트너", "연락처"], items: ["기존 소개서 · 홈페이지 문구", "로고 · 브랜드 가이드", "제품 · 현장 사진", "주요 실적 · 고객사 목록", "회사 연혁", "사용 목적 (영업 · 채용 · 투자 등)", "참고하고 싶은 레퍼런스"] },
+    other: { label: "기타", goal: "기타", flow: [], items: [] },
   };
   const gd = document.getElementById("gd"), gb = document.getElementById("gdBody"), tabs = gd.querySelector(".gd__tabs"), fillB = gd.querySelector("[data-gfill]");
   const checked = Object.fromEntries(Object.keys(G).map((k) => [k, new Set()])); let type = "ir", lastF = null;
@@ -1194,6 +1171,7 @@ a{color:inherit;text-decoration:none}
   const label = () => { const n = checked[type].size; fillB.textContent = n ? `체크한 ${n}개로 상담 요청하기` : "이 유형으로 상담 요청하기"; };
   const render = () => { const g = G[type];
     tabs.querySelectorAll("button").forEach((b) => b.setAttribute("aria-selected", b.dataset.t === type));
+    if (type === "other") { gb.innerHTML = '<div class="gd__other"><b>그 밖의 작업도 상담할 수 있습니다.</b><p>작업 내용과 일정에 따라 범위와 금액을 별도로 안내합니다.</p></div>'; fillB.textContent = "기타 작업 별도 문의하기"; return; }
     gb.innerHTML = `<h4>일반적인 기본 구성</h4><ol class="gd__flow">${g.flow.map((f) => `<li>${esc(f)}</li>`).join("")}</ol><h4>준비하면 좋은 자료<span>있는 것만 체크하세요</span></h4><ul class="gd__list">${g.items.map((it) => `<li><label><input type="checkbox" value="${esc(it)}"${checked[type].has(it) ? " checked" : ""}><span>${esc(it)}</span></label></li>`).join("")}</ul><p class="gd__note">※ 일반적인 구성 예시예요. 발표 목적에 맞게 상담 때 조정해 드려요.</p>`; label(); };
   const open = (t) => { if (G[t]) type = t; lastF = document.activeElement; render(); gd.classList.add("open"); document.body.style.overflow = "hidden"; gd.querySelector(".gd__scroll").scrollTop = 0; };
   const close = () => { gd.classList.remove("open"); document.body.style.overflow = ""; lastF?.focus?.({ preventScroll: true }); };
@@ -1205,8 +1183,12 @@ a{color:inherit;text-decoration:none}
     if (e.target.closest("[data-gclose]")) return close();
     const t = e.target.closest("[data-t]"); if (t) { type = t.dataset.t; return render(); }
     const ready = [...checked[type]];
-    if (e.target.closest("[data-gfill]")) { setGoal(G[type].goal); addMsg(`[준비 가이드 · ${G[type].label}]` + (ready.length ? `\n준비된 자료: ${ready.join(", ")}` : "")); close(); go("가이드 내용을 문의서에 담아 두었어요."); }
-    if (e.target.closest("[data-gkakao]")) { const text = `[유별난PPT 상담 · ${G[type].label}]\n준비된 자료: ${ready.length ? ready.join(", ") : "상담 후 정리"}`;
+    if (e.target.closest("[data-gfill]")) {
+      setGoal(G[type].goal);
+      addMsg(type === "other" ? "[기타 작업] 범위와 금액을 별도 문의드립니다." : `[준비 가이드 · ${G[type].label}]` + (ready.length ? `\n준비된 자료: ${ready.join(", ")}` : ""));
+      close(); go("가이드 내용을 문의서에 담아 두었어요.");
+    }
+    if (e.target.closest("[data-gkakao]")) { const text = type === "other" ? "[유별난PPT 기타 작업 문의]\n작업 내용과 일정을 상담하고 싶습니다." : `[유별난PPT 상담 · ${G[type].label}]\n준비된 자료: ${ready.length ? ready.join(", ") : "상담 후 정리"}`;
       (navigator.clipboard ? navigator.clipboard.writeText(text) : Promise.reject()).then(() => toast("내용을 복사했어요. 카카오톡에 붙여넣어 주세요."), () => {}); window.open(KAKAO, "_blank", "noopener"); }
   });
 })();
