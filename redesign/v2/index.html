@@ -484,13 +484,13 @@ a{color:inherit;text-decoration:none}
 /* IR · 데모데이 — 누적 팀 수와 연도별 행사 이력 */
 .irx{position:relative;padding:140px 0 120px;isolation:isolate;overflow-x:clip}
 .irx::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse 52% 58% at 22% 56%,rgba(31,75,255,.2),transparent 72%),radial-gradient(ellipse 40% 40% at 88% 25%,rgba(63,208,240,.1),transparent 70%)}
-.irx .wrap{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,1fr);grid-template-areas:"head ." "history pts";column-gap:88px;row-gap:54px}
+.irx .wrap{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,1fr);grid-template-areas:"head pts" "history pts";column-gap:88px;row-gap:36px}
 .irx__head{grid-area:head}
 .irx small.k{display:block;font-size:12px;font-weight:600;letter-spacing:.28em;color:#3fd0f0;text-transform:uppercase}
 .irx h2{margin:16px 0 0;font-size:clamp(30px,3.2vw,46px);line-height:1.18;letter-spacing:-.045em}
 .irx h2 span{font-weight:500}.irx h2 b{font-weight:800}
 .irx__history{grid-area:history;position:relative;padding:4px 0 4px 28px;border-left:1px solid rgba(95,171,224,.45)}
-.irx__history::before{content:"";position:absolute;left:-2px;top:0;width:3px;height:74px;background:linear-gradient(#3fd0f0,rgba(31,75,255,.2));box-shadow:0 0 18px rgba(63,208,240,.35)}
+.irx__history::before{content:"";position:absolute;left:-2px;top:0;width:3px;height:100%;background:linear-gradient(#3fd0f0 0%,rgba(31,75,255,.48) 52%,rgba(31,75,255,0) 100%);box-shadow:0 0 18px rgba(63,208,240,.25);transform-origin:top}
 .irx__history small{display:block;margin:0 0 26px;font-size:11px;font-weight:650;letter-spacing:.22em;color:#8bb8ca}
 .irx__year{display:grid;grid-template-columns:56px minmax(0,1fr);gap:18px;margin-top:26px}
 .irx__year:first-of-type{margin-top:0}
@@ -500,7 +500,21 @@ a{color:inherit;text-decoration:none}
 .irx__year li:last-child{padding-bottom:0}
 .irx__year li::before{content:"";position:absolute;left:0;top:.55em;width:4px;height:4px;border-radius:50%;background:#61cde6;box-shadow:0 0 9px rgba(63,208,240,.4)}
 .irx__year li:hover{color:#fff;transform:translateX(3px)}
-.irx__right{grid-area:pts;align-self:center}
+.irx__right{grid-area:pts;align-self:start;padding-top:20px}
+.irx__history.motion-ready::before{transform:scaleY(0);transition:transform 1.25s var(--ease)}
+.irx__history.motion-ready.is-in::before{transform:scaleY(1)}
+.irx__history.motion-ready .irx__year > b,.irx__history.motion-ready .irx__year li{opacity:0;transform:translateY(12px);transition:opacity .75s var(--ease),transform .75s var(--ease),color .3s}
+.irx__history.motion-ready.is-in .irx__year > b,.irx__history.motion-ready.is-in .irx__year li{opacity:1;transform:none}
+.irx__history.is-in .irx__year:first-of-type > b{transition-delay:.12s}
+.irx__history.is-in .irx__year:first-of-type li:nth-child(1){transition-delay:.2s}
+.irx__history.is-in .irx__year:first-of-type li:nth-child(2){transition-delay:.3s}
+.irx__history.is-in .irx__year:first-of-type li:nth-child(3){transition-delay:.4s}
+.irx__history.is-in .irx__year:first-of-type li:nth-child(4){transition-delay:.5s}
+.irx__history.is-in .irx__year:nth-of-type(2) > b{transition-delay:.58s}
+.irx__history.is-in .irx__year:nth-of-type(2) li:nth-child(1){transition-delay:.66s}
+.irx__history.is-in .irx__year:nth-of-type(2) li:nth-child(2){transition-delay:.76s}
+.irx__history.is-in .irx__year:nth-of-type(2) li:nth-child(3){transition-delay:.86s}
+.irx__history.motion-ready.is-in .irx__year li:hover{transform:translateX(3px)}
 .pts{margin:0;padding:0;list-style:none;border-top:1px solid rgba(255,255,255,.1)}
 .pt{display:grid;grid-template-columns:44px 1fr;gap:16px;align-items:start;padding:22px 0;border-bottom:1px solid rgba(255,255,255,.1);opacity:0;transform:translateX(30px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
 .pts.is-in .pt{opacity:1;transform:none}
@@ -515,12 +529,15 @@ a{color:inherit;text-decoration:none}
   .irx{padding:96px 0 80px}
   .irx .wrap{grid-template-columns:1fr;grid-template-areas:"head" "history" "pts";row-gap:38px}
   .irx h2{font-size:clamp(28px,8vw,36px)}
+  .irx__right{padding-top:0}
   .irx__history{padding-left:20px}
+  .irx__history.motion-ready::before{transform:none;transition:none}
+  .irx__history.motion-ready .irx__year > b,.irx__history.motion-ready .irx__year li{opacity:1;transform:none;transition:none}
   .irx__year{grid-template-columns:48px minmax(0,1fr);gap:10px}
   .irx__year li{font-size:13.5px}
   .irx .gbtn{width:100%}
 }
-@media (prefers-reduced-motion:reduce){.pt{opacity:1;transform:none;transition:none}.irx__year li{transition:none}}
+@media (prefers-reduced-motion:reduce){.pt{opacity:1;transform:none;transition:none}.irx__year li{transition:none}.irx__history.motion-ready::before{transform:none;transition:none}.irx__history.motion-ready .irx__year > b,.irx__history.motion-ready .irx__year li{opacity:1;transform:none;transition:none}}
 
 @media (max-width:860px){
   .hdr .wrap{grid-template-columns:auto 1fr;height:60px}
@@ -1037,6 +1054,11 @@ a{color:inherit;text-decoration:none}
 (() => {
   const pts = document.getElementById("pts");
   if (pts) new IntersectionObserver((es, o) => es.forEach((e) => { if (e.isIntersecting) { pts.classList.add("is-in"); o.disconnect(); } }), { threshold: .25 }).observe(pts);
+  const history = document.querySelector(".irx__history");
+  if (history && !matchMedia("(prefers-reduced-motion: reduce), (max-width: 860px)").matches) {
+    history.classList.add("motion-ready");
+    new IntersectionObserver((es, o) => es.forEach((e) => { if (e.isIntersecting) { history.classList.add("is-in"); o.disconnect(); } }), { threshold: .18 }).observe(history);
+  }
 })();
 </script>
 <script>
