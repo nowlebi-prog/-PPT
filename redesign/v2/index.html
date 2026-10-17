@@ -40,9 +40,11 @@ a{color:inherit;text-decoration:none}
 .hero::before{content:"";position:absolute;inset:0;z-index:-1;background:rgba(0,0,0,.28)}
 .hero::after{content:"";position:absolute;inset:auto 0 0;height:40%;z-index:-1;background:linear-gradient(transparent,#000)}
 .hero__in{padding-block:120px 96px;max-width:860px}
-.hero h1{margin:0;font-size:clamp(40px,5.6vw,80px);line-height:1.14;letter-spacing:-.045em}
-.hero h1 b{display:block;font-weight:800}
-.hero h1 span{display:block;font-weight:250}
+.hero h1{margin:0;font-size:clamp(38px,5vw,66px);line-height:1.16;letter-spacing:-.045em}
+.hero h1 span,.hero h1 b{display:block}
+.hero h1 .hero__lead{font-weight:350}
+.hero h1 .hero__brand{font-weight:600;background:linear-gradient(95deg,#dce6ef 10%,#83d7e9 55%,#9aaee4 95%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero h1 b{font-weight:800}
 .hero p{margin:28px auto 0;max-width:640px;font-size:17px;line-height:1.8;color:var(--ink-2);font-weight:500}
 .hero p strong{display:block;margin-top:22px;font-size:17px;color:var(--ink);font-weight:600}
 .down{display:grid;place-items:center;width:52px;height:52px;margin:56px auto 0;border-radius:50%;border:1.5px solid rgba(255,255,255,.85);transition:background .3s,transform .3s var(--ease)}
@@ -61,6 +63,7 @@ a{color:inherit;text-decoration:none}
 .gbtn--fill{background:linear-gradient(120deg,#16b6dc,#1f4bff 70%) padding-box,linear-gradient(120deg,rgba(255,255,255,.55),rgba(255,255,255,.1)) border-box;box-shadow:0 10px 36px -12px rgba(31,90,255,.7)}
 .gbtn--fill:hover{box-shadow:0 0 0 1px rgba(255,255,255,.1),0 14px 50px -10px rgba(31,110,255,.85)}
 .hero__acts{display:flex;justify-content:center;gap:12px;margin-top:40px}
+.hero__acts .gbtn{width:168px;padding:0 16px}
 /* 헤더 오른쪽: Portfolio | Contact 한 알약 */
 .seg{display:inline-flex;align-items:center;height:40px;padding:0 4px;border-radius:999px;border:1px solid transparent;background:linear-gradient(rgba(6,10,24,.6),rgba(6,10,24,.6)) padding-box,linear-gradient(120deg,rgba(63,208,240,.7),rgba(31,75,255,.7) 60%,rgba(255,255,255,.18)) border-box;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
 .seg a{display:inline-flex;align-items:center;height:32px;padding:0 16px;border-radius:999px;font-size:13px;font-weight:600;opacity:1!important;transition:background .3s,color .3s}
@@ -77,7 +80,7 @@ a{color:inherit;text-decoration:none}
 .show__stage::after{content:"";position:absolute;inset:auto 0 0;height:22%;z-index:0;background:linear-gradient(transparent,#000);pointer-events:none}
 .show__copy{position:relative;z-index:1;padding-top:112px}
 .show__copy small{display:block;font-size:12px;font-weight:600;letter-spacing:.28em;color:#3fd0f0;text-transform:uppercase}
-.show__copy h2{margin:16px 0 0;font-size:clamp(30px,3.6vw,52px);line-height:1.16;letter-spacing:-.04em}
+.show__copy h2{margin:16px 0 0;font-size:clamp(26px,3.1vw,44px);line-height:1.16;letter-spacing:-.04em}
 .show__copy h2 b{font-weight:800}.show__copy h2 span{font-weight:500}
 .show__copy p{margin:18px 0 0;font-size:15.5px;color:var(--ink-2);font-weight:500}
 .show__copy .gbtn{margin-top:28px;height:46px;font-size:14px}
@@ -93,7 +96,7 @@ a{color:inherit;text-decoration:none}
 .proof::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse 65% 50% at 50% 0%,rgba(31,75,255,.36),transparent 70%),radial-gradient(ellipse 45% 35% at 50% 10%,rgba(63,208,240,.2),transparent 70%)}
 .proof__head{text-align:center}
 .proof__head small{display:block;font-size:12px;font-weight:600;letter-spacing:.28em;color:#3fd0f0;text-transform:uppercase}
-.proof__head h2{margin:16px 0 0;font-size:clamp(30px,3.6vw,52px);line-height:1.16;letter-spacing:-.04em}
+.proof__head h2{margin:16px 0 0;font-size:clamp(26px,3.1vw,44px);line-height:1.16;letter-spacing:-.04em}
 .proof__head h2 b{font-weight:800}.proof__head h2 span{font-weight:250}
 .stats{display:grid;grid-template-columns:repeat(4,1fr);margin:64px auto 0;max-width:1100px}
 .stat{position:relative;text-align:center;padding:8px 12px}
@@ -138,7 +141,7 @@ a{color:inherit;text-decoration:none}
 .svc::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse 55% 45% at 12% 18%,rgba(63,208,240,.2),transparent 70%),radial-gradient(ellipse 55% 50% at 92% 82%,rgba(31,75,255,.3),transparent 70%)}
 .svc__head{display:block}
 .svc__head small{display:block;font-size:12px;font-weight:600;letter-spacing:.28em;color:#3fd0f0;text-transform:uppercase}
-.svc__head h2{margin:16px 0 0;font-size:clamp(32px,3.8vw,52px);line-height:1.16;letter-spacing:-.04em}
+.svc__head h2{margin:16px 0 0;font-size:clamp(28px,3.1vw,44px);line-height:1.16;letter-spacing:-.04em}
 .svc__head h2 b{font-weight:800}.svc__head h2 span{font-weight:500}
 .svc__head p{margin:0 0 10px;font-size:16px;line-height:1.8;color:var(--ink-2);font-weight:500}
 .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:72px;perspective:1200px}
@@ -156,8 +159,8 @@ a{color:inherit;text-decoration:none}
 .card__body i{font-style:normal;font-size:11px;font-weight:600;letter-spacing:.22em;color:#3fd0f0}
 .card__body h3{margin:10px 0 0;font-size:24px;font-weight:800;letter-spacing:-.035em}
 .card__body p{margin:8px 0 0;font-size:16px;font-weight:300;color:#fff;letter-spacing:-.02em}
-.card__body ul{display:flex;flex-wrap:wrap;gap:6px;margin:22px 0 0;padding:0;list-style:none}
-.card__body li{height:28px;display:inline-flex;align-items:center;padding:0 11px;border-radius:999px;font-size:12px;color:var(--ink-2);border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.03)}
+.card__body ul{display:flex;flex-wrap:nowrap;gap:5px;margin:22px 0 0;padding:0;list-style:none}
+.card__body li{height:28px;display:inline-flex;flex:none;align-items:center;white-space:nowrap;padding:0 7px;border-radius:999px;font-size:11px;color:var(--ink-2);border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.03)}
 .card__more{display:inline-flex;align-items:center;gap:8px;margin-top:auto;padding-top:26px;font-size:13.5px;font-weight:600;color:#fff}
 .card__more svg{width:15px;height:15px;transition:transform .4s var(--ease)}
 .card:hover .card__more svg{transform:translateX(4px)}
@@ -165,7 +168,7 @@ a{color:inherit;text-decoration:none}
 .svc__foot b{color:#fff;font-weight:600}
 @media (max-width:860px){
   .svc{padding:96px 0 88px}
-  .svc__head h2{font-size:clamp(32px,9vw,40px)}
+  .svc__head h2{font-size:clamp(26px,7.5vw,32px)}
   .svc__head p{font-size:14.5px}
   .cards{display:flex;gap:14px;margin:40px -20px 0;padding:0 20px 6px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:20px;scrollbar-width:none}
   .cards::-webkit-scrollbar{display:none}
@@ -180,7 +183,7 @@ a{color:inherit;text-decoration:none}
 .aix::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse 45% 50% at 75% 50%,rgba(31,75,255,.3),transparent 70%),radial-gradient(ellipse 35% 35% at 10% 20%,rgba(63,208,240,.14),transparent 70%)}
 .aix__grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:72px;align-items:center}
 .aix small.k{display:block;font-size:12px;font-weight:600;letter-spacing:.28em;color:#3fd0f0;text-transform:uppercase}
-.aix h2{margin:16px 0 0;font-size:clamp(28px,2.9vw,42px);line-height:1.22;letter-spacing:-.045em}
+.aix h2{margin:16px 0 0;font-size:clamp(26px,2.6vw,38px);line-height:1.22;letter-spacing:-.045em}
 .aix h2 b{font-weight:800}.aix h2 span{font-weight:250}
 .aix__lead{margin:16px 0 0;font-size:16px;color:var(--ink-2);font-weight:500}
 .cmp{margin:36px 0 0;padding:0;list-style:none;border-top:1px solid rgba(255,255,255,.1)}
@@ -211,7 +214,7 @@ a{color:inherit;text-decoration:none}
 @media (max-width:860px){
   .aix{padding:96px 0 80px}
   .aix__grid{grid-template-columns:1fr;gap:44px}
-  .aix h2{font-size:clamp(26px,7.4vw,32px)}
+  .aix h2{font-size:clamp(24px,7vw,30px)}
   .aix__lead{font-size:14.5px}
   .cmp li{grid-template-columns:1fr;gap:8px;padding:18px 0}
   .cmp i{transform:rotate(90deg)}
@@ -224,7 +227,7 @@ a{color:inherit;text-decoration:none}
 .prc::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse 50% 45% at 50% 55%,rgba(31,75,255,.22),transparent 70%),radial-gradient(ellipse 35% 35% at 85% 15%,rgba(63,208,240,.1),transparent 70%)}
 .prc__head{text-align:center}
 .prc small.k{display:block;font-size:12px;font-weight:600;letter-spacing:.28em;color:#3fd0f0;text-transform:uppercase}
-.prc h2{margin:16px 0 0;font-size:clamp(28px,3.2vw,46px);line-height:1.18;letter-spacing:-.045em}
+.prc h2{margin:16px 0 0;font-size:clamp(26px,2.8vw,40px);line-height:1.18;letter-spacing:-.045em}
 .prc h2 b{font-weight:800}.prc h2 span{font-weight:250}
 .prc__head p{margin:16px 0 0;font-size:15.5px;color:var(--ink-2)}
 .ptab{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:56px}
@@ -252,7 +255,7 @@ a{color:inherit;text-decoration:none}
 @media (max-width:980px){.ptab{grid-template-columns:1fr 1fr}}
 @media (max-width:860px){
   .prc{padding:96px 0 80px}
-  .prc h2{font-size:clamp(26px,7.6vw,34px)}
+  .prc h2{font-size:clamp(24px,7vw,30px)}
   .ptab{grid-template-columns:1fr;margin-top:40px;gap:12px}
   .pfoot{grid-template-columns:1fr;padding:22px 20px}
 }
@@ -262,7 +265,7 @@ a{color:inherit;text-decoration:none}
 .rvx::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse 50% 40% at 50% 30%,rgba(31,75,255,.2),transparent 70%)}
 .sechead{text-align:center}
 .sechead small{display:block;font-size:12px;font-weight:600;letter-spacing:.28em;color:#3fd0f0;text-transform:uppercase}
-.sechead h2{margin:16px 0 0;font-size:clamp(28px,3.2vw,46px);line-height:1.18;letter-spacing:-.045em}
+.sechead h2{margin:16px 0 0;font-size:clamp(26px,2.8vw,40px);line-height:1.18;letter-spacing:-.045em}
 .sechead h2 b{font-weight:800}.sechead h2 span{font-weight:250}
 .sechead p{margin:16px 0 0;font-size:15.5px;color:var(--ink-2)}
 .rvx__score{display:inline-flex;align-items:baseline;gap:10px;margin-top:22px}
@@ -281,7 +284,7 @@ a{color:inherit;text-decoration:none}
 .fqx{position:relative;padding:120px 0}
 .fqx .wrap{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.4fr);gap:72px}
 .fqx__head small{display:block;font-size:12px;font-weight:600;letter-spacing:.28em;color:#3fd0f0}
-.fqx__head h2{margin:16px 0 0;font-size:clamp(28px,3vw,42px);letter-spacing:-.045em;font-weight:800}
+.fqx__head h2{margin:16px 0 0;font-size:clamp(26px,2.6vw,38px);letter-spacing:-.045em;font-weight:800}
 .fqx__head p{margin:14px 0 0;font-size:15px;line-height:1.7;color:var(--ink-2)}
 .fqx__head .gbtn{margin-top:26px;height:46px;font-size:14px}
 .faq{border-top:1px solid rgba(255,255,255,.12)}
@@ -315,7 +318,7 @@ a{color:inherit;text-decoration:none}
 .fin::after{width:70%;height:90%;right:-15%;bottom:-45%;background:radial-gradient(closest-side,rgba(31,75,255,.6),transparent);animation:finB 16s ease-in-out infinite}
 @keyframes finA{50%{transform:translate(18%,-12%) scale(1.1)}}
 @keyframes finB{50%{transform:translate(-20%,-8%) scale(1.15)}}
-.fin h2{margin:0;font-size:clamp(36px,5vw,72px);line-height:1.12;letter-spacing:-.045em}
+.fin h2{margin:0;font-size:clamp(30px,4.2vw,60px);line-height:1.12;letter-spacing:-.045em}
 .fin h2 b{display:block;font-weight:800}.fin h2 span{display:block;font-weight:250}
 .fin p{margin:24px 0 0;font-size:17px;color:var(--ink-2)}
 .fin .acts{display:flex;justify-content:center;gap:12px;margin-top:40px}
@@ -324,7 +327,7 @@ a{color:inherit;text-decoration:none}
 .ctx{position:relative;padding:120px 0}
 .ctx .wrap{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.25fr);gap:72px;align-items:start}
 .ctx__info small{display:block;font-size:12px;font-weight:600;letter-spacing:.28em;color:#3fd0f0}
-.ctx__info h2{margin:16px 0 0;font-size:clamp(26px,2.6vw,38px);line-height:1.25;letter-spacing:-.045em}
+.ctx__info h2{margin:16px 0 0;font-size:clamp(24px,2.4vw,34px);line-height:1.25;letter-spacing:-.045em}
 .ctx__info h2 b{font-weight:800}.ctx__info h2 span{font-weight:250}
 .ctx__info > p{margin:16px 0 0;font-size:15px;line-height:1.75;color:var(--ink-2)}
 .cdl{margin:30px 0 0;border-top:1px solid rgba(255,255,255,.1)}
@@ -484,7 +487,7 @@ a{color:inherit;text-decoration:none}
 .irx .wrap{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,1fr);grid-template-areas:"head pts" "history pts";column-gap:88px;row-gap:36px}
 .irx__head{grid-area:head}
 .irx small.k{display:block;font-size:12px;font-weight:600;letter-spacing:.28em;color:#3fd0f0;text-transform:uppercase}
-.irx h2{margin:16px 0 0;font-size:clamp(30px,3.2vw,46px);line-height:1.18;letter-spacing:-.045em}
+.irx h2{margin:16px 0 0;font-size:clamp(26px,2.8vw,40px);line-height:1.18;letter-spacing:-.045em}
 .irx h2 span{font-weight:500}.irx h2 b{font-weight:800}
 .irx__history{grid-area:history;position:relative;padding:4px 0 4px 28px;border-left:1px solid rgba(95,171,224,.45)}
 .irx__history::before{content:"";position:absolute;left:-2px;top:0;width:3px;height:100%;background:linear-gradient(#3fd0f0 0%,rgba(31,75,255,.48) 52%,rgba(31,75,255,0) 100%);box-shadow:0 0 18px rgba(63,208,240,.25);transform-origin:top}
@@ -525,7 +528,7 @@ a{color:inherit;text-decoration:none}
 @media (max-width:860px){
   .irx{padding:96px 0 80px}
   .irx .wrap{grid-template-columns:1fr;grid-template-areas:"head" "history" "pts";row-gap:38px}
-  .irx h2{font-size:clamp(28px,8vw,36px)}
+  .irx h2{font-size:clamp(26px,7.4vw,32px)}
   .irx__right{padding-top:0}
   .irx__history{padding-left:20px}
   .irx__history.motion-ready::before{transform:none;transition:none}
@@ -541,16 +544,16 @@ a{color:inherit;text-decoration:none}
   .hdr nav:first-child{display:none}
   .hero{align-items:flex-end;text-align:left}
   .hero__in{padding-block:140px 72px;width:100%}
-  .hero h1{font-size:clamp(38px,11vw,46px)}
+  .hero h1{font-size:clamp(34px,9.5vw,42px)}
   .hero p{margin-left:0;font-size:14.5px}
   .down{margin-left:0}
   .hero__acts{justify-content:flex-start}
-  .hero__acts .gbtn{flex:1;height:52px;padding:0 16px}
+  .hero__acts .gbtn{flex:1;width:auto;min-width:0;height:52px;padding:0 16px}
   .hdr nav:last-child > a{display:none}
   .seg{height:36px}.seg a{height:28px;padding:0 12px;font-size:12px}
   .show{height:200vh}
   .show__copy{padding-top:92px}
-  .show__copy h2{font-size:clamp(28px,8vw,34px)}
+  .show__copy h2{font-size:clamp(26px,7.4vw,32px)}
   .show__copy p{font-size:14px}
   .show__copy .gbtn{display:none}
   .show__cap{left:20px;right:auto;bottom:32px}
@@ -591,7 +594,7 @@ a{color:inherit;text-decoration:none}
 <section class="hero" id="top">
   <canvas id="beam" aria-hidden="true"></canvas>
   <div class="wrap hero__in" id="heroIn">
-    <h1 class="rise"><b>같은 초안도,</b><span>차원이 다르게.</span></h1>
+    <h1 class="rise"><span class="hero__lead">같은 초안도,</span><span class="hero__brand">유별난PPT는</span><b>차원이 다르게</b></h1>
     <p class="rise">정리 안 된 초안도, 읽히는 장표로.</p>
     <div class="hero__acts rise"><a class="gbtn gbtn--fill" href="portfolio.html">Portfolio<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="gbtn" href="#contact">Contact</a></div>
     <a class="down rise" href="#work" aria-label="아래로"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
@@ -639,8 +642,8 @@ a{color:inherit;text-decoration:none}
       <div><small>Services</small><h2><span>내용을 이해하고, 기획하며,</span><br><b>목적에 맞게 완성합니다.</b></h2></div>
     </div>
     <div class="cards" id="cards">
-      <a class="card" href="#contact" data-goal="투자 유치 (IR)" data-msg="[IR · 데모데이] 상담을 원합니다."><div class="card__in"><div class="card__img"><img src="assets/slides/svc-ir.webp" alt="토프모빌리티 사업계획 장표 목업" loading="lazy"></div><div class="card__body"><i>IR · DEMO DAY</i><h3>IR · 데모데이</h3><p>투자자가 묻는 순서대로.</p><ul><li>투자 IR</li><li>데모데이</li><li>정부지원사업</li><li>IR 컨설팅</li></ul><span class="card__more">IR 상담하기<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></div></a>
-      <a class="card" href="#contact" data-goal="입찰 · 제안" data-msg="[제안서 · 입찰] 상담을 원합니다."><div class="card__in"><div class="card__img"><img src="assets/slides/svc-prop.webp" alt="특허법인 성암 회사소개 장표 목업" loading="lazy"></div><div class="card__body"><i>PROPOSAL · BID</i><h3>제안서 · 입찰</h3><p>심사위원이 찾기 쉽게.</p><ul><li>입찰 제안서</li><li>사업계획서</li><li>정량·정성 평가 대응</li></ul><span class="card__more">제안서 상담하기<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></div></a>
+      <a class="card" href="#contact" data-goal="투자 유치 (IR)" data-msg="[IR · 데모데이] 상담을 원합니다."><div class="card__in"><div class="card__img"><img src="assets/slides/svc-ir.webp" alt="토프모빌리티 사업계획 장표 목업" loading="lazy"></div><div class="card__body"><i>IR · DEMO DAY</i><h3>IR · 데모데이</h3><p>투자자가 묻는 순서대로.</p><ul><li>투자 IR</li><li>데모데이</li><li>정부지원사업</li><li>컨설팅</li></ul><span class="card__more">IR 상담하기<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></div></a>
+      <a class="card" href="#contact" data-goal="입찰 · 제안" data-msg="[제안서 · 입찰] 상담을 원합니다."><div class="card__in"><div class="card__img"><img src="assets/slides/svc-prop.webp" alt="특허법인 성암 회사소개 장표 목업" loading="lazy"></div><div class="card__body"><i>PROPOSAL · BID</i><h3>제안서 · 입찰</h3><p>심사위원이 찾기 쉽게.</p><ul><li>입찰 제안서</li><li>사업계획서</li><li>평가 대응</li></ul><span class="card__more">제안서 상담하기<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></div></a>
       <a class="card" href="#contact" data-goal="회사 · 브랜드 · 제품 소개" data-msg="[회사 · 제품 소개서] 상담을 원합니다."><div class="card__in"><div class="card__img"><img src="assets/slides/svc-intro.webp" alt="사쿠라테이엔 브랜드 소개 장표 목업" loading="lazy"></div><div class="card__body"><i>COMPANY · PRODUCT</i><h3>회사 · 제품 소개서</h3><p>처음 보는 사람도 한 번에.</p><ul><li>회사소개서</li><li>제품·서비스 소개</li><li>브랜드북</li></ul><span class="card__more">소개서 상담하기<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></div></a>
     </div>
     <p class="svc__foot">세미나 · 교육 교안 · 편집 디자인도 만듭니다. <b>모든 작업은 편집 가능한 PPTX 원본과 PDF로 드립니다.</b></p>
