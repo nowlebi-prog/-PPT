@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="ko">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>유별난PPT 포트폴리오</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+
+:root{
+  --bg:#000;--ink:#fff;--ink-2:rgba(255,255,255,.72);--ink-3:rgba(255,255,255,.48);
+  --line:rgba(255,255,255,.12);--line-2:rgba(255,255,255,.28);
+  --teal:#13b5d6;--blue:#1f4bff;
+  --sans:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo",sans-serif;
+  --ease:cubic-bezier(.2,.7,.1,1);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;word-break:keep-all}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1200px;margin:0 auto;padding:0 max(24px,env(safe-area-inset-left,0px))}
+
+/* 헤더: 가운데 로고, 양옆 메뉴 */
+.hdr{position:fixed;inset:0 0 auto;z-index:10;transition:background .4s,backdrop-filter .4s}
+.hdr.is-solid{background:rgba(0,0,0,.6);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.hdr .wrap{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:76px}
+.hdr nav{display:flex;align-items:center;gap:28px;font-size:14px;font-weight:600}
+.hdr nav:last-child{justify-content:flex-end}
+.hdr nav a{opacity:.92;transition:opacity .2s}
+.hdr nav a:hover{opacity:1}
+.logo{display:flex;align-items:center;gap:9px;font-size:17px;font-weight:700;letter-spacing:-.02em}
+.logo b{font-weight:800;background:linear-gradient(90deg,var(--teal),var(--blue));-webkit-background-clip:text;background-clip:text;color:transparent}
+.logo svg{width:20px;height:23px;flex:none}
+.logo span{display:flex;flex-direction:column;line-height:1.1}
+.logo em{font-style:normal}
+.logo small{margin-top:3px;font-size:7.5px;font-weight:500;letter-spacing:.3em;color:var(--ink-3)}
+
+
+.gbtn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:10px;height:50px;padding:0 28px;border-radius:999px;font-size:15px;font-weight:600;letter-spacing:-.01em;color:#fff;border:1px solid transparent;background:linear-gradient(rgba(6,10,24,.55),rgba(6,10,24,.55)) padding-box,linear-gradient(120deg,rgba(63,208,240,.9),rgba(31,75,255,.9) 55%,rgba(255,255,255,.25)) border-box;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:box-shadow .4s var(--ease),transform .4s var(--ease),background .4s}
+.gbtn svg{width:16px;height:16px;transition:transform .4s var(--ease)}
+.gbtn:hover{transform:translateY(-2px);box-shadow:0 0 0 1px rgba(63,208,240,.15),0 10px 40px -8px rgba(31,110,255,.55)}
+.gbtn:hover svg{transform:translateX(3px)}
+.gbtn--fill{background:linear-gradient(120deg,#16b6dc,#1f4bff 70%) padding-box,linear-gradient(120deg,rgba(255,255,255,.55),rgba(255,255,255,.1)) border-box;box-shadow:0 10px 36px -12px rgba(31,90,255,.7)}
+.gbtn--fill:hover{box-shadow:0 0 0 1px rgba(255,255,255,.1),0 14px 50px -10px rgba(31,110,255,.85)}
+.gbtn.gbtn--kakao{background:#fee500!important;border-color:#fee500!important;color:#191600!important;backdrop-filter:none}
+.ftr{padding:56px 0 52px;border-top:1px solid rgba(255,255,255,.08)}
+.ftr .wrap{display:flex;justify-content:space-between;gap:32px;align-items:flex-start}
+.ftr p{margin:0 0 6px;font-size:12.5px;line-height:1.7;color:var(--ink-3)}
+.ftr p b{color:#fff}
+.ftr nav{display:flex;flex-wrap:wrap;gap:8px 24px;font-size:13px}
+.ftr nav a:hover{color:#3fd0f0}
+.ftr .src{margin-top:14px;font-size:11.5px}
+.seg{display:inline-flex;align-items:center;height:40px;padding:0 4px;border-radius:999px;border:1px solid transparent;background:linear-gradient(rgba(6,10,24,.6),rgba(6,10,24,.6)) padding-box,linear-gradient(120deg,rgba(63,208,240,.7),rgba(31,75,255,.7) 60%,rgba(255,255,255,.18)) border-box;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.seg a{display:inline-flex;align-items:center;height:32px;padding:0 16px;border-radius:999px;font-size:13px;font-weight:600;opacity:1!important;transition:background .3s,color .3s}
+.seg a:hover{background:rgba(255,255,255,.08)}
+.seg a:last-child{background:#fff;color:#000}
+.seg a:last-child:hover{background:linear-gradient(120deg,#7fe3ff,#fff)}
+.seg i{width:1px;height:14px;background:rgba(255,255,255,.22);margin:0 2px}
+.pfh{position:relative;padding:170px 0 40px;isolation:isolate}
+.pfh::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse 55% 60% at 80% 0%,rgba(31,75,255,.32),transparent 70%),radial-gradient(ellipse 40% 50% at 10% 20%,rgba(63,208,240,.16),transparent 70%)}
+.pfh small{display:block;font-size:12px;font-weight:600;letter-spacing:.28em;color:#3fd0f0}
+.pfh h1{margin:16px 0 0;font-size:clamp(34px,4.4vw,64px);line-height:1.12;letter-spacing:-.045em}
+.pfh h1 b{font-weight:800}.pfh h1 span{font-weight:250}
+.pfh p{margin:18px 0 0;font-size:16px;color:var(--ink-2)}
+.flt{display:flex;flex-wrap:wrap;gap:8px;margin-top:36px}
+.flt button{height:40px;padding:0 18px;border-radius:999px;border:1px solid rgba(255,255,255,.14);background:transparent;color:var(--ink-2);font:inherit;font-size:13.5px;font-weight:600;cursor:pointer;transition:all .3s}
+.flt button:hover{color:#fff;border-color:rgba(63,208,240,.5)}
+.flt button[aria-pressed="true"]{color:#fff;border-color:transparent;background:linear-gradient(120deg,#16b6dc,#1f4bff)}
+.flt button em{font-style:normal;margin-left:6px;opacity:.6;font-weight:500}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px 22px;padding:32px 0 140px}
+.pc{display:block;opacity:0;transform:translateY(18px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.pc.in{opacity:1;transform:none}
+.pc[hidden]{display:none}
+.pc__img{position:relative;display:block;aspect-ratio:16/10;border-radius:18px;overflow:hidden;background:#0b1230;box-shadow:0 0 0 1px rgba(255,255,255,.08);transition:box-shadow .5s}
+.pc__img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .6s var(--ease),transform 1.2s var(--ease)}
+.pc__img .b{opacity:0}
+.pc:hover .pc__img{box-shadow:0 0 0 1px rgba(63,208,240,.6),0 30px 70px -30px rgba(31,90,255,.8)}
+.pc:hover .pc__img .a{opacity:0}
+.pc:hover .pc__img .b{opacity:1;transform:scale(1.04)}
+.pc__meta{display:block;padding:16px 4px 0}
+.pc__meta i{font-style:normal;font-size:11px;font-weight:600;letter-spacing:.2em;color:#3fd0f0}
+.pc__meta b{display:block;margin-top:6px;font-size:18px;font-weight:700;letter-spacing:-.03em}
+.pc__meta small{display:block;margin-top:3px;font-size:13.5px;color:var(--ink-3)}
+.lb{position:fixed;inset:0;z-index:50;display:none;place-items:center;padding:4vh 4vw;background:rgba(2,4,12,.88);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.lb.open{display:grid}
+.lb figure{margin:0;max-width:1100px;width:100%}
+.lb img{width:100%;border-radius:18px;box-shadow:0 40px 100px -30px rgba(31,90,255,.7)}
+.lb figcaption{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:16px;font-size:15px}
+.lb figcaption small{color:var(--ink-3);margin-left:8px}
+.lb__x{position:absolute;top:22px;right:22px;width:46px;height:46px;border-radius:50%;border:1px solid rgba(255,255,255,.2);background:transparent;color:#fff;font-size:22px;cursor:pointer}
+.lb__nav{display:flex;gap:8px}
+.lb__nav button{width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.2);background:transparent;color:#fff;font-size:16px;cursor:pointer}
+.pfcta{text-align:center;padding:0 0 120px}
+.pfcta p{margin:0 0 18px;font-size:16px;color:var(--ink-2)}
+.pfcta .gbtn{height:50px;font-size:15px}
+@media (max-width:980px){.grid{grid-template-columns:1fr 1fr}}
+@media (max-width:860px){
+  .hdr .wrap{grid-template-columns:auto 1fr;height:60px}
+  .hdr nav:first-child{display:none}
+  .hdr nav:last-child > a{display:none}
+  .pfh{padding:120px 0 24px}
+  .flt{flex-wrap:nowrap;overflow-x:auto;margin:28px -20px 0;padding:0 20px;scrollbar-width:none}
+  .flt button{flex:none}
+  .grid{grid-template-columns:1fr;gap:26px}
+  .ftr .wrap{flex-direction:column}
+}
+</style>
+<header class="hdr" id="hdr">
+  <div class="wrap">
+    <nav><a href="index.html#work">작업 사례</a><a href="index.html#services">서비스</a><a href="index.html#ir">IR</a><a href="index.html#visual">AI</a></nav>
+    <a class="logo" href="index.html" aria-label="유별난PPT 홈"><svg viewBox="0 0 200 230" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3fd0f0"/><stop offset="1" stop-color="#1f4bff"/></linearGradient><clipPath id="hu"><path d="M0 0H200V130A100 100 0 0 1 0 130Z"/></clipPath></defs><g clip-path="url(#hu)" fill="url(#lg)"><polygon points="0,14 20,0 20,230 0,230"/><polygon points="30,30 50,16 50,230 30,230"/><polygon points="60,96 80,82 80,230 60,230"/><polygon points="90,110 110,96 110,230 90,230"/><polygon points="120,96 140,82 140,230 120,230"/><polygon points="150,30 170,16 170,230 150,230"/><polygon points="180,14 200,0 200,230 180,230"/></g></svg><span><em><b>유별난</b>PPT</em><small>YOUSTAR PRESENTATION</small></span></a>
+    <nav><a href="index.html#pricing">가격</a><a href="index.html#faq">FAQ</a><span class="seg"><a href="portfolio.html">Portfolio</a><i></i><a href="index.html#contact">Contact</a></span></nav>
+  </div>
+</header>
+<main>
+<section class="pfh">
+  <div class="wrap">
+    <small>PORTFOLIO</small>
+    <h1><b>유별난 완성도를,</b><br><span>직접 확인해 보세요.</span></h1>
+    <p>공개 동의를 받은 작업만 올렸습니다.</p>
+    <div class="flt" id="flt" role="group" aria-label="분류">
+      <button type="button" aria-pressed="true" data-f="all">전체<em>24</em></button>
+      <button type="button" aria-pressed="false" data-f="IR">IR<em></em></button>
+      <button type="button" aria-pressed="false" data-f="소개서">소개서<em></em></button>
+      <button type="button" aria-pressed="false" data-f="편집 · 교육">편집 · 교육<em></em></button>
+    </div>
+  </div>
+</section>
+<section class="wrap"><div class="grid" id="grid"><a class="pc" href="#" data-cat="IR" data-i="01"><span class="pc__img"><img class="a" src="assets/pf/01a.webp" alt="리필리 종이팩 리필 솔루션 IR 노트북 목업" loading="lazy"><img class="b" src="assets/pf/01b.webp" alt="" loading="lazy"></span><span class="pc__meta"><i>IR</i><b>리필리</b><small>종이팩 리필 솔루션 IR</small></span></a><a class="pc" href="#" data-cat="IR" data-i="02"><span class="pc__img"><img class="a" src="assets/pf/02a.webp" alt="마인즈그라운드 B2B 세일즈 플랫폼 IR 노트북 목업" loading="lazy"><img class="b" src="assets/pf/02b.webp" alt="" loading="lazy"></span><span class="pc__meta"><i>IR</i><b>마인즈그라운드</b><small>B2B 세일즈 플랫폼 IR</small></span></a><a class="pc" href="#" data-cat="IR" data-i="03"><span class="pc__img"><img class="a" src="assets/pf/03a.webp" alt="닥터비랩 한의학 빅데이터 IR 노트북 목업" loading="lazy"><img class="b" src="assets/pf/03b.webp" alt="" loading="lazy"></span><span class="pc__meta"><i>IR</i><b>닥터비랩</b><small>한의학 빅데이터 IR</small></span></a><a class="pc" href="#" data-cat="소개서" data-i="04"><span class="pc__img"><img class="a" src="assets/pf/04a.webp" alt="기어스컴퍼니 제품 · 회사 소개 노트북 목업" loading="lazy"><img class="b" src="assets/pf/04b.webp" alt="" loading="lazy"></span><span class="pc__meta"><i>소개서</i><b>기어스컴퍼니</b><small>제품 · 회사 소개</small></span></a><a class="pc" href="#" data-cat="IR" data-i="05"><span class="pc__img"><img class="a" src="assets/pf/05a.webp" alt="팜킷 스마트팜 IR 노트북 목업" loading="lazy"><img class="b" src="assets/pf/05b.webp" alt="" loading="lazy"></span><span class="pc__meta"><i>IR</i><b>팜킷</b><small>스마트팜 IR</small></span></a><a class="pc" href="#" data-cat="IR" data-i="06"><span class="pc__img"><img class="a" src="assets/pf/06a.webp" alt="스프링소프트 2024 IR 노트북 목업" loading="lazy"><img class="b" src="assets/pf/06b.webp" alt="" loading="lazy"></span><span class="pc__meta"><i>IR</i><b>스프링소프트</b><small>2024 IR</small></span></a><a class="pc" href="#" data-cat="IR" data-i="07"><span class="pc__img"><img class="a" src="assets/pf/07a.webp" alt="언어발전소 랭플랜트 IR 노트북 목업" loading="lazy"><img class="b" src="assets/pf/07b.webp" alt="" loading="lazy"></span><span class="pc__meta"><i>IR</i><b>언어발전소</b><small>랭플랜트 IR</small></span></a><a class="pc" href="#" data-cat="IR" data-i="08"><span class="pc__img"><img class="a" src="assets/pf/08a.webp" alt="인비고웍스 사업 소개 노트북 목업" loading="lazy"><img class="b" src="assets/pf/08b.webp" alt="" loading="lazy"></span><span class="pc__meta"><i>IR</i><b>인비고웍스</b><small>사업 소개</small></span></a><a class="pc" href="#" data-cat="IR" data-i="09"><span class="pc__img"><img class="a" src="assets/pf/09a.webp" alt="토프모빌리티 사업계획 발표 노트북 목업" loading="lazy"><img class="b" src="assets/pf/09b.webp" alt="" loading="lazy"></span><span class="pc__meta"><i>IR</i><b>토프모빌리티</b><small>사업계획 발표</small></span></a><a class="pc" href="#" data-cat="IR" data-i="10"><span class="pc__img"><img class="a" src="assets/pf/10a.webp" alt="에스피앤이 스프링클러 기술 IR 노트북 목업" loading="lazy"><img class="b" src="assets/pf/10b.webp" alt="" loading="lazy"></span><span class="pc__meta"><i>IR</i><b>에스피앤이</b><small>스프링클러 기술 IR</small></span></a><a class="pc" href="#" data-cat="IR" data-i="11"><span class="pc__img"><img class="a" src="assets/pf/11a.webp" alt="지오그리드 수질진단 R&D IR 노트북 목업" loading="lazy"><img class="b" src="assets/pf/11b.webp" alt="" loading="lazy"></span><span class="pc__meta"><i>IR</i><b>지오그리드</b><small>수질진단 R&D IR</small></span></a><a class="pc" href="#" data-cat="소개서" data-i="12"><span class="pc__img"><img class="a" src="assets/pf/12a.webp" alt="어니티 회사소개 (국문) 노트북 목업" loading="lazy"><img class="b" src="assets/pf/12b.webp" alt="" loading="lazy"></span><span class="pc__meta"><i>소개서</i><b>어니티</b><small>회사소개 (국문)</small></span></a><a class="pc" href="#" data-cat="소개서" data-i="13"><span class="pc__img"><img class="a" src="assets/pf/13a.webp" alt="어니티 회사소개 (영문) 노트북 목업" loading="lazy"><img class="b" src="assets/pf/13b.webp" alt="" loading="lazy"></span><span class="pc__meta"><i>소개서</i><b>어니티</b><small>회사소개 (영문)</small></span></a><a class="pc" href="#" data-cat="소개서" data-i="14"><span class="pc__img"><img class="a" src="assets/pf/14a.webp" alt="사쿠라테이엔 브랜드 소개 노트북 목업" loading="lazy"><img class="b" src="assets/pf/14b.webp" alt="" loading="lazy"></span><span class="pc__meta"><i>소개서</i><b>사쿠라테이엔</b><small>브랜드 소개</small></span></a><a class="pc" href="#" data-cat="소개서" data-i="15"><span class="pc__img"><img class="a" src="assets/pf/15a.webp" alt="지오그리드 BLOS 제품 소개 노트북 목업" loading="lazy"><img class="b" src="assets/pf/15b.webp" alt="" loading="lazy"></span><span class="pc__meta"><i>소개서</i><b>지오그리드 BLOS</b><small>제품 소개</small></span></a><a class="pc" href="#" data-cat="IR" data-i="16"><span class="pc__img"><img class="a" src="assets/pf/16a.webp" alt="메이퍼런스 사업 소개 노트북 목업" loading="lazy"><img class="b" src="assets/pf/16b.webp" alt="" loading="lazy"></span><span class="pc__meta"><i>IR</i><b>메이퍼런스</b><small>사업 소개</small></span></a><a class="pc" href="#" data-cat="소개서" data-i="17"><span class="pc__img"><img class="a" src="assets/pf/17a.webp" alt="노무법인 사월 회사 소개 노트북 목업" loading="lazy"><img class="b" src="assets/pf/17b.webp" alt="" loading="lazy"></span><span class="pc__meta"><i>소개서</i><b>노무법인 사월</b><small>회사 소개</small></span></a><a class="pc" href="#" data-cat="소개서" data-i="18"><span class="pc__img"><img class="a" src="assets/pf/18a.webp" alt="특허법인 성암 상표부 소개 노트북 목업" loading="lazy"><img class="b" src="assets/pf/18b.webp" alt="" loading="lazy"></span><span class="pc__meta"><i>소개서</i><b>특허법인 성암</b><small>상표부 소개</small></span></a><a class="pc" href="#" data-cat="소개서" data-i="19"><span class="pc__img"><img class="a" src="assets/pf/19a.webp" alt="재난안전구호함 제품 소개 노트북 목업" loading="lazy"><img class="b" src="assets/pf/19b.webp" alt="" loading="lazy"></span><span class="pc__meta"><i>소개서</i><b>재난안전구호함</b><small>제품 소개</small></span></a><a class="pc" href="#" data-cat="소개서" data-i="20"><span class="pc__img"><img class="a" src="assets/pf/20a.webp" alt="스윙걸즈 회사 소개 노트북 목업" loading="lazy"><img class="b" src="assets/pf/20b.webp" alt="" loading="lazy"></span><span class="pc__meta"><i>소개서</i><b>스윙걸즈</b><small>회사 소개</small></span></a><a class="pc" href="#" data-cat="편집 · 교육" data-i="21"><span class="pc__img"><img class="a" src="assets/pf/21a.webp" alt="한국자활연수원 2024 교육안내책자 노트북 목업" loading="lazy"><img class="b" src="assets/pf/21b.webp" alt="" loading="lazy"></span><span class="pc__meta"><i>편집 · 교육</i><b>한국자활연수원</b><small>2024 교육안내책자</small></span></a><a class="pc" href="#" data-cat="편집 · 교육" data-i="22"><span class="pc__img"><img class="a" src="assets/pf/22a.webp" alt="한국자활연수원 2025 교육안내책자 노트북 목업" loading="lazy"><img class="b" src="assets/pf/22b.webp" alt="" loading="lazy"></span><span class="pc__meta"><i>편집 · 교육</i><b>한국자활연수원</b><small>2025 교육안내책자</small></span></a><a class="pc" href="#" data-cat="편집 · 교육" data-i="23"><span class="pc__img"><img class="a" src="assets/pf/23a.webp" alt="한국자활연수원 2026 교육안내책자 노트북 목업" loading="lazy"><img class="b" src="assets/pf/23b.webp" alt="" loading="lazy"></span><span class="pc__meta"><i>편집 · 교육</i><b>한국자활연수원</b><small>2026 교육안내책자</small></span></a><a class="pc" href="#" data-cat="편집 · 교육" data-i="24"><span class="pc__img"><img class="a" src="assets/pf/24a.webp" alt="잘될거야 다이어리 다이어리 · 굿즈 노트북 목업" loading="lazy"><img class="b" src="assets/pf/24b.webp" alt="" loading="lazy"></span><span class="pc__meta"><i>편집 · 교육</i><b>잘될거야 다이어리</b><small>다이어리 · 굿즈</small></span></a></div></section>
+<section class="pfcta"><div class="wrap"><p>비슷한 자료가 있으신가요?</p><a class="gbtn gbtn--fill" href="index.html#contact">이런 작업으로 상담하기</a></div></section>
+</main>
+<footer class="ftr">
+  <div class="wrap">
+    <div>
+      <p><b>유별난PPT</b> · YOUSTAR PRESENTATION</p>
+      <p>운영 유어스타 · 사업자등록번호 202-13-66345 · 개인정보보호책임자 이은비</p>
+      <p>youstar_ppt@naver.com · © 2026 유별난PPT. All rights reserved.</p>
+      <p class="src">거래·평점·후기 수치는 외부 플랫폼 기준입니다. (2026.10)</p>
+    </div>
+    <nav aria-label="하단 메뉴"><a href="../../about.html">회사소개</a><a href="portfolio.html">포트폴리오</a><a href="index.html#reviews">고객 후기</a><a href="index.html#contact">문의하기</a><a href="https://pf.kakao.com/_XgRWxj/chat" target="_blank" rel="noopener">카카오톡 상담 ↗</a></nav>
+  </div>
+</footer>
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="작업 크게 보기"><button class="lb__x" type="button" aria-label="닫기">×</button><figure><img id="lbImg" alt=""><figcaption><span id="lbCap"></span><span class="lb__nav"><button type="button" data-d="-1" aria-label="이전">←</button><button type="button" data-d="1" aria-label="다음">→</button></span></figcaption></figure></div>
+<script>
+(() => {
+  const hdr = document.getElementById("hdr"); addEventListener("scroll", () => hdr && hdr.classList.toggle("is-solid", scrollY > 40), { passive: true });
+  const cards = [...document.querySelectorAll(".pc")], btns = [...document.querySelectorAll("#flt button")];
+  btns.forEach((b) => { if (b.dataset.f !== "all") b.querySelector("em").textContent = cards.filter((c) => c.dataset.cat === b.dataset.f).length; });
+  const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .1 });
+  cards.forEach((c, i) => { c.style.transitionDelay = (i % 3) * 0.08 + "s"; io.observe(c); });
+  btns.forEach((b) => b.addEventListener("click", () => { btns.forEach((x) => x.setAttribute("aria-pressed", x === b));
+    cards.forEach((c) => { c.hidden = !(b.dataset.f === "all" || c.dataset.cat === b.dataset.f); }); }));
+  const lb = document.getElementById("lb"), img = document.getElementById("lbImg"), cap = document.getElementById("lbCap"); let cur = 0;
+  const vis = () => cards.filter((c) => !c.hidden);
+  const show = (c) => { cur = vis().indexOf(c); img.src = c.querySelector(".b").src; img.alt = c.querySelector(".a").alt; cap.innerHTML = c.querySelector("b").textContent + "<small>" + c.querySelector("small").textContent + "</small>"; lb.classList.add("open"); document.body.style.overflow = "hidden"; };
+  const close = () => { lb.classList.remove("open"); document.body.style.overflow = ""; };
+  cards.forEach((c) => c.addEventListener("click", (e) => { e.preventDefault(); show(c); }));
+  lb.addEventListener("click", (e) => { if (e.target === lb || e.target.closest(".lb__x")) close(); const d = e.target.closest("[data-d]"); if (d) { const v = vis(); show(v[(cur + +d.dataset.d + v.length) % v.length]); } });
+  addEventListener("keydown", (e) => { if (!lb.classList.contains("open")) return; if (e.key === "Escape") close(); if (e.key === "ArrowRight" || e.key === "ArrowLeft") { const v = vis(); show(v[(cur + (e.key === "ArrowRight" ? 1 : -1) + v.length) % v.length]); } });
+})();
+</script>
