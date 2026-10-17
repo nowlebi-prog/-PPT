@@ -216,8 +216,7 @@ a{color:inherit;text-decoration:none}
   .aix__grid{grid-template-columns:1fr;gap:44px}
   .aix h2{font-size:clamp(24px,7vw,30px)}
   .aix__lead{font-size:14.5px}
-  .cmp li{grid-template-columns:1fr;gap:8px;padding:18px 0}
-  .cmp i{transform:rotate(90deg)}
+  .cmp li{gap:10px;padding:18px 0}
   .ext{flex-direction:column;align-items:stretch;gap:20px;margin-top:72px}
   .ext .gbtn{width:100%}
 }
@@ -256,7 +255,7 @@ a{color:inherit;text-decoration:none}
 @media (max-width:860px){
   .prc{padding:96px 0 80px}
   .prc h2{font-size:clamp(24px,7vw,30px)}
-  .ptab{grid-template-columns:1fr;margin-top:40px;gap:12px}
+  .ptab{margin-top:40px;gap:12px}
   .pfoot{grid-template-columns:1fr;padding:22px 20px}
 }
 
@@ -386,7 +385,7 @@ a{color:inherit;text-decoration:none}
   .steps5 li{display:grid;grid-template-columns:44px 1fr;column-gap:16px}
   .steps5 h3{margin-top:10px}.steps5 p{grid-column:2}
   .fin{padding:110px 0}.fin p{font-size:15px}
-  .fin .acts{flex-direction:column;align-items:stretch}
+  .fin .acts{align-items:stretch}
   .form{padding:22px 18px}
   .frow{grid-template-columns:1fr;gap:0}
   .fld input,.fld select,.fld textarea{font-size:16px}
@@ -428,7 +427,7 @@ a{color:inherit;text-decoration:none}
   .qfab .gbtn{width:100%}
   .qz{place-items:end center;padding:0}
   .qz__panel{border-radius:24px 24px 0 0;padding:28px 20px calc(24px + env(safe-area-inset-bottom,0px))}
-  .qz__opts{grid-template-columns:1fr}
+  .qz__opts{grid-template-columns:repeat(2,minmax(0,1fr))}
   .qz__step h3{font-size:21px}
 }
 
@@ -620,7 +619,7 @@ a{color:inherit;text-decoration:none}
   .pcol__for{font-size:11.5px;line-height:1.45}
   .pcol__inc{margin-top:12px;padding-top:12px;font-size:11.5px;line-height:1.5}
   .pcol__num{margin:14px 0 16px;font-size:11px}.pcol__num b{display:block;font-size:16px;white-space:nowrap}
-  .pcol .gbtn{height:38px;padding:0 6px;font-size:10.5px;white-space:nowrap}
+  .pcol .gbtn{height:38px;padding:0 6px;font-size:12.5px;white-space:nowrap}
   .pfoot{margin-top:14px}
 
   .steps5{display:flex;gap:18px;margin:40px -24px 0;padding:0 24px 12px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:24px;scrollbar-width:none}
@@ -639,7 +638,9 @@ a{color:inherit;text-decoration:none}
   .form > .frow:first-child .fld input{min-width:0}
 }
 @media (max-width:359px){
-  .pcol{padding:15px 11px}.pcol h3{font-size:14px}.pcol__num b{font-size:14px}.pcol .gbtn{font-size:9.5px}
+  .ptab{display:flex;gap:12px;margin-left:-24px;margin-right:-24px;padding:0 24px 8px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:24px;scrollbar-width:none}
+  .ptab::-webkit-scrollbar{display:none}
+  .pcol{flex:0 0 75vw;scroll-snap-align:start}
   .ext{display:block}.ext .gbtn{margin-top:14px}
   .fin .gbtn{font-size:10.5px}
 }
