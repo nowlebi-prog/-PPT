@@ -118,14 +118,35 @@ a{color:inherit;text-decoration:none}
   .aband{padding:100px 0}.aband .acts{flex-direction:column;align-items:stretch}
   .ftr .wrap{flex-direction:column}
 }
+
+/* 모바일 메뉴: 오른쪽 위 버튼 → 전체 화면 시트 */
+.mbtn{display:none;width:40px;height:40px;margin-left:8px;border-radius:50%;border:1px solid rgba(255,255,255,.2);background:rgba(6,10,24,.5);color:#fff;cursor:pointer;place-items:center;padding:0}
+.mbtn span{display:block;width:16px;height:1.5px;background:currentColor;margin:3px auto;transition:transform .3s var(--ease),opacity .2s}
+.msheet{position:fixed;inset:0;z-index:55;display:flex;flex-direction:column;padding:calc(84px + env(safe-area-inset-top,0px)) 20px calc(20px + env(safe-area-inset-bottom,0px));background:radial-gradient(ellipse 80% 50% at 80% 0%,rgba(31,75,255,.35),transparent 70%),radial-gradient(ellipse 70% 40% at 0% 100%,rgba(63,208,240,.2),transparent 70%),#02040c;opacity:0;visibility:hidden;transition:opacity .35s,visibility .35s}
+.msheet nav{display:flex;flex-direction:column}
+.msheet nav a{display:flex;align-items:center;justify-content:space-between;min-height:58px;font-size:22px;font-weight:700;letter-spacing:-.03em;border-bottom:1px solid rgba(255,255,255,.08);opacity:0;transform:translateY(10px);transition:opacity .4s,transform .4s var(--ease),color .2s}
+.msheet nav a::after{content:"→";font-size:16px;color:#3fd0f0}
+.msheet nav a:active{color:#3fd0f0}
+.menu-open .msheet{opacity:1;visibility:visible}
+.menu-open .msheet nav a{opacity:1;transform:none}
+.menu-open .msheet nav a:nth-child(n){transition-delay:calc(var(--i) * 40ms)}
+.msheet__acts{display:grid;gap:10px;margin-top:auto}
+.msheet__acts .gbtn{height:54px;font-size:15.5px}
+.menu-open .mbtn span:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
+.menu-open .mbtn span:nth-child(2){opacity:0}
+.menu-open .mbtn span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg)}
+.menu-open .hdr{background:transparent!important;backdrop-filter:none!important}
+.menu-open .qfab{opacity:0!important;pointer-events:none!important}
+@media (max-width:860px){.mbtn{display:flex;flex-direction:column;justify-content:center;align-items:center}.logo small{white-space:nowrap;letter-spacing:.2em}.hdr{z-index:60}.hdr nav:last-child{gap:0}}
 </style>
 <header class="hdr" id="hdr">
   <div class="wrap">
     <nav><a href="index.html#work">작업 사례</a><a href="index.html#services">서비스</a><a href="index.html#ir">IR</a><a href="index.html#visual">AI</a></nav>
     <a class="logo" href="index.html" aria-label="유별난PPT 홈"><svg viewBox="0 0 200 230" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3fd0f0"/><stop offset="1" stop-color="#1f4bff"/></linearGradient><clipPath id="hu"><path d="M0 0H200V130A100 100 0 0 1 0 130Z"/></clipPath></defs><g clip-path="url(#hu)" fill="url(#lg)"><polygon points="0,14 20,0 20,230 0,230"/><polygon points="30,30 50,16 50,230 30,230"/><polygon points="60,96 80,82 80,230 60,230"/><polygon points="90,110 110,96 110,230 90,230"/><polygon points="120,96 140,82 140,230 120,230"/><polygon points="150,30 170,16 170,230 150,230"/><polygon points="180,14 200,0 200,230 180,230"/></g></svg><span><em><b>유별난</b>PPT</em><small>YOUSTAR PRESENTATION</small></span></a>
-    <nav><a href="about.html">회사소개</a><a href="index.html#pricing">가격</a><a href="index.html#faq">FAQ</a><span class="seg"><a href="portfolio.html">Portfolio</a><i></i><a href="index.html#contact">Contact</a></span></nav>
+    <nav><a href="about.html">회사소개</a><a href="index.html#pricing">가격</a><a href="index.html#faq">FAQ</a><span class="seg"><a href="portfolio.html">Portfolio</a><i></i><a href="index.html#contact">Contact</a></span><button class="mbtn" id="mbtn" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="msheet"><span></span><span></span><span></span></button></nav>
   </div>
 </header>
+<div class="msheet" id="msheet" aria-hidden="true"><nav aria-label="모바일 메뉴"><a href="portfolio.html" style="--i:0">작업 사례</a><a href="index.html#services" style="--i:1">서비스</a><a href="index.html#ir" style="--i:2">IR · 데모데이</a><a href="index.html#visual" style="--i:3">AI 리터치</a><a href="index.html#pricing" style="--i:4">가격</a><a href="index.html#faq" style="--i:5">FAQ</a><a href="about.html" style="--i:6">회사소개</a><a href="index.html#contact" style="--i:7">문의하기</a></nav><div class="msheet__acts"><a class="gbtn gbtn--kakao" href="https://pf.kakao.com/_XgRWxj/chat" target="_blank" rel="noopener">카카오톡 상담하기 ↗</a><a class="gbtn gbtn--fill" href="index.html#contact">견적 문의하기</a></div></div>
 <main>
 <section class="ah">
   <div class="wrap">
@@ -172,5 +193,14 @@ a{color:inherit;text-decoration:none}
 (() => {
   const hdr = document.getElementById("hdr"); addEventListener("scroll", () => hdr && hdr.classList.toggle("is-solid", scrollY > 40), { passive: true });
   const st = document.getElementById("steps5"); new IntersectionObserver((es, o) => es.forEach((e) => { if (e.isIntersecting) { st.classList.add("is-in"); o.disconnect(); } }), { threshold: .3 }).observe(st);
+})();
+</script>
+<script>
+(() => { const b = document.getElementById("mbtn"), sh = document.getElementById("msheet"); if (!b) return;
+  const set = (o) => { document.body.classList.toggle("menu-open", o); b.setAttribute("aria-expanded", o); b.setAttribute("aria-label", o ? "메뉴 닫기" : "메뉴 열기"); sh.setAttribute("aria-hidden", !o); document.body.style.overflow = o ? "hidden" : ""; };
+  b.addEventListener("click", () => set(!document.body.classList.contains("menu-open")));
+  sh.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => set(false)));
+  addEventListener("keydown", (e) => { if (e.key === "Escape") set(false); });
+  addEventListener("resize", () => { if (innerWidth > 860) set(false); });
 })();
 </script>
