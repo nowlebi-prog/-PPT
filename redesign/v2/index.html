@@ -223,6 +223,45 @@ a{color:inherit;text-decoration:none}
   .ext .gbtn{width:100%}
 }
 
+/* 일곱 번째: 가격 — 한 줄 4칸 표, 추천 칸만 빛 테두리, 아래 공통 포함 한 줄 */
+.prc{position:relative;padding:140px 0 120px;isolation:isolate}
+.prc::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse 50% 45% at 50% 60%,rgba(31,75,255,.26),transparent 70%),radial-gradient(ellipse 35% 35% at 85% 15%,rgba(63,208,240,.12),transparent 70%)}
+.prc__head{text-align:center}
+.prc small.k{display:block;font-size:12px;font-weight:600;letter-spacing:.28em;color:#3fd0f0;text-transform:uppercase}
+.prc h2{margin:16px 0 0;font-size:clamp(28px,3.2vw,46px);line-height:1.18;letter-spacing:-.045em}
+.prc h2 b{font-weight:800}.prc h2 span{font-weight:250}
+.prc__head p{margin:16px 0 0;font-size:15.5px;color:var(--ink-2)}
+.ptab{display:grid;grid-template-columns:repeat(4,1fr);margin-top:56px;border-top:1px solid rgba(255,255,255,.12);border-bottom:1px solid rgba(255,255,255,.12)}
+.pcol{position:relative;display:flex;flex-direction:column;padding:34px 28px 30px;opacity:0;transform:translateY(16px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.ptab.is-in .pcol{opacity:1;transform:none}
+.ptab.is-in .pcol:nth-child(2){transition-delay:.1s}.ptab.is-in .pcol:nth-child(3){transition-delay:.2s}.ptab.is-in .pcol:nth-child(4){transition-delay:.3s}
+.pcol+.pcol::before{content:"";position:absolute;left:0;top:28px;bottom:28px;width:1px;background:rgba(255,255,255,.1)}
+.pcol--pick{margin:-1px 0;border-radius:20px;background:linear-gradient(170deg,rgba(31,75,255,.22),rgba(6,10,28,.6)) padding-box,linear-gradient(150deg,#3fd0f0,#1f4bff 55%,rgba(255,255,255,.15)) border-box;border:1px solid transparent;box-shadow:0 30px 80px -30px rgba(31,90,255,.8)}
+.pcol--pick::before,.pcol--pick+.pcol::before{display:none}
+.pcol__badge{position:absolute;top:-12px;left:28px;padding:4px 10px;border-radius:999px;font-size:11px;font-weight:700;color:#fff;background:linear-gradient(120deg,#16b6dc,#1f4bff)}
+.pcol h3{margin:0;font-size:20px;font-weight:800;letter-spacing:-.03em}
+.pcol__for{margin:6px 0 0;font-size:13px;color:var(--ink-3)}
+.pcol__num{margin:26px 0 0;font-size:13px;color:var(--ink-3)}
+.pcol__num b{font-size:30px;font-weight:800;letter-spacing:-.04em;color:#fff;font-variant-numeric:tabular-nums;margin:0 2px}
+.pcol--pick .pcol__num b{background:linear-gradient(180deg,#fff 30%,#8fdcff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.pcol__inc{margin:14px 0 0;font-size:13.5px;line-height:1.65;color:var(--ink-2)}
+.pcol .gbtn{margin-top:auto;height:42px;padding:0 18px;font-size:13px;align-self:flex-start}
+.pcol__inc{margin-bottom:24px}
+.prc__foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px 26px;margin-top:30px;font-size:13px;color:var(--ink-3)}
+.prc__foot b{color:#fff;font-weight:600}
+.prc__foot i{font-style:normal;color:#3fd0f0;margin-right:6px}
+@media (max-width:980px){.ptab{grid-template-columns:1fr 1fr}.pcol:nth-child(3)::before{display:none}}
+@media (max-width:860px){
+  .prc{padding:96px 0 80px}
+  .prc h2{font-size:clamp(26px,7.6vw,34px)}
+  .ptab{grid-template-columns:1fr;border:0;margin-top:40px;gap:12px}
+  .pcol{padding:24px 22px;border-radius:18px;background:rgba(255,255,255,.03)}
+  .pcol::before{display:none}
+  .pcol--pick{margin:8px 0 0}
+  .pcol__num{margin-top:16px}
+  .prc__foot{justify-content:flex-start;flex-direction:column;align-items:flex-start;gap:6px}
+}
+
 /* 섹션마다 핵심 요소에 첫 화면 빛과 같은 청록·파랑 네온을 은은하게 */
 @keyframes neonbtn{0%,100%{box-shadow:0 0 0 0 rgba(63,208,240,0),0 0 0 0 rgba(31,75,255,0)}45%,60%{box-shadow:0 0 26px 3px rgba(63,208,240,.5),0 0 70px 14px rgba(31,75,255,.3)}}
 .neon-btn{animation:neonbtn 5.5s ease-in-out infinite}
@@ -430,6 +469,17 @@ a{color:inherit;text-decoration:none}
       <div class="ext__flow" aria-label="PPT 외 제작 가능 범위"><div class="ext__row"><span>제품 · 서비스 연출컷</span><span>사진 보정 · 합성</span><span>상세페이지</span><span>랜딩페이지 · 홈페이지</span><span>서비스 소개 인포그래픽</span><span>짧은 인포그래픽 영상</span><span>웹 · UI/UX</span><span>AI 업무 자동화 툴</span><span>Android · iOS 앱 상담</span><span aria-hidden="true">제품 · 서비스 연출컷</span><span aria-hidden="true">사진 보정 · 합성</span><span aria-hidden="true">상세페이지</span><span aria-hidden="true">랜딩페이지 · 홈페이지</span><span aria-hidden="true">서비스 소개 인포그래픽</span><span aria-hidden="true">짧은 인포그래픽 영상</span><span aria-hidden="true">웹 · UI/UX</span><span aria-hidden="true">AI 업무 자동화 툴</span><span aria-hidden="true">Android · iOS 앱 상담</span></div></div>
       <a class="gbtn" href="#contact">확장 제작 문의하기<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     </div>
+  </div>
+</section>
+<section class="prc" id="pricing">
+  <div class="wrap">
+    <div class="prc__head">
+      <small class="k">Pricing</small>
+      <h2><b>가격은 장 수와</b> <span>자료 상태로 정해집니다.</span></h2>
+      <p>자료를 보내 주시면 장 수와 일정에 맞춘 견적서를 드립니다.</p>
+    </div>
+    <div class="ptab" id="ptab"><article class="pcol"><h3>리디자인</h3><p class="pcol__for">디자인된 PPT가 있다면</p><p class="pcol__num">장당 <b>30,000</b>원부터</p><p class="pcol__inc">톤 통일 · 도형 · 폰트 정리</p><a class="gbtn" href="#contact" data-package="리디자인">견적 받기<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></article><article class="pcol pcol--pick"><span class="pcol__badge">추천</span><h3>풀디자인</h3><p class="pcol__for">장 구분된 초안이 있다면</p><p class="pcol__num">장당 <b>35,000</b>원부터</p><p class="pcol__inc">템플릿 · 전체 디자인 · 문장 정리</p><a class="gbtn gbtn--fill" href="#contact" data-package="풀디자인">견적 받기<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></article><article class="pcol"><h3>기획 + 디자인</h3><p class="pcol__for">텍스트만 있다면</p><p class="pcol__num">장당 <b>45,000</b>원부터</p><p class="pcol__inc">방향 · 장 순서 · 문구 · 디자인</p><a class="gbtn" href="#contact" data-package="기획 + 디자인">견적 받기<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></article><article class="pcol"><h3>데모데이 · 기관</h3><p class="pcol__for">여러 팀을 한 번에</p><p class="pcol__num"><b>별도 견적</b></p><p class="pcol__inc">팀별 IR · 일정 관리</p><a class="gbtn" href="#contact" data-package="데모데이 · 기관">견적 받기<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></article></div>
+    <p class="prc__foot"><span><i>공통 포함</i><b>PPTX 원본 + PDF · 수정 2회 · 숫자·오탈자 검수 · NDA 가능</b></span><span>시작가 기준 · 부가세 별도</span></p>
   </div>
 </section>
 </main>
@@ -688,5 +738,8 @@ a{color:inherit;text-decoration:none}
 </script>
 <script>
 (() => { const cmp = document.getElementById("cmp"); if (cmp) new IntersectionObserver((es, o) => es.forEach((e) => { if (e.isIntersecting) { cmp.classList.add("is-in"); o.disconnect(); } }), { threshold: .3 }).observe(cmp); })();
+</script>
+<script>
+(() => { const t = document.getElementById("ptab"); if (t) new IntersectionObserver((es, o) => es.forEach((e) => { if (e.isIntersecting) { t.classList.add("is-in"); o.disconnect(); } }), { threshold: .3 }).observe(t); })();
 </script>
 
