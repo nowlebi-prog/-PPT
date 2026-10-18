@@ -269,6 +269,7 @@ a{color:inherit;text-decoration:none}
   addEventListener("keydown", (e) => { if (lb.classList.contains("open") && e.key === "Escape") close(); });
 })();
 </script>
+<script src="assets/image-guard.js" defer></script>
 <script>
 (() => { const b = document.getElementById("mbtn"), sh = document.getElementById("msheet"); if (!b) return;
   const set = (o) => { document.body.classList.toggle("menu-open", o); b.setAttribute("aria-expanded", o); b.setAttribute("aria-label", o ? "메뉴 닫기" : "메뉴 열기"); sh.setAttribute("aria-hidden", !o); document.body.style.overflow = o ? "hidden" : ""; };
