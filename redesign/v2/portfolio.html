@@ -264,6 +264,8 @@ a{color:inherit;text-decoration:none}
   lb.querySelectorAll(".lb__slides button").forEach((button) => button.addEventListener("click", () => { const slide = button.querySelector("img"); img.src = slide.src; img.alt = slide.alt; lb.classList.add("lb--slide-focus"); }));
   lb.querySelector(".lb__back").addEventListener("click", () => lb.classList.remove("lb--slide-focus"));
   cards.forEach((c) => c.addEventListener("click", (e) => { e.preventDefault(); show(c); }));
+  const linkedItem = new URLSearchParams(location.search).get("item");
+  if (linkedItem) { const linkedCard = cards.find((c) => c.dataset.i === linkedItem); if (linkedCard) show(linkedCard); }
   lb.addEventListener("click", (e) => { if (e.target === lb || e.target.closest(".lb__x")) close();
     if (e.target.closest("#lbMore") && currentCard) { const category = currentCard.dataset.cat; close(); filterTo(category); document.querySelector(".flt").scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth", block: "start" }); } });
   addEventListener("keydown", (e) => { if (lb.classList.contains("open") && e.key === "Escape") close(); });
