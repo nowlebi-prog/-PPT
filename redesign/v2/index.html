@@ -250,6 +250,7 @@ a{color:inherit;text-decoration:none}
 .pfoot__acts{display:flex;flex-direction:column;gap:8px;align-items:stretch}
 .pfoot__acts span{font-size:12px;color:var(--ink-3);text-align:center}
 .pfoot__acts .gbtn{height:44px;font-size:13.5px}
+.mtab{display:none}
 .gbtn.gbtn--kakao{background:#fee500!important;border-color:#fee500!important;color:#191600!important;backdrop-filter:none}
 @media (max-width:980px){.ptab{grid-template-columns:1fr 1fr}}
 @media (max-width:860px){
@@ -481,8 +482,8 @@ a{color:inherit;text-decoration:none}
 @media (prefers-reduced-motion:reduce){.neon-btn,.neon-txt,.stats::before{animation:none}}
 
 /* IR · 데모데이 — 누적 팀 수와 연도별 행사 이력 */
-.irx{position:relative;padding:140px 0 120px;isolation:isolate;overflow-x:clip}
-.irx::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse 52% 58% at 22% 56%,rgba(31,75,255,.2),transparent 72%),radial-gradient(ellipse 40% 40% at 88% 25%,rgba(63,208,240,.1),transparent 70%)}
+.irx{position:relative;padding:140px 0 120px;isolation:isolate;overflow-x:clip;background:linear-gradient(125deg,#071936 0%,#102f7f 58%,#1646bb 100%);box-shadow:inset 0 1px rgba(255,255,255,.08),inset 0 -1px rgba(255,255,255,.08)}
+.irx::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse 52% 58% at 22% 56%,rgba(57,119,255,.24),transparent 72%),radial-gradient(ellipse 40% 40% at 88% 25%,rgba(63,208,240,.1),transparent 70%)}
 .irx .wrap{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,1fr);grid-template-areas:"head pts" "history pts";column-gap:88px;row-gap:36px}
 .irx__head{grid-area:head}
 .irx small.k{display:block;font-size:12px;font-weight:600;letter-spacing:.28em;color:#3fd0f0;text-transform:uppercase}
@@ -523,6 +524,7 @@ a{color:inherit;text-decoration:none}
 .pt i.t{display:block;font-style:normal;font-size:11px;font-weight:600;letter-spacing:.2em;color:#3fd0f0}
 .pt h3{margin:6px 0 0;font-size:17px;font-weight:700;letter-spacing:-.025em;line-height:1.45}
 .pt p{margin:5px 0 0;font-size:14px;line-height:1.7;color:var(--ink-3)}
+.irx .pt p,.irx__year li{color:rgba(255,255,255,.78)}
 .irx .gbtn{margin-top:30px;height:48px;font-size:14px}
 @media (max-width:860px){
   .irx{padding:96px 0 80px}
@@ -612,7 +614,17 @@ a{color:inherit;text-decoration:none}
   .ext .gbtn{width:auto;min-width:104px;height:42px;padding:0 11px;font-size:12px;white-space:nowrap}
   .ext .gbtn svg{display:none}
 
-  .ptab{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:30px}
+  .ptab{display:none}
+  .mtab{display:block;margin-top:28px;border-top:1px solid rgba(255,255,255,.24);border-bottom:1px solid rgba(255,255,255,.24)}
+  .mtab__head{display:flex;justify-content:space-between;padding:12px 4px;font-size:11px;font-weight:600;color:var(--ink-3);letter-spacing:.04em}
+  .mtab__row{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:8px;min-height:76px;padding:12px 4px;border-top:1px solid rgba(255,255,255,.12);color:#fff;text-decoration:none}
+  .mtab__row:active{background:rgba(255,255,255,.06)}
+  .mtab__row strong,.mtab__row small{display:block}
+  .mtab__row strong{font-size:14px;line-height:1.3;font-weight:750;white-space:nowrap}
+  .mtab__row small{margin-top:5px;font-size:11px;line-height:1.35;color:var(--ink-3);white-space:nowrap}
+  .mtab__price{text-align:right;white-space:nowrap}
+  .mtab__price strong{font-size:15px;font-variant-numeric:tabular-nums}
+  .mtab__price small{color:#85cfea}
   .pcol{min-width:0;padding:18px 14px 16px;border-radius:16px}
   .pcol h3{display:block;font-size:15.5px;line-height:1.35;word-break:keep-all}
   .pcol__badge{display:inline-block;margin-left:5px;padding:2px 5px;font-size:9px;vertical-align:2px}
@@ -620,7 +632,17 @@ a{color:inherit;text-decoration:none}
   .pcol__inc{margin-top:12px;padding-top:12px;font-size:11.5px;line-height:1.5}
   .pcol__num{margin:14px 0 16px;font-size:11px}.pcol__num b{display:block;font-size:16px;white-space:nowrap}
   .pcol .gbtn{height:38px;padding:0 6px;font-size:12.5px;white-space:nowrap}
-  .pfoot{margin-top:14px}
+  .pfoot{margin-top:12px;padding:16px 4px 0;border:0;border-radius:0;border-top:1px solid rgba(255,255,255,.12);background:none;gap:0}
+  .pfoot__t{font-size:11px;color:var(--ink-3)}
+  .pincl{gap:2px 10px;margin-top:7px}
+  .pincl li{height:auto;padding:0;background:none;font-size:10.5px;line-height:1.5}
+  .pincl li+li::before{content:'·';margin-right:10px;color:var(--ink-3)}
+  .pfoot__ex{margin-top:13px;font-size:11.5px;line-height:1.5}
+  .pfoot__basis{font-size:10.5px;line-height:1.5}
+  .pfoot__acts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:16px}
+  .pfoot__acts span{display:none}
+  .pfoot__acts .gbtn{width:100%;min-width:0;height:42px;padding:0 5px;font-size:11.5px;white-space:nowrap}
+  .pfoot__acts .gbtn svg{display:none}
 
   .steps5{display:flex;gap:18px;margin:40px -24px 0;padding:0 24px 12px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:24px;scrollbar-width:none}
   .steps5::before,.steps5::after{display:none}
@@ -640,9 +662,10 @@ a{color:inherit;text-decoration:none}
 @media (max-width:359px){
   .hdr .wrap{padding-inline:12px}.logo{gap:5px;font-size:14px}.logo svg{width:17px;height:20px}.logo small{font-size:5px;letter-spacing:.1em}
   .seg{height:32px;padding:0 2px}.seg a{height:26px;padding:0 8px;font-size:10px}.mbtn{width:34px;height:34px;margin-left:4px}
-  .ptab{display:flex;gap:12px;margin-left:-24px;margin-right:-24px;padding:0 24px 8px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:24px;scrollbar-width:none}
-  .ptab::-webkit-scrollbar{display:none}
-  .pcol{flex:0 0 75vw;scroll-snap-align:start}
+  .mtab__row{gap:5px}
+  .mtab__row strong{font-size:12.5px}
+  .mtab__row small{font-size:10px}
+  .mtab__price strong{font-size:13px}
   .ext{display:block}.ext .gbtn{margin-top:14px}
   .fin .gbtn{font-size:10.5px}
 }
@@ -772,6 +795,13 @@ a{color:inherit;text-decoration:none}
       <p>자료를 보내 주시면 장 수와 일정에 맞춘 견적서를 드립니다.</p>
     </div>
     <div class="ptab" id="ptab"><article class="pcol"><h3>리디자인</h3><p class="pcol__for">디자인된 PPT가 있는 분</p><p class="pcol__inc">톤 통일 · 도형·폰트 정리</p><p class="pcol__num"><b>장당 30,000원</b>부터</p><a class="gbtn" href="#contact" data-package="리디자인">이 구성으로 견적 받기</a></article><article class="pcol"><h3>풀디자인<span class="pcol__badge">추천</span></h3><p class="pcol__for">장 구분만 된 초안이 있는 분</p><p class="pcol__inc">템플릿 제작 · 전체 디자인 · 텍스트 정리</p><p class="pcol__num"><b>장당 35,000원</b>부터</p><a class="gbtn" href="#contact" data-package="풀디자인">이 구성으로 견적 받기</a></article><article class="pcol"><h3>기획 + 디자인</h3><p class="pcol__for">텍스트만 있는 분</p><p class="pcol__inc">방향 설정 · 장 순서 · 문구 정리 · 디자인</p><p class="pcol__num"><b>장당 45,000원</b>부터</p><a class="gbtn" href="#contact" data-package="기획 + 디자인">이 구성으로 견적 받기</a></article><article class="pcol"><h3>데모데이 · 기관</h3><p class="pcol__for">여러 팀 IR을 한 번에 맡기실 때</p><p class="pcol__inc">팀별 IR · 일정 관리</p><p class="pcol__num"><b>별도 견적</b></p><a class="gbtn" href="#contact" data-package="데모데이 · 기관">이 구성으로 견적 받기</a></article></div>
+    <div class="mtab" aria-label="모바일 가격 비교표">
+      <div class="mtab__head"><span>작업 유형</span><span>시작가 · 견적</span></div>
+      <a class="mtab__row" href="#contact" data-package="리디자인"><span><strong>리디자인</strong><small>디자인된 PPT 정리</small></span><span class="mtab__price"><strong>30,000원</strong><small>견적 문의 ↗</small></span></a>
+      <a class="mtab__row" href="#contact" data-package="풀디자인"><span><strong>풀디자인</strong><small>장별 초안 전체 디자인</small></span><span class="mtab__price"><strong>35,000원</strong><small>견적 문의 ↗</small></span></a>
+      <a class="mtab__row" href="#contact" data-package="기획 + 디자인"><span><strong>기획 + 디자인</strong><small>텍스트 기획부터 디자인</small></span><span class="mtab__price"><strong>45,000원</strong><small>견적 문의 ↗</small></span></a>
+      <a class="mtab__row" href="#contact" data-package="데모데이 · 기관"><span><strong>데모데이 · 기관</strong><small>여러 팀 IR 일괄 제작</small></span><span class="mtab__price"><strong>별도 견적</strong><small>견적 문의 ↗</small></span></a>
+    </div>
     <div class="pfoot">
       <div>
         <p class="pfoot__t">공통 포함</p>
@@ -945,6 +975,33 @@ a{color:inherit;text-decoration:none}
     if (run && !reduce) requestAnimationFrame(f);
   }
   requestAnimationFrame((n) => { f(n); cv.classList.add("is-on"); });
+})();
+</script>
+
+<script>
+(() => {
+  const mobile = matchMedia("(max-width: 600px)");
+  const reduced = matchMedia("(prefers-reduced-motion: reduce)");
+  const rails = [
+    { section: "#services", rail: "#cards", items: ".card", delay: 4700 },
+    { section: "#ir", rail: ".irx__history", items: ".irx__year", delay: 5600 }
+  ];
+  rails.forEach(({ section, rail: railSelector, items: itemSelector, delay }) => {
+    const area = document.querySelector(section);
+    const rail = area?.querySelector(railSelector);
+    if (!area || !rail) return;
+    let visible = false;
+    let pauseUntil = 0;
+    const pause = () => { pauseUntil = Date.now() + 12000; };
+    ["pointerdown", "touchstart", "wheel"].forEach((name) => rail.addEventListener(name, pause, { passive: true }));
+    new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; }, { threshold: .35 }).observe(area);
+    setInterval(() => {
+      if (!mobile.matches || reduced.matches || !visible || document.hidden || Date.now() < pauseUntil) return;
+      const positions = [...rail.querySelectorAll(itemSelector)].map((item) => item.getBoundingClientRect().left - rail.getBoundingClientRect().left + rail.scrollLeft);
+      const next = positions.find((left) => left > rail.scrollLeft + 24);
+      rail.scrollTo({ left: next ?? 0, behavior: "smooth" });
+    }, delay);
+  });
 })();
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -1291,4 +1348,5 @@ a{color:inherit;text-decoration:none}
   addEventListener("resize", () => { if (innerWidth > 860) set(false); });
 })();
 </script>
+
 
