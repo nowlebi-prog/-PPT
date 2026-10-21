@@ -263,7 +263,7 @@ a{color:inherit;text-decoration:none}
 .pfoot__acts span{font-size:12px;color:var(--ink-3);text-align:center}
 .pfoot__acts .gbtn{height:44px;font-size:13.5px}
 .mtab{display:none}
-.gbtn.gbtn--kakao{background:#fee500!important;border-color:#fee500!important;color:#191600!important;backdrop-filter:none}
+.gbtn.gbtn--kakao{background:#fee500!important;border-color:#fee500!important;color:#191600!important;backdrop-filter:none;-webkit-backdrop-filter:none}
 @media (max-width:980px){.ptab{grid-template-columns:1fr 1fr}}
 @media (max-width:860px){
   .prc{padding:96px 0 80px}
@@ -589,7 +589,7 @@ a{color:inherit;text-decoration:none}
 .menu-open .mbtn span:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
 .menu-open .mbtn span:nth-child(2){opacity:0}
 .menu-open .mbtn span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg)}
-.menu-open .hdr{background:transparent!important;backdrop-filter:none!important}
+.menu-open .hdr{background:transparent!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
 .menu-open .qfab{opacity:0!important;pointer-events:none!important}
 @media (max-width:860px){.mbtn{display:flex;flex-direction:column;justify-content:center;align-items:center}.logo small{white-space:nowrap;letter-spacing:.2em}.hdr{z-index:60}.hdr nav:last-child{gap:0}}
 
@@ -757,6 +757,7 @@ a{color:inherit;text-decoration:none}
 .ctx__info .gcard small{font-size:12.5px;font-weight:400;letter-spacing:0;text-transform:none;color:var(--ink-3)}
 .agree.err span{color:#ff9b9b}
 .nw{white-space:nowrap}
+.fstatus__alt{display:block;margin-top:8px;font-size:12.5px;line-height:1.7;color:var(--ink-3)}.fstatus__alt button{padding:0;border:0;background:none;color:#3fd0f0;font:inherit;text-decoration:underline;text-underline-offset:3px;cursor:pointer}.fstatus__alt a{color:#3fd0f0;text-decoration:underline;text-underline-offset:3px}
 .stat b{white-space:nowrap}
 @media (max-width:860px){
   /* 모바일에서는 모든 섹션 머리글을 같은 왼쪽 선에 맞춘다 */
@@ -1344,7 +1345,8 @@ a{color:inherit;text-decoration:none}
     const d = new FormData(f), g = (k) => d.getAll(k).join(", ");
     const body = `성함: ${g("name")}\n회사명: ${g("company")}\n이메일: ${g("email")}\n연락처: ${g("phone")}\n\n${g("message")}\n\n연락 방법: ${g("contact_pref")}\n의뢰 목적: ${g("goal")}\n희망 납기: ${g("due")}\n분량: ${g("pages")}\n준비된 자료: ${g("ready")}\nNDA: ${g("nda")}`;
     location.href = `mailto:contact@youstarppt.com?subject=${encodeURIComponent("[유별난PPT 상담] " + g("company"))}&body=${encodeURIComponent(body)}`;
-    out.textContent = "메일 앱이 열렸습니다. 메일 앱에서 보내기를 눌러 주세요.";
+    out.innerHTML = '메일 앱이 열렸습니다. 메일 앱에서 보내기를 눌러 주세요.<span class="fstatus__alt">메일 앱이 열리지 않았나요? <button type="button" data-copymail>문의 내용 복사</button> 후 contact@youstarppt.com으로 보내 주시거나 <a href="https://pf.kakao.com/_XgRWxj/chat" target="_blank" rel="noopener">카카오톡에 붙여넣어</a> 주세요.</span>';
+    out.querySelector("[data-copymail]").addEventListener("click", (ev) => { const t = `[유별난PPT 상담] ${g("company")}\n\n${body}`; (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(() => { const t = document.getElementById("toast"); if (t) { t.textContent = "문의 내용을 복사했습니다."; t.classList.add("on"); setTimeout(() => t.classList.remove("on"), 2800); } }, () => { ev.target.textContent = "복사가 안 되면 직접 선택해 복사"; }); });
   });
 })();
 </script>
