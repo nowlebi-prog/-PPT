@@ -2,20 +2,7 @@
 <html lang="ko">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>유별난PPT | IR · 제안서 · 회사소개서 PPT 기획 디자인</title>
-<meta name="description" content="같은 초안도, 차원이 다르게. 발표 자료, 회사소개서, 제안서, IR PPT를 기획부터 디자인까지 만듭니다. 누적 작업 642건+ · 고객 평점 4.9 · 고객 후기 359건.">
-<meta name="robots" content="noindex">
-<meta name="theme-color" content="#000000">
-<link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
-<meta property="og:type" content="website">
-<meta property="og:locale" content="ko_KR">
-<meta property="og:site_name" content="유별난PPT">
-<meta property="og:url" content="https://nowlebi-prog.github.io/-PPT/redesign/v2/">
-<meta property="og:title" content="유별난PPT | IR · 제안서 · 회사소개서 PPT 기획 디자인">
-<meta property="og:description" content="같은 초안도, 차원이 다르게. 발표 자료, 회사소개서, 제안서, IR PPT를 기획부터 디자인까지 만듭니다. 누적 작업 642건+ · 고객 평점 4.9 · 고객 후기 359건.">
-<meta property="og:image" content="https://nowlebi-prog.github.io/-PPT/assets/img/og.png">
-<meta name="twitter:card" content="summary_large_image">
-
+<title>유별난PPT 시안 v2 — 빛</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
 :root{
@@ -263,7 +250,7 @@ a{color:inherit;text-decoration:none}
 .pfoot__acts span{font-size:12px;color:var(--ink-3);text-align:center}
 .pfoot__acts .gbtn{height:44px;font-size:13.5px}
 .mtab{display:none}
-.gbtn.gbtn--kakao{background:#fee500!important;border-color:#fee500!important;color:#191600!important;backdrop-filter:none;-webkit-backdrop-filter:none}
+.gbtn.gbtn--kakao{background:#fee500!important;border-color:#fee500!important;color:#191600!important;backdrop-filter:none}
 @media (max-width:980px){.ptab{grid-template-columns:1fr 1fr}}
 @media (max-width:860px){
   .prc{padding:96px 0 80px}
@@ -589,7 +576,7 @@ a{color:inherit;text-decoration:none}
 .menu-open .mbtn span:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
 .menu-open .mbtn span:nth-child(2){opacity:0}
 .menu-open .mbtn span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg)}
-.menu-open .hdr{background:transparent!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+.menu-open .hdr{background:transparent!important;backdrop-filter:none!important}
 .menu-open .qfab{opacity:0!important;pointer-events:none!important}
 @media (max-width:860px){.mbtn{display:flex;flex-direction:column;justify-content:center;align-items:center}.logo small{white-space:nowrap;letter-spacing:.2em}.hdr{z-index:60}.hdr nav:last-child{gap:0}}
 
@@ -725,65 +712,6 @@ a{color:inherit;text-decoration:none}
   .hdr .mbtn{display:flex}
 }
 @media (max-width:359px){.hdr .wrap{padding-inline:12px}}
-
-/* ===== 공통 섹션 표기 (2026-10-22 정리) =====
-   eyebrow: 영문 Title Case 입력 → 대문자 표시, 12px/600/.28em, 청록
-   제목: 굵은 첫 줄(800) + 가는 둘째 줄(300), 마침표로 끝, 같은 크기 스케일
-   서브: 제목 아래 16px, 15.5px, 두 줄 이내 */
-[data-head] > small,[data-head] > div > small,.irx__head small.k,.aix__intro small.k,.prc__head small.k{display:block;font-size:12px;font-weight:600;letter-spacing:.28em;color:#3fd0f0;text-transform:uppercase}
-.proof__head h2,.svc__head h2,.irx__head h2,.aix__intro h2,.prc__head h2,.sechead h2,.fqx__head h2,.ctx__info h2{margin:16px 0 0;font-size:clamp(28px,2.9vw,42px);line-height:1.2;letter-spacing:-.045em;font-weight:800}
-[data-head] h2 b{font-weight:800}
-[data-head] h2 span{font-weight:300}
-.show__copy h2 span{font-weight:300}
-.irx__head .lead,.prc__head p,.sechead p,.fqx__head p,.ctx__info > p:not(.cmeta),.aix__lead{font-size:15.5px;line-height:1.75;color:var(--ink-2)}
-.irx__head .lead{margin:16px 0 0;max-width:460px}
-.irx__history small{text-transform:uppercase}
-@media (max-width:860px){
-  .proof__head h2,.svc__head h2,.irx__head h2,.aix__intro h2,.prc__head h2,.sechead h2,.fqx__head h2,.ctx__info h2{font-size:clamp(26px,7.4vw,32px)}
-  .irx__head .lead,.prc__head p,.sechead p,.fqx__head p,.ctx__info > p:not(.cmeta),.aix__lead{font-size:14.5px}
-  [data-head] h2 b,[data-head] h2 span{display:block}
-  [data-head] h2 br.desktop-break{display:none}
-  .prx .acts{text-align:left}
-}
-/* 등장: 헤드 요소가 eyebrow → 제목 → 서브 순으로 .08s 간격, .9s */
-.js-reveal [data-head] > *,.js-reveal [data-head] > div > *{opacity:0;transform:translateY(14px);transition:opacity .9s var(--ease),transform .9s var(--ease);transition-delay:calc(var(--d,0) * 80ms)}
-.js-reveal [data-head].is-shown > *,.js-reveal [data-head].is-shown > div > *{opacity:1;transform:none}
-@media (prefers-reduced-motion:reduce){.js-reveal [data-head] > *,.js-reveal [data-head] > div > *{opacity:1;transform:none;transition:none}}
-
-/* ===== 야간 점검 보정 (2026-10-22) ===== */
-/* 키보드 포커스가 어두운 배경에서도 보이게 */
-:where(a,button,summary,[role=tab],input[type=checkbox],input[type=radio]):focus-visible{outline:2px solid #3fd0f0;outline-offset:3px}
-/* 문의 영역의 eyebrow 규칙이 준비 가이드 카드 설명까지 번지던 문제 */
-.ctx__info .gcard small{font-size:12.5px;font-weight:400;letter-spacing:0;text-transform:none;color:var(--ink-3)}
-.agree.err span{color:#ff9b9b}
-.nw{white-space:nowrap}
-.fstatus__alt{display:block;margin-top:8px;font-size:12.5px;line-height:1.7;color:var(--ink-3)}.fstatus__alt button{padding:0;border:0;background:none;color:#3fd0f0;font:inherit;text-decoration:underline;text-underline-offset:3px;cursor:pointer}.fstatus__alt a{color:#3fd0f0;text-decoration:underline;text-underline-offset:3px}
-.stat b{white-space:nowrap}
-@media (max-width:860px){
-  /* 모바일에서는 모든 섹션 머리글을 같은 왼쪽 선에 맞춘다 */
-  .proof__head,.prc__head,.rvx .sechead,.prx .sechead{text-align:left}
-  .prc__head p,.rvx .sechead p,.prx .sechead p{margin-left:0;margin-right:0}
-  .rvx__score{justify-content:flex-start}
-  /* 누르는 영역 44px 확보 */
-  .ftr nav{gap:0 20px}
-  .ftr nav a{display:inline-flex;align-items:center;min-height:44px}
-  .cdl dd a{display:inline-flex;align-items:center;min-height:40px;margin:-12px 0}
-  .hdr .logo{min-height:44px}
-  .hdr .mbtn{width:44px;height:44px}
-  .seg a{height:36px}
-  /* 작은 글자 보정 */
-  .pincl li{font-size:12px}
-  .pfoot__basis,.pfoot__ex{font-size:12px}
-}
-@media (max-width:374px){
-  .hero__acts{flex-direction:column;align-items:stretch}
-  .hero__acts .gbtn{flex:none;width:100%}
-  .stat b{font-size:38px}
-  .form > .frow:first-child{grid-template-columns:1fr;gap:0}
-  .logo small{display:none}
-  .seg a{height:36px;padding:0 10px;font-size:11.5px}
-  .mtab__row small{font-size:11px}
-}
 </style>
 
 
@@ -803,24 +731,24 @@ a{color:inherit;text-decoration:none}
         </button>
         <div class="section-switch__panel" id="sectionSwitchPanel" hidden>
           <p class="section-switch__caption">전체 섹션 · 바로 이동</p>
-          <div class="section-switch__list"><a class="section-switch__item" href="#top" data-section="top" data-label="첫 화면" aria-current="location"><span>01</span>첫 화면</a><a class="section-switch__item" href="#work" data-section="work" data-label="작업 사례"><span>02</span>작업 사례</a><a class="section-switch__item" href="#proof" data-section="proof" data-label="실적"><span>03</span>실적</a><a class="section-switch__item" href="#services" data-section="services" data-label="서비스"><span>04</span>서비스</a><a class="section-switch__item" href="#ir" data-section="ir" data-label="IR · 데모데이"><span>05</span>IR · 데모데이</a><a class="section-switch__item" href="#visual" data-section="visual" data-label="AI 리터치"><span>06</span>AI 리터치</a><a class="section-switch__item" href="#process" data-section="process" data-label="진행 과정"><span>07</span>진행 과정</a><a class="section-switch__item" href="#pricing" data-section="pricing" data-label="가격"><span>08</span>가격</a><a class="section-switch__item" href="#reviews" data-section="reviews" data-label="후기"><span>09</span>후기</a><a class="section-switch__item" href="#faq" data-section="faq" data-label="FAQ"><span>10</span>FAQ</a><a class="section-switch__item" href="#contact" data-section="contact" data-label="문의"><span>11</span>문의</a></div>
+          <div class="section-switch__list"><a class="section-switch__item" href="#top" data-section="top" data-label="첫 화면" aria-current="location"><span>01</span>첫 화면</a><a class="section-switch__item" href="#work" data-section="work" data-label="작업 사례"><span>02</span>작업 사례</a><a class="section-switch__item" href="#proof" data-section="proof" data-label="작업의 기준"><span>03</span>작업의 기준</a><a class="section-switch__item" href="#services" data-section="services" data-label="서비스"><span>04</span>서비스</a><a class="section-switch__item" href="#ir" data-section="ir" data-label="IR · 데모데이"><span>05</span>IR · 데모데이</a><a class="section-switch__item" href="#visual" data-section="visual" data-label="AI · 제작"><span>06</span>AI · 제작</a><a class="section-switch__item" href="#pricing" data-section="pricing" data-label="가격"><span>07</span>가격</a><a class="section-switch__item" href="#reviews" data-section="reviews" data-label="후기"><span>08</span>후기</a><a class="section-switch__item" href="#faq" data-section="faq" data-label="FAQ"><span>09</span>FAQ</a><a class="section-switch__item" href="#process" data-section="process" data-label="진행 과정"><span>10</span>진행 과정</a><a class="section-switch__item" href="#contact" data-section="contact" data-label="문의"><span>11</span>문의</a></div>
           <div class="section-switch__progress" aria-hidden="true"><i></i></div>
         </div>
       </div>
-      <span class="seg hdr__mobile-actions"><a href="portfolio.html">포트폴리오</a><i></i><a href="#contact">문의</a></span>
+      <span class="seg hdr__mobile-actions"><a href="portfolio.html">Portfolio</a><i></i><a href="#contact">Contact</a></span>
       <button class="mbtn" id="mbtn" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="msheet"><span></span><span></span><span></span></button>
     </nav>
   </div>
 </header>
-<div class="msheet" id="msheet" aria-hidden="true"><nav aria-label="모바일 메뉴"><a href="portfolio.html" style="--i:0">작업 사례</a><a href="#services" style="--i:1">서비스</a><a href="#ir" style="--i:2">IR · 데모데이</a><a href="#visual" style="--i:3">AI 리터치</a><a href="#process" style="--i:4">진행 과정</a><a href="#pricing" style="--i:5">가격</a><a href="#faq" style="--i:6">FAQ</a><a href="about.html" style="--i:7">회사소개</a><a href="#contact" style="--i:8">문의하기</a></nav><div class="msheet__acts"><a class="gbtn gbtn--kakao" href="https://pf.kakao.com/_XgRWxj/chat" target="_blank" rel="noopener">카카오톡 상담하기 ↗</a><a class="gbtn gbtn--fill" href="#contact">견적 문의하기</a></div></div>
+<div class="msheet" id="msheet" aria-hidden="true"><nav aria-label="모바일 메뉴"><a href="portfolio.html" style="--i:0">작업 사례</a><a href="#services" style="--i:1">서비스</a><a href="#ir" style="--i:2">IR · 데모데이</a><a href="#visual" style="--i:3">AI 리터치</a><a href="#pricing" style="--i:4">가격</a><a href="#faq" style="--i:5">FAQ</a><a href="about.html" style="--i:6">회사소개</a><a href="#contact" style="--i:7">문의하기</a></nav><div class="msheet__acts"><a class="gbtn gbtn--kakao" href="https://pf.kakao.com/_XgRWxj/chat" target="_blank" rel="noopener">카카오톡 상담하기 ↗</a><a class="gbtn gbtn--fill" href="#contact">견적 문의하기</a></div></div>
 
 <main>
 <section class="hero" id="top">
   <canvas id="beam" aria-hidden="true"></canvas>
   <div class="wrap hero__in" id="heroIn">
     <h1 class="rise"><span class="hero__lead">같은 초안도,</span><span class="hero__brand">유별난PPT는</span><b>차원이 다르게</b></h1>
-    <p class="rise">순서부터 다시 잡아, <br class="desktop-break">읽히는 장표로 완성합니다.</p>
-    <div class="hero__acts rise"><a class="gbtn gbtn--fill" href="portfolio.html">작업 사례 보기<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="gbtn" href="#contact">내 자료로 상담하기</a></div>
+    <p class="rise">정리 안 된 초안도, 읽히는 장표로.</p>
+    <div class="hero__acts rise"><a class="gbtn gbtn--fill" href="portfolio.html">Portfolio<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="gbtn" href="#contact">Contact</a></div>
     <a class="down rise" href="#work" aria-label="아래로"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
   </div>
 </section>
@@ -828,24 +756,24 @@ a{color:inherit;text-decoration:none}
   <div class="show__stage">
     <canvas id="room" aria-hidden="true"></canvas>
     <div class="show__fallback" aria-hidden="true"></div>
-    <div class="wrap show__copy" data-head>
-      <small>Work</small>
+    <div class="wrap show__copy">
+      <small>On Stage</small>
       <h2><b>유별난 완성도를</b><br class="desktop-break"> <span>살펴보세요.</span></h2>
-      <a class="gbtn neon-btn" href="portfolio.html">전체 포트폴리오 보기<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a class="gbtn neon-btn" href="portfolio.html">작업 사례 보기<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     </div>
     <div class="show__cap" aria-live="polite"><span class="show__bar"><i id="showBar"></i></span><b id="showName"></b></div>
   </div>
 </section>
 <section class="proof" id="proof">
   <div class="wrap">
-    <div class="proof__head" data-head>
+    <div class="proof__head">
       <small>Track Record</small>
-      <h2><b>숫자가</b><br class="desktop-break"> <span>먼저 말합니다.</span></h2>
+      <h2><b>숫자가</b> <span>먼저 말합니다.</span></h2>
     </div>
     <div class="stats" id="stats">
       <div class="stat"><b class="neon-txt" data-to="642">0<em>건+</em></b><span>누적 작업</span><small>IR · 제안서 · 회사소개서</small></div>
       <div class="stat"><b class="neon-txt" data-to="4.9" data-dec="1">0<em>/5</em></b><span>고객 평점</span><small>외부 플랫폼 기준</small></div>
-      <div class="stat"><b class="neon-txt" data-to="359">0<em>건</em></b><span>고객 후기</span><small>실제 의뢰 고객 작성</small></div>
+      <div class="stat"><b class="neon-txt" data-to="359">0<em>건</em></b><span>공식 고객후기</span><small>실제 의뢰 고객 작성</small></div>
       <div class="stat"><b class="neon-txt" data-to="300">0<em>팀 이상</em></b><span>IR · 데모데이</span><small>누적 작업 팀</small></div>
     </div>
     <div class="quote" id="quote" aria-live="polite">
@@ -862,8 +790,8 @@ a{color:inherit;text-decoration:none}
 </section>
 <section class="svc" id="services">
   <div class="wrap">
-    <div class="svc__head" data-head>
-      <div><small>Services</small><h2><b>단순히 디자인하지 않습니다.</b><br class="desktop-break"> <span>내용을 이해하고, 목적에 맞게 완성합니다.</span></h2></div>
+    <div class="svc__head">
+      <div><small>Services</small><h2><span>내용을 이해하고, 기획하며,</span><br class="desktop-break"> <b>목적에 맞게 완성합니다.</b></h2></div>
     </div>
     <div class="cards" id="cards">
       <a class="card" href="#contact" data-goal="투자 유치 (IR)" data-msg="[IR · 데모데이] 상담을 원합니다."><div class="card__in"><div class="card__img"><img src="assets/slides/svc-ir.webp" alt="토프모빌리티 사업계획 장표 목업" loading="lazy"></div><div class="card__body"><i>IR · DEMO DAY</i><h3>IR · 데모데이</h3><p>투자자가 묻는 순서대로.</p><ul><li>IR</li><li>데모데이</li><li>지원사업</li><li>컨설팅</li></ul><span class="card__more">IR 상담하기<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></div></a>
@@ -875,9 +803,9 @@ a{color:inherit;text-decoration:none}
 </section>
 <section class="irx" id="ir">
   <div class="wrap">
-    <div class="irx__head" data-head><small class="k">IR · Demo Day</small><h2><b>300팀 넘게 만든</b><br class="desktop-break"> <span>IR · 데모데이 경험.</span></h2><p class="lead">TIPS·예창패·초창패 같은 지원사업부터 투자 발표까지, 심사 흐름에 맞춰 기획합니다.</p></div>
+    <div class="irx__head"><small class="k">IR · Demo Day</small><h2><span>누적 작업 팀</span><br class="desktop-break"> <b>300팀 이상.</b></h2></div>
     <div class="irx__history" aria-label="연도별 데모데이 이력">
-      <small>Demo Day History · 연도별 이력</small>
+      <small>DEMO DAY HISTORY · 연도별 이력</small>
       <div class="irx__year"><b>2025</b><ul>
         <li>SWITCH : Growth Stage 성과공유회</li>
         <li>Nharvest X 데모데이</li>
@@ -903,8 +831,8 @@ a{color:inherit;text-decoration:none}
 </section>
 <section class="aix" id="visual">
   <div class="wrap">
-    <div class="aix__intro" data-head>
-      <div><small class="k">AI Retouch</small><h2><b>AI로 만든 초안,</b><br class="desktop-break"> <span>빈틈은 사람이 메웁니다.</span></h2></div>
+    <div class="aix__intro">
+      <div><small class="k">AI RETOUCH</small><h2>AI 초안의 빈틈을 메웁니다.</h2></div>
       <p class="aix__lead">보기 좋은 초안에서 멈추지 않고, 내용과 표현을 발표 목적에 맞게 다시 다듬습니다.</p>
     </div>
     <ol class="aix__points" id="aiPoints">
@@ -913,7 +841,7 @@ a{color:inherit;text-decoration:none}
       <li class="aix__point"><span class="aix__num">03</span><h3>제품은 있는데, 드러나지 않는 강점.</h3><p>제품이 보이도록 이미지와 영상 소재를 만듭니다.</p></li>
     </ol>
     <div class="aix__work">
-      <div class="aix__work-head"><div><small class="k">Actual Work</small><h3>실제 작업물로 확인해 보세요.</h3></div><p>공개 가능한 실제 작업 사례입니다.</p></div>
+      <div class="aix__work-head"><div><small class="k">ACTUAL WORK</small><h3>실제 작업물로 확인해보세요.</h3></div><p>공개 가능한 실제 작업 사례입니다.</p></div>
       <div class="aix__gallery" aria-label="실제 작업 사례">
         <a class="aix__sample" href="portfolio.html?item=x02"><img src="assets/pf/extra-02b.webp" alt="기업 소개서 실제 작업 이미지" loading="lazy"><span>기업 소개서</span></a>
         <a class="aix__sample" href="portfolio.html?item=x14"><img src="assets/pf/extra-14b.webp" alt="IT 기업 소개서 실제 작업 이미지" loading="lazy"><span>IT 기업 소개서</span></a>
@@ -921,24 +849,16 @@ a{color:inherit;text-decoration:none}
       </div>
     </div>
     <div class="aix__production">
-      <div><small class="k">Beyond the Deck</small><h3>사업에 필요한 제작까지.</h3><p>제품·서비스 연출컷 · 입체감 있는 시각 요소 · 짧은 소개 영상 · 상세페이지 · 랜딩페이지</p><small class="note">연출컷·입체감 있는 요소·짧은 영상 제작은 범위에 따라 진행하며, 금액은 별도 협의합니다.</small></div>
+      <div><small class="k">BEYOND THE DECK</small><h3>사업에 필요한 제작까지.</h3><p>제품·서비스 연출컷 / 입체감 있는 시각 요소 / 짧은 소개영상 / 상세페이지 / 랜딩페이지</p><small class="note">연출컷·입체감 있는 요소·짧은 영상 제작은 범위에 따라 진행합니다. (가격 별도 합의 필요)</small></div>
       <a class="gbtn" href="#contact" data-goal="기타" data-msg="[사업에 필요한 제작] 상담을 원합니다.">제작 문의하기<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     </div>
   </div>
 </section>
-<section class="prx" id="process">
-  <div class="wrap">
-    <div class="sechead" data-head><small>Process</small><h2><b>맡기시면,</b><br class="desktop-break"> <span>이렇게 진행됩니다.</span></h2><p>단계마다 확인받고 다음으로 넘어갑니다.</p></div>
-    <ol class="steps5" id="steps5"><li style="--i:0"><em>01</em><div><h3>상담 · 일정 확인</h3></div><p>목적·일정·자료 상태를 확인합니다. 원하시면 NDA를 먼저 맺습니다.</p></li><li style="--i:1"><em>02</em><div><h3>내용 분석 · 기획</h3></div><p>자료를 직접 읽고 장 순서와 장마다 할 말을 정합니다.</p></li><li style="--i:2"><em>03</em><div><h3>시안 · 방향 확정</h3></div><p>표지와 대표 내지를 먼저 보여 드리고 방향을 정합니다.</p></li><li style="--i:3"><em>04</em><div><h3>제작 · 피드백</h3></div><p>정한 방향으로 전체를 만들고 피드백을 반영합니다.</p></li><li style="--i:4"><em>05</em><div><h3>검수 · 납품</h3></div><p>숫자·오탈자를 원본과 대조하고 PPTX 원본과 PDF로 드립니다.</p></li></ol>
-    <div class="acts"><a class="gbtn" href="#pricing">가격 확인하기<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
-  </div>
-</section>
-
 <section class="prc" id="pricing">
   <div class="wrap">
-    <div class="prc__head" data-head>
+    <div class="prc__head">
       <small class="k">Pricing</small>
-      <h2><b>가격은 장 수와</b><br class="desktop-break"> <span>자료 상태로 정해집니다.</span></h2>
+      <h2><b>가격은 장 수와</b> <span>자료 상태로 정해집니다.</span></h2>
       <p>자료를 보내 주시면 장 수와 일정에 맞춘 견적서를 드립니다.</p>
     </div>
     <div class="ptab" id="ptab"><article class="pcol"><h3>리디자인</h3><p class="pcol__for">디자인된 PPT가 있는 분</p><p class="pcol__inc">톤 통일 · 도형·폰트 정리</p><p class="pcol__num"><b>장당 30,000원</b>부터</p><a class="gbtn" href="#contact" data-package="리디자인">이 구성으로 견적 받기</a></article><article class="pcol"><h3>풀디자인<span class="pcol__badge">추천</span></h3><p class="pcol__for">장 구분만 된 초안이 있는 분</p><p class="pcol__inc">템플릿 제작 · 전체 디자인 · 텍스트 정리</p><p class="pcol__num"><b>장당 35,000원</b>부터</p><a class="gbtn" href="#contact" data-package="풀디자인">이 구성으로 견적 받기</a></article><article class="pcol"><h3>기획 + 디자인</h3><p class="pcol__for">텍스트만 있는 분</p><p class="pcol__inc">방향 설정 · 장 순서 · 문구 정리 · 디자인</p><p class="pcol__num"><b>장당 45,000원</b>부터</p><a class="gbtn" href="#contact" data-package="기획 + 디자인">이 구성으로 견적 받기</a></article><article class="pcol"><h3>데모데이 · 기관</h3><p class="pcol__for">여러 팀 IR을 한 번에 맡기실 때</p><p class="pcol__inc">팀별 IR · 일정 관리</p><p class="pcol__num"><b>별도 견적</b></p><a class="gbtn" href="#contact" data-package="데모데이 · 기관">이 구성으로 견적 받기</a></article></div>
@@ -961,10 +881,10 @@ a{color:inherit;text-decoration:none}
   </div>
 </section>
 <section class="rvx" id="reviews">
-  <div class="wrap sechead" data-head>
+  <div class="wrap sechead">
     <small>Reviews</small>
-    <h2><b>먼저 맡겨 본 분들의</b><br class="desktop-break"> <span>이야기.</span></h2>
-    <div class="rvx__score"><b class="neon-txt">4.9</b><span>고객 후기 359건</span></div>
+    <h2><b>먼저 맡겨 본 분들의</b> <span>이야기.</span></h2>
+    <div class="rvx__score"><b class="neon-txt">4.9</b><span>공식 고객후기 359건</span></div>
   </div>
   <div class="rvrows"><div class="rvrow"><article class="rv"><i>★★★★★</i><h3>정리가 덜 된 자료도 찰떡같이 이해하는 알잘딱깔센!</h3><p>정리가 완벽히 안 된 PPT 초안을 드렸는데도, 찰떡같이 알아들어주시고 정말 '알잘딱깔센'으로 작업해 주셨습니다! 책임감 있게 끝까지 빠른 작업해 주셔서 너무 감사합니다.</p></article><article class="rv"><i>★★★★★</i><h3>벌써 8번째 의뢰, 자료의 톤앤매너를 완벽하게 캐치합니다.</h3><p>벌써 8번째 작업 의뢰네요. 이번에도 역시 작업 결과물이 기대 이상이었습니다~! 시각적으로도 뛰어나고, 자료의 톤앤매너를 정확하게 반영해 주셔서 만족도가 매우 높았습니다.</p></article><article class="rv"><i>★★★★★</i><h3>디자인 퀄리티, 피드백 속도, 소통 모두 완벽합니다.</h3><p>매번 디자이너님께만 작업을 맡기게 되네요~! 요청 사항을 정확히 이해하고 감각적으로 완성해 주셔서 늘 다시 찾게 됩니다. 다음 작업도 계속 부탁드릴 예정입니다.</p></article><article class="rv"><i>★★★★★</i><h3>단순 의뢰를 넘어, 전문가의 적극적인 의견 개진까지!</h3><p>의뢰자가 원하는 걸 완벽하게 적용시켜 주는 건 물론이고 적극적인 의견 개진 또한 너무나 감사합니다. 갑작스러운 의뢰에도 최선을 다해 최고의 결과물을 보여주셨습니다.</p></article><article class="rv" aria-hidden="true"><i>★★★★★</i><h3>정리가 덜 된 자료도 찰떡같이 이해하는 알잘딱깔센!</h3><p>정리가 완벽히 안 된 PPT 초안을 드렸는데도, 찰떡같이 알아들어주시고 정말 '알잘딱깔센'으로 작업해 주셨습니다! 책임감 있게 끝까지 빠른 작업해 주셔서 너무 감사합니다.</p></article><article class="rv" aria-hidden="true"><i>★★★★★</i><h3>벌써 8번째 의뢰, 자료의 톤앤매너를 완벽하게 캐치합니다.</h3><p>벌써 8번째 작업 의뢰네요. 이번에도 역시 작업 결과물이 기대 이상이었습니다~! 시각적으로도 뛰어나고, 자료의 톤앤매너를 정확하게 반영해 주셔서 만족도가 매우 높았습니다.</p></article><article class="rv" aria-hidden="true"><i>★★★★★</i><h3>디자인 퀄리티, 피드백 속도, 소통 모두 완벽합니다.</h3><p>매번 디자이너님께만 작업을 맡기게 되네요~! 요청 사항을 정확히 이해하고 감각적으로 완성해 주셔서 늘 다시 찾게 됩니다. 다음 작업도 계속 부탁드릴 예정입니다.</p></article><article class="rv" aria-hidden="true"><i>★★★★★</i><h3>단순 의뢰를 넘어, 전문가의 적극적인 의견 개진까지!</h3><p>의뢰자가 원하는 걸 완벽하게 적용시켜 주는 건 물론이고 적극적인 의견 개진 또한 너무나 감사합니다. 갑작스러운 의뢰에도 최선을 다해 최고의 결과물을 보여주셨습니다.</p></article></div><div class="rvrow"><article class="rv"><i>★★★★★</i><h3>단순 의뢰를 넘어, 전문가의 적극적인 의견 개진까지!</h3><p>의뢰자가 원하는 걸 완벽하게 적용시켜 주는 건 물론이고 적극적인 의견 개진 또한 너무나 감사합니다. 갑작스러운 의뢰에도 최선을 다해 최고의 결과물을 보여주셨습니다.</p></article><article class="rv"><i>★★★★★</i><h3>촉박한 일정에도 빛을 발하는 정확한 납기일</h3><p>촉박한 일정 때문에 걱정했는데 최대한 편의를 봐주셔서 너무 감사해요. 결과물도 너무 만족스럽고요. 약속 정확하고 센스 있으시고 정말 잘 이용했습니다.</p></article><article class="rv"><i>★★★★★</i><h3>세대 불문 취향 저격, 세련되고 깔끔한 디자인</h3><p>항상 만족하며 이용하고 있습니다. 그 어떤 곳보다도 디자인이 세련되고 깔끔해요. 적은 텍스트도, 많은 텍스트도 가독성 좋게 정리해 주십니다.</p></article><article class="rv"><i>★★★★★</i><h3>작업물이 완벽 그 자체네요!</h3><p>작업물이 완벽 그 자체네요. 너무 좋고 친절하시고 다음에도 무조건 이용할 것 같습니다. 성심성의껏 해주셔서 정말 감사합니다!</p></article><article class="rv" aria-hidden="true"><i>★★★★★</i><h3>단순 의뢰를 넘어, 전문가의 적극적인 의견 개진까지!</h3><p>의뢰자가 원하는 걸 완벽하게 적용시켜 주는 건 물론이고 적극적인 의견 개진 또한 너무나 감사합니다. 갑작스러운 의뢰에도 최선을 다해 최고의 결과물을 보여주셨습니다.</p></article><article class="rv" aria-hidden="true"><i>★★★★★</i><h3>촉박한 일정에도 빛을 발하는 정확한 납기일</h3><p>촉박한 일정 때문에 걱정했는데 최대한 편의를 봐주셔서 너무 감사해요. 결과물도 너무 만족스럽고요. 약속 정확하고 센스 있으시고 정말 잘 이용했습니다.</p></article><article class="rv" aria-hidden="true"><i>★★★★★</i><h3>세대 불문 취향 저격, 세련되고 깔끔한 디자인</h3><p>항상 만족하며 이용하고 있습니다. 그 어떤 곳보다도 디자인이 세련되고 깔끔해요. 적은 텍스트도, 많은 텍스트도 가독성 좋게 정리해 주십니다.</p></article><article class="rv" aria-hidden="true"><i>★★★★★</i><h3>작업물이 완벽 그 자체네요!</h3><p>작업물이 완벽 그 자체네요. 너무 좋고 친절하시고 다음에도 무조건 이용할 것 같습니다. 성심성의껏 해주셔서 정말 감사합니다!</p></article></div></div>
   <p class="rvx__note">외부 플랫폼에 공개된 후기를 옮겼습니다. (2026.10 기준)</p>
@@ -972,25 +892,33 @@ a{color:inherit;text-decoration:none}
 
 <section class="fqx" id="faq">
   <div class="wrap">
-    <div class="fqx__head" data-head><small>FAQ</small><h2><b>맡기기 전에</b><br class="desktop-break"> <span>많이 묻는 질문.</span></h2><p>여기 없는 질문은 상담에서 바로 답해 드립니다.</p><a class="gbtn" href="#contact">상담 요청하기<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
-    <div class="faq"><details><summary>정리가 덜 된 초안이나 텍스트만 있어도 되나요?</summary><p>네. 내용에서 핵심 문장을 뽑고 장 순서를 잡은 뒤 디자인합니다.</p></details><details><summary>상담 전에 무엇을 준비하면 되나요?</summary><p>발표 유형별 기본 구성과 준비하면 좋은 자료를 정리해 두었습니다. 없는 자료가 있어도 괜찮습니다. <a href="#contact" data-guide="ir">준비 가이드 열기 →</a></p></details><details><summary>제품 사진 한 장만 있어도 제작할 수 있나요?</summary><p>네. 보내 주신 사진으로 연출 컷과 장표 방향을 제안해 드립니다. 제품 특징과 발표 목적, 필요한 정확도를 확인한 뒤 가능한 범위를 안내합니다.</p></details><details><summary>요즘 AI로 직접 만들어도 되지 않나요?</summary><p>초안과 아이디어 정리에는 유용합니다. 사실관계와 숫자를 확인하고, 내용의 흐름과 장표 디자인까지 다듬어 전달합니다.</p></details><details><summary>납품 후에 직접 수정할 수 있나요?</summary><p>네. 추가금 없이 편집 가능한 PPT 원본을 드립니다. 이미지로 들어가는 요소의 수정 범위는 작업 전에 안내합니다.</p></details><details><summary>NDA(비밀유지계약)를 맺을 수 있나요?</summary><p>가능합니다. 기밀 자료를 보내시기 전에 요청해 주세요. 계약 내용과 자료 취급 범위를 협의한 뒤 진행합니다.</p></details><details><summary>어디로 문의하면 되나요?</summary><p><a href="https://pf.kakao.com/_XgRWxj/chat" target="_blank" rel="noopener">카카오톡 상담</a> 또는 <a href="#contact">견적 문의</a>로 자료와 일정을 알려 주세요.</p></details><details><summary>IR은 어떤 분야까지 해 보셨나요?</summary><p>기후테크, 농업·푸드, 헬스케어, IT 플랫폼, 제조, 게임 등 여러 분야의 IR을 만들었습니다. 비슷한 분야 사례는 상담 때 보여 드립니다.</p></details><details><summary>세금계산서 발행이 되나요?</summary><p>네. 기업 고객을 위한 세금계산서와 현금영수증 발행이 모두 가능합니다.</p></details></div>
+    <div class="fqx__head"><small>FAQ</small><h2>자주 묻는 질문</h2><p>궁금한 게 없으면, 바로 상담으로 넘어가셔도 됩니다.</p><a class="gbtn" href="#contact">상담 요청하기<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+    <div class="faq"><details><summary>정리가 덜 된 초안이나 텍스트만 있어도 되나요?</summary><p>네. 내용에서 핵심 문장을 뽑고 장 순서를 잡은 뒤 디자인합니다.</p></details><details><summary>상담 전에 무엇을 준비하면 되나요?</summary><p>발표 유형별 기본 구성과 준비하면 좋은 자료를 정리해 두었어요. 없는 자료가 있어도 괜찮아요. <a href="#contact" data-guide="ir">준비 가이드 열기 →</a></p></details><details><summary>제품 사진 한 장만 있어도 제작할 수 있나요?</summary><p>네. 보내 주신 사진으로 연출 컷과 장표 방향을 제안해 드립니다. 제품 특징과 발표 목적, 필요한 정확도를 확인한 뒤 가능한 범위를 안내합니다.</p></details><details><summary>요즘 AI로 직접 만들어도 되지 않나요?</summary><p>초안과 아이디어 정리에는 유용합니다. 사실관계와 숫자를 확인하고, 내용의 흐름과 장표 디자인까지 다듬어 전달합니다.</p></details><details><summary>납품 후에 직접 수정할 수 있나요?</summary><p>네. 추가금 없이 편집 가능한 PPT 원본을 드립니다. 이미지로 들어가는 요소의 수정 범위는 작업 전에 안내합니다.</p></details><details><summary>NDA(비밀유지계약)를 맺을 수 있나요?</summary><p>가능합니다. 기밀 자료를 보내시기 전에 요청해 주세요. 계약 내용과 자료 취급 범위를 협의한 뒤 진행합니다.</p></details><details><summary>어디로 문의하면 되나요?</summary><p><a href="https://pf.kakao.com/_XgRWxj/chat" target="_blank" rel="noopener">카카오톡 상담</a> 또는 <a href="#contact">견적 문의</a>로 자료와 일정을 알려 주세요.</p></details><details><summary>IR은 어떤 분야까지 해 보셨나요?</summary><p>기후테크, 농업·푸드, 헬스케어, IT 플랫폼, 제조, 게임 등 여러 분야의 IR을 만들었습니다. 비슷한 분야 사례는 상담 때 보여 드립니다.</p></details><details><summary>세금계산서 발행이 되나요?</summary><p>네. 기업 고객을 위한 세금계산서와 현금영수증 발행이 모두 가능합니다.</p></details></div>
+  </div>
+</section>
+
+<section class="prx" id="process">
+  <div class="wrap">
+    <div class="sechead"><small>Process</small><h2><b>맡기시면,</b> <span>이렇게 진행됩니다.</span></h2><p>단계마다 확인받고 다음으로 넘어갑니다.</p></div>
+    <ol class="steps5" id="steps5"><li style="--i:0"><em>01</em><div><h3>상담 · 일정 확인</h3></div><p>목적 · 일정 · 자료 상태를 확인합니다. 원하시면 NDA를 먼저 맺습니다.</p></li><li style="--i:1"><em>02</em><div><h3>내용 분석 · 기획</h3></div><p>자료를 직접 읽고 장 순서와 장마다 할 말을 정합니다.</p></li><li style="--i:2"><em>03</em><div><h3>시안 · 방향 확정</h3></div><p>표지와 대표 내지를 먼저 보여 드리고 방향을 정합니다.</p></li><li style="--i:3"><em>04</em><div><h3>제작 · 피드백</h3></div><p>정한 방향으로 전체를 만들고 피드백을 반영합니다.</p></li><li style="--i:4"><em>05</em><div><h3>검수 · 납품</h3></div><p>숫자 · 오탈자를 원본과 대조하고 PPTX 원본과 PDF로 드립니다.</p></li></ol>
+    <div class="acts"><a class="gbtn" href="#contact">상담 요청하기<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
   </div>
 </section>
 
 <section class="fin" aria-label="상담 안내">
   <div class="wrap">
     <h2><b>다음 발표,</b><span>유별나게 준비하세요.</span></h2>
-    <p>지금 상담을 남기시면<br class="desktop-break"> 일정과 견적을 빠르게 안내해 드립니다.</p>
+    <p>지금 상담을 남기시면 일정과 견적을 빠르게 안내해 드립니다.</p>
     <div class="acts"><a class="gbtn gbtn--kakao" href="https://pf.kakao.com/_XgRWxj/chat" target="_blank" rel="noopener">카카오톡 상담하기 ↗</a><a class="gbtn gbtn--fill neon-btn" href="#contact" data-quote>빠른 견적 문의하기<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
   </div>
 </section>
 
 <section class="ctx" id="contact">
   <div class="wrap">
-    <div class="ctx__info" data-head>
-      <small>Contact</small>
+    <div class="ctx__info">
+      <small>CONTACT</small>
       <h2><b>지금 가진 자료로,</b><br class="desktop-break"> <span>어디까지 가능한지 물어보세요.</span></h2>
-      <p>필요한 작업과 지금 상황만 알려 주세요.<br class="desktop-break"> 목적과 일정에 맞춰 방향과 견적을 안내합니다.</p>
+      <p>필요한 작업과 지금 상황만 알려 주세요. 목적과 일정에 맞춰 방향과 견적을 안내합니다.</p>
       <dl class="cdl">
         <div><dt>이메일</dt><dd><a href="mailto:contact@youstarppt.com">contact@youstarppt.com</a></dd></div>
         <div><dt>팩스</dt><dd>0504-410-8553</dd></div>
@@ -998,12 +926,12 @@ a{color:inherit;text-decoration:none}
         <div><dt>상담 시간</dt><dd>09:00 – 17:00</dd></div>
       </dl>
       <button class="gcard" type="button" data-guide="ir"><span><b>상담 전 준비 가이드</b><small>발표 유형별 기본 구성과 준비 자료 체크리스트</small></span><i>→</i></button>
-      <p class="cmeta">개인정보보호책임자 이은비 · <span class="nw">사업자등록번호 202-13-66345</span></p>
+      <p class="cmeta">개인정보보호책임자 이은비 · 사업자등록번호 202-13-66345</p>
     </div>
     <form class="form" id="cform" novalidate>
       <div class="frow">
-        <div class="fld"><label for="f-name">성함<span class="req">*</span></label><input id="f-name" name="name" required autocomplete="name" placeholder="이름"></div>
-        <div class="fld"><label for="f-company">회사명<span class="req">*</span></label><input id="f-company" name="company" required autocomplete="organization" placeholder="회사·브랜드명"></div>
+        <div class="fld"><label for="f-name">성함<span class="req">*</span></label><input id="f-name" name="name" required autocomplete="name" placeholder="이름을 입력하세요"></div>
+        <div class="fld"><label for="f-company">회사명<span class="req">*</span></label><input id="f-company" name="company" required autocomplete="organization" placeholder="회사 또는 브랜드명"></div>
       </div>
       <div class="frow">
         <div class="fld"><label for="f-email">이메일<span class="req">*</span></label><input id="f-email" name="email" type="email" required autocomplete="email" placeholder="example@company.co.kr"></div>
@@ -1047,7 +975,7 @@ a{color:inherit;text-decoration:none}
 </footer>
 <div class="qfab" id="qfab"><button class="gbtn gbtn--fill" type="button" data-quote>빠른 견적 받기</button></div>
 <div class="qz" id="qz" role="dialog" aria-modal="true" aria-label="빠른 견적 문의"><div class="qz__bg" data-close></div><div class="qz__panel"><button class="qz__x" type="button" data-close aria-label="닫기">×</button><div class="qz__prog"><i></i></div><div id="qzBody"></div></div></div>
-<div class="gd" id="gd" role="dialog" aria-modal="true" aria-labelledby="gdTitle"><div class="gd__bg" data-gclose></div><aside class="gd__panel"><button class="gd__x" type="button" data-gclose aria-label="닫기">×</button><div class="gd__scroll"><small class="k">Ready Guide</small><h3 id="gdTitle">상담 전 준비 가이드</h3><p class="gd__lead">발표 유형을 고르면 기본 구성과 준비하면 좋은 자료를 알려 드려요. 없는 자료가 있어도 괜찮아요.</p><div class="gd__tabs" role="tablist"></div><div id="gdBody"></div></div><div class="gd__foot"><button class="gbtn gbtn--fill" type="button" data-gfill></button><button class="gbtn gbtn--kakao" type="button" data-gkakao>카카오톡으로 보내기 ↗</button></div></aside></div>
+<div class="gd" id="gd" role="dialog" aria-modal="true" aria-labelledby="gdTitle"><div class="gd__bg" data-gclose></div><aside class="gd__panel"><button class="gd__x" type="button" data-gclose aria-label="닫기">×</button><div class="gd__scroll"><small class="k">READY GUIDE</small><h3 id="gdTitle">상담 전 준비 가이드</h3><p class="gd__lead">발표 유형을 고르면 기본 구성과 준비하면 좋은 자료를 알려 드려요. 없는 자료가 있어도 괜찮아요.</p><div class="gd__tabs" role="tablist"></div><div id="gdBody"></div></div><div class="gd__foot"><button class="gbtn gbtn--fill" type="button" data-gfill></button><button class="gbtn gbtn--kakao" type="button" data-gkakao>카카오톡으로 보내기 ↗</button></div></aside></div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 
@@ -1340,13 +1268,12 @@ a{color:inherit;text-decoration:none}
   const f = document.getElementById("cform"), out = document.getElementById("fstatus"); if (!f) return;
   f.addEventListener("submit", (e) => {
     e.preventDefault(); let bad = null;
-    f.querySelectorAll("[required]").forEach((el) => { const ok = el.type === "checkbox" ? el.checked : el.value.trim() && el.checkValidity(); const w = el.closest(".fld") || el.closest(".agree"); if (w) w.classList.toggle("err", !ok); if (!ok && !bad) bad = el; });
+    f.querySelectorAll("[required]").forEach((el) => { const ok = el.type === "checkbox" ? el.checked : el.value.trim() && el.checkValidity(); const w = el.closest(".fld"); if (w) w.classList.toggle("err", !ok); if (!ok && !bad) bad = el; });
     if (bad) { out.textContent = "필수 항목을 확인해 주세요."; bad.focus(); return; }
     const d = new FormData(f), g = (k) => d.getAll(k).join(", ");
     const body = `성함: ${g("name")}\n회사명: ${g("company")}\n이메일: ${g("email")}\n연락처: ${g("phone")}\n\n${g("message")}\n\n연락 방법: ${g("contact_pref")}\n의뢰 목적: ${g("goal")}\n희망 납기: ${g("due")}\n분량: ${g("pages")}\n준비된 자료: ${g("ready")}\nNDA: ${g("nda")}`;
     location.href = `mailto:contact@youstarppt.com?subject=${encodeURIComponent("[유별난PPT 상담] " + g("company"))}&body=${encodeURIComponent(body)}`;
-    out.innerHTML = '메일 앱이 열렸습니다. 메일 앱에서 보내기를 눌러 주세요.<span class="fstatus__alt">메일 앱이 열리지 않았나요? <button type="button" data-copymail>문의 내용 복사</button> 후 contact@youstarppt.com으로 보내 주시거나 <a href="https://pf.kakao.com/_XgRWxj/chat" target="_blank" rel="noopener">카카오톡에 붙여넣어</a> 주세요.</span>';
-    out.querySelector("[data-copymail]").addEventListener("click", (ev) => { const t = `[유별난PPT 상담] ${g("company")}\n\n${body}`; (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(() => { const t = document.getElementById("toast"); if (t) { t.textContent = "문의 내용을 복사했습니다."; t.classList.add("on"); setTimeout(() => t.classList.remove("on"), 2800); } }, () => { ev.target.textContent = "복사가 안 되면 직접 선택해 복사"; }); });
+    out.textContent = "메일 앱이 열렸습니다. 메일 앱에서 보내기를 눌러 주세요.";
   });
 })();
 </script>
@@ -1389,7 +1316,7 @@ a{color:inherit;text-decoration:none}
       form.querySelector('[name="pages"]').value = ans.pages; form.querySelector('[name="due"]').value = ans.due;
       form.querySelectorAll('input[name="ready"]').forEach((c) => (c.checked = c.value === ans.ready));
       const mb = form.querySelector(".more__btn"); if (mb && mb.getAttribute("aria-expanded") !== "true") mb.click();
-      const msg = form.querySelector('[name="message"]'), line = `[빠른 견적] ${ans.goal} · ${ans.pages} · ${ans.due} · 준비 자료: ${ans.ready}`; if (msg && !msg.value.includes(line)) msg.value = (msg.value.trim() ? msg.value.trim() + "\n\n" : "") + line + "\n"; form.dispatchEvent(new Event("input", { bubbles: true }));
+      const msg = form.querySelector('[name="message"]'); if (msg && !msg.value) msg.value = `[빠른 견적] ${ans.goal} · ${ans.pages} · ${ans.due} · 준비 자료: ${ans.ready}\n`;
       close(); document.getElementById("contact").scrollIntoView({ behavior: reduce ? "auto" : "smooth" });
       setTimeout(() => form.querySelector('[name="name"]').focus({ preventScroll: true }), 800);
       return toast("선택하신 내용을 문의서에 채워 두었어요.");
@@ -1485,50 +1412,14 @@ a{color:inherit;text-decoration:none}
   const set = (o) => { document.body.classList.toggle("menu-open", o); b.setAttribute("aria-expanded", o); b.setAttribute("aria-label", o ? "메뉴 닫기" : "메뉴 열기"); sh.setAttribute("aria-hidden", !o); document.body.style.overflow = o ? "hidden" : ""; };
   b.addEventListener("click", () => set(!document.body.classList.contains("menu-open")));
   sh.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => set(false)));
-  const isOpen = () => document.body.classList.contains("menu-open");
-  addEventListener("keydown", (e) => { if (e.key === "Escape" && isOpen()) set(false); });
-  addEventListener("resize", () => { if (innerWidth > 860 && isOpen()) set(false); });
+  addEventListener("keydown", (e) => { if (e.key === "Escape") set(false); });
+  addEventListener("resize", () => { if (innerWidth > 860) set(false); });
 })();
 </script>
 
 
 
 
-
-
-<script id="focus-trap">
-(() => {
-  const sel = 'a[href],button:not([disabled]),input:not([disabled]),select,textarea,[tabindex]:not([tabindex="-1"])';
-  const active = () => document.querySelector("#qz.open .qz__panel") || document.querySelector("#gd.open .gd__panel") || (document.body.classList.contains("menu-open") ? document.getElementById("msheet") : null);
-  addEventListener("keydown", (e) => {
-    if (e.key !== "Tab") return;
-    const box = active(); if (!box) return;
-    const list = [...box.querySelectorAll(sel)].filter((el) => el.offsetParent !== null || el.getClientRects().length);
-    if (box.id === "msheet") { const b = document.getElementById("mbtn"); if (b) list.unshift(b); }
-    if (!list.length) return;
-    const first = list[0], last = list[list.length - 1], cur = document.activeElement;
-    if (!list.includes(cur)) { e.preventDefault(); first.focus(); return; }
-    if (e.shiftKey && cur === first) { e.preventDefault(); last.focus(); }
-    else if (!e.shiftKey && cur === last) { e.preventDefault(); first.focus(); }
-  });
-})();
-</script>
-<script id="section-head-reveal">
-(() => {
-  const heads = [...document.querySelectorAll("[data-head]")];
-  if (!heads.length || !("IntersectionObserver" in window)) return;
-  document.documentElement.classList.add("js-reveal");
-  heads.forEach((h) => {
-    const kids = [...h.children].flatMap((c) => c.tagName === "DIV" && !c.className ? [...c.children] : [c]);
-    kids.forEach((k, i) => k.style.setProperty("--d", i));
-  });
-  const io = new IntersectionObserver((es) => es.forEach((e) => {
-    if (e.isIntersecting) { e.target.classList.add("is-shown"); io.unobserve(e.target); }
-  }), { threshold: .2, rootMargin: "0px 0px -8% 0px" });
-  heads.forEach((h) => io.observe(h));
-  setTimeout(() => heads.forEach((h) => { if (h.getBoundingClientRect().top < innerHeight) h.classList.add("is-shown"); }), 1200);
-})();
-</script>
 <script id="section-navigation-script">
 (() => {
   const root = document.getElementById("sectionSwitch");
