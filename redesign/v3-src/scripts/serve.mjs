@@ -1,0 +1,6 @@
+import http from 'node:http';
+import fs from 'node:fs';
+import path from 'node:path';
+const root=path.resolve(import.meta.dirname,'../dist');
+const mime={'.html':'text/html; charset=utf-8','.css':'text/css','.mjs':'text/javascript','.js':'text/javascript','.svg':'image/svg+xml','.webp':'image/webp','.png':'image/png','.woff2':'font/woff2','.json':'application/json'};
+export const server=http.createServer((req,res)=>{let url,requestUrl;try{requestUrl=new URL(req.url,'http://localhost');url=decodeURIComponent(requestUrl.pathname)}catch{res.writeHead(400).end();return}let file=path.resolve(root,'.'+url);if(!file.startsWith(root+path.sep)&&file!==root){res.writeHead(403).end();return}if(fs.existsSync(file)&&fs.statSync(file).isDirectory()){if(!requestUrl.pathname.endsWith('/')){res.writeHead(308,{Location:requestUrl.pathname+'/'+requestUrl.search}).end();return}file=path.join(file,'index.html')}if(!fs.existsSync(file)){res.writeHead(404).end('Not found');return}res.writeHead(200,{'Content-Type':mime[path.extname(file)]||'application/octet-stream','Cache-Control':'no-store'});fs.createReadStream(file).pipe(res)}).listen(Number(process.env.PORT||4185),'127.0.0.1',()=>console.log('Preview http://127.0.0.1:'+(process.env.PORT||4185)));
