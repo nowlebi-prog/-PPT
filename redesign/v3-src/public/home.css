@@ -789,32 +789,8 @@ html:not(.has-motion) .h-rcard[data-clone]{display:none}
 .h-note--dark{color:#7d838f}
 
 /* 1 hero --------------------------------------------------------------------- */
-@media(min-width:768px){.h-hero{height:max(640px,88svh)}.h-hero__grid{grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:clamp(24px,4vw,72px)}}
-.h-hero__eye{color:#9db1ff}
-.h-hero__title{margin:0;font-size:clamp(40px,4.2vw,74px);font-weight:700;line-height:1.16;letter-spacing:-.055em;color:#fff}
-.h-hero__title .t-ln:first-child{color:#aeb4c0}
-.has-motion .h-hero__title .t-ln{opacity:0;transform:translateY(22px);animation:fadeUp 1s var(--ease) forwards}
-.has-motion .h-hero__title .t-ln:nth-child(2){animation-delay:.14s}
-.has-motion .h-hero__eye{opacity:0;animation:fadeUp .8s var(--ease) .05s forwards;transform:translateY(10px)}
-.h-hero__sub{margin-top:clamp(20px,3svh,30px)!important;max-width:34em;font-size:18px!important;line-height:1.7!important;color:#d5d9e2}
-.h-hero__body{margin-top:10px;max-width:36em;font-size:15.5px;line-height:1.75;color:#8b919c}
-.h-hero__cta{margin-top:clamp(24px,4svh,36px);flex-wrap:wrap;gap:12px 24px}
+.h-hero__cta{flex-wrap:wrap;row-gap:12px}
 .h-hero__cta .h-link{white-space:nowrap}
-.h-hero__inst{margin-top:18px;font-size:14px;color:#8b919c}
-.h-hero__inst a{display:inline-flex;align-items:center;gap:6px;margin-left:4px;font-weight:600;color:#9db1ff}
-.h-hero__inst a .arr{width:14px;height:14px}
-.h-hero__right{align-items:center}
-.h-hero__obj{width:min(100%,600px,48svh * 1.5)}
-@media(max-width:767px){
- .h-hero__grid{padding:calc(var(--header) + 36px) var(--g) 48px;gap:0}
- .h-hero__title{font-size:min(10.4vw,44px)}
- .h-hero__sub{font-size:16px!important;margin-top:20px!important}
- .h-hero__body{font-size:14.5px}
- .h-hero__inst{font-size:13.5px}
- .h-hero__right{margin-top:28px}
- .h-hero__obj{width:88%;margin:0 auto}
-}
-@media(max-height:700px) and (min-width:768px){.h-hero{position:relative;height:auto;min-height:0}.h-hero__grid{padding-block:calc(var(--header) + 48px) 72px}}
 
 /* 2 clients ------------------------------------------------------------------ */
 .h-cl{position:relative;z-index:1;background:#fff;color:var(--ink);border-radius:28px 28px 0 0;padding:clamp(96px,13svh,140px) var(--g) clamp(80px,11svh,120px)}
@@ -1017,12 +993,169 @@ ul.h-price__notes li::marker{color:#c3c8d2}
 }
 
 /* short descriptive copy: balance lines so a lone word never ends a block */
-.h-plan dd,.h-how__pts p,.h-ev__list p,.h-bp__list p,.h-note,.h-ev__notes li,.h-price__notes li,.iq-card__h,.iq-hint,.h-dd__head p,.h-cl__sub,.h-how__lead p,.h-hero__sub,.h-hero__body,.show__copy p,.h-rev__sub,.h-bp__head p,.h-price__head p,.h-ct__sub,.h-ct__body{text-wrap:balance}
+.h-plan dd,.h-how__pts p,.h-ev__list p,.h-bp__list p,.h-note,.h-ev__notes li,.h-price__notes li,.iq-card__h,.iq-hint,.h-dd__head p,.h-cl__sub,.h-how__lead p,.show__copy p,.h-rev__sub,.h-bp__head p,.h-price__head p,.h-ct__sub,.h-ct__body{text-wrap:balance}
 /* eyebrows inside section heads must not inherit the heads' paragraph rules */
 .is-home p.h-eye{margin:0 0 16px!important;font-size:13px!important;font-weight:700!important;line-height:1.4!important;letter-spacing:.16em!important;color:var(--blue)!important;text-align:left;text-wrap:nowrap}
 .is-home p.h-eye.h-eye--dark{color:#7f9bff!important}
-.is-home p.h-hero__eye{letter-spacing:.04em!important;font-size:14px!important;color:#9db1ff!important;white-space:normal;text-wrap:balance}
 .is-home .show__copy p.h-eye,.is-home .h-rev__head p.h-eye{margin-bottom:0!important}
 .mini--draft{font-family:'Malgun Gothic','Apple SD Gothic Neo',Pretendard,sans-serif}
 .h-rcard header{padding:22px 26px 20px}
 .h-rcard h3{min-height:2.84em}
+
+/* ==== v3.2 (2026-10-28): pricing back to a table · mobile shows the core only ==================== */
+/* pricing table (desktop look of the original v3 table; mobile-only parts hidden here) */
+.h-table caption{caption-side:top}
+.h-table .for b{display:block;margin-bottom:2px;font-size:11.5px;font-weight:700;letter-spacing:.02em;opacity:.8}
+.h-table thead th .desc{line-height:1.45}
+.h-table thead th .for{line-height:1.6}
+.h-table__m,.h-price__for-m,.h-price__m-price{display:none}
+.h-price__help{margin-top:24px}
+.h-ev__more{display:none}
+.faq-more{display:none}
+
+@media(max-width:767px){
+ /* shorter sections */
+ .h-cl,.h-how,.h-price,.h-dd,.h-bp,.h-rev{padding-top:64px!important;padding-bottom:56px!important}
+ .is-home{--h2:28px}
+ .is-home h2{margin-bottom:0}
+
+ /* 2 clients: one swipe row per group */
+ .h-cl__sub{margin-top:12px;font-size:15px}
+ .h-cl__groups{margin-top:24px}
+ .h-cl__grp{gap:10px;padding:14px 0}
+ .h-cl__grp ul{display:flex;overflow-x:auto;scroll-snap-type:x proximity;scroll-padding-left:var(--g);gap:8px;margin:0 calc(var(--g) * -1);padding:0 var(--g) 2px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+ .h-cl__grp ul::-webkit-scrollbar{display:none}
+ .h-cl__grp li{flex:0 0 108px;height:50px;padding:8px 10px;scroll-snap-align:start}
+ .h-cl__grp img{max-height:24px}
+ .h-cl .h-note{margin-top:12px}
+
+ /* 3 work: no 3D walk; heading + swipe tiles */
+ .h-work .show__track{height:auto}
+ .h-work .show__stage{position:relative;height:auto;overflow:visible}
+ .h-work .show__stage::before,.h-work .show__stage::after,.h-work #room,.h-work .show__fallback,.h-work .show__cap{display:none!important}
+ .h-work .show__copy{padding:64px var(--g) 0;opacity:1!important;visibility:visible!important}
+ .h-work .show__copy p{margin-top:12px;font-size:15px}
+ .h-work__body{padding:24px 0 56px}
+ .h-work__grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:var(--g);gap:10px;padding:0 var(--g) 2px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+ .h-work__grid::-webkit-scrollbar{display:none}
+ .h-work__grid li{flex:0 0 74%;scroll-snap-align:start}
+ .has-motion .h-work__grid li[data-reveal]{opacity:1;transform:none}
+ .h-work__foot{margin-top:20px;padding:0 var(--g);gap:10px}
+
+ /* 4 how we work: plain list, steps without the example slide */
+ .h-how__lead{margin-top:12px}
+ .h-how__lead .h-how__sub{margin:0;font-size:15px}
+ .h-how__pts{gap:0;margin-top:24px}
+ .h-how__pts li{padding:14px 0;border-radius:0;background:none;border-top:1px solid #dde1e8}
+ .h-how__pts li:last-child{border-bottom:1px solid #dde1e8}
+ .h-how__pts .no{font-size:12px}
+ .h-how__pts h3{margin-top:4px;font-size:16.5px}
+ .h-how__pts p{margin-top:4px;font-size:14px;line-height:1.65}
+ .h-how .h-process{margin-top:36px}
+ .h-process__t{font-size:20px}
+ .h-how .h-process__body{margin-top:16px;gap:0}
+ .h-process__stage,.h-process__note{display:none!important}
+ .h-steps button{padding-bottom:14px;pointer-events:none}
+ .h-steps .t{font-size:16px;color:var(--ink)!important}
+ .h-steps .no{color:var(--blue)!important;padding-top:3px}
+ .h-steps .d{max-height:none!important;opacity:1!important;margin-top:3px!important;font-size:13.5px;line-height:1.6}
+ .h-steps .bar{display:none!important}
+ .h-steps button:not(:last-child)::after{display:none}
+ .h-steps button:not(:last-child)::before{top:28px}
+
+ /* 5 pricing: "이럴 때" list, then a compact check table */
+ .h-price__head p{font-size:15px!important}
+ .h-price__for-m{display:flex;flex-direction:column;list-style:none;margin:22px 0 0;padding:0}
+ .h-price__for-m li{display:grid;grid-template-columns:76px minmax(0,1fr);gap:10px;align-items:baseline;padding:10px 0;border-top:1px solid #e6e8ec;font-size:14px;line-height:1.55;color:#3b3f48}
+ .h-price__for-m li:last-child{border-bottom:1px solid #e6e8ec}
+ .h-price__for-m b{font-size:12.5px;font-weight:800;letter-spacing:.04em;color:var(--blue)}
+ .h-price__for-m b.tier-2{color:var(--ink)}
+ .h-table-wrap{display:block!important;overflow:visible!important;margin-top:18px!important;padding-top:0!important}
+ .h-table{min-width:0!important;table-layout:fixed}
+ .h-table thead th{padding:11px 2px!important;text-align:center;vertical-align:middle!important}
+ .h-table thead th:first-child{width:38%!important}
+ .h-table thead th .up,.h-table thead th .desc,.h-table thead th .for,.h-table thead th .price,.h-table thead th .h-pill{display:none!important}
+ .h-table thead th .name{margin:0;font-size:12.5px!important;font-weight:800;letter-spacing:.02em!important}
+ .h-table thead th:nth-child(2){border-radius:12px 0 0 0}.h-table thead th:last-child{border-radius:0 12px 0 0}
+ .h-table tbody th{padding:9px 8px 9px 0!important;font-size:13px!important;line-height:1.4}
+ .h-table tbody td{padding:9px 2px!important}
+ .h-table tbody tr:last-child td:nth-child(2){border-radius:0 0 0 12px}.h-table tbody tr:last-child td:last-child{border-radius:0 0 12px 0}
+ .h-table td .ck{width:18px;height:18px}
+ .h-table__m{display:table-footer-group}
+ .h-table__m th,.h-table__m td{padding:10px 2px 0;text-align:center}
+ .h-tq{display:inline-flex;align-items:center;justify-content:center;gap:4px;min-height:40px;width:100%;max-width:84px;border-radius:999px;background:var(--ink);color:#fff;font-size:13px;font-weight:700}
+ .h-tq .arr{width:13px;height:13px}
+ .h-price__m-price{display:block;margin-top:16px;font-size:14px;line-height:1.6;color:#3b3f48}
+ .h-price__m-price b{color:var(--ink)}
+ .h-price__help{margin-top:8px;font-size:14px!important;font-weight:500!important;color:var(--muted)!important}
+ ul.h-price__notes{margin-top:14px;padding-top:12px;font-size:12.5px;line-height:1.6;gap:4px}
+
+ /* 6 demo days: compact history, flow and event pages (details on /demoday) */
+ .h-dd{gap:28px}
+ .h-dd__head p{margin-top:12px!important;font-size:15px!important}
+ .h-dd__head p+p{margin-top:6px!important;font-size:14px!important}
+ .h-dd__hist{margin-top:22px}
+ .h-dd__ht{margin-bottom:6px;font-size:14px}
+ .h-dd__yr{gap:2px!important;padding-bottom:8px}
+ .h-dd__yr>b{font-size:14px}
+ .h-dd__yr li{padding:7px 0!important;gap:1px!important}
+ .h-dd__yr h4{font-size:14.5px;line-height:1.4}
+ .h-dd__yr p{font-size:12px}
+ .h-dd__ir{font-size:12px;line-height:1.6}
+ .h-dd__card{padding:24px 20px!important}
+ .h-dd__card h3{font-size:22px}
+ .h-dd__flow{margin-top:16px}
+ .h-dd__flow li{padding:10px 0;gap:12px}
+ .h-dd__flow .no{width:24px;font-size:13px}
+ .h-dd__flow b{font-size:15px!important}
+ .h-dd__foot{margin-top:16px!important;padding-top:14px!important}
+ .h-dd__foot>p{font-size:13px}
+ .h-dd__cta{margin-top:12px}
+ .h-ev{padding:22px 18px!important}
+ .h-ev__head{gap:6px}
+ .h-ev__head h3{font-size:19px!important}
+ .h-ev__head p{font-size:14px!important}
+ .h-ev__list{gap:0!important;margin-top:12px}
+ .h-ev__list li{display:flex;align-items:baseline;gap:10px;padding:11px 0!important;border-radius:0;background:none!important;border-top:1px solid #eceef2}
+ .h-ev__list .no{font-size:12px}
+ .h-ev__list h4{margin:0;font-size:15px}
+ .h-ev__list p,.h-ev__notes{display:none}
+ .h-ev__more{display:inline-flex;margin-top:6px;font-size:14px}
+
+ /* 7 beyond PPT: the three kinds only (sample sites stay on PC) */
+ .h-bp__head p{margin-top:12px;font-size:15px}
+ .h-bp .h-pc{display:none}
+ .h-bp__body{margin-top:22px}
+ .h-bp__list{gap:8px}
+ .h-bp__list li{grid-template-columns:44px minmax(0,1fr);gap:12px;padding:14px;border-radius:14px}
+ .h-bp__list .ic{width:44px;height:44px}.h-bp__list .ic .obj{width:40px}
+ .h-bp__list h3{font-size:16px}
+ .h-bp__list p{margin-top:4px;font-size:13.5px;line-height:1.6}
+ .h-bp__foot{margin-top:22px;gap:12px}
+ .h-bp__notes p{font-size:12.5px}
+
+ /* 8 reviews + FAQ: smaller cards, five questions first */
+ .h-rev__head{gap:14px!important}
+ .h-rev__sub{margin-top:12px;font-size:15px!important}
+ .h-rev__pager button{width:44px;height:44px}
+ .h-rev__track{padding-top:18px!important;padding-bottom:18px!important}
+ .h-rcard{width:80vw}
+ .h-rcard header{padding:16px 18px}
+ .h-rcard h3{min-height:0;font-size:16px!important}
+ .h-rcard__body{padding:14px 18px 18px}
+ .h-rcard__body p,.h-rcard__body p:not(.q){font-size:13.5px!important;line-height:1.7}
+ .h-rev .h-faq{margin-top:40px!important;gap:14px!important}
+ .h-faq__t{font-size:21px!important}
+ .h-faq .faq-item button{min-height:54px;padding:13px 14px!important}
+ .h-faq .faq-item h4{font-size:15px}
+ .h-faq .faq-answer p{padding:0 14px 16px!important;font-size:14px}
+ .js-ready .h-faq .faq-list:not(.is-all) .faq-item:nth-child(n+6){display:none}
+ .js-ready .faq-more:not([hidden]){display:flex;align-items:center;justify-content:center;width:100%;min-height:48px;margin-top:8px;border-radius:12px;background:rgba(255,255,255,.6);font-size:14px;font-weight:600;color:var(--ink)}
+}
+.h-dd__flow li:last-child{border-bottom:0}
+@media(max-width:767px){
+ .h-dd__yr li{display:block!important}
+ .h-dd__yr h4{display:inline;margin-right:6px}
+ .h-dd__yr p{display:inline;text-align:left}
+ .h-rev__pager{display:none}
+}

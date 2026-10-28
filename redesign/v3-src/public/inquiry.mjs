@@ -127,7 +127,6 @@ if (form) {
   inquiry.focus = () => { const target = $$('input[name=kind]').find(x => x.checked) ? el('name') : $('input[name=kind]'); target?.focus({ preventScroll: true }); };
 
   const initial = parseSelection(location.search);
-  if (matchMedia('(max-width: 767px)').matches) more.open = false;
   prefill(initial);
   try { if (sessionStorage.getItem('youstar:estimate')) sessionStorage.removeItem('youstar:estimate'); } catch { /* storage may be unavailable */ }
 

@@ -299,3 +299,30 @@ a:hover>.arr,button:hover>.arr{transform:translateX(3px)}
 .iq-check:not(.iq-check--block) span{white-space:nowrap}
 @media(max-width:767px){.iq-due input{flex:1 1 150px}}
 @media(min-width:768px) and (max-width:1024px){.website-options{gap:20px}.website-options h3{font-size:19px;letter-spacing:-.03em}}
+
+/* v3.2 mobile: shorter contact section */
+@media(max-width:767px){
+ .h-ct{padding-top:64px;padding-bottom:64px;gap:24px}
+ .h-ct--page{padding-top:calc(var(--header) + 28px)}
+ .h-ct__title{font-size:28px}
+ .h-ct__sub{margin-top:14px;font-size:15px}
+ .h-ct__body{display:none}
+ .h-ct__list{margin-top:18px;gap:6px}
+ .h-ct__list div{grid-template-columns:64px 1fr;font-size:14px}
+ .iq-f{padding-top:16px}
+ .iq-f>legend,.iq-label{margin-bottom:8px;font-size:14px}
+ .iq-cards{gap:6px}
+ .iq-card{min-height:48px;padding:10px 14px}
+ .iq-card__t{font-size:14px}
+ .iq-chips{gap:6px}
+ .iq-chip span{padding:8px 13px;font-size:13.5px}
+ .iq-more{margin-top:18px}
+ .iq-consent{margin-top:16px}
+}
+@media(max-width:767px){
+ .iq-f[data-f=service] .iq-cards--2{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .iq-f[data-f=service] .iq-card{min-height:64px}
+ /* after choosing how to be contacted, show only that field */
+ .iq-f[data-f=contactMethod]:has(input[value=email]:checked) .iq-sub:has(#iq-phone),
+ .iq-f[data-f=contactMethod]:has(input[value=phone]:checked) .iq-sub:has(#iq-email){display:none}
+}

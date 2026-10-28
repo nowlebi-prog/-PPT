@@ -20,6 +20,7 @@ menuButton?.addEventListener('click',()=>{openDialog(menu,menuButton);menuButton
 $('[data-close-menu]')?.addEventListener('click',()=>closeDialog(menu));
 // In-page links: release the scroll lock before jumping, otherwise the page cannot move while the menu closes.
 $$('#mobile-menu a').forEach(a=>a.addEventListener('click',e=>{const h=a.getAttribute('href');const target=h.startsWith('#')&&document.getElementById(h.slice(1));if(!target){closeDialog(menu);return}e.preventDefault();dialogOpener=null;closeDialog(menu);document.body.classList.remove('modal-open');menuButton.setAttribute('aria-expanded','false');requestAnimationFrame(()=>{target.scrollIntoView({behavior:reduced.matches?'auto':'smooth'});history.pushState(null,'',h)})}));
+$$('[data-faq-more]').forEach(b=>b.addEventListener('click',()=>{b.previousElementSibling?.classList.add('is-all');b.hidden=true;b.previousElementSibling?.querySelectorAll('.faq-item')[5]?.querySelector('button')?.focus()}));
 $$('.faq-item button').forEach(button=>button.addEventListener('click',()=>{const expanded=button.getAttribute('aria-expanded')==='true';button.setAttribute('aria-expanded',String(!expanded));$('#'+button.getAttribute('aria-controls')).hidden=expanded;button.lastElementChild.textContent=expanded?'+':'−'}));
 function selectGroup(buttons,panels,attr,panelAttr,value){buttons.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset[attr]===value)));panels.forEach(p=>p.classList.toggle('is-selected',p.dataset[panelAttr]===value))}
 const priceButtons=$$('[data-price-tab]');

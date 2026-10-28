@@ -44,7 +44,7 @@ export function inquiryForm(base = '') {
     <div class="iq-sub"><label class="iq-label" for="iq-email">이메일 <span class="iq-tag" data-contact-tag="email">선택</span></label><input id="iq-email" name="email" type="email" maxlength="254" autocomplete="email" placeholder="example@company.co.kr">${err('email')}</div>
     <div class="iq-sub"><label class="iq-label" for="iq-phone">전화 <span class="iq-tag" data-contact-tag="phone">선택</span></label><input id="iq-phone" name="phone" type="tel" maxlength="30" autocomplete="tel" inputmode="tel" placeholder="010-0000-0000">${err('phone')}</div>
    </div>`, { required: true, hint: '고른 쪽만 적으면 됩니다.' })}
-  <details class="iq-more" data-more open>
+  <details class="iq-more" data-more>
    <summary><span>더 알려 주기</span><small>선택 · 분량, 자료, 함께 필요한 것, 예산</small></summary>
    <div class="iq-more__body">
     ${group('pages', '예상 분량', `<div class="iq-chips" data-show="pages-company">${o.pagesCompany.map(v => chip('pagesCompany', v, v)).join('')}</div><div class="iq-chips" data-show="pages-institution" hidden>${o.pagesInstitution.map(v => chip('pagesInstitution', v, v)).join('')}</div>`)}
