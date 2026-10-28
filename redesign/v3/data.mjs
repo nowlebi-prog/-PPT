@@ -56,8 +56,17 @@ export const pricing = [
 
 export const pricingNotes = [
   '제작비는 분량과 작업 범위에 따라 달라집니다. 수정 횟수, 제공 파일, 부가세 기준과 최종 금액은 견적서로 안내합니다.',
-  'PPTX·PDF로 전달하며, 복잡한 그래픽은 이미지로 제공되거나 별도 재제작이 필요할 수 있습니다.',
   '시장조사, 재무 모델, 투자 전략, 번역, 법률 검토는 기본 범위에 포함되지 않으며 필요 시 별도로 협의합니다.',
+];
+
+// Pricing table rows: what each tier includes (from the tiers' scope sentences above). [label, [BASIC, PRO, PREMIUM]]
+export const pricingRows = [
+  ['편집 가능한 PPTX · PDF 납품', [1, 1, 1]],
+  ['텍스트 · 기본 도형 재구성과 다듬기', [1, 1, 1]],
+  ['브랜드 맞춤 표지 · 목차 · 내지 디자인', [0, 1, 1]],
+  ['차트 · 인포그래픽 디자인', [0, 1, 1]],
+  ['발표 흐름 · 페이지 구성', [0, 0, 1]],
+  ['장표별 핵심 문장 정리', [0, 0, 1]],
 ];
 
 // Institution (demoday) base price. Shown on screen and in the team calculator only when status is 'approved'.
@@ -133,7 +142,7 @@ export const demodayFlow = ['기관 일정 확인', '팀별 자료 취합', '구
 // 함께 맡길 수 있는 제작. obj = decorative concept object in assets/concepts (not client work).
 export const beyondItems = [
   { id: 'print', obj: 'print', title: '손에 남는 인쇄물', body: '브로슈어, 카탈로그, 리플렛, 교육 안내 책자. 발표자료의 내용을 판형에 맞게 재편집하고 인쇄용 PDF로 전달합니다.' },
-  { id: 'web', obj: 'digital', title: '온라인으로 이어지는 홈페이지', body: '회사·서비스 소개 페이지부터 행사 페이지까지. PC와 모바일에서 브랜드가 일관되게 보이도록 제작합니다.' },
+  { id: 'web', obj: 'digital', title: '온라인으로 이어지는 홈페이지', body: '회사·서비스 소개 페이지. PC와 모바일에서 브랜드가 일관되게 보이도록 제작합니다.' },
   { id: 'visual', obj: 'image-video', title: '설명을 돕는 이미지와 영상', body: '제품 목업, 자료에 필요한 이미지, 짧은 소개 영상과 인터뷰 촬영. 전달할 내용에 맞춰 필요한 제작물을 함께 준비합니다.' },
 ];
 

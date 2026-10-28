@@ -2,7 +2,8 @@
 // from the back row up to the big screen, which cycles through real slides. three.js (r128, self-hosted)
 // is loaded only when this section exists and WebGL works; otherwise a still slide is shown instead.
 const sec=document.getElementById('portfolio'),stage=sec?.querySelector('.show__stage'),cv=document.getElementById('room');
-if(sec&&stage&&cv){
+if(sec&&stage&&cv&&matchMedia('(max-width: 767px)').matches)stage.classList.add('no3d');
+else if(sec&&stage&&cv){
  const base=document.body.dataset.base||'';
  const load=()=>new Promise((ok,no)=>{if(window.THREE)return ok();const s=document.createElement('script');s.src=base+'assets/vendor/three.min.js';s.onload=ok;s.onerror=no;document.head.appendChild(s)});
  let started=false;

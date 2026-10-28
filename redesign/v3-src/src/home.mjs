@@ -1,26 +1,29 @@
 // Home: 9 sections (최종 기획안 2장). Copy follows 문구 교체안. Concept objects are decorative, not client evidence.
-import { site, pricing, pricingNotes, faq, processSteps, workPoints, proofStats, demodayHistory, demodayTeamsApproved, demodayFlow, demodayPrice, irConsulting, partnerGroups, partnerLogos, reviews, webShowcase, websiteOptions, eventPageCommon, beyondItems, featuredWork } from './data.mjs';
+import { site, pricing, pricingNotes, pricingRows, faq, processSteps, workPoints, proofStats, demodayHistory, demodayTeamsApproved, demodayFlow, demodayPrice, irConsulting, partnerGroups, partnerLogos, reviews, webShowcase, websiteOptions, eventPageCommon, beyondItems, featuredWork } from './data.mjs';
 import { portfolio } from './portfolio.mjs';
-import { esc, arrow, ext, title, eyebrow } from './ui.mjs';
+import { esc, arrow, ext, ck, title, eyebrow } from './ui.mjs';
 import { contactSection } from './contact.mjs';
 
 const obj = (name, base, cls = '', eager = false) => `<img class="obj ${cls}" src="${base}assets/concepts/${name}.webp" alt="" width="1200" height="800" decoding="async" loading="${eager ? 'eager' : 'lazy'}"${eager ? ' fetchpriority="high"' : ''}>`;
 const typeNames = { ir: 'IR과 발표자료', company: '회사소개와 제안서', print: '인쇄와 편집' };
 const won = n => n.toLocaleString('ko-KR') + '원';
 
-/* 1 — hero */
+/* 1 — hero: restored to the earlier v3 hero on request (2026-10-28) — rotating first line, giant wordmark, deck object */
+const rot = ['같은 초안도,', '급한 IR도,', '줄글 메모도,', 'AI로 뽑은 장표도,'];
 function hero(base) {
   return `<section id="hero" class="h-hero" data-header="dark">
  <div class="h-hero__grid">
   <div class="h-hero__left">
-   ${eyebrow('IR · 회사소개서 · 발표자료 기획과 디자인', 'h-eye--dark h-hero__eye')}
-   <h1 class="h-hero__title">${title(['중요한 발표에는,', ['유별난 자료가', '필요합니다.']])}</h1>
-   <p class="h-hero__sub" data-intro>줄글 메모부터 IR 초안까지. 전할 내용의 흐름을 잡고, 목적에 맞는 디자인으로 완성합니다.</p>
-   <p class="h-hero__body" data-intro>무엇을 먼저 말하고, 무엇을 크게 보여줄지. 발표의 목적부터 살펴 내용과 디자인을 함께 정리합니다.</p>
-   <div class="h-hero__cta" data-intro><a class="h-pill h-pill--blue" href="#contact">견적 문의 ${arrow}</a><a class="h-link h-link--light" href="#portfolio">작업 사례 보기 ${arrow}</a></div>
-   <p class="h-hero__inst" data-intro>여러 팀의 IR 제작이 필요한가요? <a href="#demoday">기관·데모데이 안내 ${arrow}</a></p>
+   <h1 class="h-title" aria-label="같은 초안도, 유별나게.">
+    <span class="h-title__rot" aria-hidden="true"><span class="h-rot" data-rot>${rot.map((t, i) => `<b${i === 0 ? ' class="is-on"' : ''}>${t}</b>`).join('')}</span></span>
+    <span class="h-title__big" aria-hidden="true">${[...'유별나게'].map((c, i) => `<b style="--i:${i}">${c}</b>`).join('')}<b class="dot" style="--i:4">.</b></span>
+   </h1>
+   <p class="h-hero__sub" data-intro>기획자의 시선과 디자이너의 손으로,<br>발표에 필요한 흐름과 디자인을 완성합니다.</p>
   </div>
-  <div class="h-hero__right" aria-hidden="true"><div class="h-hero__obj">${obj('deck', base, '', true)}</div></div>
+  <div class="h-hero__right">
+   <div class="h-hero__obj">${obj('deck', base, '', true)}</div>
+   <div class="h-hero__cta" data-intro><a class="h-pill h-pill--blue" href="#contact">내 자료로 견적 상담 ${arrow}</a><a class="h-link h-link--light" href="#portfolio">작업 먼저 보기 ${arrow}</a></div>
+  </div>
  </div>
 </section>`;
 }
@@ -78,7 +81,7 @@ function how() {
  <div class="h-how__head" data-reveal>
   ${eyebrow('HOW WE WORK')}
   <h2>${title(['좋은 아이템이,', ['자료 때문에', '작아 보이지 않게.']])}</h2>
-  <div class="h-how__lead"><p class="h-how__sub">디자인을 시작하기 전, 전달할 내용과 읽히는 순서부터 살핍니다.</p><p>선택한 제작 범위에 맞춰 내용의 구조, 숫자의 표현, 제품의 강점을 다듬습니다.</p></div>
+  <div class="h-how__lead"><p class="h-how__sub">디자인을 시작하기 전, 전달할 내용과 읽히는 순서부터 살핍니다.</p></div>
  </div>
  <ol class="h-how__pts">${workPoints.map((p, i) => `<li data-reveal style="--i:${i}"><span class="no">0${i + 1}</span><h3>${esc(p.title)}</h3><p>${esc(p.body)}</p></li>`).join('')}</ol>
  <div class="h-process">
@@ -92,28 +95,30 @@ function how() {
 </section>`;
 }
 
-/* 5 — service and pricing: pick by the state of the material */
+/* 5 — service and pricing: comparison table (desktop: full header; mobile: names + checks, "이럴 때" list above) */
+const no = '<span class="no" aria-label="미포함">—</span>';
 function pricingSection(base) {
-  const price = p => p.status === 'approved' && Number.isSafeInteger(p.unitPrice)
+  const up = ['', 'BASIC 전부 +', 'PRO 전부 +'];
+  const approved = p => p.status === 'approved' && Number.isSafeInteger(p.unitPrice);
+  const price = p => approved(p)
     ? `<b>${p.setupFee ? `세팅 ${won(p.setupFee)} + ` : ''}장당 ${won(p.unitPrice)}</b>${p.minPages ? `<small>${p.minPages}장 이상</small>` : ''}`
-    : '<b>자료 확인 후 견적</b>';
+    : '<b>자료 확인 후 견적</b><small>장수 · 범위 기준</small>';
+  const pre = p => `href="#contact" data-prefill="service=${p.id}&kind=company"`;
   return `<section id="pricing" class="h-price" data-header="light">
  <div class="h-price__head" data-reveal>
   ${eyebrow('SERVICE')}
   <h2>${title(['디자인만 필요할 때도,', '처음부터 함께할 때도.'])}</h2>
   <p>지금 준비된 자료를 바탕으로, 필요한 작업 범위부터 제안합니다.</p>
  </div>
- <div class="h-plans">${pricing.map((p, i) => `<article class="h-plan tier-${i}" data-reveal style="--i:${i}">
-  <p class="h-plan__name">${esc(p.name)}</p>
-  <h3>${esc(p.tagline)}</h3>
-  <dl>
-   <div><dt>이럴 때</dt><dd>${esc(p.when)}</dd></div>
-   <div><dt>제공 범위</dt><dd>${esc(p.scope)}</dd></div>
-  </dl>
-  <p class="h-plan__price">${price(p)}</p>
-  <a class="h-pill h-plan__cta" href="#contact" data-prefill="service=${p.id}&kind=company">${esc(p.name)} 견적 문의 ${arrow}</a>
- </article>`).join('')}</div>
- <p class="h-price__help" data-reveal>어떤 서비스가 맞을지 몰라도 괜찮습니다. 자료를 살펴보고 필요한 범위부터 안내합니다.</p>
+ <ul class="h-price__for-m">${pricing.map((p, i) => `<li><b class="tier-${i}">${esc(p.name)}</b><span>${esc(p.when)}</span></li>`).join('')}</ul>
+ <div class="h-table-wrap" data-reveal><table class="h-table">
+  <caption class="sr-only">서비스별 제공 범위</caption>
+  <thead><tr><th scope="col"><span class="sr-only">제공 범위</span></th>${pricing.map((p, i) => `<th scope="col" class="tier-${i}"><span class="up">${up[i] || '&nbsp;'}</span><span class="name">${esc(p.name)}</span><span class="desc">${esc(p.tagline)}</span><span class="for"><b>이럴 때</b> ${esc(p.when)}</span><span class="price">${price(p)}</span><a class="h-pill h-pill--sm" ${pre(p)}>${esc(p.name)} 견적 문의 ${arrow}</a></th>`).join('')}</tr></thead>
+  <tbody>${pricingRows.map(([t, v]) => `<tr><th scope="row">${esc(t)}</th>${v.map((x, i) => `<td class="tier-${i}${x ? '' : ' off'}">${x ? ck : no}</td>`).join('')}</tr>`).join('')}</tbody>
+  <tfoot class="h-table__m"><tr><th scope="row"><span class="sr-only">견적 문의</span></th>${pricing.map(p => `<td><a class="h-tq" ${pre(p)} aria-label="${esc(p.name)} 견적 문의">문의 ${arrow}</a></td>`).join('')}</tr></tfoot>
+ </table></div>
+ <p class="h-price__m-price">${pricing.every(p => !approved(p)) ? '세 서비스 모두 <b>자료 확인 후 견적</b>입니다. (장수 · 범위 기준)' : pricing.map(p => `${esc(p.name)} ${approved(p) ? `장당 ${won(p.unitPrice)}` : '자료 확인 후 견적'}`).join(' · ')}</p>
+ <p class="h-price__help" data-reveal>어떤 서비스가 맞을지 몰라도 괜찮습니다. 자료만 보내 주시면 맞는 범위부터 안내합니다.</p>
  <ul class="h-price__notes">${pricingNotes.map(t => `<li>${esc(t)}</li>`).join('')}</ul>
 </section>`;
 }
@@ -129,7 +134,7 @@ function demoday(base) {
    ${eyebrow('DEMODAY & IR')}
    <h2>${title(['각 팀의 가능성을,', '한 무대에서 선명하게.'])}</h2>
    <p class="h-dd__sub">팀마다 다른 사업과 브랜드를 이해하고, 행사 일정에 맞춰 IR 자료를 완성합니다.</p>
-   <p>자료 취합부터 팀별 피드백, 최종 납품까지 한 흐름으로 진행합니다. 기관이 자료를 모아 전달하거나, 각 팀과 직접 소통하는 방식 모두 협의할 수 있습니다.</p>
+   <p>기관이 자료를 모아 전달하거나, 각 팀과 직접 소통하는 방식 모두 협의할 수 있습니다.</p>
   </div>
   <div class="h-dd__hist" data-reveal>
    <h3 class="h-dd__ht">함께 준비한 데모데이</h3>
@@ -150,6 +155,7 @@ function demoday(base) {
   <div class="h-ev__head"><h3>행사의 시작부터 기록까지, 웹페이지로.</h3><p>IR 자료와 어울리는 디자인으로 행사 페이지를 제작합니다. 필요한 기능에 따라 범위와 비용을 별도로 안내합니다.</p></div>
   <ol class="h-ev__list">${websiteOptions.map((o, i) => `<li><span class="no">0${i + 1}</span><h4>${esc(o.name)}</h4><p>${esc(o.summary)}</p></li>`).join('')}</ol>
   <ul class="h-ev__notes"><li>${esc(eventPageCommon)}</li><li>참가팀 인터뷰 영상 촬영도 별도로 문의할 수 있습니다.</li></ul>
+  <a class="h-link h-ev__more" href="${base}demoday/#website-options">행사 페이지 자세히 보기 ${arrow}</a>
  </div>
 </section>`;
 }
@@ -196,7 +202,7 @@ function voice() {
  <div class="h-rev__foot"><p class="h-rev__note">외부 판매 페이지에 올라온 후기 원문입니다.</p>${site.reviewSourceUrl ? `<a class="h-link" href="${esc(site.reviewSourceUrl)}" target="_blank" rel="noopener">후기 원문 보기 ${ext}</a>` : ''}</div>
  <div class="h-faq" id="faq">
   <h3 class="h-faq__t" data-reveal>맡기기 전, 궁금한 것들.</h3>
-  <div class="faq-list">${faq.map((x, i) => `<div class="faq-item"><h4><button type="button" aria-expanded="false" aria-controls="answer-${i}" id="question-${i}"><span class="q">${esc(x.question)}</span><span class="pm" aria-hidden="true">+</span></button></h4><div class="faq-answer" id="answer-${i}" role="region" aria-labelledby="question-${i}" hidden><p>${esc(x.answer)}</p></div></div>`).join('')}</div>
+  <div class="faq-list">${faq.map((x, i) => `<div class="faq-item"><h4><button type="button" aria-expanded="false" aria-controls="answer-${i}" id="question-${i}"><span class="q">${esc(x.question)}</span><span class="pm" aria-hidden="true">+</span></button></h4><div class="faq-answer" id="answer-${i}" role="region" aria-labelledby="question-${i}" hidden><p>${esc(x.answer)}</p></div></div>`).join('')}</div><button class="faq-more" type="button" data-faq-more>질문 더 보기 +</button>
  </div>
 </section>`;
 }
