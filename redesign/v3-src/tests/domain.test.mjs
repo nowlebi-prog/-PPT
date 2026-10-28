@@ -145,6 +145,11 @@ test('form services confirm only on their own success signal', async () => {
   assert.equal((await domain.submitInquiry(validInquiry, { provider: 'web3forms', endpoint: 'https://api.web3forms.com/submit', fetchImpl: reply(200, { success: true }), idempotencyKey: 'w3-key', today })).code, 'configuration');
   assert.equal((await domain.submitInquiry(validInquiry, { provider: 'google', endpoint: 'https://script.google.com/macros/s/x/exec', fetchImpl: reply(200, { ok: true, id: 12 }), idempotencyKey: 'gs-ok', today })).inquiryId, '12');
   assert.equal((await domain.submitInquiry(validInquiry, { provider: 'google', endpoint: 'https://script.google.com/macros/s/x/exec', fetchImpl: reply(200, { ok: false }), idempotencyKey: 'gs-no', today })).ok, false);
+  assert.equal((await domain.submitInquiry(validInquiry, { provider: 'google', endpoint: 'https://script.google.com/macros/s/x/exec', fetchImpl: reply(200, { result: 'success', row: 4 }), idempotencyKey: 'gs-tpl', today })).inquiryId, '4');
+  let gsBody;
+  await domain.submitInquiry(validInquiry, { provider: 'google', endpoint: 'https://script.google.com/macros/s/x/exec', fetchImpl: async (url, init) => { gsBody = init.body; return new Response('<html>login</html>', { status: 200 }); }, idempotencyKey: 'gs-html', today });
+  assert.equal(gsBody.get('이름'), '홍길동');
+  assert.equal(JSON.parse(gsBody.get('payload')).key, 'gs-html');
 });
 
 test('server field, rate-limit, and failure responses are distinct and never succeed', async () => {

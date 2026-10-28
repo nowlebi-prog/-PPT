@@ -32,7 +32,7 @@ function doPost(e) {
   const lock = LockService.getScriptLock();
   lock.waitLock(10000);
   try {
-    const body = JSON.parse(e.postData.contents);
+    const body = JSON.parse((e.parameter && e.parameter.payload) || e.postData.contents);
     const rows = Array.isArray(body.rows) ? body.rows.slice(0, 40) : [];
     const key = String(body.key || '').slice(0, 200);
     const book = SpreadsheetApp.getActiveSpreadsheet();
@@ -72,7 +72,9 @@ inquiryProvider: 'google',
 inquiryEndpoint: 'https://script.google.com/macros/s/…/exec',
 ```
 
-코드를 고친 뒤에는 **배포 → 배포 관리 → 수정 → 새 버전**으로 다시 배포해야 반영됩니다.
+코드를 고친 뒤에는 **배포 → 배포 관리 → 연필(수정) → 버전: 새 버전 → 배포**로 다시 배포해야 반영됩니다. 이렇게 하면 웹 앱 URL은 바뀌지 않습니다.
+
+다른 시트 템플릿 코드를 이미 쓰고 있어도 됩니다. 홈페이지는 항목을 한국어 이름(`이름`, `이메일`, `자료 상태` …)으로도 함께 보내고, 응답이 `{ "ok": true }` 또는 `{ "result": "success" }`이면 접수 완료로 봅니다. 그 밖의 응답이나 로그인 화면이 오면 ‘접수 여부를 확인하지 못했습니다’로 안내합니다(액세스 권한이 ‘모든 사용자’가 아닐 때 흔히 생깁니다).
 
 ## ② Web3Forms
 
