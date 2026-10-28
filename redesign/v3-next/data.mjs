@@ -17,8 +17,18 @@ export const site = {
   inquiryKey: null,
   inquiryFiles: false, // 접수 서비스가 파일 첨부를 받을 때만 true (Formspree 유료 플랜 등)
   inquiryMaxFileMB: null, // 접수 서비스의 첨부 한도(MB)
-  privacyApproved: false,
-  privacyPolicy: null, // Approved [{heading, body}] required before activation. 초안: PRIVACY_DRAFT.md
+  privacyApproved: false, // true + 아래 안내문 확정 → /privacy 게시와 접수 전송이 함께 켜집니다.
+  privacyPolicy: [ // 구글 시트 접수 기준 안내문 (PRIVACY_DRAFT.md). 책임자 이름 등은 확정 시 고칩니다.
+    { heading: '수집하는 항목', body: '견적 문의 시 이름, 회사·기관명, 이메일, 전화번호, 첨부 자료(공유 링크)와 문의 내용(자료 용도, 자료 상태, 필요한 날짜, 분량, 예산 등)을 받습니다. 이름과 회신 연락처(이메일 또는 전화 중 하나)는 견적을 안내하는 데 필요한 항목입니다.' },
+    { heading: '이용 목적', body: '견적 상담과 회신, 작업 범위와 일정 안내에만 사용합니다. 광고나 마케팅 목적으로 쓰지 않습니다.' },
+    { heading: '보유 기간', body: '상담 종료 후 1년 동안 보관한 뒤 파기합니다. 계약을 맺은 경우에는 관련 법령에서 정한 기간 동안 보관합니다.' },
+    { heading: '처리 위탁', body: '문의 접수와 보관에 Google LLC의 Google 스프레드시트와 Apps Script를 사용하며, 접수 알림은 Gmail로 받습니다. 접수 내용은 Google이 운영하는 해외(미국 등) 서버에 저장될 수 있습니다. 위탁받은 곳은 접수·보관·알림 외의 목적으로 개인정보를 처리하지 않습니다.' },
+    { heading: '제3자 제공', body: '법령에 따른 경우를 제외하고, 동의 없이 제3자에게 제공하지 않습니다.' },
+    { heading: '첨부 자료와 작업 사례', body: '보내 주신 자료는 견적 확인에만 사용하며 공개하지 않습니다. 포트폴리오 활용 협의 동의는 선택 사항이며, 동의하신 경우에도 별도로 공개 승인을 받은 뒤에만 작업 사례로 사용합니다.' },
+    { heading: '정보주체의 권리', body: '언제든지 개인정보 열람, 정정, 삭제, 처리 정지를 요청할 수 있습니다. 아래 문의처로 알려 주시면 지체 없이 처리합니다.' },
+    { heading: '개인정보 보호책임자와 문의처', body: '유별난PPT 대표 · contact@youstarppt.com · 010-8186-8553 · 사업자등록번호 202-13-66345' },
+    { heading: '시행일', body: '이 안내는 홈페이지에 게시한 날부터 적용합니다.' },
+  ],
   reviewSourceUrl: null, // 후기 원문 링크. 확인된 출처일 때만 '후기 원문 보기' 버튼이 나옵니다.
 };
 

@@ -280,8 +280,14 @@ function buildRequest(provider, payload, key, { files = [], accessKey = null, so
     return { init: { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(body) } };
   }
   if (provider === 'google') {
-    // Apps Script web app: a text/plain body avoids a CORS preflight; the script answers {"ok":true}.
-    return { init: { method: 'POST', body: JSON.stringify({ subject, rows: lines, data: n, key }) } };
+    // Apps Script web app. A form-encoded body is a "simple" request (no CORS preflight) and works with
+    // FORM_SETUP.md's script (reads `payload`) as well as common sheet templates that read e.parameter[label].
+    const body = new URLSearchParams();
+    body.set('payload', JSON.stringify({ subject, rows: lines, data: n, key }));
+    body.set('subject', subject);
+    body.set('key', key);
+    for (const [label, value] of lines) body.set(label, String(value));
+    return { init: { method: 'POST', body } };
   }
   return null;
 }
@@ -296,7 +302,7 @@ function confirmed(provider, status, data) {
   if (status < 200 || status > 299) return null;
   if (provider === 'formspree') return data && data.ok !== false && !data.errors ? '' : null;
   if (provider === 'web3forms') return data?.success === true ? '' : null;
-  if (provider === 'google') return data?.ok === true ? String(data.id ?? '') : null;
+  if (provider === 'google') return data?.ok === true || data?.result === 'success' ? String(data.id ?? data.row ?? '') : null;
   return null;
 }
 
