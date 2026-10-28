@@ -287,12 +287,17 @@ function buildRequest(provider, payload, key, { files = [], accessKey = null, so
     body.set('subject', subject);
     body.set('key', key);
     for (const [label, value] of lines) body.set(label, String(value));
+    // Code-named copies for sheet templates whose header row uses English names (name, email, message …).
+    for (const [field, value] of Object.entries(n)) {
+      if (value === null || value === '' || value === false || (Array.isArray(value) && !value.length) || body.has(field)) continue;
+      body.set(field, Array.isArray(value) ? value.join(', ') : String(value));
+    }
     return { init: { method: 'POST', body } };
   }
   return null;
 }
 
-function confirmed(provider, status, data) {
+function confirmed(provider, status, data, raw = '') {
   if (provider === 'api') {
     const receipt = data?.inquiryId ?? data?.id;
     if (status !== 201) return null;
@@ -302,7 +307,15 @@ function confirmed(provider, status, data) {
   if (status < 200 || status > 299) return null;
   if (provider === 'formspree') return data && data.ok !== false && !data.errors ? '' : null;
   if (provider === 'web3forms') return data?.success === true ? '' : null;
-  if (provider === 'google') return data?.ok === true || data?.result === 'success' ? String(data.id ?? data.row ?? '') : null;
+  if (provider === 'google') {
+    // Only a ContentService reply from doPost is readable cross-origin, so a 2xx body here comes from the script itself.
+    if (data && typeof data === 'object') {
+      if (data.ok === false || data.success === false || data.result === 'error' || data.status === 'error' || data.error) return null;
+      if (data.ok === true || data.success === true || data.result === 'success' || data.status === 'success') return String(data.id ?? data.row ?? '');
+      return null;
+    }
+    return /^\s*(ok|success|성공|완료|접수)/i.test(raw) ? '' : null;
+  }
   return null;
 }
 
@@ -328,10 +341,11 @@ export async function submitInquiry(payload, { provider = 'api', endpoint, fetch
       return outcome('network', '접수 여부를 확인하지 못했습니다. 잠시 후 다시 확인해 주세요.', { idempotencyKey: key });
     }
     const status = response.status;
-    let data = null;
-    try { data = await response.json(); } catch { /* A malformed response never confirms a receipt. */ }
+    let raw = '', data = null;
+    try { raw = await response.text(); } catch { /* unreadable body */ }
+    try { data = JSON.parse(raw); } catch { /* A malformed response never confirms a receipt (except a plain 'ok' from Apps Script). */ }
     const shared = { status, idempotencyKey: key };
-    const receipt = confirmed(provider, status, data);
+    const receipt = confirmed(provider, status, data, raw.slice(0, 200));
     if (receipt !== null) return outcome('success', '문의가 접수되었습니다.', { ...shared, inquiryId: receipt || null });
     if (status === 400 || status === 422) {
       const errors = responseErrors(data);

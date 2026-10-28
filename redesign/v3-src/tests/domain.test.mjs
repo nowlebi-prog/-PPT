@@ -149,6 +149,9 @@ test('form services confirm only on their own success signal', async () => {
   let gsBody;
   await domain.submitInquiry(validInquiry, { provider: 'google', endpoint: 'https://script.google.com/macros/s/x/exec', fetchImpl: async (url, init) => { gsBody = init.body; return new Response('<html>login</html>', { status: 200 }); }, idempotencyKey: 'gs-html', today });
   assert.equal(gsBody.get('이름'), '홍길동');
+  assert.equal(gsBody.get('email'), 'hello@example.com');
+  assert.equal((await domain.submitInquiry(validInquiry, { provider: 'google', endpoint: 'https://script.google.com/macros/s/x/exec', fetchImpl: async () => new Response('OK', { status: 200 }), idempotencyKey: 'gs-text', today })).ok, true);
+  assert.equal((await domain.submitInquiry(validInquiry, { provider: 'google', endpoint: 'https://script.google.com/macros/s/x/exec', fetchImpl: reply(200, { result: 'error', error: 'x' }), idempotencyKey: 'gs-err', today })).ok, false);
   assert.equal(JSON.parse(gsBody.get('payload')).key, 'gs-html');
 });
 

@@ -12,12 +12,12 @@ export const site = {
   // 비어 있으면 폼은 '이메일 작성하기'로 동작하고, 접수 완료 화면을 띄우지 않습니다.
   // Web3Forms: inquiryProvider 'web3forms' + inquiryEndpoint 'https://api.web3forms.com/submit' + inquiryKey(액세스 키).
   // 구글 시트: inquiryProvider 'google' + inquiryEndpoint(Apps Script 웹 앱 주소). 설정 순서는 FORM_SETUP.md.
-  inquiryProvider: null,
-  inquiryEndpoint: null,
+  inquiryProvider: 'google',
+  inquiryEndpoint: 'https://script.google.com/macros/s/AKfycbwEreT8ghxoNvqLF29rkVfG0LER2f59lMeu4hormVmcDwMROb0-kFbU4swtab4VHRVM/exec',
   inquiryKey: null,
   inquiryFiles: false, // 접수 서비스가 파일 첨부를 받을 때만 true (Formspree 유료 플랜 등)
   inquiryMaxFileMB: null, // 접수 서비스의 첨부 한도(MB)
-  privacyApproved: false, // true + 아래 안내문 확정 → /privacy 게시와 접수 전송이 함께 켜집니다.
+  privacyApproved: true, // 2026-10-28 구글 시트 접수 연결과 함께 게시. false로 바꾸면 전송이 꺼지고 '이메일 작성하기'로 돌아갑니다.
   privacyPolicy: [ // 구글 시트 접수 기준 안내문 (PRIVACY_DRAFT.md). 책임자 이름 등은 확정 시 고칩니다.
     { heading: '수집하는 항목', body: '견적 문의 시 이름, 회사·기관명, 이메일, 전화번호, 첨부 자료(공유 링크)와 문의 내용(자료 용도, 자료 상태, 필요한 날짜, 분량, 예산 등)을 받습니다. 이름과 회신 연락처(이메일 또는 전화 중 하나)는 견적을 안내하는 데 필요한 항목입니다.' },
     { heading: '이용 목적', body: '견적 상담과 회신, 작업 범위와 일정 안내에만 사용합니다. 광고나 마케팅 목적으로 쓰지 않습니다.' },
