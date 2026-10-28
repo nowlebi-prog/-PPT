@@ -67,7 +67,8 @@ if(sec&&stage&&cv){
   const size=()=>{const w=stage.clientWidth,h=stage.clientHeight;R.setSize(w,h,false);cam.aspect=w/h;cam.fov=cam.aspect<1?62:40;cam.updateProjectionMatrix();const k=2*Math.tan(cam.fov*Math.PI/360);const d=Math.max(Hh/k,W/(k*cam.aspect))*1.16;P[2][2]=Math.min(-8.48+d,9)};
   const offset=k=>{const w=stage.clientWidth,h=stage.clientHeight;if(w>860)cam.setViewOffset(w,h,-w*.12*(1-ss(Math.min(1,k/.6))),0,w,h);else cam.clearViewOffset()};
   size();addEventListener('resize',size);
-  const prog=()=>{const r=sec.getBoundingClientRect();return Math.min(1,Math.max(0,-r.top/(r.height-innerHeight)))};
+  const track=sec.querySelector('.show__track')||sec;
+  const prog=()=>{const r=track.getBoundingClientRect();const span=r.height-innerHeight;return span>0?Math.min(1,Math.max(0,-r.top/span)):1};
   new IntersectionObserver(([e])=>{on=e.isIntersecting;if(on&&!running){running=true;prevT=0;requestAnimationFrame(loop)}},{rootMargin:'200px'}).observe(sec);
   const drawScreen=()=>{cx.fillStyle='#050814';cx.fillRect(0,0,1600,900);const a=imgs[cur],b=imgs[nxt];if(a.complete&&a.naturalWidth){cx.globalAlpha=1;cx.drawImage(a,0,0,1600,900)}if(fade<1&&b.complete&&b.naturalWidth){cx.globalAlpha=ss(fade);cx.drawImage(b,0,0,1600,900)}cx.globalAlpha=1;scTex.needsUpdate=true};
   imgs.forEach(im=>im.addEventListener('load',drawScreen));
