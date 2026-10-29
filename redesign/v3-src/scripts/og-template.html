@@ -1,0 +1,26 @@
+<!doctype html>
+<!-- Link-preview image (KakaoTalk, Slack, Facebook). Render at 1200x630 and save as public/assets/og.png. -->
+<html lang="ko"><head><meta charset="utf-8"><style>
+@font-face{font-family:P;src:url(../public/assets/fonts/Pretendard-Bold.woff2) format('woff2');font-weight:700}
+@font-face{font-family:P;src:url(../public/assets/fonts/Pretendard-SemiBold.woff2) format('woff2');font-weight:600}
+@font-face{font-family:P;src:url(../public/assets/fonts/Pretendard-Medium.woff2) format('woff2');font-weight:500}
+*{box-sizing:border-box;margin:0}
+html,body{width:1200px;height:630px;overflow:hidden}
+body{font-family:P,sans-serif;color:#fff;background:#0b0c0f;position:relative;-webkit-font-smoothing:antialiased}
+.glow{position:absolute;right:-180px;top:-120px;width:900px;height:900px;border-radius:50%;background:radial-gradient(closest-side,rgba(31,75,255,.38),rgba(31,75,255,.1) 55%,transparent 72%)}
+.obj{position:absolute;right:-40px;top:70px;width:640px}
+.brand{position:absolute;left:80px;top:64px;display:flex;align-items:center;gap:14px;font-weight:700;font-size:34px;letter-spacing:-.02em}
+.brand img{width:32px;height:37px}
+.copy{position:absolute;left:80px;top:178px}
+.rot{font-weight:600;font-size:46px;letter-spacing:-.03em;color:#b9bfcc}
+.big{margin-top:2px;font-weight:700;font-size:178px;line-height:1.02;letter-spacing:-.06em}
+.big i{font-style:normal;color:#4f6bff}
+.sub{position:absolute;left:80px;bottom:66px;font-weight:500;font-size:27px;letter-spacing:-.02em;color:#a7afc0}
+.sub b{color:#fff;font-weight:600}
+</style></head><body>
+<div class="glow"></div>
+<img class="obj" src="../public/assets/concepts/deck.webp" alt="">
+<div class="brand"><img src="../public/assets/logo.svg" alt="">유별난PPT</div>
+<div class="copy"><p class="rot">IR · 회사소개서 · 제안서도,</p><p class="big">유별나게<i>.</i></p></div>
+<p class="sub"><b>IR · 발표자료 기획 디자인</b> · 내용의 흐름부터 디자인까지</p>
+</body></html>

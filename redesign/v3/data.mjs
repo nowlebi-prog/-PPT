@@ -1,6 +1,7 @@
 // Monetary values are integer KRW. Only approved prices are stored here: this file is public on GitHub Pages.
 export const site = {
   brand: '유별난PPT',
+  url: 'https://nowlebi-prog.github.io/-PPT/redesign/v3/', // 공개 주소. 링크 미리보기(og:url·og:image)에 씁니다.
   email: 'contact@youstarppt.com',
   phone: '010-8186-8553',
   fax: '0504-410-8553',

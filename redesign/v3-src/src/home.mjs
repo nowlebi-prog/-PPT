@@ -9,16 +9,16 @@ const typeNames = { ir: 'IR과 발표자료', company: '회사소개와 제안�
 const won = n => n.toLocaleString('ko-KR') + '원';
 
 /* 1 — hero: restored to the earlier v3 hero on request (2026-10-28) — rotating first line, giant wordmark, deck object */
-const rot = ['같은 초안도,', '급한 IR도,', '줄글 메모도,', 'AI로 뽑은 장표도,'];
+const rot = ['IR 자료도,', '회사소개서도,', '제안서도,', '데모데이 발표도,'];
 function hero(base) {
   return `<section id="hero" class="h-hero" data-header="dark">
  <div class="h-hero__grid">
   <div class="h-hero__left">
-   <h1 class="h-title" aria-label="같은 초안도, 유별나게.">
+   <h1 class="h-title" aria-label="IR 자료도, 회사소개서도, 제안서도, 데모데이 발표도, 유별나게.">
     <span class="h-title__rot" aria-hidden="true"><span class="h-rot" data-rot>${rot.map((t, i) => `<b${i === 0 ? ' class="is-on"' : ''}>${t}</b>`).join('')}</span></span>
     <span class="h-title__big" aria-hidden="true">${[...'유별나게'].map((c, i) => `<b style="--i:${i}">${c}</b>`).join('')}<b class="dot" style="--i:4">.</b></span>
    </h1>
-   <p class="h-hero__sub" data-intro>기획자의 시선과 디자이너의 손으로,<br>발표에 필요한 흐름과 디자인을 완성합니다.</p>
+   <p class="h-hero__sub" data-intro>줄글 메모부터 IR 초안까지,<br>내용의 흐름을 잡고 목적에 맞는 디자인으로 완성합니다.</p>
   </div>
   <div class="h-hero__right">
    <div class="h-hero__obj">${obj('deck', base, '', true)}</div>
@@ -44,7 +44,7 @@ function statement(base) {
 
 /* 3 — track record (v2 layout, current tone): figures, a rotating one-line review with stars, two drifting logo rows */
 function trackRecord(base) {
-  const stats = proofStats.approved && proofStats.items.length ? `<ul class="h-tr__stats">${proofStats.items.map(s => `<li><b><span data-count="${esc(s.value)}">${esc(s.value)}</span><em>${esc(s.unit)}</em></b><span class="lb">${esc(s.label)}</span>${s.note ? `<small>${esc(s.note)}</small>` : ''}</li>`).join('')}</ul>${proofStats.asOf ? `<p class="h-tr__asof">${esc(proofStats.asOf)} 기준</p>` : ''}` : '';
+  const stats = proofStats.approved && proofStats.items.length ? `<ul class="h-tr__stats">${proofStats.items.map(s => `<li><b aria-label="${esc(s.value)}${esc(s.unit)}"><span data-count="${esc(s.value)}" aria-hidden="true">${esc(s.value)}</span><em aria-hidden="true">${esc(s.unit)}</em></b><span class="lb">${esc(s.label)}</span>${s.note ? `<small>${esc(s.note)}</small>` : ''}</li>`).join('')}</ul>${proofStats.asOf ? `<p class="h-tr__asof">${esc(proofStats.asOf)} 기준</p>` : ''}` : '';
   const quotes = reviews.filter(r => r.excerpt);
   const row = (list, hidden) => list.map(t => `<span class="h-tr__tile"${hidden ? ' aria-hidden="true"' : ''}><img src="${base}assets/clients-dark/${t.file}" ${hidden ? 'alt="" ' : `alt="${esc(t.name)}" `}style="height:${t.h}px" loading="lazy" decoding="async">${t.label ? `<span>${esc(t.label)}</span>` : ''}</span>`).join('');
   return `<section id="clients" class="h-tr" data-header="dark">
@@ -77,7 +77,7 @@ function work(base) {
   </div>
  </div>
  <div class="h-work__body">
-  <ul class="h-work__grid">${tiles.map(({ p, image }, i) => `<li data-reveal style="--i:${i % 3}"><a class="h-work__tile" href="${base}portfolio/${p.slug}/"><span class="h-work__img"><img src="${base + image}" alt="${esc(p.title)} 작업 이미지" loading="lazy" decoding="async"></span><span class="h-work__cap"><small>${esc(typeNames[p.type] || '')}</small><b>${esc(p.title)}</b></span></a></li>`).join('')}</ul>
+  <ul class="h-work__grid" data-swipe data-swipe-auto>${tiles.map(({ p, image }, i) => `<li data-reveal style="--i:${i % 3}"><a class="h-work__tile" href="${base}portfolio/${p.slug}/"><span class="h-work__img"><img src="${base + image}" alt="${esc(p.title)} 작업 이미지" loading="lazy" decoding="async"></span><span class="h-work__cap"><small>${esc(typeNames[p.type] || '')}</small><b>${esc(p.title)}</b></span></a></li>`).join('')}</ul>
   <div class="h-work__foot"><a class="h-pill h-pill--blue" href="${base}portfolio/">작업 사례 전체 보기 ${arrow}</a><p class="h-note h-note--dark">공개에 동의한 자료만 소개합니다.</p></div>
  </div>
 </section>`;
@@ -112,50 +112,60 @@ function pricingSection(base) {
 }
 
 /* 6 — institutions and demo days. Right card = original v3 card (restored on request 2026-10-28). */
+// [title, description, shorter description for mobile]
 const ddSteps = [
-  ['초안만 받아 주세요.', '참가팀 연락부터 자료 취합, 일정과 피드백 관리까지 대신 챙깁니다.'],
-  ['산업이 달라도, 이해하고 만듭니다.', '팀마다 사업 내용을 먼저 파악하고, 그 팀에 맞는 순서와 디자인을 따로 잡습니다.'],
-  ['발표 현장을 아는 브랜드입니다.', '여러 데모데이를 함께 준비하며, 무대에서 무엇이 먼저 보여야 하는지 알고 있습니다.'],
+  ['초안만 받아 주세요.', '참가팀 연락부터 자료 취합, 일정과 피드백 관리까지 대신 챙깁니다.', '연락부터 일정·피드백 관리까지 대신합니다.'],
+  ['산업이 달라도, 이해하고 만듭니다.', '팀마다 사업 내용을 먼저 파악하고, 그 팀에 맞는 순서와 디자인을 따로 잡습니다.', '팀마다 사업을 파악해 따로 기획합니다.'],
+  ['발표 현장을 아는 브랜드입니다.', '여러 데모데이를 함께 준비하며, 무대에서 무엇이 먼저 보여야 하는지 알고 있습니다.', '무대에서 먼저 보여야 할 것을 압니다.'],
 ];
+// Desktop text and a shorter mobile text; only one is displayed (the other is display:none, so it is not read twice).
+const dm = (desktop, mobile) => `<span class="t-d">${esc(desktop)}</span><span class="t-m">${esc(mobile)}</span>`;
 const manwon = n => n % 10000 === 0 ? `${n / 10000}만원` : `${Math.floor(n / 10000)}만 ${(n % 10000) / 1000}천원`;
 function demoday(base) {
-  const years = [...new Set(demodayHistory.map(h => h.year))];
   const approved = demodayPrice.status === 'approved';
-  let n = 0;
-  return `<section id="demoday" class="h-dd" data-header="light">
- <div class="h-dd__l">
-  <div class="h-dd__head" data-reveal>
-   ${eyebrow('DEMODAY & IR')}
-   <h2>${title(['각 팀의 가능성을,', '한 무대에서 선명하게.'])}</h2>
-   <p class="h-dd__sub">팀마다 다른 사업과 브랜드를 이해하고, 행사 일정에 맞춰 IR 자료를 완성합니다.</p>
-   <p>기관이 자료를 모아 전달하거나, 각 팀과 직접 소통하는 방식 모두 협의할 수 있습니다.</p>
+  const event = (h, hidden) => `<li class="h-dd2__ev"${hidden ? ' aria-hidden="true"' : ''}><b>${h.year}</b><span class="t">${esc(h.title.replace(/^20\d\d\s/, ''))}${demodayTeamsApproved && h.teams ? ` <em>${h.teams}팀</em>` : ''}</span><span class="h">${esc(h.host.replaceAll(' · ', ', '))}</span></li>`;
+  return `<section id="demoday" class="h-dd h-dd2" data-header="light">
+ <div class="h-dd2__head" data-reveal>
+  ${eyebrow('DEMODAY & IR')}
+  <h2>${title(['각 팀의 가능성을,', '한 무대에서 선명하게.'])}</h2>
+  <div class="h-dd2__lead">
+   <p class="h-dd__sub">${dm('팀마다 다른 사업과 브랜드를 이해하고, 행사 일정에 맞춰 IR 자료를 완성합니다.', '팀별 IR을 행사 일정에 맞춰 완성합니다.')}</p>
+   <p>${dm('기관이 자료를 모아 전달하거나, 각 팀과 직접 소통하는 방식 모두 협의할 수 있습니다.', '기관 취합 · 팀별 직접 소통 모두 가능합니다.')}</p>
   </div>
-  <div class="h-dd__hist" data-reveal>
-   <h3 class="h-dd__ht">함께 준비한 데모데이</h3>
-   ${years.map(y => `<div class="h-dd__yr"><b>${y}</b><ul>${demodayHistory.filter(h => h.year === y).map(h => `<li style="--i:${n++}"><h4>${esc(h.title.replace(/^20\d\d\s/, ''))}${demodayTeamsApproved && h.teams ? ` <em>${h.teams}팀</em>` : ''}</h4><p>${esc(h.host.replaceAll(' · ', ', '))}</p></li>`).join('')}</ul></div>`).join('')}
-   ${irConsulting.length ? `<p class="h-dd__ir"><b>IR 컨설팅</b>${irConsulting.map(x => esc(x.title)).join(' · ')} <em>(세부 내용 비공개)</em></p>` : ''}
-  </div>
+ </div>
+ <div class="h-dd2__hist" data-reveal>
+  <p class="h-dd2__label">함께 준비한 데모데이</p>
+  <div class="h-dd2__row"><ul class="h-dd2__track">${demodayHistory.map(h => event(h, false)).join('')}${demodayHistory.map(h => event(h, true)).join('')}</ul></div>
+  ${irConsulting.length ? `<p class="h-dd__ir"><b>IR 컨설팅</b>${irConsulting.map(x => esc(x.title)).join(' · ')} <em>(세부 내용 비공개)</em></p>` : ''}
  </div>
  <div class="h-dd__card" data-reveal>
   <svg class="h-dd__wave" viewBox="0 0 400 400" aria-hidden="true" preserveAspectRatio="none"><defs><linearGradient id="ddw" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7f9bff" stop-opacity=".0"/><stop offset=".45" stop-color="#3d63ff" stop-opacity=".55"/><stop offset="1" stop-color="#1f4bff"/></linearGradient><linearGradient id="ddl" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#b9c8ff" stop-opacity="0"/><stop offset=".6" stop-color="#cdd8ff"/><stop offset="1" stop-color="#fff" stop-opacity=".2"/></linearGradient></defs><path d="M150 0C215 95 300 170 400 215V0z" fill="url(#ddw)"/><path d="M215 0C270 110 330 190 400 250V215C310 175 240 105 190 0z" fill="#1f4bff" opacity=".35"/><path d="M150 0C215 95 300 170 400 215" fill="none" stroke="url(#ddl)" stroke-width="1.6"/></svg>
   <h3>한 번 맡기면,<br>여기까지 진행합니다.</h3>
-  <ol class="h-dd__steps">${ddSteps.map(([t, d], i) => `<li style="--i:${i}"><span class="no">0${i + 1}</span><h4>${t}</h4><p>${d}</p></li>`).join('')}</ol>
+  <ol class="h-dd__steps">${ddSteps.map(([t, d, m], i) => `<li style="--i:${i}" data-reveal><span class="no">0${i + 1}</span><h4>${t}</h4><p>${dm(d, m)}</p></li>`).join('')}</ol>
   <div class="h-dd__foot">
    <p>${approved ? `<b>팀당 ${manwon(demodayPrice.perTeam)}</b> (${demodayPrice.pagesIncluded}장 이내)<br>초과 시 장당 ${manwon(demodayPrice.extraPerPage)}, 규모에 따라 협의합니다.` : '<b>가격은 별도 협의합니다.</b>'}</p>
    <div class="h-dd__cta"><a class="h-pill" href="#contact" data-prefill="kind=institution">IR · 데모데이 상담하기 ${arrow}</a>${approved ? `<a class="h-link" href="${base}demoday/#estimate">팀 수로 예상 비용 계산 ${arrow}</a>` : ''}</div>
   </div>
  </div>
- ${webPricing(base, { eye: '행사·데모데이 홈페이지도, 유별나게!', onHome: true })}
+ ${webStrip(base)}
 </section>`;
 }
 
-/* Website pricing block: home (inside the demo day section), /web/ and /demoday share it. */
+/* Small website strip inside a section (home demo day section, /demoday): awareness only, details live on /web/. */
+export function webStrip(base, { heading = 'h3' } = {}) {
+  return `<div class="wz" data-reveal>
+  <div class="wz__txt"><p class="wz__eye">WEBSITE</p><${heading} class="wz__t">행사·데모데이 홈페이지도, 유별나게!</${heading}><p class="wz__d">${dm('행사 안내부터 참가 신청 접수까지, IR 자료와 같은 디자인으로 웹사이트를 만듭니다.', '행사 안내·신청 페이지도 같은 디자인으로.')}</p></div>
+  <a class="wz__cta" href="${base}web/#price">웹사이트 제작 보기 ${arrow}</a>
+ </div>`;
+}
+
+/* Website pricing block: the full price list on /web/. */
 export function webPricing(base, { eye = '', onHome = false, heading = 'h3', tier = 'h4' } = {}) {
   const price = o => o.status === 'approved' && Number.isSafeInteger(o.price) ? `${manwon(o.price)}${o.priceNote || ''}` : '별도 견적';
   const href = o => onHome ? `href="#contact" data-prefill="item=web&option=${o.id}"` : `href="${base}contact/?item=web&option=${o.id}"`;
   return `<div class="wp" data-reveal>
   <div class="wp__head">${eye ? `<p class="wp__eye">${esc(eye)}</p>` : ''}<${heading} class="wp__t">${title(websitePricing.title)}</${heading}><p class="wp__lead">${esc(websitePricing.lead)}</p></div>
-  <ul class="wp__tiers">${websiteOptions.map(o => `<li class="wp__tier">
+  <ul class="wp__tiers" data-swipe>${websiteOptions.map(o => `<li class="wp__tier">
    <div class="wp__top"><${tier}>${esc(o.name)}</${tier}><p class="wp__price">${price(o)}</p></div>
    <p class="wp__tag">${esc(o.tagline)}</p>
    <ul class="wp__inc">${o.include.map(t => `<li>${ck}<span>${esc(t)}</span></li>`).join('')}</ul>
