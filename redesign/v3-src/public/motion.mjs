@@ -19,7 +19,8 @@ if('IntersectionObserver'in window&&motionOn()){const io=new IntersectionObserve
 
 /* count up */
 const counters=$$('[data-count]');
-if('IntersectionObserver'in window&&motionOn()){const io=new IntersectionObserver(es=>{for(const e of es){if(!e.isIntersecting)continue;io.unobserve(e.target);const el=e.target,to=parseFloat(el.dataset.count),dec=(el.dataset.count.split('.')[1]||'').length,t0=performance.now(),dur=1400;const step=t=>{const k=ease(clamp((t-t0)/dur));el.textContent=(to*k).toFixed(dec);if(k<1)requestAnimationFrame(step)};el.textContent=(0).toFixed(dec);requestAnimationFrame(step)}},{threshold:.6});counters.forEach(el=>io.observe(el))}
+// Numbers start at 0 and climb once they are on screen (no flash of the final value first).
+if('IntersectionObserver'in window&&motionOn()){const dec=el=>(el.dataset.count.split('.')[1]||'').length;counters.forEach(el=>{el.textContent=(0).toFixed(dec(el))});const io=new IntersectionObserver(es=>{for(const e of es){if(!e.isIntersecting)continue;io.unobserve(e.target);const el=e.target,to=parseFloat(el.dataset.count),d=dec(el),t0=performance.now(),dur=1600;const step=t=>{const k=ease(clamp((t-t0)/dur));el.textContent=(to*k).toFixed(d);if(k<1)requestAnimationFrame(step);else el.textContent=el.dataset.count};requestAnimationFrame(step)}},{threshold:.4});counters.forEach(el=>io.observe(el))}
 
 /* home scenes */
 const hero=$('.h-hero');
@@ -107,7 +108,35 @@ if(cap){const tabs=$$('[data-cap]',cap),panels=$$('[data-cap-panel]',cap),now=$(
 /* magnetic orb */
 for(const orb of $$('.h-orb')){const area=orb.closest('section');area?.addEventListener('pointermove',e=>{if(!motionOn()||e.pointerType!=='mouse')return;const r=orb.getBoundingClientRect();const dx=e.clientX-(r.left+r.width/2),dy=e.clientY-(r.top+r.height/2);const d=Math.hypot(dx,dy);const k=d<r.width*1.6?.22:0;orb.style.transform=`translate(${dx*k}px,${dy*k}px)`});area?.addEventListener('pointerleave',()=>{orb.style.transform=''})}
 
-function setup(){vh=innerHeight;vw=innerWidth;root.classList.toggle('has-motion',motionOn());fit();if(!motionOn()){for(const el of $$('[data-speed],.h-title,.h-hero__foot,[data-row]'))el.style.transform=el.style.opacity='';hero?.style.setProperty('--p',0);}request()}
+/* swipe lists (mobile rows of cards): arrows + counter under the row; data-swipe-auto also moves itself while on screen
+   until the visitor touches it. Hidden when the row fits (desktop grids). */
+const pad=n=>String(n).padStart(2,'0');
+const swipeArr='<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5"/></svg>';
+const swipes=[];
+for(const list of $$('[data-swipe]')){
+ const items=[...list.children];if(items.length<2)continue;
+ const nav=document.createElement('div');nav.className='swipe-nav';nav.hidden=true;
+ nav.innerHTML=`<button type="button" class="swipe-nav__b is-prev" aria-label="이전 항목">${swipeArr}</button><span class="swipe-nav__n" aria-hidden="true"><b>01</b> / ${pad(items.length)}</span><span class="swipe-nav__bar" aria-hidden="true"><i></i></span><button type="button" class="swipe-nav__b" aria-label="다음 항목">${swipeArr}</button>`;
+ list.after(nav);
+ const num=$('b',nav),bar=$('.swipe-nav__bar i',nav),[prev,next]=$$('button',nav);
+ const pos=i=>items[i].getBoundingClientRect().left-items[0].getBoundingClientRect().left;
+ const atEnd=()=>list.scrollLeft+list.clientWidth>=list.scrollWidth-4;
+ const idx=()=>{if(atEnd())return items.length-1;let best=0,d=1e9;items.forEach((_,i)=>{const x=Math.abs(pos(i)-list.scrollLeft);if(x<d){d=x;best=i}});return best};
+ const go=i=>{i=Math.max(0,Math.min(items.length-1,i));list.scrollTo({left:pos(i),behavior:motionOn()?'smooth':'auto'})};
+ const upd=()=>{const i=idx();num.textContent=pad(i+1);prev.disabled=list.scrollLeft<4;next.disabled=atEnd();const max=list.scrollWidth-list.clientWidth;bar.style.transform=`scaleX(${max>0?Math.max(.08,list.scrollLeft/max):1})`};
+ const check=()=>{nav.hidden=list.scrollWidth<=list.clientWidth+4;if(!nav.hidden)upd()};
+ prev.addEventListener('click',()=>go(idx()-1));next.addEventListener('click',()=>go(idx()+1));
+ list.addEventListener('scroll',()=>requestAnimationFrame(upd),{passive:true});
+ if('swipeAuto' in list.dataset&&'IntersectionObserver'in window){let inView=false,stop=false,t=0;
+  const tick=()=>{clearTimeout(t);if(stop||!inView||!motionOn()||nav.hidden)return;t=setTimeout(()=>{if(!document.hidden)go(atEnd()?0:idx()+1);tick()},3000)};
+  const halt=()=>{stop=true;clearTimeout(t)};
+  ['touchstart','pointerdown','wheel'].forEach(ev=>list.addEventListener(ev,halt,{passive:true}));nav.addEventListener('click',halt);
+  new IntersectionObserver(([e])=>{inView=e.intersectionRatio>=.5;tick()},{threshold:[0,.5,1]}).observe(list);
+  swipes.push(()=>{check();tick()})}
+ else swipes.push(check);
+ check()}
+
+function setup(){swipes.forEach(f=>f());vh=innerHeight;vw=innerWidth;root.classList.toggle('has-motion',motionOn());fit();if(!motionOn()){for(const el of $$('[data-speed],.h-title,.h-hero__foot,[data-row]'))el.style.transform=el.style.opacity='';hero?.style.setProperty('--p',0);}request()}
 let rt;addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(setup,120)});
 addEventListener('scroll',request,{passive:true});
 reduce.addEventListener?.('change',setup);

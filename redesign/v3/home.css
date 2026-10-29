@@ -1157,7 +1157,7 @@ ul.h-price__notes li::marker{color:#c3c8d2}
  .h-dd__yr li{display:block!important}
  .h-dd__yr h4{display:inline;margin-right:6px}
  .h-dd__yr p{display:inline;text-align:left}
- .h-rev__pager{display:none}
+ .h-rev__pager button{width:40px;height:40px}
 }
 
 /* ==== v3.3 (2026-10-28): statement band back after the hero · marquee clients · original demo day card ==== */
@@ -1292,3 +1292,55 @@ ul.h-price__notes li::marker{color:#c3c8d2}
 .h-dd>.wp{grid-column:1/-1}
 @media(max-width:1024px){.h-dd{grid-template-columns:minmax(0,1fr)}}
 .h-dd>*{min-width:0}
+.h-dd>.wz{grid-column:1/-1}
+
+/* ==== v3.6 (2026-10-29): demo day — header row, one sliding history row, card with steps side by side ==== */
+.h-dd.h-dd2{display:block;padding:clamp(90px,11svh,120px) var(--g) clamp(80px,10svh,110px)}
+.h-dd2__head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:'eye eye' 'h lead';gap:0 clamp(32px,5vw,90px);align-items:end}
+.h-dd2__head .h-eye{grid-area:eye}
+.h-dd2__head h2{grid-area:h;font-size:var(--h2)!important;font-weight:700;line-height:1.2!important;letter-spacing:-.05em}
+.h-dd2__lead{grid-area:lead}
+.h-dd2__lead p{font-size:16px;line-height:1.75;color:var(--muted)}
+.h-dd2__lead .h-dd__sub{margin-bottom:6px;font-size:17px;font-weight:600;color:var(--ink)}
+.h-dd2__hist{margin-top:clamp(36px,5svh,52px)}
+.h-dd2__label{margin-bottom:12px;font-size:14px;font-weight:700;letter-spacing:-.02em;color:var(--ink)}
+.h-dd2__row{overflow:hidden;margin:0 calc(var(--g) * -1);padding:4px 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.h-dd2__track{list-style:none;margin:0;padding:0;display:flex;gap:12px;width:max-content;animation:marquee 60s linear infinite}
+.h-dd2__row:hover .h-dd2__track{animation-play-state:paused}
+.h-dd2__ev{flex:none;display:flex;align-items:center;gap:12px;padding:14px 20px;border-radius:14px;background:#fff;border:1px solid #e6e8ec;white-space:nowrap}
+.h-dd2__ev b{font-size:14px;font-weight:800;color:var(--blue)}
+.h-dd2__ev .t{font-size:15px;font-weight:700;letter-spacing:-.03em;color:var(--ink)}
+.h-dd2__ev .t em{margin-left:4px;font-style:normal;font-size:13px;color:var(--blue)}
+.h-dd2__ev .h{font-size:12.5px;color:#8b919c}
+.h-dd2 .h-dd__ir{margin-top:12px}
+.h-dd2 .h-dd__card{margin-top:clamp(28px,4svh,40px);padding:clamp(32px,3.4vw,52px)}
+.h-dd2 .h-dd__card h3{max-width:none}
+.h-dd2 .h-dd__steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,2.4vw,36px);margin-top:clamp(26px,3.5svh,40px)}
+.h-dd2 .h-dd__foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px 24px}
+.h-dd2 .h-dd__cta{margin-top:0}
+.h-dd2>.wz{margin-top:16px}
+/* each step appears on its own as it scrolls into view */
+.has-motion .h-dd2 .h-dd__card .h-dd__steps li{opacity:1;transform:none}
+.has-motion .h-dd2 .h-dd__card .h-dd__steps li[data-reveal]:not(.is-in){opacity:0!important;transform:translateY(22px)!important}
+.has-motion .h-dd2 .h-dd__steps li[data-reveal]{transition:opacity .7s var(--ease),transform .8s var(--ease);transition-delay:calc(var(--i) * 120ms)}
+@media(prefers-reduced-motion:reduce){.h-dd2__track{animation:none}.h-dd2__row{overflow-x:auto;scrollbar-width:none}}
+@media(max-width:1024px){.h-dd2 .h-dd__steps{grid-template-columns:1fr}}
+@media(max-width:767px){
+ .h-dd.h-dd2{padding:64px var(--g) 56px}
+ .h-dd2__head{grid-template-columns:1fr;grid-template-areas:'eye' 'h' 'lead'}
+ .h-dd2__lead{margin-top:12px}
+ .h-dd2__lead .h-dd__sub{font-size:15px;margin-bottom:2px}
+ .h-dd2__lead p{font-size:14px}
+ .h-dd2__hist{margin-top:28px}
+ .h-dd2__label{font-size:13px;margin-bottom:8px}
+ .h-dd2__ev{padding:11px 14px;gap:8px;border-radius:12px}
+ .h-dd2__ev b{font-size:12.5px}.h-dd2__ev .t{font-size:13.5px}.h-dd2__ev .h{display:none}
+ .h-dd2 .h-dd__ir{font-size:11.5px}
+ .h-dd2 .h-dd__card{margin-top:24px;padding:26px 20px!important}
+ .h-dd2 .h-dd__steps{gap:20px!important;margin-top:20px!important}
+ .h-dd2 .h-dd__steps .no{font-size:16px}
+ .h-dd2 .h-dd__steps h4{margin-top:6px;font-size:16px!important}
+ .h-dd2 .h-dd__steps p{margin-top:3px;font-size:13.5px}
+ .h-dd2 .h-dd__foot{flex-direction:column;align-items:flex-start}
+ .has-motion .h-dd2 .h-dd__steps li[data-reveal]{transition-delay:0s}
+}
