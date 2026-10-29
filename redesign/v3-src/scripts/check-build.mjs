@@ -6,7 +6,7 @@ const files=fs.readdirSync(root,{recursive:true}).filter(f=>f.endsWith('.html'))
 let links=0,images=0;
 for(const file of files){
  const html=fs.readFileSync(path.join(root,file),'utf8');
- if(file.endsWith('index.html'))assert.equal((html.match(/<h1[ >]/g)||[]).length,1,`${file}: H1`);
+ if(file.endsWith('index.html')&&html.includes('<main'))assert.equal((html.match(/<h1[ >]/g)||[]).length,1,`${file}: H1`);
  const base=new URL(file.replaceAll('\\','/'),'https://local.test/new-site/');
  for(const m of html.matchAll(/(?:href|src)="([^"]+)"/g)){
   const value=m[1].replaceAll('&amp;','&');
@@ -19,5 +19,7 @@ for(const file of files){
  }
  images+=(html.match(/<img /g)||[]).length;
 }
-const summary={pages:files.filter(f=>f.endsWith('index.html')).length,legacyRedirects:files.filter(f=>!f.endsWith('index.html')).length,checkedLocalReferences:links,imageElements:images};
-assert.equal(summary.pages,43);fs.writeFileSync(path.resolve(root,'../qa/build-check.json'),JSON.stringify(summary,null,2));console.log(summary);
+// Redirect stubs (no <main>): old .html links and the removed /about/ page.
+const isPage=f=>f.endsWith('index.html')&&fs.readFileSync(path.join(root,f),'utf8').includes('<main');
+const summary={pages:files.filter(isPage).length,legacyRedirects:files.filter(f=>!isPage(f)).length,checkedLocalReferences:links,imageElements:images};
+assert.equal(summary.pages,42);fs.writeFileSync(path.resolve(root,'../qa/build-check.json'),JSON.stringify(summary,null,2));console.log(summary);

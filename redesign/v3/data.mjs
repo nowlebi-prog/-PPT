@@ -419,8 +419,6 @@ export const featuredWork = [
 // Website showcase on /web/. Items marked (샘플) are studio examples, not client sites. href: live site (null = 링크 준비 중, 버튼 없음).
 export const webShowcase = [
   { title: '데모데이 행사 페이지', sub: '참가팀, 일정, 심사위원, 사전 등록까지 한 페이지로 (샘플)', src: 'assets/web/forge-demo.webp', poster: 'assets/web/forge-demo-poster.webp', href: null },
-  { title: '기업 홈페이지 시안 A', sub: '작업 사례와 서비스, 가격을 한 흐름으로 (샘플)', src: 'assets/web/company-a.webp', poster: 'assets/web/company-a-poster.webp', href: 'https://nowlebi-prog.github.io/-PPT/redesign/v2/' },
-  { title: '기업 홈페이지 시안 B', sub: '3D 히어로와 포트폴리오 쇼케이스 (샘플)', src: 'assets/web/company-b.webp', poster: 'assets/web/company-b-poster.webp', href: 'https://nowlebi-prog.github.io/-PPT/redesign/prototype/' },
   { title: '반응형 웹 서비스 · 프모아', sub: 'PC와 모바일에 맞춰 바뀌는 서비스 홈페이지', src: 'assets/web/peumoa.webp', poster: 'assets/web/peumoa-poster.webp', href: 'https://peumoa.com/' },
 ];
 
