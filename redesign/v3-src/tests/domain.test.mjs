@@ -5,7 +5,7 @@ import * as domain from '../src/domain.mjs';
 
 const today = '2026-10-28';
 const validInquiry = {
-  kind: 'company', purpose: 'ir', service: 'ppt-b', dueDate: '2026-11-20', dueUndecided: false,
+  items: ['ppt'], kind: 'company', purpose: 'ir', service: 'ppt-b', dueDate: '2026-11-20', dueUndecided: false,
   name: '홍길동', organization: '', contactMethod: 'email', email: 'hello@example.com', phone: '',
   pages: '11–20장', attachmentLink: '', extras: [], webTier: '', budget: '', message: '발표자료 제작 범위와 일정을 상담하고 싶습니다.',
   privacyConsent: true, portfolioConsent: false,
@@ -49,22 +49,39 @@ test('demoday rejects missing teams and invalid integer page counts', () => {
 });
 
 test('query selection carries allowed scope only and preserves unknown counts', () => {
-  assert.deepEqual(domain.parseSelection('?service=demoday&option=web-register&option=interview&teamCount=3&pageCount=24&name=Private&email=private@example.com&message=secret'), {
-    service: null, kind: 'institution', purpose: null, due: null, optionIds: ['web-register', 'interview'], teamCount: 3, pageCount: 24,
+  assert.deepEqual(domain.parseSelection('?service=demoday&option=web-form&option=interview&teamCount=3&pageCount=24&name=Private&email=private@example.com&message=secret'), {
+    items: [], service: null, kind: 'institution', purpose: null, due: null, optionIds: ['web-form', 'interview'], teamCount: 3, pageCount: 24,
   });
   assert.deepEqual(domain.parseSelection('?service=javascript:alert(1)&option=unknown&teamCount=0&pageCount=1.2&due=2026-02-30&kind=x&purpose=y'), {
-    service: null, kind: null, purpose: null, due: null, optionIds: [], teamCount: null, pageCount: null,
+    items: [], service: null, kind: null, purpose: null, due: null, optionIds: [], teamCount: null, pageCount: null,
   });
   assert.deepEqual(domain.parseSelection('?service=ppt-a&kind=company&purpose=gov&due=undecided'), {
-    service: 'ppt-a', kind: 'company', purpose: 'gov', due: 'undecided', optionIds: [], teamCount: null, pageCount: null,
+    items: [], service: 'ppt-a', kind: 'company', purpose: 'gov', due: 'undecided', optionIds: [], teamCount: null, pageCount: null,
   });
 });
 
 test('query rejects numeric tricks and keeps only one website tier', () => {
-  const selection = domain.parseSelection('?service=ppt-b&option=web-info,web-archive,interview,interview,none,web-event&teamCount=1e2&pageCount=9007199254740992');
-  assert.deepEqual(selection.optionIds, ['web-info', 'interview']);
+  const selection = domain.parseSelection('?service=ppt-b&option=web-intro,web-form,interview,interview,none,web-event&teamCount=1e2&pageCount=9007199254740992');
+  assert.deepEqual(selection.optionIds, ['web-intro', 'interview']);
   assert.equal(selection.teamCount, null);
   assert.equal(selection.pageCount, null);
+});
+
+test('the first answer decides which questions are required', () => {
+  const base = { dueUndecided: true, name: '홍길동', contactMethod: 'email', email: 'hello@example.com', privacyConsent: true };
+  assert.ok(domain.validateInquiry({ ...base, items: [] }, { today }).items);
+  assert.ok(domain.validateInquiry({ ...base, items: ['tv'] }, { today }).items);
+  assert.deepEqual(domain.validateInquiry({ ...base, items: ['web'], webType: 'web-intro' }, { today }), {});
+  const both = domain.validateInquiry({ ...base, items: ['ppt', 'print', 'visual'] }, { today });
+  for (const field of ['kind', 'purpose', 'service', 'printType', 'visualTypes']) assert.ok(both[field], field);
+  assert.equal(both.webType, undefined);
+  assert.deepEqual(domain.validateInquiry({ ...base, items: ['print', 'visual'], printType: '리플렛', visualTypes: ['interview'], videoCount: '2' }, { today }), {});
+  const n = domain.normalizeInquiry({ ...base, items: ['web'], kind: 'company', service: 'ppt-a', webType: 'web-form' });
+  assert.equal(n.kind, null);
+  assert.equal(n.service, null);
+  assert.equal(n.webType, 'web-form');
+  assert.deepEqual(domain.parseSelection('?item=web,print&item=nope').items, ['web', 'print']);
+  assert.match(domain.inquiryText({ ...base, items: ['web', 'visual'], webType: 'web-intro', visualTypes: ['mockup'] }), /만들 것: 홈페이지, 이미지 · 영상\n홈페이지 종류: 소개형\n이미지·영상: 제품 목업 이미지/);
 });
 
 test('institution inquiries need an organisation and a team count (or 미정)', () => {
@@ -87,14 +104,15 @@ test('inquiry validates mandatory fields, consent, and field-specific formats', 
   assert.ok(domain.validateInquiry({ ...validInquiry, contactMethod: 'sms' }, { today }).contactMethod);
   assert.ok(domain.validateInquiry({ ...validInquiry, extras: ['none', 'print'] }, { today }).extras);
   assert.ok(domain.validateInquiry({ ...validInquiry, extras: ['web-event'] }, { today }).webTier);
-  assert.deepEqual(domain.validateInquiry({ ...validInquiry, extras: ['web-event', 'interview'], webTier: 'web-archive', videoCount: '2' }, { today }), {});
+  assert.deepEqual(domain.validateInquiry({ ...validInquiry, extras: ['web-event', 'interview'], webTier: 'web-form', videoCount: '2' }, { today }), {});
 });
 
 test('summary and mail fallback list readable labels, never a receipt', () => {
-  const text = domain.inquiryText({ ...validInquiry, extras: ['web-event'], webTier: 'web-register' });
+  const text = domain.inquiryText({ ...validInquiry, extras: ['web-event'], webTier: 'web-form' });
+  assert.match(text, /만들 것: PPT · 발표자료/);
   assert.match(text, /의뢰 구분: 우리 회사 자료/);
   assert.match(text, /자료 상태: 내용은 정해졌고 디자인이 필요해요/);
-  assert.match(text, /함께 필요한 것: 행사 홈페이지 \(참가 신청 페이지\)/);
+  assert.match(text, /함께 필요한 것: 행사 홈페이지 \(폼 연동형\)/);
   const href = domain.mailtoHref(validInquiry, 'contact@example.com');
   assert.ok(href.startsWith('mailto:contact@example.com?subject='));
   assert.match(decodeURIComponent(href), /\[유별난PPT 견적 문의\] 홍길동/);

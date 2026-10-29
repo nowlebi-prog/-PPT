@@ -77,6 +77,10 @@ if(revTrack){const cards=$$('.h-rcard:not([data-clone])',revTrack),clones=$$('[d
  revTrack.classList.toggle('is-drift',motionOn());
  if('IntersectionObserver'in window)new IntersectionObserver(([e])=>{inView=e.isIntersecting;run()},{threshold:.1}).observe(revTrack)}
 
+/* track record: one review line at a time */
+const quoteBox=$('[data-quotes]');
+if(quoteBox&&motionOn()){const ps=$$('p',quoteBox);let k=0;if(ps.length>1)setInterval(()=>{if(document.hidden)return;ps[k].classList.remove('is-on');ps[k].setAttribute('aria-hidden','true');k=(k+1)%ps.length;ps[k].classList.add('is-on');ps[k].removeAttribute('aria-hidden')},4200)}
+
 /* homepage section: one PC mockup, sites slide through */
 const pc=$('[data-pc]');
 if(pc){const track=$('.h-pc__track',pc),slides=$$('.h-pc__slide',pc),dots=$$('[data-pc-go]',pc),tt=$('[data-pc-title]',pc),st=$('[data-pc-sub]',pc);

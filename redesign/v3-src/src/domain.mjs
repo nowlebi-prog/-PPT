@@ -1,6 +1,10 @@
 import { pricing, websiteOptions, inquiryOptions, demodayPrice } from './data.mjs';
 
 const codes = list => new Set(list.map(item => Array.isArray(item) ? item[0] : item));
+const ITEMS = codes(inquiryOptions.items);
+const WEB_TYPE = codes(inquiryOptions.webType);
+const PRINT_TYPE = new Set(inquiryOptions.printType);
+const VISUAL_TYPE = codes(inquiryOptions.visualType);
 const KIND = codes(inquiryOptions.kind);
 const PURPOSE = codes(inquiryOptions.purpose);
 const STATE = codes(inquiryOptions.state);
@@ -9,7 +13,9 @@ const EXTRAS = codes(inquiryOptions.extras);
 const EXCHANGE = codes(inquiryOptions.exchange);
 const REFERRAL = new Set(inquiryOptions.referral);
 const WEB_TIERS = new Set(websiteOptions.map(item => item.id));
-const QUERY_OPTIONS = new Set([...EXTRAS, ...WEB_TIERS].filter(id => id !== 'none' && id !== 'web-event'));
+const QUERY_OPTIONS = new Set([...EXTRAS, ...WEB_TIERS, ...WEB_TYPE].filter(id => id !== 'none' && id !== 'web-event'));
+const uniq = list => [...new Set(Array.isArray(list) ? list : [])];
+const nameOf = (list, value) => (list.find(item => item[0] === value) || [])[1] || value;
 const SERVICE_QUERY = new Set([...pricing.map(item => item.id), 'unsure']);
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const inFlight = new Map();
@@ -89,6 +95,7 @@ export function parseSelection(search = '') {
   const kind = service === 'demoday' ? 'institution' : (KIND.has(query.get('kind')) ? query.get('kind') : null);
   const due = query.get('due');
   return {
+    items: uniq(query.getAll('item').flatMap(value => value.split(','))).filter(id => ITEMS.has(id)),
     service: SERVICE_QUERY.has(service) ? service : null,
     kind,
     purpose: PURPOSE.has(query.get('purpose')) ? query.get('purpose') : null,
@@ -102,16 +109,23 @@ export function parseSelection(search = '') {
 /** Keeps only the fields that apply to the chosen kind and options, trimmed and in canonical form. */
 export function normalizeInquiry(input = {}) {
   const p = input && typeof input === 'object' ? input : {};
-  const kind = KIND.has(p.kind) ? p.kind : null;
+  const items = uniq(p.items).filter(id => ITEMS.has(id));
+  const ppt = items.includes('ppt');
+  const kind = ppt && KIND.has(p.kind) ? p.kind : null;
   const institution = kind === 'institution';
-  const extras = [...new Set(Array.isArray(p.extras) ? p.extras.filter(id => EXTRAS.has(id)) : [])];
-  const interview = extras.includes('interview');
+  const extras = uniq(p.extras).filter(id => EXTRAS.has(id));
+  const visualTypes = items.includes('visual') ? uniq(p.visualTypes).filter(id => VISUAL_TYPE.has(id)) : [];
+  const interview = visualTypes.includes('interview') || extras.includes('interview');
   const pages = text(p.pages);
   return {
+    items,
     kind,
-    purpose: PURPOSE.has(p.purpose) ? p.purpose : null,
-    purposeOther: p.purpose === 'other' ? text(p.purposeOther) : '',
-    service: STATE.has(p.service) ? p.service : null,
+    purpose: ppt && PURPOSE.has(p.purpose) ? p.purpose : null,
+    purposeOther: ppt && p.purpose === 'other' ? text(p.purposeOther) : '',
+    service: ppt && STATE.has(p.service) ? p.service : null,
+    webType: items.includes('web') && WEB_TYPE.has(p.webType) ? p.webType : null,
+    printType: items.includes('print') && PRINT_TYPE.has(p.printType) ? p.printType : null,
+    visualTypes,
     dueDate: p.dueUndecided === true || !validDate(text(p.dueDate)) ? null : text(p.dueDate),
     dueUndecided: p.dueUndecided === true,
     eventName: institution ? text(p.eventName) : '',
@@ -143,17 +157,25 @@ export function validateInquiry(input = {}, { today = localToday() } = {}) {
   const p = input && typeof input === 'object' ? input : {};
   const s = field => text(p[field]);
   const e = {};
-  if (!KIND.has(p.kind)) e.kind = '어떤 의뢰인지 선택해 주세요.';
-  if (!PURPOSE.has(p.purpose)) e.purpose = '어디에 쓸 자료인지 선택해 주세요.';
-  else if (p.purpose === 'other' && !s('purposeOther')) e.purposeOther = '어떤 자료인지 적어 주세요.';
-  if (s('purposeOther').length > 100) e.purposeOther = '100자 이내로 적어 주세요.';
-  if (!STATE.has(p.service)) e.service = '지금 자료 상태를 선택해 주세요.';
+  const items = Array.isArray(p.items) ? p.items : [];
+  if (!items.length || items.some(id => !ITEMS.has(id))) e.items = '만들 것을 하나 이상 골라 주세요.';
+  const ppt = items.includes('ppt');
+  if (ppt) {
+    if (!KIND.has(p.kind)) e.kind = '어떤 의뢰인지 선택해 주세요.';
+    if (!PURPOSE.has(p.purpose)) e.purpose = '어디에 쓸 자료인지 선택해 주세요.';
+    else if (p.purpose === 'other' && !s('purposeOther')) e.purposeOther = '어떤 자료인지 적어 주세요.';
+    if (s('purposeOther').length > 100) e.purposeOther = '100자 이내로 적어 주세요.';
+    if (!STATE.has(p.service)) e.service = '지금 자료 상태를 선택해 주세요.';
+  }
+  if (items.includes('web') && !WEB_TYPE.has(p.webType)) e.webType = '어떤 홈페이지인지 골라 주세요.';
+  if (items.includes('print') && !PRINT_TYPE.has(p.printType)) e.printType = '어떤 인쇄물인지 골라 주세요.';
+  if (items.includes('visual') && !(Array.isArray(p.visualTypes) && p.visualTypes.length && p.visualTypes.every(id => VISUAL_TYPE.has(id)))) e.visualTypes = '필요한 이미지·영상을 하나 이상 골라 주세요.';
   if (p.dueUndecided !== true) {
     const due = s('dueDate');
     if (!validDate(due)) e.dueDate = '필요한 날짜를 고르거나 ‘아직 미정’을 선택해 주세요.';
     else if (due < today) e.dueDate = '오늘 이후 날짜를 골라 주세요.';
   }
-  if (p.kind === 'institution') {
+  if (ppt && p.kind === 'institution') {
     if (p.teamCountUndecided !== true) {
       const teams = optionalInteger(p.teamCount);
       if (teams === null || teams > 100) e.teamCount = '참가팀 수를 1~100 사이로 입력하거나 ‘미정’을 선택해 주세요.';
@@ -173,14 +195,17 @@ export function validateInquiry(input = {}, { today = localToday() } = {}) {
     const digits = phone.replace(/\D/g, '');
     if (!/^\+?[\d\s()-]+$/.test(phone) || digits.length < 7 || digits.length > 15 || phone.length > 30) e.phone = '전화번호를 확인해 주세요.';
   } else if (p.contactMethod === 'phone') e.phone = '회신 받을 전화번호를 입력해 주세요.';
-  if (s('pages') && !(KIND.has(p.kind) && PAGES[p.kind].has(s('pages')))) e.pages = '예상 분량을 다시 선택해 주세요.';
+  if (ppt && s('pages') && !(KIND.has(p.kind) && PAGES[p.kind].has(s('pages')))) e.pages = '예상 분량을 다시 선택해 주세요.';
   const link = s('attachmentLink');
   if (link && (link.length > 500 || !/^https?:\/\/\S+$/i.test(link))) e.attachmentLink = '공유 링크는 http:// 또는 https://로 시작하는 주소로 입력해 주세요.';
   if (p.extras !== undefined) {
     if (!Array.isArray(p.extras) || p.extras.some(id => !EXTRAS.has(id))) e.extras = '함께 필요한 것을 다시 선택해 주세요.';
     else if (p.extras.includes('none') && p.extras.length > 1) e.extras = '‘없어요’는 다른 항목과 함께 고를 수 없습니다.';
     else if (p.extras.includes('web-event') && !WEB_TIERS.has(p.webTier)) e.webTier = '행사 홈페이지 종류를 하나 골라 주세요.';
-    if (Array.isArray(p.extras) && p.extras.includes('interview')) {
+  }
+  {
+    const interview = (Array.isArray(p.visualTypes) && p.visualTypes.includes('interview')) || (Array.isArray(p.extras) && p.extras.includes('interview'));
+    if (interview) {
       if (s('filmingPlace').length > 200) e.filmingPlace = '촬영 장소는 200자 이내로 입력해 주세요.';
       if (s('videoCount') && (optionalInteger(p.videoCount) === null || optionalInteger(p.videoCount) > 100)) e.videoCount = '영상 편수는 1~100 사이의 숫자로 입력해 주세요.';
       if (s('filmingNotes').length > 1000) e.filmingNotes = '촬영 희망 조건은 1000자 이내로 입력해 주세요.';
@@ -199,9 +224,13 @@ export function summaryLines(input) {
   const n = normalizeInquiry(input);
   const tierNames = websiteOptions.map(item => [item.id, item.name]);
   const rows = [
+    ['만들 것', n.items.map(id => nameOf(inquiryOptions.items, id)).join(', ')],
     ['의뢰 구분', n.kind && labelOf(inquiryOptions.kind, n.kind)],
     ['자료 용도', n.purpose === 'other' ? `기타${n.purposeOther ? ` (${n.purposeOther})` : ''}` : n.purpose && labelOf(inquiryOptions.purpose, n.purpose)],
     ['자료 상태', n.service && labelOf(inquiryOptions.state, n.service)],
+    ['홈페이지 종류', n.webType && nameOf(inquiryOptions.webType, n.webType)],
+    ['인쇄물 종류', n.printType],
+    ['이미지·영상', n.visualTypes.map(id => nameOf(inquiryOptions.visualType, id)).join(', ')],
     ['필요한 날짜', n.dueUndecided ? '아직 미정' : n.dueDate],
     ['행사명', n.eventName],
     ['참가팀 수', n.teamCountUndecided ? '미정' : n.teamCount && `${n.teamCount}팀`],
