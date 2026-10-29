@@ -339,3 +339,51 @@ a:hover>.arr,button:hover>.arr{transform:translateX(3px)}
 .web-notes ul a{color:var(--blue);text-decoration:underline;text-underline-offset:3px}
 @media(max-width:767px){.web-cases{grid-template-columns:1fr;gap:36px;padding-bottom:48px}.web-case__meta h3{font-size:19px}.web-notes{padding-bottom:80px}}
 .team-page-row label{white-space:nowrap}
+
+/* website pricing block (home demo day section, /web/, /demoday) */
+.wp{position:relative;border-radius:28px;padding:clamp(28px,3vw,48px);background:linear-gradient(135deg,#1f4bff 0%,#1638d6 55%,#0d2390 100%);color:#fff;box-shadow:0 40px 80px -48px rgba(31,75,255,.7)}
+.wp__head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.85fr);grid-template-areas:'eye eye' 't lead';gap:0 clamp(24px,4vw,64px);align-items:end}
+.wp__eye{grid-area:eye;justify-self:start;margin:0 0 14px;padding:5px 12px;border-radius:999px;background:rgba(255,227,107,.16);color:#ffe36b;font-size:13px;font-weight:700;letter-spacing:-.01em}
+.wp__t{grid-area:t;margin:0;font-size:clamp(24px,2.3vw,34px)!important;font-weight:700;line-height:1.3!important;letter-spacing:-.045em;color:#fff}
+.wp__t .t-ln+.t-ln{color:#ffe36b!important}
+.wp__lead{grid-area:lead;margin:0;font-size:16px;line-height:1.7;color:rgba(255,255,255,.85)}
+.wp__tiers{list-style:none;margin:28px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr .9fr;gap:12px;align-items:stretch}
+.wp__tier{display:flex;flex-direction:column;gap:12px;padding:26px 24px;border-radius:18px;background:#fff;color:var(--ink)}
+.wp__top{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:4px 12px}
+.wp__top h3,.wp__top h4{margin:0;font-size:20px;font-weight:800;letter-spacing:-.03em;color:inherit}
+.wp__price{margin:0;font-size:24px;font-weight:800;letter-spacing:-.03em;color:var(--blue)}
+.wp__tag{margin:0;font-size:15px;font-weight:600;line-height:1.5}
+.wp__inc{list-style:none;margin:2px 0 0;padding:12px 0 0;display:flex;flex-direction:column;gap:7px;border-top:1px solid #e6e8ec}
+.wp__inc li{display:flex;align-items:flex-start;gap:8px;padding:0;margin:0;border:0;background:none;font-size:14px;line-height:1.55;color:#3b3f48}
+.wp .ck{flex:none;width:17px;height:17px;margin-top:2px;fill:none;stroke:var(--blue);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.wp__use{margin:auto 0 0;padding-top:12px;border-top:1px solid #e6e8ec;font-size:13.5px;line-height:1.6;color:var(--muted)}
+.wp__use b{display:block;margin-bottom:2px;font-size:12.5px;color:var(--ink)}
+.wp__cta{display:inline-flex;align-items:center;justify-content:center;gap:10px;align-self:flex-start;min-height:46px;padding:0 20px;border-radius:999px;background:var(--ink);color:#fff;font-size:14.5px;font-weight:700;transition:background .25s}
+.wp__cta:hover{background:var(--blue)}
+.wp__tier--extra{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);color:#fff}
+.wp__tier--extra .wp__price{color:#ffe36b;font-size:20px}
+.wp__inc--plain{border-top-color:rgba(255,255,255,.2)}
+.wp__inc--plain li{color:rgba(255,255,255,.88)}
+.wp__inc--plain li::before{content:'+';flex:none;width:17px;font-weight:700;color:#ffe36b}
+.wp__notes{margin:24px 0 0;padding-top:20px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;border-top:1px solid rgba(255,255,255,.2)}
+.wp__notes dt{font-size:13px;font-weight:700;color:#fff}
+.wp__notes dd{margin:6px 0 0;font-size:13px;line-height:1.7;color:rgba(255,255,255,.78)}
+.wp__foot{margin:14px 0 0;font-size:12.5px;line-height:1.6;color:rgba(255,255,255,.7)}
+.web-price{padding-bottom:120px}
+@media(max-width:1024px){.wp__head{grid-template-columns:1fr;grid-template-areas:'eye' 't' 'lead';gap:10px 0}.wp__tiers{grid-template-columns:1fr}.wp__notes{grid-template-columns:1fr;gap:14px}}
+@media(max-width:767px){
+ .wp{padding:22px 18px;border-radius:20px}
+ .wp__eye{font-size:12px}
+ .wp__t{font-size:22px!important}
+ .wp__lead{font-size:14.5px}
+ .wp__tiers{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:10px;margin:18px -18px 0;padding:0 18px 4px;scroll-padding-left:18px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+ .wp__tiers::-webkit-scrollbar{display:none}
+ .wp__tier{flex:0 0 86%;scroll-snap-align:start;padding:20px 18px;border-radius:16px}
+ .wp__price{font-size:21px}
+ .wp__inc li{font-size:13.5px}
+ .wp__notes{margin-top:18px;padding-top:16px}
+ .wp__notes dd{font-size:12.5px}
+ .web-price{padding-bottom:80px}
+}
+.wp{min-width:0;max-width:100%}
+.wp__tiers{min-width:0}

@@ -32,9 +32,9 @@ title(['중요한 발표에는,', ['유별난 자료가', '필요합니다.']])
 | 항목 | 위치 | 지금 상태 | 승인되면 |
 | --- | --- | --- | --- |
 | BASIC·PRO·PREMIUM 가격 | `pricing[].status`, `unitPrice`, `setupFee`, `minPages` | 초안 금액 삭제, ‘자료 확인 후 견적’ | 금액을 넣고 `status: 'approved'` |
-| 행사 홈페이지 3종 가격 | `websiteOptions[].price` | 초안 금액 삭제, ‘기능 확인 후 견적’ | 금액을 넣고 `status: 'approved'` |
-| 데모데이 팀당 가격·계산기 | `demodayPrice.status` | `approved` (2026-10-28 기존 데모데이 카드 복원 요청): 홈 카드와 /demoday에 가격·계산기 표시 | `pending`으로 바꾸면 가격과 계산기가 숨겨짐 |
-| 고객사·작업·후기 수, 평점 | `proofStats` | 화면에 없음 | `items`, `asOf`(기준일), `source`(출처)를 넣고 `approved: true` → 2섹션에 표시 |
+| 웹사이트 가격 (소개형 · 폼 연동형) | `websiteOptions[].price`, `priceNote` | 2026-10-29 대표 확정: 40만원부터 · 70만원부터 (부가세 별도 시작가). 추가 제작은 `websiteExtra` ‘별도 견적’ | 금액을 바꾸면 홈 · /web/ · /demoday에 함께 반영 |
+| 데모데이 팀당 가격·계산기 | `demodayPrice.status` | `pending` (2026-10-29 ‘가격은 별도 협의’만 표기) | `approved`로 바꾸면 팀당 가격과 계산기가 나옴 |
+| 고객사·작업·후기 수, 평점 | `proofStats` | 2026-10-29 대표 요청으로 TRACK RECORD 섹션에 표시 (800건+ · 4.9/5 · 458건+ · 300곳+) | `asOf`에 집계 기준일을 넣으면 숫자 아래 표시, `approved: false`면 숫자 줄이 사라짐 |
 | 데모데이 행사별 팀 수 | `demodayTeamsApproved` | `false`: 표시 안 함 | `true` |
 | 후기 원문 링크 | `site.reviewSourceUrl` | 없음: 버튼 숨김 | 확인된 주소를 넣으면 ‘후기 원문 보기 ↗’ 표시 |
 | 개인정보 안내 | `site.privacyApproved`, `site.privacyPolicy` | 미확정 | `PRIVACY_DRAFT.md`를 확정해 옮김 |

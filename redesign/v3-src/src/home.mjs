@@ -1,5 +1,5 @@
 // Home: 9 sections. Hero, statement band, clients and the demo day card follow the original v3 (owner request 2026-10-28); other copy follows 문구 교체안. Concept objects are decorative, not client evidence.
-import { site, pricing, pricingNotes, pricingRows, faq, proofStats, demodayHistory, demodayTeamsApproved, demodayPrice, irConsulting, partnerLogos, reviews, websiteOptions, eventPageCommon, beyondItems, featuredWork } from './data.mjs';
+import { site, pricing, pricingNotes, pricingRows, faq, proofStats, trackWall, demodayHistory, demodayTeamsApproved, demodayPrice, irConsulting, reviews, websiteOptions, websiteExtra, websitePricing, beyondItems, featuredWork } from './data.mjs';
 import { portfolio } from './portfolio.mjs';
 import { esc, arrow, ext, ck, title, eyebrow } from './ui.mjs';
 import { contactSection } from './contact.mjs';
@@ -42,26 +42,21 @@ function statement(base) {
 </section>`;
 }
 
-/* 3 — clients (original v3 layout): two logo rows drifting in opposite directions; figures only once approved */
-function logoRows(base) {
-  const half = Math.ceil(partnerLogos.length / 2);
-  return [partnerLogos.slice(0, half), partnerLogos.slice(half)].map((list, i) => {
-    const imgs = hidden => list.map(l => `<img src="${base + l.src}" ${hidden ? 'aria-hidden="true" alt=""' : `alt="${esc(l.name)}"`} loading="lazy" decoding="async">`).join('');
-    return `<div class="h-lrow${i ? ' is-rev' : ''}"><div class="h-lrow__track">${imgs(false)}${imgs(true)}</div></div>`;
-  }).join('');
-}
-function clients(base) {
-  const stats = proofStats.approved && proofStats.asOf && proofStats.source && proofStats.items.length
-    ? `<div class="h-cl__stats"><ul>${proofStats.items.map(s => `<li><b>${esc(s.value)}${esc(s.unit || '')}</b><span>${esc(s.label)}</span></li>`).join('')}</ul><p>${esc(proofStats.asOf)} 기준 · ${esc(proofStats.source)}</p></div>` : '';
-  return `<section id="clients" class="h-nums h-cl2" data-header="light">
- <div class="h-cl__head" data-reveal>
-  ${eyebrow('OUR CLIENTS')}
-  <h2>${title(['중요한 순간을', '함께한 이름들.'])}</h2>
-  <p class="h-cl__sub">기업의 발표부터 공공기관과 창업지원 현장까지, 서로 다른 목적의 자료를 함께 만들었습니다.</p>
+/* 3 — track record (v2 layout, current tone): figures, a rotating one-line review with stars, two drifting logo rows */
+function trackRecord(base) {
+  const stats = proofStats.approved && proofStats.items.length ? `<ul class="h-tr__stats">${proofStats.items.map(s => `<li><b><span data-count="${esc(s.value)}">${esc(s.value)}</span><em>${esc(s.unit)}</em></b><span class="lb">${esc(s.label)}</span>${s.note ? `<small>${esc(s.note)}</small>` : ''}</li>`).join('')}</ul>${proofStats.asOf ? `<p class="h-tr__asof">${esc(proofStats.asOf)} 기준</p>` : ''}` : '';
+  const quotes = reviews.filter(r => r.excerpt);
+  const row = (list, hidden) => list.map(t => `<span class="h-tr__tile"${hidden ? ' aria-hidden="true"' : ''}><img src="${base}assets/clients-dark/${t.file}" ${hidden ? 'alt="" ' : `alt="${esc(t.name)}" `}style="height:${t.h}px" loading="lazy" decoding="async">${t.label ? `<span>${esc(t.label)}</span>` : ''}</span>`).join('');
+  return `<section id="clients" class="h-tr" data-header="dark">
+ <div class="h-tr__head" data-reveal>
+  ${eyebrow('TRACK RECORD', 'h-eye--dark')}
+  <h2><b>숫자가</b> <span>먼저 말합니다.</span></h2>
  </div>
  ${stats}
- <div class="h-logorows" data-reveal role="group" aria-label="함께한 기업과 기관">${logoRows(base)}</div>
- <p class="h-note">함께 작업한 기관과 기업 중 일부입니다.</p>
+ ${quotes.length ? `<div class="h-tr__quote" data-quotes>${quotes.map((r, i) => `<p${i === 0 ? ' class="is-on"' : ' aria-hidden="true"'}><i aria-label="별점 5점 만점에 5점">★★★★★</i><q>${esc(r.excerpt)}</q></p>`).join('')}</div>` : ''}
+ <p class="h-tr__real">100% 실제 고객 후기 · 외부 판매 페이지 원문</p>
+ <p class="h-tr__cap"><b>정부 부처 · 공공기관 · 대학 · 기업</b>이 함께했습니다</p>
+ <div class="h-tr__wall" role="group" aria-label="함께한 기업과 기관">${trackWall.map(list => `<div class="h-tr__row"><div class="h-tr__track">${row(list, false)}${row(list, true)}</div></div>`).join('')}</div>
 </section>`;
 }
 
@@ -118,9 +113,9 @@ function pricingSection(base) {
 
 /* 6 — institutions and demo days. Right card = original v3 card (restored on request 2026-10-28). */
 const ddSteps = [
-  ['투자자가 묻는 순서로 기획합니다.', '심사 흐름에 맞춰 장표 순서부터 다시 잡습니다.'],
-  ['산업도 팀도 달라도, 각자에 맞게.', '팀마다 사업을 이해하고 기획과 디자인을 따로 잡아 드립니다.'],
-  ['광고비 0원, 모두 소개로 이어졌습니다.', '결과물이 다음 의뢰를 데려옵니다.'],
+  ['초안만 받아 주세요.', '참가팀 연락부터 자료 취합, 일정과 피드백 관리까지 대신 챙깁니다.'],
+  ['산업이 달라도, 이해하고 만듭니다.', '팀마다 사업 내용을 먼저 파악하고, 그 팀에 맞는 순서와 디자인을 따로 잡습니다.'],
+  ['발표 현장을 아는 브랜드입니다.', '여러 데모데이를 함께 준비하며, 무대에서 무엇이 먼저 보여야 하는지 알고 있습니다.'],
 ];
 const manwon = n => n % 10000 === 0 ? `${n / 10000}만원` : `${Math.floor(n / 10000)}만 ${(n % 10000) / 1000}천원`;
 function demoday(base) {
@@ -146,17 +141,35 @@ function demoday(base) {
   <h3>한 번 맡기면,<br>여기까지 진행합니다.</h3>
   <ol class="h-dd__steps">${ddSteps.map(([t, d], i) => `<li style="--i:${i}"><span class="no">0${i + 1}</span><h4>${t}</h4><p>${d}</p></li>`).join('')}</ol>
   <div class="h-dd__foot">
-   <p>${approved ? `<b>팀당 ${manwon(demodayPrice.perTeam)}</b> (${demodayPrice.pagesIncluded}장 이내)<br>초과 시 장당 ${manwon(demodayPrice.extraPerPage)}, 규모에 따라 협의합니다.` : '팀 수와 제작 범위에 맞춰 견적을 안내합니다.'}</p>
+   <p>${approved ? `<b>팀당 ${manwon(demodayPrice.perTeam)}</b> (${demodayPrice.pagesIncluded}장 이내)<br>초과 시 장당 ${manwon(demodayPrice.extraPerPage)}, 규모에 따라 협의합니다.` : '<b>가격은 별도 협의합니다.</b>'}</p>
    <div class="h-dd__cta"><a class="h-pill" href="#contact" data-prefill="kind=institution">IR · 데모데이 상담하기 ${arrow}</a>${approved ? `<a class="h-link" href="${base}demoday/#estimate">팀 수로 예상 비용 계산 ${arrow}</a>` : ''}</div>
   </div>
  </div>
- <div class="h-ev" data-reveal>
-  <div class="h-ev__head"><h3>행사의 시작부터 기록까지, 웹페이지로.</h3><p>IR 자료와 어울리는 디자인으로 행사 페이지를 제작합니다. 필요한 기능에 따라 범위와 비용을 별도로 안내합니다.</p></div>
-  <ol class="h-ev__list">${websiteOptions.map((o, i) => `<li><span class="no">0${i + 1}</span><h4>${esc(o.name)}</h4><p>${esc(o.summary)}</p></li>`).join('')}</ol>
-  <ul class="h-ev__notes"><li>${esc(eventPageCommon)}</li><li>참가팀 인터뷰 영상 촬영도 별도로 문의할 수 있습니다.</li></ul>
-  <a class="h-link h-ev__more" href="${base}demoday/#website-options">행사 페이지 자세히 보기 ${arrow}</a>
- </div>
+ ${webPricing(base, { eye: '행사·데모데이 홈페이지도, 유별나게!', onHome: true })}
 </section>`;
+}
+
+/* Website pricing block: home (inside the demo day section), /web/ and /demoday share it. */
+export function webPricing(base, { eye = '', onHome = false, heading = 'h3', tier = 'h4' } = {}) {
+  const price = o => o.status === 'approved' && Number.isSafeInteger(o.price) ? `${manwon(o.price)}${o.priceNote || ''}` : '별도 견적';
+  const href = o => onHome ? `href="#contact" data-prefill="item=web&option=${o.id}"` : `href="${base}contact/?item=web&option=${o.id}"`;
+  return `<div class="wp" data-reveal>
+  <div class="wp__head">${eye ? `<p class="wp__eye">${esc(eye)}</p>` : ''}<${heading} class="wp__t">${title(websitePricing.title)}</${heading}><p class="wp__lead">${esc(websitePricing.lead)}</p></div>
+  <ul class="wp__tiers">${websiteOptions.map(o => `<li class="wp__tier">
+   <div class="wp__top"><${tier}>${esc(o.name)}</${tier}><p class="wp__price">${price(o)}</p></div>
+   <p class="wp__tag">${esc(o.tagline)}</p>
+   <ul class="wp__inc">${o.include.map(t => `<li>${ck}<span>${esc(t)}</span></li>`).join('')}</ul>
+   <p class="wp__use"><b>추천 용도</b>${esc(o.useFor)}</p>
+   <a class="wp__cta" ${href(o)}>${esc(o.name)} 견적 문의 ${arrow}</a>
+  </li>`).join('')}
+   <li class="wp__tier wp__tier--extra">
+    <div class="wp__top"><${tier}>${esc(websiteExtra.name)}</${tier}><p class="wp__price">${esc(websiteExtra.price)}</p></div>
+    <ul class="wp__inc wp__inc--plain">${websiteExtra.include.map(t => `<li><span>${esc(t)}</span></li>`).join('')}</ul>
+   </li>
+  </ul>
+  <dl class="wp__notes">${websitePricing.notes.map(([t, d]) => `<div><dt>${esc(t)}</dt><dd>${esc(d)}</dd></div>`).join('')}</dl>
+  <p class="wp__foot">${esc(websitePricing.footnote)}</p>
+ </div>`;
 }
 
 /* 7 — beyond PPT: print, web and visuals. Sample sites live on the separate /web/ page. */
@@ -171,7 +184,7 @@ function beyond(base) {
   <ul class="h-bp__list">${beyondItems.map((it, i) => `<li data-reveal style="--i:${i}"><span class="ic">${obj(it.obj, base)}</span><div><h3>${esc(it.title)}</h3><p>${esc(it.body)}</p>${it.id === 'web' ? `<a class="h-link h-bp__more" href="${base}web/">웹 제작 사례 보기 ${arrow}</a>` : ''}</div></li>`).join('')}</ul>
  </div>
  <div class="h-bp__foot" data-reveal>
-  <a class="h-pill h-pill--blue" href="#contact" data-prefill="more=1">PPT와 함께 견적 문의 ${arrow}</a>
+  <a class="h-pill h-pill--blue" href="#contact">PPT와 함께 견적 문의 ${arrow}</a>
   <div class="h-bp__notes"><p>PPT 제작과 구분해 작업 범위와 비용을 안내합니다.</p></div>
  </div>
 </section>`;
@@ -186,6 +199,7 @@ function voice() {
    ${eyebrow('CLIENT VOICE')}
    <h2>${title(['다시 맡기는 이유,', '고객의 말에 있습니다.'])}</h2>
    <p class="h-rev__sub">자료를 이해하는 과정부터 디자인과 소통까지. 함께 작업한 고객의 후기를 확인하세요.</p>
+   <p class="h-real"><b>100% 실제 고객 후기</b><span>외부 판매 페이지에 올라온 후기를 고치지 않고 그대로 옮겼습니다.</span></p>
   </div>
   <div class="h-rev__pager"><button type="button" data-rev-prev aria-label="이전 후기">${arrow}</button><span class="sr-only"><b data-rev-now>01</b> / ${String(shown.length).padStart(2, '0')}</span><button type="button" data-rev-next aria-label="다음 후기">${arrow}</button></div>
  </div>
@@ -193,7 +207,7 @@ function voice() {
   <header><h3>“${esc(r.excerpt)}”</h3></header>
   <div class="h-rcard__body"><p>${esc(r.body)}</p></div>
  </article>`).join('')).join('')}</div>
- <div class="h-rev__foot"><p class="h-rev__note">외부 판매 페이지에 올라온 후기 원문입니다.</p>${site.reviewSourceUrl ? `<a class="h-link" href="${esc(site.reviewSourceUrl)}" target="_blank" rel="noopener">후기 원문 보기 ${ext}</a>` : ''}</div>
+ <div class="h-rev__foot">${site.reviewSourceUrl ? `<a class="h-link" href="${esc(site.reviewSourceUrl)}" target="_blank" rel="noopener">후기 원문 보기 ${ext}</a>` : ''}</div>
  <div class="h-faq" id="faq">
   <h3 class="h-faq__t" data-reveal>맡기기 전, 궁금한 것들.</h3>
   <div class="faq-list">${faq.map((x, i) => `<div class="faq-item"><h4><button type="button" aria-expanded="false" aria-controls="answer-${i}" id="question-${i}"><span class="q">${esc(x.question)}</span><span class="pm" aria-hidden="true">+</span></button></h4><div class="faq-answer" id="answer-${i}" role="region" aria-labelledby="question-${i}" hidden><p>${esc(x.answer)}</p></div></div>`).join('')}</div><button class="faq-more" type="button" data-faq-more>질문 더 보기 +</button>
@@ -202,5 +216,5 @@ function voice() {
 }
 
 export function homePage(base = '') {
-  return `<div class="h-intro">${hero(base)}${statement(base)}</div>${clients(base)}${work(base)}${pricingSection(base)}${demoday(base)}${beyond(base)}${voice()}${contactSection(base)}`;
+  return `<div class="h-intro">${hero(base)}${statement(base)}</div>${trackRecord(base)}${work(base)}${pricingSection(base)}${demoday(base)}${beyond(base)}${voice()}${contactSection(base)}`;
 }

@@ -1,7 +1,7 @@
 // Step-by-step inquiry form for the home (section 9) and /contact. Markup: src/contact.mjs.
 // One question per step; the last step asks for contact details and holds the optional extras.
 // Without a connected receiving service the form opens the visitor's mail app and never shows a receipt.
-import { site } from './data.mjs';
+import { site, inquiryOptions } from './data.mjs';
 import { validateInquiry, submitInquiry, mailtoHref, inquiryText, summaryLines, parseSelection, localToday, daysUntil } from './domain.mjs';
 
 const form = document.getElementById('inquiry-form');
@@ -26,26 +26,36 @@ if (form) {
   submit.disabled = false; // rendered disabled so the form cannot be sent without this script
 
   // Which step holds each field (errors jump to that step).
+  // Steps with data-when only appear when that item is chosen in step 1.
   const STEP_FIELDS = [
+    ['items'],
     ['kind'],
     ['purpose', 'purposeOther'],
     ['service'],
+    ['webType'],
+    ['printType'],
+    ['visualTypes', 'filmingPlace', 'videoCount', 'filmingNotes'],
     ['dueDate', 'teamCount', 'eventName', 'exchange'],
-    ['name', 'organization', 'contactMethod', 'email', 'phone', 'pages', 'attachmentLink', 'files', 'extras', 'webTier', 'filmingPlace', 'videoCount', 'filmingNotes', 'budget', 'referral', 'message', 'privacyConsent'],
+    ['name', 'organization', 'contactMethod', 'email', 'phone', 'pages', 'attachmentLink', 'files', 'budget', 'referral', 'message', 'privacyConsent'],
   ];
+  const WEB_TYPES = new Set(inquiryOptions.webType.map(x => x[0]));
+  const items = () => $$('input[name=items]:checked').map(x => x.value);
+  const isActive = i => { const when = steps[i].dataset.when; return !when || items().includes(when); };
+  const activeSteps = () => steps.map((_, i) => i).filter(isActive);
   const stepOf = name => { const i = STEP_FIELDS.findIndex(list => list.includes(name)); return i < 0 ? last : i; };
   const order = STEP_FIELDS.flat();
-  const MORE_FIELDS = ['pages', 'attachmentLink', 'files', 'extras', 'webTier', 'filmingPlace', 'videoCount', 'filmingNotes', 'budget', 'referral', 'message'];
+
+  const MORE_FIELDS = ['pages', 'attachmentLink', 'files', 'budget', 'referral', 'message'];
 
   function sync() {
-    const inst = radio('kind') === 'institution';
+    const ppt = items().includes('ppt');
+    const inst = ppt && radio('kind') === 'institution';
     show('institution', inst);
+    show('pages', ppt);
     show('pages-company', !inst);
     show('pages-institution', inst);
     show('purpose-other', radio('purpose') === 'other');
-    const extras = $$('input[name=extras]:checked').map(x => x.value);
-    show('web-tier', extras.includes('web-event'));
-    show('interview', extras.includes('interview'));
+    show('interview', $$('input[name=visualTypes]:checked').some(x => x.value === 'interview'));
     const orgTag = $('[data-org-tag]');
     orgTag.textContent = inst ? '필수' : '선택';
     orgTag.classList.toggle('iq-tag--req', inst);
@@ -66,13 +76,13 @@ if (form) {
   function payload() {
     const kind = radio('kind');
     return {
+      items: items(), webType: radio('webType'), printType: radio('printType'), visualTypes: $$('input[name=visualTypes]:checked').map(x => x.value),
       kind, purpose: radio('purpose'), purposeOther: el('purposeOther').value, service: radio('service'),
       dueDate: el('dueDate').value, dueUndecided: el('dueUndecided').checked,
       eventName: el('eventName').value, teamCount: el('teamCount').value, teamCountUndecided: el('teamCountUndecided').checked, exchange: radio('exchange'),
       name: el('name').value, organization: el('organization').value,
       contactMethod: radio('contactMethod'), email: el('email').value, phone: el('phone').value,
       pages: radio(kind === 'institution' ? 'pagesInstitution' : 'pagesCompany'), attachmentLink: el('attachmentLink').value,
-      extras: $$('input[name=extras]:checked').map(x => x.value), webTier: radio('webTier'),
       filmingPlace: el('filmingPlace').value, videoCount: el('videoCount').value, filmingNotes: el('filmingNotes').value,
       budget: el('budget').value, message: el('message').value, referral: el('referral').value,
       privacyConsent: el('privacyConsent').checked, portfolioConsent: el('portfolioConsent').checked,
@@ -101,10 +111,10 @@ if (form) {
     return first;
   }
   const errorsFor = i => Object.fromEntries(Object.entries(validateInquiry(payload(), { today })).filter(([name]) => STEP_FIELDS[i].includes(name)));
-  const firstOpenStep = () => { for (let i = 0; i < last; i++) if (Object.keys(errorsFor(i)).length) return i; return last; };
+  const firstOpenStep = () => { for (const i of activeSteps()) if (i < last && Object.keys(errorsFor(i)).length) return i; return last; };
 
   function renderRecap() {
-    const want = { '의뢰 구분': 0, '자료 용도': 1, '자료 상태': 2, '필요한 날짜': 3, '참가팀 수': 3 };
+    const want = { '만들 것': 0, '의뢰 구분': 1, '자료 용도': 2, '자료 상태': 3, '홈페이지 종류': 4, '인쇄물 종류': 5, '이미지·영상': 6, '필요한 날짜': 7, '참가팀 수': 7 };
     const items = summaryLines(payload()).filter(([name]) => name in want);
     recap.replaceChildren();
     if (items.length) {
@@ -125,10 +135,12 @@ if (form) {
 
   let cur = 0;
   function go(i, { focus = true, scroll = true } = {}) {
-    cur = Math.max(0, Math.min(last, i));
+    const list = activeSteps();
+    cur = list.find(k => k >= Math.max(0, Math.min(last, i))) ?? last;
     steps.forEach((s, k) => s.classList.toggle('is-on', k === cur));
-    progText.textContent = `질문 ${cur + 1} / ${steps.length}`;
-    progBar.style.width = `${((cur + 1) / steps.length) * 100}%`;
+    const pos = list.indexOf(cur) + 1;
+    progText.textContent = `질문 ${pos} / ${list.length}`;
+    progBar.style.width = `${(pos / list.length) * 100}%`;
     prevBtn.hidden = cur === 0;
     nextBtn.hidden = cur === last;
     alt.hidden = cur === last;
@@ -143,13 +155,14 @@ if (form) {
     const errors = errorsFor(cur);
     clearErrors(STEP_FIELDS[cur]);
     if (Object.keys(errors).length) { markErrors(errors)?.focus?.({ preventScroll: true }); return; }
-    go(cur + 1);
+    go(activeSteps().find(k => k > cur) ?? last);
   }
+  const back = () => { const list = activeSteps().filter(k => k < cur); go(list.length ? list[list.length - 1] : 0); };
 
   form.classList.add('is-wizard');
   prog.hidden = false;
   nav.hidden = false;
-  prevBtn.addEventListener('click', () => go(cur - 1));
+  prevBtn.addEventListener('click', back);
   nextBtn.addEventListener('click', next);
   recap.addEventListener('click', e => { const b = e.target.closest('[data-goto]'); if (b) go(Number(b.dataset.goto)); });
 
@@ -158,10 +171,6 @@ if (form) {
   form.addEventListener('pointerdown', () => { pointerAt = performance.now(); });
   form.addEventListener('change', e => {
     const t = e.target;
-    if (t.name === 'extras') {
-      if (t.value === 'none' && t.checked) $$('input[name=extras]').forEach(x => { if (x !== t) x.checked = false; });
-      else if (t.checked) setCheck('extras', 'none', false);
-    }
     if (t.name === 'kind') $$(`input[name=${t.value === 'institution' ? 'pagesCompany' : 'pagesInstitution'}]`).forEach(x => { x.checked = false; });
     if (t.name === 'dueUndecided' || t.name === 'dueDate') clearError('dueDate');
     if (t.name === 'teamCountUndecided') clearError('teamCount');
@@ -169,7 +178,7 @@ if (form) {
     if (t.name) clearError(t.name);
     sync();
     if (t.name === 'purpose' && t.value === 'other') { setTimeout(() => el('purposeOther').focus(), 0); return; }
-    const auto = ['kind', 'purpose', 'service'].includes(t.name) && t.type === 'radio' && performance.now() - pointerAt < 800;
+    const auto = ['kind', 'purpose', 'service', 'webType', 'printType'].includes(t.name) && t.type === 'radio' && performance.now() - pointerAt < 800;
     if (auto) setTimeout(() => { if (steps[cur].contains(t) && t.checked) next(); }, 220);
   });
   form.addEventListener('input', e => { if (e.target.name === 'dueDate') sync(); if (e.target.name) clearError(e.target.name); });
@@ -181,17 +190,20 @@ if (form) {
   });
 
   function prefill(sel = {}) {
+    const chosen = new Set(sel.items || []);
+    if (sel.kind || sel.purpose || sel.service || sel.teamCount) chosen.add('ppt');
+    for (const id of sel.optionIds || []) {
+      if (WEB_TYPES.has(id)) { chosen.add('web'); setRadio('webType', id); }
+      else if (id === 'print') chosen.add('print');
+      else if (id === 'interview') { chosen.add('visual'); setCheck('visualTypes', 'interview'); }
+      else if (id === 'visual') chosen.add('visual');
+    }
+    chosen.forEach(id => setCheck('items', id));
     if (sel.kind) setRadio('kind', sel.kind);
     if (sel.purpose) setRadio('purpose', sel.purpose);
     if (sel.service) setRadio('service', sel.service);
     if (sel.due === 'undecided') el('dueUndecided').checked = true;
     else if (sel.due) { el('dueDate').value = sel.due; el('dueUndecided').checked = false; }
-    for (const id of sel.optionIds || []) {
-      if (id.startsWith('web-') && id !== 'web-company') { setCheck('extras', 'web-event'); setRadio('webTier', id); }
-      else setCheck('extras', id);
-      setCheck('extras', 'none', false);
-      more.open = true;
-    }
     if (sel.teamCount) { setRadio('kind', 'institution'); el('teamCount').value = sel.teamCount; }
     if (sel.more) more.open = true;
     sync();
@@ -199,7 +211,7 @@ if (form) {
 
   const initial = parseSelection(location.search);
   prefill(initial);
-  go([initial.kind, initial.purpose, initial.service, initial.due].some(Boolean) ? firstOpenStep() : 0, { focus: false, scroll: false });
+  go([initial.items.length, initial.optionIds.length, initial.kind, initial.purpose, initial.service, initial.due].some(Boolean) ? firstOpenStep() : 0, { focus: false, scroll: false });
   try { sessionStorage.removeItem('youstar:estimate'); } catch { /* storage may be unavailable */ }
 
   // Same-page links (pricing, demoday, beyond) carry their selection in data-prefill and keep the #contact jump.

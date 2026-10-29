@@ -70,39 +70,38 @@ export const pricingRows = [
 ];
 
 // Institution (demoday) base price. Shown on screen and in the team calculator only when status is 'approved'.
-export const demodayPrice = { status: 'approved', // owner restored the original demo day card with this price (2026-10-28)
+export const demodayPrice = { status: 'pending', // 2026-10-29 owner: show '가격은 별도 협의' only. 'approved' shows the per-team price and calculator.
    perTeam: 500000, pagesIncluded: 20, extraPerPage: 25000 };
 
-const websiteCommon = ['메인 7개 섹션 이내', '최대 10팀 소개', 'PC·모바일 대응', '제공 원고·사진 기준 제작'];
-const websiteExcluded = [
-  '10팀 초과', '별도 다국어', '독립 페이지 대량 추가', '유료 이미지 구매',
-  '회원가입', '결제', '투자자 미팅 매칭', '좌석 배정', 'QR 체크인',
-  '이메일·문자 자동 발송', '독립 관리자 대시보드',
-  '도메인·호스팅·유료 서비스 이용료', '유지보수 기간과 행사 후 운영 주체는 별도 협의',
-];
-
-// Event website tiers. Prices are quoted per project until approved (price: null).
+// Website pricing (owner copy, 2026-10-29). price: integer KRW start price, shown with priceNote ('부터').
 export const websiteOptions = [
   {
-    id: 'web-info', name: '행사 안내 페이지', status: 'draft', price: null,
-    summary: '행사 소개, 프로그램, 참가팀, 연사, 장소를 한곳에 정리합니다. 참가 신청은 외부 링크로 연결합니다.',
-    features: [...websiteCommon, '행사 소개 프로그램 팀 연사 장소', '외부 신청 링크 연결', '별도 명단 기능 없음', '팀별 상세는 메인 소개 범위', '자료와 영상은 메인 제공 범위 협의', '행사 후 변경은 별도 협의'],
-    excluded: [...websiteExcluded],
+    id: 'web-intro', name: '소개형', status: 'approved', price: 400000, priceNote: '부터',
+    tagline: '회사·서비스·행사 정보를 한 페이지에.',
+    include: ['원페이지 구성 · 최대 7개 섹션', '기존 디자인 구성을 활용한 브랜드 색상·이미지 적용', '제공된 원고·로고·이미지 배치', 'PC·모바일 반응형 제작', '이메일·카카오톡·외부 신청 링크 연결', '최초 사이트 공개 및 링크 작동 확인', '확정된 구성 내 문구·이미지 수정 2회'],
+    useFor: '스타트업·기업 소개 / 제품·서비스 소개 / 행사 안내',
   },
   {
-    id: 'web-register', name: '참가 신청 페이지', status: 'draft', price: null,
-    summary: '행사 안내에 자체 신청 양식, 명단 저장, 신청 마감 기능을 더합니다.',
-    features: [...websiteCommon, '행사 안내 페이지 전체', '자체 신청폼 완료 화면 신청 마감', '승인된 연동 경로로 명단 저장', '팀별 상세는 메인 소개 범위', '자료와 영상은 메인 제공 범위 협의', '제출·중복·마감·오류·완료 화면', '행사 후 변경은 별도 협의'],
-    excluded: [...websiteExcluded],
-  },
-  {
-    id: 'web-archive', name: '행사 아카이브 페이지', status: 'draft', price: null,
-    summary: '참가 신청 기능에 팀별 상세 소개, IR 자료·영상 연결, 행사 후 사진·영상 업데이트 1회를 더합니다.',
-    features: [...websiteCommon, '참가 신청 페이지 전체', '자체 신청폼 포함', '승인된 연동 경로로 명단 저장', '팀별 상세 소개', '제공 IR 자료 영상 연결', '제공 사진과 영상 업데이트 1회'],
-    excluded: [...websiteExcluded, '행사 측에서 제공·공개 승인하지 않은 IR 자료'],
+    id: 'web-form', name: '폼 연동형', status: 'approved', price: 700000, priceNote: '부터',
+    tagline: '소개부터 문의·신청 접수까지.',
+    include: ['소개형 제공 범위 전체 포함', '문의 또는 신청폼 1종 · 입력 항목 최대 10개', '기존 폼 서비스 또는 구글폼·시트 연동', '접수 내용 저장·확인 및 내보내기 설정', '폼 제출·저장 작동 테스트', '접수 내역 확인 방법 안내', '행사 신청 시 접수 마감 설정'],
+    useFor: '상담·도입 문의 / 행사 참가 신청 / 프로그램 신청',
   },
 ];
-export const eventPageCommon = '행사 페이지 공통 범위: 메인 7개 섹션 이내 · 최대 10팀 소개 · PC·모바일 대응 · 제공된 원고와 사진 기준.';
+export const websiteExtra = {
+  name: '추가 제작', price: '별도 견적',
+  include: ['페이지·섹션 추가 및 맞춤 디자인', '원고 작성·콘텐츠 기획·번역', '행사 후 사진·자료·영상 링크 업데이트', '이미지 제작·촬영·영상 편집', '맞춤 관리자·회원·결제 등 별도 기능', '정기 콘텐츠 수정 및 운영 관리'],
+};
+export const websitePricing = {
+  title: [['기업 소개부터', '행사 안내까지,'], ['필요한 웹사이트를', '합리적으로.']],
+  lead: '준비된 콘텐츠를 바탕으로 PC와 모바일에 맞는 웹사이트를 제작합니다.',
+  notes: [
+    ['가격 안내', '표기 금액은 부가세 별도 시작가입니다. 최종 비용은 콘텐츠 분량과 기능 범위를 확인한 뒤 안내합니다.'],
+    ['제작 기준', '고객이 제공한 원고와 이미지, 기존 디자인 구성을 기준으로 제작합니다. 수정 1회는 취합된 요청 1건을 기준으로 하며, 확정 후 구성 변경과 신규 기능 추가는 별도 견적입니다.'],
+    ['운영 비용', '도메인·호스팅·유료 폼 서비스 등 외부 서비스 이용료는 별도입니다. 운영 기간과 연장 비용은 계약 시 안내합니다. 신청자 응대·명단 관리·상시 운영 대행은 포함되지 않습니다.'],
+  ],
+  footnote: '폼 연동형은 외부 서비스의 지원 범위 내에서 제공하며, 별도 관리자 시스템 개발은 포함되지 않습니다.',
+};
 
 export const included = [
   { title: '자료 분석', description: '제공 자료를 바탕으로 내용의 우선순위를 정리합니다.', output: '우선순위 메모' },
@@ -164,7 +163,180 @@ export const media = [
 
 // Public figures (고객사 수, 작업 건수, 후기 수, 평점 등). Shown only when approved with asOf and source.
 // items: [{ value: 0, unit: '곳', label: '고객사' }]
-export const proofStats = { approved: false, asOf: null, source: null, items: [] };
+export const proofStats = {
+  approved: true, // owner restored the v2 track record section with these figures (2026-10-29)
+  asOf: null, // 집계 기준일을 넣으면 숫자 아래에 'YYYY.MM 기준'으로 표시됩니다.
+  items: [
+    { value: 800, unit: '건+', label: '누적 작업', note: 'IR · 제안서 · 회사소개서' },
+    { value: 4.9, unit: '/5', label: '고객 평점', note: '외부 판매 페이지 기준' },
+    { value: 458, unit: '건+', label: '공식 고객후기', note: '실제 의뢰 고객 작성' },
+    { value: 300, unit: '곳+', label: '고객사', note: '기업 · 기관 · 대학' },
+  ],
+};
+
+// Logo wall for the track record section (v2 rows, logos prepared for a dark background). h = logo height in px.
+export const trackWall = [
+[
+{
+file: "msit.webp",
+name: "과학기술정보통신부",
+h: 27,
+label: null
+},
+{
+file: "compa.webp",
+name: "과학기술사업화진흥원",
+h: 26,
+label: null
+},
+{
+file: "samsungcnt.webp",
+name: "삼성물산",
+h: 27,
+label: null
+},
+{
+file: "nh.webp",
+name: "NH농협",
+h: 46,
+label: "NH농협"
+},
+{
+file: "kaist.webp",
+name: "KAIST",
+h: 30,
+label: null
+},
+{
+file: "kyunghee.webp",
+name: "경희대 산학협력단",
+h: 46,
+label: "경희대 산학협력단"
+},
+{
+file: "forest.webp",
+name: "산림청",
+h: 39,
+label: null
+},
+{
+file: "fsec.webp",
+name: "금융보안원",
+h: 34,
+label: null
+},
+{
+file: "iwssm.webp",
+name: "유네스코 I-WSSM",
+h: 42,
+label: null
+},
+{
+file: "jahwal.webp",
+name: "한국자활연수원",
+h: 28,
+label: null
+},
+{
+file: "sopoong.webp",
+name: "소풍커넥트",
+h: 22,
+label: null
+},
+{
+file: "woorihrd.webp",
+name: "우리들HRD",
+h: 46,
+label: null
+},
+{
+file: "langdev.webp",
+name: "언어발전소",
+h: 46,
+label: "언어발전소"
+}
+],
+[
+{
+file: "mois.webp",
+name: "행정안전부",
+h: 33,
+label: null
+},
+{
+file: "nipa.webp",
+name: "정보통신산업진흥원",
+h: 25,
+label: null
+},
+{
+file: "woori.webp",
+name: "우리은행",
+h: 46,
+label: "우리은행"
+},
+{
+file: "lh.webp",
+name: "LH",
+h: 46,
+label: null
+},
+{
+file: "korea-univ.webp",
+name: "고려대 산학협력단",
+h: 46,
+label: "고려대 산학협력단"
+},
+{
+file: "pknu.webp",
+name: "국립부경대학교",
+h: 30,
+label: null
+},
+{
+file: "jeonbuk.webp",
+name: "전북특별자치도",
+h: 46,
+label: null
+},
+{
+file: "gcon.webp",
+name: "경기콘텐츠진흥원",
+h: 33,
+label: null
+},
+{
+file: "koef.webp",
+name: "한국청년기업가정신재단",
+h: 22,
+label: null
+},
+{
+file: "likelion.webp",
+name: "멋쟁이사자처럼",
+h: 45,
+label: "멋쟁이사자처럼"
+},
+{
+file: "abyplus.webp",
+name: "A by Plus",
+h: 37,
+label: null
+},
+{
+file: "creacube.webp",
+name: "크레아큐브",
+h: 30,
+label: null
+},
+{
+file: "sungam.webp",
+name: "특허법인 성암",
+h: 28,
+label: null
+}
+]
+];
 
 // Demo day history, copied from the published about page (주요 연혁). teams is shown only when teamsApproved.
 export const demodayTeamsApproved = false;
@@ -253,6 +425,24 @@ export const webShowcase = [
 
 // One inquiry form for the home, /contact and the quick quote. Values are stable codes; labels are shown.
 export const inquiryOptions = {
+  // First question: what to make (several allowed). Later questions depend on these.
+  items: [
+    ['ppt', 'PPT · 발표자료', 'IR · 회사소개서 · 제안서 · 교육자료'],
+    ['web', '홈페이지', '회사 · 서비스 · 행사 페이지'],
+    ['print', '인쇄물', '브로슈어 · 카탈로그 · 리플렛 · 책자'],
+    ['visual', '이미지 · 영상', '제품 목업 · 소개 영상 · 인터뷰 촬영'],
+  ],
+  webType: [
+    ['web-intro', '소개형', '회사·서비스·행사 정보를 한 페이지에'],
+    ['web-form', '폼 연동형', '소개부터 문의·신청 접수까지'],
+    ['web-unsure', '아직 모르겠어요', '상담하며 정합니다'],
+  ],
+  printType: ['브로슈어', '카탈로그', '리플렛', '교육 안내 책자', '기타'],
+  visualType: [
+    ['mockup', '제품 목업 이미지'],
+    ['video', '짧은 소개 영상'],
+    ['interview', '인터뷰 영상 촬영'],
+  ],
   kind: [
     ['company', '우리 회사 자료', 'IR·회사소개서·제안서 등'],
     ['institution', '여러 팀 자료', '기관·데모데이'],
