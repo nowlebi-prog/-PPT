@@ -12,7 +12,7 @@
 | `src/ui.mjs` | 제목 줄바꿈 도우미 `title()` |
 | `src/render.mjs` | 하위 페이지, 헤더·푸터 |
 | `src/domain.mjs` | 가격 계산, URL 선택값, 문의 검증·요약·전송 |
-| `public/inquiry.mjs` · `public/quote.mjs` | 문의 폼 동작 · 빠른 견적 창 |
+| `public/inquiry.mjs` | 단계형 문의 폼 (1 의뢰 구분 · 2 용도 · 3 자료 상태 · 4 날짜(기관이면 팀 수) · 5 연락처·동의, 선택 항목은 5단계의 ‘더 알려 주기’) |
 | `public/home.css` · `public/styles.css` | 홈 전용 · 공통 스타일 (개편분은 각 파일 끝 `v3.1` 블록) |
 
 `dist/`는 빌드 결과입니다. 원본을 고친 뒤 `SITE_MODE=production npm run build`로 다시 만들고, `dist/`의 내용을 `redesign/v3/`에 올립니다.
@@ -33,7 +33,7 @@ title(['중요한 발표에는,', ['유별난 자료가', '필요합니다.']])
 | --- | --- | --- | --- |
 | BASIC·PRO·PREMIUM 가격 | `pricing[].status`, `unitPrice`, `setupFee`, `minPages` | 초안 금액 삭제, ‘자료 확인 후 견적’ | 금액을 넣고 `status: 'approved'` |
 | 행사 홈페이지 3종 가격 | `websiteOptions[].price` | 초안 금액 삭제, ‘기능 확인 후 견적’ | 금액을 넣고 `status: 'approved'` |
-| 데모데이 팀당 가격·계산기 | `demodayPrice.status` | `pending`: 화면과 /demoday 계산기 숨김 | `approved`로 바꾸면 가격 문구와 ‘팀 수로 예상 비용 확인’ 버튼, 계산기가 나옴 |
+| 데모데이 팀당 가격·계산기 | `demodayPrice.status` | `approved` (2026-10-28 기존 데모데이 카드 복원 요청): 홈 카드와 /demoday에 가격·계산기 표시 | `pending`으로 바꾸면 가격과 계산기가 숨겨짐 |
 | 고객사·작업·후기 수, 평점 | `proofStats` | 화면에 없음 | `items`, `asOf`(기준일), `source`(출처)를 넣고 `approved: true` → 2섹션에 표시 |
 | 데모데이 행사별 팀 수 | `demodayTeamsApproved` | `false`: 표시 안 함 | `true` |
 | 후기 원문 링크 | `site.reviewSourceUrl` | 없음: 버튼 숨김 | 확인된 주소를 넣으면 ‘후기 원문 보기 ↗’ 표시 |

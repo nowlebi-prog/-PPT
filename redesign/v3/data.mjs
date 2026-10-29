@@ -70,7 +70,8 @@ export const pricingRows = [
 ];
 
 // Institution (demoday) base price. Shown on screen and in the team calculator only when status is 'approved'.
-export const demodayPrice = { status: 'pending', perTeam: 500000, pagesIncluded: 20, extraPerPage: 25000 };
+export const demodayPrice = { status: 'approved', // owner restored the original demo day card with this price (2026-10-28)
+   perTeam: 500000, pagesIncluded: 20, extraPerPage: 25000 };
 
 const websiteCommon = ['메인 7개 섹션 이내', '최대 10팀 소개', 'PC·모바일 대응', '제공 원고·사진 기준 제작'];
 const websiteExcluded = [
@@ -242,12 +243,12 @@ export const featuredWork = [
   { id: '23', image: 'assets/pf/book-23.webp' },
 ];
 
-// Website showcase in section 7. Items marked (샘플) are studio examples, not client sites.
+// Website showcase on /web/. Items marked (샘플) are studio examples, not client sites. href: live site (null = 링크 준비 중, 버튼 없음).
 export const webShowcase = [
-  { title: '데모데이 행사 페이지', sub: '참가팀, 일정, 심사위원, 사전 등록까지 한 페이지로 (샘플)', src: 'assets/web/forge-demo.webp', poster: 'assets/web/forge-demo-poster.webp' },
-  { title: '기업 홈페이지 시안 A', sub: '작업 사례와 서비스, 가격을 한 흐름으로 (샘플)', src: 'assets/web/company-a.webp', poster: 'assets/web/company-a-poster.webp' },
-  { title: '기업 홈페이지 시안 B', sub: '3D 히어로와 포트폴리오 쇼케이스 (샘플)', src: 'assets/web/company-b.webp', poster: 'assets/web/company-b-poster.webp' },
-  { title: '반응형 웹 서비스 · 프모아', sub: 'PC와 모바일에 맞춰 바뀌는 서비스 홈페이지', src: 'assets/web/peumoa.webp', poster: 'assets/web/peumoa-poster.webp' },
+  { title: '데모데이 행사 페이지', sub: '참가팀, 일정, 심사위원, 사전 등록까지 한 페이지로 (샘플)', src: 'assets/web/forge-demo.webp', poster: 'assets/web/forge-demo-poster.webp', href: null },
+  { title: '기업 홈페이지 시안 A', sub: '작업 사례와 서비스, 가격을 한 흐름으로 (샘플)', src: 'assets/web/company-a.webp', poster: 'assets/web/company-a-poster.webp', href: 'https://nowlebi-prog.github.io/-PPT/redesign/v2/' },
+  { title: '기업 홈페이지 시안 B', sub: '3D 히어로와 포트폴리오 쇼케이스 (샘플)', src: 'assets/web/company-b.webp', poster: 'assets/web/company-b-poster.webp', href: 'https://nowlebi-prog.github.io/-PPT/redesign/prototype/' },
+  { title: '반응형 웹 서비스 · 프모아', sub: 'PC와 모바일에 맞춰 바뀌는 서비스 홈페이지', src: 'assets/web/peumoa.webp', poster: 'assets/web/peumoa-poster.webp', href: 'https://peumoa.com/' },
 ];
 
 // One inquiry form for the home, /contact and the quick quote. Values are stable codes; labels are shown.

@@ -1,13 +1,12 @@
 import {calculateDemoday,parseSelection} from './domain.mjs';
 import './motion.mjs';
 import './inquiry.mjs';
-import './quote.mjs';
 import './stage.mjs';
 document.documentElement.classList.add('js-ready');
 const $=(s,root=document)=>root.querySelector(s), $$=(s,root=document)=>[...root.querySelectorAll(s)];
 const base=document.body.dataset.base||'';
 // Anchors from earlier versions of the home, mapped to the 9-section layout.
-const oldAnchors={services:'pricing',visual:'process','ai-finish':'process','ai-retouch':'process',collage:'process',work:'portfolio',ir:'demoday',top:'hero',numbers:'clients',capabilities:'beyond',web:'beyond','process-faq':'faq',inquiry:'contact'};
+const oldAnchors={services:'pricing',visual:'collage','ai-finish':'collage','ai-retouch':'collage',process:'collage',work:'portfolio',ir:'demoday',top:'hero',numbers:'clients',capabilities:'beyond',web:'beyond','process-faq':'faq',inquiry:'contact'};
 if(document.body.classList.contains('is-home')&&oldAnchors[location.hash.slice(1)]){const id=oldAnchors[location.hash.slice(1)];history.replaceState(null,'',location.pathname+location.search+'#'+id);requestAnimationFrame(()=>document.getElementById(id)?.scrollIntoView())}
 const reduced=matchMedia('(prefers-reduced-motion: reduce)');
 const header=$('.site-header');

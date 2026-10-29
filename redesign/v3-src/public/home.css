@@ -1159,3 +1159,39 @@ ul.h-price__notes li::marker{color:#c3c8d2}
  .h-dd__yr p{display:inline;text-align:left}
  .h-rev__pager{display:none}
 }
+
+/* ==== v3.3 (2026-10-28): statement band back after the hero · marquee clients · original demo day card ==== */
+.h-collage{border-radius:28px 28px 0 0}
+.h-collage__copy>p{margin-top:36px;line-height:1.75}
+
+/* clients: heading + two logo rows (original v3 rows) */
+.h-cl2 .h-cl__head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:'eye eye' 'h sub';gap:0 clamp(32px,5vw,90px);align-items:end}
+.h-cl2 .h-note{margin-top:24px}
+.h-cl2 .h-cl__stats{margin-top:32px}
+
+/* pricing: one quote note under the sub copy */
+.h-price__q{display:block;margin-top:6px;font-size:14px;color:#8b919c}
+
+/* beyond: three kinds side by side, no slider on the home */
+.h-bp__body{grid-template-columns:1fr}
+.h-bp__list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.h-bp__list li{height:100%}
+.h-bp__more{margin-top:6px;min-height:40px;font-size:14px;color:#9db1ff}
+@media(max-width:1024px){.h-bp__list{grid-template-columns:1fr}}
+
+@media(max-width:767px){
+ .h-collage{min-height:0;padding:88px var(--g);border-radius:20px 20px 0 0}
+ .h-collage__copy>p{margin-top:22px;font-size:15px!important}
+ .h-nums.h-cl2{padding:64px var(--g) 56px}
+ .h-cl2 .h-cl__head{grid-template-columns:1fr;grid-template-areas:'eye' 'h' 'sub'}
+ .h-cl2 .h-cl__sub{margin-top:12px;font-size:15px}
+ .h-cl2 .h-logorows{margin-top:28px;gap:18px}
+ .h-cl2 .h-lrow img{height:26px}
+ .h-cl2 .h-note{margin-top:16px}
+ .h-price__q{font-size:13px}
+ .h-dd__steps{margin-top:22px!important;gap:18px!important}
+ .h-dd__steps .no{font-size:17px}
+ .h-dd__steps h4{margin-top:6px;font-size:16px!important}
+ .h-dd__steps p{margin-top:4px;font-size:13.5px}
+}
+.h-table thead th .h-pill{margin-top:18px}
