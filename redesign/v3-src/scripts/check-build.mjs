@@ -20,4 +20,4 @@ for(const file of files){
  images+=(html.match(/<img /g)||[]).length;
 }
 const summary={pages:files.filter(f=>f.endsWith('index.html')).length,legacyRedirects:files.filter(f=>!f.endsWith('index.html')).length,checkedLocalReferences:links,imageElements:images};
-assert.equal(summary.pages,42);fs.writeFileSync(path.resolve(root,'../qa/build-check.json'),JSON.stringify(summary,null,2));console.log(summary);
+assert.equal(summary.pages,43);fs.writeFileSync(path.resolve(root,'../qa/build-check.json'),JSON.stringify(summary,null,2));console.log(summary);
