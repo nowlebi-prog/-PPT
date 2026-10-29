@@ -228,3 +228,6 @@ function voice() {
 export function homePage(base = '') {
   return `<div class="h-intro">${hero(base)}${statement(base)}</div>${trackRecord(base)}${work(base)}${pricingSection(base)}${demoday(base)}${beyond(base)}${voice()}${contactSection(base)}`;
 }
+
+// Shared with the /demoday page.
+export { ddSteps, dm, manwon };
