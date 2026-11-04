@@ -14,7 +14,8 @@ function hero(base) {
   return `<section id="hero" class="h-hero" data-header="dark">
  <div class="h-hero__grid">
   <div class="h-hero__left">
-   <h1 class="h-title" aria-label="IR 자료도, 회사소개서도, 제안서도, 데모데이 발표도, 유별나게.">
+   <h1 class="h-title">
+    <span class="sr-only">IR·회사소개서·발표자료 PPT 기획과 디자인, 유별난PPT</span>
     <span class="h-title__rot" aria-hidden="true"><span class="h-rot" data-rot>${rot.map((t, i) => `<b${i === 0 ? ' class="is-on"' : ''}>${t}</b>`).join('')}</span></span>
     <span class="h-title__big" aria-hidden="true">${[...'유별나게'].map((c, i) => `<b style="--i:${i}">${c}</b>`).join('')}<b class="dot" style="--i:4">.</b></span>
    </h1>
