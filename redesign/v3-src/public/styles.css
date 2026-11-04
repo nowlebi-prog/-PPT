@@ -576,7 +576,7 @@ body.is-dark .filter-empty .button,body.is-dark .detail-gallery>.button{backgrou
 @media(max-width:767px){.web-cases{grid-template-columns:1fr}}
 /* v3.4: portfolio grid — every thumbnail fills its frame; square laptop shots are zoomed to match the 16:10 ones */
 .portfolio-grid .project-image img{object-fit:cover}
-.portfolio-grid .project-image img.is-sq{object-position:50% 56%;scale:1.24}
+.portfolio-grid .project-image img.is-sq{object-position:50% 30%;scale:1}
 /* v3.4: detail pages carry blurred copies; one quiet line says why */
 .detail-guard{display:flex;flex-direction:column;gap:4px;margin:0 0 28px;padding:16px 20px;border-radius:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);font-size:14px;line-height:1.65;color:rgba(255,255,255,.72)}
 .detail-guard b{color:#fff;font-weight:700}
