@@ -1,4 +1,23 @@
 User-agent: *
 Allow: /
-Disallow: /preview/
-Sitemap: https://nowlebi-prog.github.io/-PPT/sitemap.xml
+Disallow: /redesign/
+
+# 작업물이 AI 학습에 쓰이지 않도록 AI 수집 봇은 막습니다.
+User-agent: GPTBot
+Disallow: /
+User-agent: ChatGPT-User
+Disallow: /
+User-agent: CCBot
+Disallow: /
+User-agent: Google-Extended
+Disallow: /
+User-agent: ClaudeBot
+Disallow: /
+User-agent: anthropic-ai
+Disallow: /
+User-agent: Bytespider
+Disallow: /
+User-agent: PerplexityBot
+Disallow: /
+
+Sitemap: https://youstarppt.com/sitemap.xml

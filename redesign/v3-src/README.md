@@ -49,6 +49,8 @@ npm start
 
 ## 배포
 
+**2026-11-04부터 youstarppt.com으로 공개합니다.** `gh-pages` 브랜치 루트에 `dist/` 내용을 그대로 복사하고, 루트의 `CNAME`(youstarppt.com), `robots.txt`, `sitemap.xml`은 유지합니다. 옛 주소 `/redesign/v3/...`는 같은 경로의 루트 페이지로 넘겨 주는 안내 파일만 남겼습니다. `src/data.mjs`의 `site.url`은 `https://youstarppt.com/`입니다.
+
 검토 후 정적 호스팅에는 `dist/`의 **내용**을 배포합니다. ZIP 파일 자체를 올려서는 홈페이지가 실행되지 않습니다. 모든 로컬 경로는 상대 경로이므로 GitHub Pages의 저장소 하위 폴더에서도 사용할 수 있습니다. 공개 모드에서는 `SITE_MODE=production`으로 빌드하여 빈 GIF의 편집 안내를 숨길 수 있습니다.
 
 Windows PowerShell 공개용 빌드:
