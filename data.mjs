@@ -36,19 +36,19 @@ export const site = {
 // Draft prices were removed before publishing. Approve a tier by adding unitPrice (and setupFee/minPages) and status 'approved'.
 export const pricing = [
   {
-    id: 'ppt-a', name: 'BASIC', status: 'draft', unitPrice: null, setupFee: null, minPages: null,
+    id: 'ppt-a', name: 'BASIC', status: 'approved', unitPrice: 25000, setupFee: null, minPages: 5, // 2026-11-04 owner: 장당 2.5만, VAT 별도
     tagline: '디자인은 그대로, 편집 가능한 PPT로.',
     when: '디자인이 완성된 이미지·PDF를 수정 가능한 PPT로 바꾸고 싶을 때.',
     scope: '기존 디자인을 바탕으로 텍스트와 기본 도형을 다시 구성하고, 어긋난 부분을 다듬습니다.',
   },
   {
-    id: 'ppt-b', name: 'PRO', status: 'draft', unitPrice: null, setupFee: null, minPages: null,
+    id: 'ppt-b', name: 'PRO', status: 'approved', unitPrice: 35000, setupFee: null, minPages: 5,
     tagline: '정리된 내용에, 새로운 디자인을.',
     when: '페이지별 내용은 정해졌고, 브랜드에 맞는 디자인이 필요할 때.',
     scope: 'BASIC 제공 범위에 브랜드 맞춤 표지·목차·내지와 차트·인포그래픽 디자인을 더합니다.',
   },
   {
-    id: 'ppt-c', name: 'PREMIUM', status: 'draft', unitPrice: null, setupFee: null, minPages: null,
+    id: 'ppt-c', name: 'PREMIUM', status: 'approved', unitPrice: 50000, setupFee: null, minPages: 5,
     tagline: '내용의 시작부터, 디자인의 완성까지.',
     when: '줄글·메모·참고 자료부터 발표자료를 만들어야 할 때.',
     scope: 'PRO 제공 범위에 발표 흐름, 페이지 구성, 장표별 핵심 문장 정리를 더합니다.',
@@ -56,7 +56,10 @@ export const pricing = [
 ];
 
 export const pricingNotes = [
-  '제작비는 분량과 작업 범위에 따라 달라집니다. 수정 횟수, 제공 파일, 부가세 기준과 최종 금액은 견적서로 안내합니다.',
+  '표시한 금액은 장당 기본 단가이며 부가세(VAT)는 별도입니다.',
+  '최소 5장부터 제작합니다.',
+  '급한 일정은 급행 추가 요금이 붙습니다. 일정을 알려 주시면 견적서에 함께 안내합니다.',
+  '자료 정리 정도, 도표·인포그래픽 비중, 수정 범위에 따라 금액이 달라질 수 있습니다. 최종 금액은 견적서로 안내합니다.',
   '시장조사, 재무 모델, 투자 전략, 번역, 법률 검토는 기본 범위에 포함되지 않으며 필요 시 별도로 협의합니다.',
 ];
 

@@ -89,7 +89,7 @@ function pricingSection(base) {
   const up = ['', 'BASIC 전부 +', 'PRO 전부 +'];
   const approved = p => p.status === 'approved' && Number.isSafeInteger(p.unitPrice);
   const price = p => approved(p)
-    ? `<b>${p.setupFee ? `세팅 ${won(p.setupFee)} + ` : ''}장당 ${won(p.unitPrice)}</b>${p.minPages ? `<small>${p.minPages}장 이상</small>` : ''}`
+    ? `<small>장당</small><b>${won(p.unitPrice)}~</b><small>VAT 별도</small>`
     : '';
   const pre = p => `href="#contact" data-prefill="service=${p.id}&kind=company"`;
   return `<section id="pricing" class="h-price" data-header="light">
@@ -98,20 +98,23 @@ function pricingSection(base) {
   <h2>${title(['디자인만 필요할 때도,', '처음부터 함께할 때도.'])}</h2>
   <p>지금 준비된 자료를 바탕으로, 필요한 작업 범위부터 제안합니다.${pricing.some(approved) ? '' : '<span class="h-price__q">(자료 확인 후 견적 안내 예정 / 해당 견적은 장수, 범위 기준)</span>'}</p>
  </div>
+ ${pricing.some(approved) ? `<div class="h-price__notice" data-reveal><p><b>표시된 금액은 장당 기본 단가예요.</b><span>자료 상태와 분량, 일정에 따라 달라지니 정확한 금액은 1:1 견적으로 안내드려요.</span></p><a class="h-pill h-pill--blue" href="#contact" data-prefill="kind=company">내 자료로 견적 받기 ${arrow}</a></div>` : ''}
  <ul class="h-price__for-m">${pricing.map((p, i) => `<li><b class="tier-${i}">${esc(p.name)}</b><span>${esc(p.when)}</span></li>`).join('')}</ul>
  <div class="h-pmc-list">${pricing.map((p, i) => { const own = pricingRows.filter(([, v]) => v[i] && (i === 0 || !v[i - 1])).map(([t]) => t); return `<article class="h-pmc tier-${i}">
-  <div class="h-pmc__top"><h3>${esc(p.name)}</h3><a class="h-pmc__q" ${pre(p)} aria-label="${esc(p.name)} 견적 문의">견적 문의 ${arrow}</a></div>
+  <div class="h-pmc__top"><h3>${esc(p.name)}</h3><a class="h-pmc__q" ${pre(p)} aria-label="${esc(p.name)} 1:1 견적 받기">1:1 견적 ${arrow}</a></div>
+  ${approved(p) ? `<p class="h-pmc__price"><small>장당</small> <b>${won(p.unitPrice)}~</b> <small>VAT 별도</small></p>` : ''}
   <p class="h-pmc__when">${esc(p.when)}</p>
   <ul class="h-pmc__inc">${i ? `<li class="base">${esc(pricing[i - 1].name)} 전부</li>` : ''}${own.map(t => `<li>${ck}<span>${esc(t)}</span></li>`).join('')}</ul>
  </article>`; }).join('')}</div>
  <div class="h-table-wrap" data-reveal><table class="h-table">
   <caption class="sr-only">서비스별 제공 범위</caption>
-  <thead><tr><th scope="col"><span class="sr-only">제공 범위</span></th>${pricing.map((p, i) => `<th scope="col" class="tier-${i}"><span class="up">${up[i] || '&nbsp;'}</span><span class="name">${esc(p.name)}</span><span class="desc">${esc(p.tagline)}</span><span class="for"><b>이럴 때</b> ${esc(p.when)}</span>${approved(p) ? `<span class="price">${price(p)}</span>` : ''}<a class="h-pill h-pill--sm" ${pre(p)}>${esc(p.name)} 견적 문의 ${arrow}</a></th>`).join('')}</tr></thead>
+  <thead><tr><th scope="col"><span class="sr-only">제공 범위</span></th>${pricing.map((p, i) => `<th scope="col" class="tier-${i}"><span class="up">${up[i] || '&nbsp;'}</span><span class="name">${esc(p.name)}</span><span class="desc">${esc(p.tagline)}</span><span class="for"><b>이럴 때</b> ${esc(p.when)}</span>${approved(p) ? `<span class="price">${price(p)}</span>` : ''}<a class="h-pill h-pill--sm" ${pre(p)}>${esc(p.name)} 1:1 견적 받기 ${arrow}</a></th>`).join('')}</tr></thead>
   <tbody>${pricingRows.map(([t, v]) => `<tr><th scope="row">${esc(t)}</th>${v.map((x, i) => `<td class="tier-${i}${x ? '' : ' off'}">${x ? ck : no}</td>`).join('')}</tr>`).join('')}</tbody>
   <tfoot class="h-table__m"><tr><th scope="row"><span class="sr-only">견적 문의</span></th>${pricing.map(p => `<td><a class="h-tq" ${pre(p)} aria-label="${esc(p.name)} 견적 문의">문의 ${arrow}</a></td>`).join('')}</tr></tfoot>
  </table></div>
- ${pricing.some(approved) ? `<p class="h-price__m-price">${pricing.map(p => `${esc(p.name)} ${approved(p) ? `장당 ${won(p.unitPrice)}` : '자료 확인 후 견적'}`).join(' · ')}</p>` : ''}
+
  <p class="h-price__help" data-reveal>어떤 서비스가 맞을지 몰라도 괜찮습니다. 자료를 살펴보고 필요한 범위부터 안내합니다.</p>
+ <p class="h-price__notes-t">기타 안내</p>
  <ul class="h-price__notes">${pricingNotes.map(t => `<li>${esc(t)}</li>`).join('')}</ul>
 </section>`;
 }
