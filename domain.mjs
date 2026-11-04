@@ -1,4 +1,4 @@
-import { pricing, websiteOptions, inquiryOptions, demodayPrice } from './data.mjs?v=d94f69a1a2';
+import { pricing, websiteOptions, inquiryOptions, demodayPrice } from './data.mjs?v=0f2eb20b4f';
 
 const codes = list => new Set(list.map(item => Array.isArray(item) ? item[0] : item));
 const ITEMS = codes(inquiryOptions.items);

@@ -30,6 +30,11 @@ export const site = {
     { heading: '개인정보 보호책임자와 문의처', body: '유별난PPT 대표 · contact@youstarppt.com · 010-8186-8553 · 사업자등록번호 202-13-66345' },
     { heading: '시행일', body: '이 안내는 홈페이지에 게시한 날부터 적용합니다.' },
   ],
+  // 검색 등록 (2026-11-04 SEO). 값이 비어 있으면 태그·블록을 출력하지 않습니다.
+  naverVerification: '', // 네이버 서치어드바이저 HTML 태그의 content 값
+  googleVerification: '', // 구글 서치콘솔 HTML 태그의 content 값 (DNS 인증이면 비워 둠)
+  addressRegion: '', // 시/도 (예: 서울특별시). 비우면 JSON-LD에 주소를 넣지 않습니다.
+  addressLocality: '', // 시/군/구
   reviewSourceUrl: null, // 후기 원문 링크. 확인된 출처일 때만 '후기 원문 보기' 버튼이 나옵니다.
 };
 

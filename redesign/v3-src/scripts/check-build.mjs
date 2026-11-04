@@ -22,4 +22,5 @@ for(const file of files){
 // Redirect stubs (no <main>): old .html links and the removed /about/ page.
 const isPage=f=>f.endsWith('index.html')&&fs.readFileSync(path.join(root,f),'utf8').includes('<main');
 const summary={pages:files.filter(isPage).length,legacyRedirects:files.filter(f=>!isPage(f)).length,checkedLocalReferences:links,imageElements:images};
-assert.equal(summary.pages,42);fs.writeFileSync(path.resolve(root,'../qa/build-check.json'),JSON.stringify(summary,null,2));console.log(summary);
+assert.equal(summary.pages,43); // 42 + /ir/ (SEO 2026-11-04)
+fs.writeFileSync(path.resolve(root,'../qa/build-check.json'),JSON.stringify(summary,null,2));console.log(summary);
