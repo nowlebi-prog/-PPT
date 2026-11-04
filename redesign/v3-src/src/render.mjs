@@ -37,7 +37,6 @@ export function demodayPage(base) {
    <ul class="dp-chips"><li>팀별 PPT 제작</li><li>기관 취합 · 팀별 직접 소통</li><li>행사 홈페이지 별도</li></ul>
    <div class="dp-cta"><a class="dp-pill" href="${contact}">기관 견적 문의 ${arr}</a><a class="dp-link" href="#flow">진행 방식 보기 ${arr}</a></div>
   </div>
-  <dl class="dp-figs" data-reveal>${fig(demodayHistory.length, '회', '함께 준비한 데모데이', '데모데이')}${fig(hosts.size, '곳', '함께한 기관', '함께한 기관')}${irConsulting.length ? fig(irConsulting.length, '개', 'IR 컨설팅 프로그램', 'IR 컨설팅') : ''}</dl>
  </div>
  <div class="dp-hist" role="group" aria-label="함께 준비한 데모데이">
   <div class="dp-hist__row"><ul class="dp-hist__track">${demodayHistory.map(h => ev(h, false)).join('')}${demodayHistory.map(h => ev(h, true)).join('')}</ul></div>
