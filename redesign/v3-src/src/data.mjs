@@ -419,7 +419,7 @@ export const featuredWork = [
 // Website showcase on /web/. Items marked (샘플) are studio examples, not client sites. href: live site (null = 링크 준비 중, 버튼 없음).
 export const webShowcase = [
   { title: '유별난PPT 홈페이지', sub: '3D 발표장과 포트폴리오, 단계형 문의까지 직접 만든 회사 홈페이지', src: 'assets/web/youstar-v3.webp', poster: 'assets/web/youstar-v3-poster.webp', href: null },
-  { title: '반응형 웹 서비스 · 프모아', sub: 'PC와 모바일에 맞춰 바뀌는 서비스 홈페이지', src: 'assets/web/peumoa.webp', poster: 'assets/web/peumoa-poster.webp', href: 'https://peumoa.com/' },
+  { title: '반응형 웹 서비스 · 프모아', sub: 'PC와 모바일에 맞춰 바뀌는 서비스 홈페이지', src: 'assets/web/peumoa.webp', poster: 'assets/web/peumoa-poster.webp', href: null },
   { title: '데모데이 행사 페이지', sub: '참가팀, 일정, 심사위원, 사전 등록까지 한 페이지로 (샘플)', src: 'assets/web/forge-demo.webp', poster: 'assets/web/forge-demo-poster.webp', href: null },
 ];
 
