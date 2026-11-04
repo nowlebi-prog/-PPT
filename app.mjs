@@ -1,8 +1,31 @@
-import {calculateDemoday,parseSelection} from './domain.mjs?v=c0372385d6';
-import './motion.mjs?v=c0372385d6';
-import './inquiry.mjs?v=c0372385d6';
-import './stage.mjs?v=c0372385d6';
+import {calculateDemoday,parseSelection} from './domain.mjs?v=caf1e39800';
+import './motion.mjs?v=caf1e39800';
+import './inquiry.mjs?v=caf1e39800';
+import './stage.mjs?v=caf1e39800';
 document.documentElement.classList.add('js-ready');
+// Line breaks between sentences (owner request 2026-11-04): each sentence becomes an inline-block, so a sentence that
+// does not fit on the current line starts on the next one instead of leaving its first words dangling after the
+// previous sentence. Skips clamped text (review cards) and animated or hidden headings.
+(function groupSentences(){
+  const boundary=/[.!?](?=\s+\S)/;
+  const sel='main p, main li, main dd, main p span, main li span, main dd span, main label span, footer p';
+  for(const el of document.querySelectorAll(sel)){
+    if(el.closest('[aria-hidden="true"],h1,h2,h3,h4,button,.snt,[data-no-snt]'))continue;
+    const nodes=[...el.childNodes];
+    const brSplit=nodes.some(n=>n.nodeName==='BR')&&nodes.some((n,i)=>n.nodeType===3&&/[.!?]\s*$/.test(n.textContent)&&nodes.slice(i+1).some(m=>m.nodeName==='BR'));
+    if(!brSplit&&!nodes.some(n=>n.nodeType===3&&boundary.test(n.textContent)))continue;
+    if(getComputedStyle(el).webkitLineClamp!=='none'&&getComputedStyle(el).webkitLineClamp)continue;
+    const frag=document.createDocumentFragment();let cur=null;
+    const flush=()=>{if(cur&&cur.childNodes.length)frag.append(cur);cur=null};
+    const open=()=>cur||(cur=Object.assign(document.createElement('span'),{className:'snt'}));
+    for(const n of nodes){
+      if(n.nodeType===3){const parts=n.textContent.split(/(?<=[.!?])(\s+)(?=\S)/);parts.forEach((t,i)=>{if(i%2){flush();frag.append(t)}else if(t)open().append(t)})}
+      else if(n.nodeName==='BR'){flush();frag.append(n)}
+      else open().append(n);
+    }
+    flush();el.replaceChildren(frag);
+  }
+})();
 const $=(s,root=document)=>root.querySelector(s), $$=(s,root=document)=>[...root.querySelectorAll(s)];
 const base=document.body.dataset.base||'';
 // Anchors from earlier versions of the home, mapped to the 9-section layout.
