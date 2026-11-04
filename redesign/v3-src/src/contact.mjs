@@ -69,11 +69,21 @@ export function inquiryForm(base = '') {
      <div class="iq-sub"><label class="iq-label" for="iq-email">이메일 <span class="iq-tag" data-contact-tag="email">선택</span></label><input id="iq-email" name="email" type="email" maxlength="254" autocomplete="email" placeholder="example@company.co.kr">${err('email')}</div>
      <div class="iq-sub"><label class="iq-label" for="iq-phone">전화 <span class="iq-tag" data-contact-tag="phone">선택</span></label><input id="iq-phone" name="phone" type="tel" maxlength="30" autocomplete="tel" inputmode="tel" placeholder="010-0000-0000">${err('phone')}</div>
     </div>`, { required: true, hint: '고른 쪽만 적으면 됩니다.' })}
+   ${site.inquiryFiles && live ? `<div class="iq-f iq-files" data-f="files">
+    <p class="iq-label">파일 첨부 ${opt}</p>
+    <p class="iq-hint">초안이나 로고 같은 참고 자료가 있으면 함께 올려 주세요. 합계 ${site.inquiryMaxFileMB || 20}MB까지, 더 큰 파일은 ‘더 알려 주기’의 자료 링크로 보내 주세요.</p>
+    <div class="iq-files__row">
+     <label class="iq-drop" for="iq-draftFiles"><b>초안 파일</b><span>PPT · PDF · 한글 · 워드 · 키노트</span><input id="iq-draftFiles" name="draftFiles" type="file" multiple accept=".ppt,.pptx,.pdf,.hwp,.hwpx,.doc,.docx,.key,.txt,.zip" data-file-kind="초안"></label>
+     <label class="iq-drop" for="iq-refFiles"><b>참고 자료</b><span>로고 · 이미지 · 브랜드 가이드 등</span><input id="iq-refFiles" name="refFiles" type="file" multiple accept=".png,.jpg,.jpeg,.svg,.ai,.eps,.psd,.pdf,.ppt,.pptx,.zip,.webp,.gif" data-file-kind="참고 자료"></label>
+    </div>
+    <ul class="iq-filelist" data-file-list></ul>
+    ${err('files')}
+   </div>` : ''}
    <details class="iq-more" data-more>
     <summary><span>더 알려 주기</span><small>선택 · 분량, 자료 링크, 예산</small></summary>
     <div class="iq-more__body">
      <div data-show="pages" hidden>${group('pages', 'PPT 예상 분량', `<div class="iq-chips" data-show="pages-company">${o.pagesCompany.map(v => chip('pagesCompany', v, v)).join('')}</div><div class="iq-chips" data-show="pages-institution" hidden>${o.pagesInstitution.map(v => chip('pagesInstitution', v, v)).join('')}</div>`)}</div>
-     ${field('attachmentLink', '자료 링크', `<input id="iq-attachmentLink" name="attachmentLink" type="url" maxlength="500" inputmode="url" placeholder="구글 드라이브·드롭박스 등 공유 링크">${site.inquiryFiles ? `<input class="iq-file" id="iq-files" name="files" type="file" multiple accept=".ppt,.pptx,.pdf,.hwp,.hwpx,.doc,.docx,.key,.png,.jpg,.jpeg,.zip"${site.inquiryMaxFileMB ? ` data-max-mb="${site.inquiryMaxFileMB}"` : ''}>` : ''}`, { hint: `견적 확인에만 쓰고 공개하지 않습니다.${site.inquiryFiles ? (site.inquiryMaxFileMB ? ` 파일은 PPT·PDF·한글·워드·이미지, 최대 ${site.inquiryMaxFileMB}MB.` : ' 파일은 PPT·PDF·한글·워드·이미지.') : ' 파일은 회신 메일로 받아도 됩니다.'}` })}
+     ${field('attachmentLink', '자료 링크', `<input id="iq-attachmentLink" name="attachmentLink" type="url" maxlength="500" inputmode="url" placeholder="구글 드라이브·드롭박스 등 공유 링크">`)}
      <div class="iq-row">
       ${field('budget', '예산', '<input id="iq-budget" name="budget" maxlength="100" placeholder="예: 총 200만원 이내">')}
       ${field('referral', '어떻게 알고 오셨나요?', `<select id="iq-referral" name="referral"><option value="">선택 안 함</option>${o.referral.map(v => `<option>${esc(v)}</option>`).join('')}</select>`)}

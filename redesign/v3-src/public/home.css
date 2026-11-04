@@ -1433,3 +1433,30 @@ ul.h-price__notes li::marker{color:#c3c8d2}
 @media(max-width:767px){.js-ready .h-fqx .faq-more:not([hidden]){background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12);color:#fff}}
 /* section titles: same size as the FAQ title (hero and the statement band keep their own scale) */
 .is-home :is(#clients,#portfolio,#pricing,#demoday,#beyond,#reviews,#faq) h2,.is-home #contact h2.h-ct__title{font-size:clamp(26px,2.6vw,38px)!important;line-height:1.25!important;letter-spacing:-.045em!important}
+/* ---- v3.6 mobile: pricing as three compact cards (no repeated list + table); demoday reduced to the event strip + two buttons ---- */
+.h-pmc-list,.h-dd2__mcta{display:none}
+@media(max-width:767px){
+ .h-price__for-m,.h-price .h-table-wrap{display:none!important}
+ .h-pmc-list{display:flex;flex-direction:column;gap:10px;margin-top:22px}
+ .h-pmc{padding:18px 18px 16px;border-radius:14px;background:#f3f5f9;color:var(--ink)}
+ .h-pmc.tier-1{background:var(--blue);color:#fff}
+ .h-pmc.tier-2{background:var(--ink);color:#fff}
+ .h-pmc__top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+ .h-pmc__top h3{margin:0;font-size:18px!important;font-weight:800;letter-spacing:-.01em}
+ .h-pmc__q{display:inline-flex;align-items:center;gap:4px;min-height:34px;padding:0 14px;border-radius:999px;background:var(--ink);color:#fff;font-size:12.5px;font-weight:700;white-space:nowrap}
+ .h-pmc.tier-1 .h-pmc__q,.h-pmc.tier-2 .h-pmc__q{background:#fff;color:var(--ink)}
+ .h-pmc__q .arr{width:12px;height:12px}
+ .h-pmc__when{margin:8px 0 0;font-size:13.5px;line-height:1.55;color:#5f6571}
+ .h-pmc.tier-1 .h-pmc__when{color:rgba(255,255,255,.82)}.h-pmc.tier-2 .h-pmc__when{color:rgba(255,255,255,.7)}
+ .h-pmc__inc{list-style:none;margin:12px 0 0;padding:12px 0 0;border-top:1px solid rgba(11,12,15,.08);display:flex;flex-direction:column;gap:6px}
+ .h-pmc.tier-1 .h-pmc__inc,.h-pmc.tier-2 .h-pmc__inc{border-top-color:rgba(255,255,255,.18)}
+ .h-pmc__inc li{display:flex;align-items:flex-start;gap:8px;font-size:13.5px;line-height:1.5}
+ .h-pmc__inc li .ck{flex:none;width:16px;height:16px;margin-top:2px;stroke:var(--blue)}
+ .h-pmc.tier-1 .h-pmc__inc li .ck{stroke:#fff}.h-pmc.tier-2 .h-pmc__inc li .ck{stroke:#7f9bff}
+ .h-pmc__inc li.base{font-size:12.5px;font-weight:700;opacity:.75}
+ .h-price__help{margin-top:16px!important}
+ .h-dd2__lead,.h-dd2 .h-dd__ir,.h-dd2 .h-dd__card,.h-dd2>.wz{display:none!important}
+ .h-dd2__mcta{display:flex;flex-direction:column;gap:8px;margin-top:20px}
+ .h-dd2__mcta .h-pill{justify-content:center;width:100%;height:50px}
+ .h-dd2__mweb{background:#fff;color:var(--ink);border:1px solid #d6ddeb}
+}

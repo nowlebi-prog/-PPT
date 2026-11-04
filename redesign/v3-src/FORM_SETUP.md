@@ -6,7 +6,7 @@
 
 | 서비스 | 한국어 화면 | 문의가 쌓이는 곳 | 첨부 파일 |
 | --- | --- | --- | --- |
-| ① 구글 시트 + Apps Script | ○ | 구글 시트 + 알림 메일 | ✕ |
+| ① 구글 시트 + Apps Script | ○ | 구글 시트 + 알림 메일 | ○ (드라이브 보관 + 메일 첨부, 합계 20MB) |
 | ② Web3Forms | ✕ (화면이 단순함) | 알림 메일 | 유료 |
 | ③ Formspree | ✕ | 대시보드 + 알림 메일 | 유료 |
 
@@ -24,13 +24,15 @@
 6. 나오는 **웹 앱 URL**(`https://script.google.com/macros/s/…/exec`)을 복사해 전달합니다.
 
 ```js
-// 유별난PPT 홈페이지 견적 문의 → 시트 저장 + 알림 메일
+// 유별난PPT 홈페이지 견적 문의 → 시트 저장 + 첨부 파일 드라이브 보관 + 알림 메일(첨부 포함)
 const NOTIFY = 'contact@youstarppt.com';
 const SHEET = '문의';
+const FOLDER = '유별난PPT 문의 첨부';     // 내 드라이브에 이 이름의 폴더를 만들어 문의별로 파일을 모읍니다.
+const MAIL_LIMIT = 24 * 1024 * 1024;      // Gmail 첨부 한도(25MB) 아래일 때만 메일에 파일을 붙입니다. 넘으면 링크만 보냅니다.
 
 function doPost(e) {
   const lock = LockService.getScriptLock();
-  lock.waitLock(10000);
+  lock.waitLock(30000);
   try {
     const body = JSON.parse((e.parameter && e.parameter.payload) || e.postData.contents);
     const rows = Array.isArray(body.rows) ? body.rows.slice(0, 40) : [];
@@ -45,11 +47,41 @@ function doPost(e) {
       if (found >= 0) return json({ ok: true, id: sheet.getRange(found + 2, 2).getValue() }); // 같은 문의 재전송
     }
     for (const [label] of rows) if (!header.includes(label)) header.push(label);
-    sheet.getRange(1, 1, 1, header.length).setValues([header]);
     const id = 'Y' + Utilities.formatDate(new Date(), 'Asia/Seoul', 'yyMMdd') + '-' + Math.max(1, sheet.getLastRow());
     const map = Object.fromEntries(rows.map(([k, v]) => [k, safe(v)]));
+
+    // 첨부 파일: 드라이브의 문의별 폴더에 저장하고, 시트에는 링크를 남깁니다.
+    const files = Array.isArray(body.files) ? body.files.slice(0, 10) : [];
+    const blobs = [];
+    let total = 0;
+    if (files.length) {
+      const dir = folder(FOLDER).createFolder(`${id} ${map['이름'] || ''}`.trim());
+      const links = [];
+      for (const f of files) {
+        if (!f || typeof f.data !== 'string' || !f.name) continue;
+        const blob = Utilities.newBlob(Utilities.base64Decode(f.data), String(f.type || 'application/octet-stream'), `[${String(f.kind || '첨부').slice(0, 20)}] ${String(f.name).slice(0, 180)}`);
+        const saved = dir.createFile(blob);
+        links.push(`${blob.getName()} — ${saved.getUrl()}`);
+        blobs.push(blob);
+        total += blob.getBytes().length;
+      }
+      if (links.length) {
+        map['첨부 파일'] = links.join('\n');
+        map['첨부 폴더'] = dir.getUrl();
+        for (const h of ['첨부 파일', '첨부 폴더']) if (!header.includes(h)) header.push(h);
+      }
+    }
+
+    sheet.getRange(1, 1, 1, header.length).setValues([header]);
     sheet.appendRow(header.map(h => h === '접수 시각' ? new Date() : h === '접수 번호' ? id : h === '요청 키' ? key : (map[h] ?? '')));
-    const mail = { to: NOTIFY, subject: String(body.subject || '[유별난PPT 견적 문의]').slice(0, 200), body: rows.map(([k, v]) => `${k}: ${v}`).join('\n') + `\n\n접수 번호: ${id}` };
+
+    const lines = header.filter(h => !['접수 시각', '접수 번호', '요청 키'].includes(h) && map[h]).map(h => `${h}: ${map[h]}`);
+    const mail = {
+      to: NOTIFY,
+      subject: String(body.subject || '[유별난PPT 견적 문의]').slice(0, 200),
+      body: lines.join('\n') + `\n\n접수 번호: ${id}` + (blobs.length && total > MAIL_LIMIT ? '\n\n※ 첨부 파일이 커서 메일에는 붙이지 않았습니다. 위 링크에서 받아 주세요.' : ''),
+    };
+    if (blobs.length && total <= MAIL_LIMIT) mail.attachments = blobs;
     if (map['이메일']) mail.replyTo = map['이메일'];
     MailApp.sendEmail(mail);
     return json({ ok: true, id });
@@ -60,6 +92,7 @@ function doPost(e) {
   }
 }
 
+function folder(name) { const it = DriveApp.getFoldersByName(name); return it.hasNext() ? it.next() : DriveApp.createFolder(name); }
 // 시트가 수식으로 읽지 않도록 =, +, -, @로 시작하는 값 앞에 ' 를 붙입니다.
 function safe(v) { const s = String(v ?? '').slice(0, 5000); return /^[=+\-@]/.test(s) ? "'" + s : s; }
 function json(o) { return ContentService.createTextOutput(JSON.stringify(o)).setMimeType(ContentService.MimeType.JSON); }
@@ -71,6 +104,8 @@ function json(o) { return ContentService.createTextOutput(JSON.stringify(o)).set
 inquiryProvider: 'google',
 inquiryEndpoint: 'https://script.google.com/macros/s/…/exec',
 ```
+
+**첨부 파일(2026-11-04 추가):** 홈페이지 폼에서 ‘초안 파일’과 ‘참고 자료(로고 등)’를 선택해 올릴 수 있습니다. 위 코드로 바꾸면 파일은 드라이브의 ‘유별난PPT 문의 첨부’ 폴더에 문의별로 저장되고, 시트에는 파일 링크가, 알림 메일에는 문의 내용과 파일이 함께 붙어 옵니다. 드라이브 권한이 새로 필요해 다시 배포할 때 권한 승인 창이 한 번 더 뜹니다. 옛 코드 그대로 두면 문의는 접수되지만 파일은 저장되지 않습니다.
 
 코드를 고친 뒤에는 **배포 → 배포 관리 → 연필(수정) → 버전: 새 버전 → 배포**로 다시 배포해야 반영됩니다. 이렇게 하면 웹 앱 URL은 바뀌지 않습니다.
 

@@ -99,6 +99,11 @@ function pricingSection(base) {
   <p>지금 준비된 자료를 바탕으로, 필요한 작업 범위부터 제안합니다.${pricing.some(approved) ? '' : '<span class="h-price__q">(자료 확인 후 견적 안내 예정 / 해당 견적은 장수, 범위 기준)</span>'}</p>
  </div>
  <ul class="h-price__for-m">${pricing.map((p, i) => `<li><b class="tier-${i}">${esc(p.name)}</b><span>${esc(p.when)}</span></li>`).join('')}</ul>
+ <div class="h-pmc-list">${pricing.map((p, i) => { const own = pricingRows.filter(([, v]) => v[i] && (i === 0 || !v[i - 1])).map(([t]) => t); return `<article class="h-pmc tier-${i}">
+  <div class="h-pmc__top"><h3>${esc(p.name)}</h3><a class="h-pmc__q" ${pre(p)} aria-label="${esc(p.name)} 견적 문의">견적 문의 ${arrow}</a></div>
+  <p class="h-pmc__when">${esc(p.when)}</p>
+  <ul class="h-pmc__inc">${i ? `<li class="base">${esc(pricing[i - 1].name)} 전부</li>` : ''}${own.map(t => `<li>${ck}<span>${esc(t)}</span></li>`).join('')}</ul>
+ </article>`; }).join('')}</div>
  <div class="h-table-wrap" data-reveal><table class="h-table">
   <caption class="sr-only">서비스별 제공 범위</caption>
   <thead><tr><th scope="col"><span class="sr-only">제공 범위</span></th>${pricing.map((p, i) => `<th scope="col" class="tier-${i}"><span class="up">${up[i] || '&nbsp;'}</span><span class="name">${esc(p.name)}</span><span class="desc">${esc(p.tagline)}</span><span class="for"><b>이럴 때</b> ${esc(p.when)}</span>${approved(p) ? `<span class="price">${price(p)}</span>` : ''}<a class="h-pill h-pill--sm" ${pre(p)}>${esc(p.name)} 견적 문의 ${arrow}</a></th>`).join('')}</tr></thead>
@@ -148,6 +153,7 @@ function demoday(base) {
   </div>
  </div>
  ${webStrip(base)}
+ <div class="h-dd2__mcta"><a class="h-pill h-pill--blue" href="#contact" data-prefill="kind=institution">IR · 데모데이 상담하기 ${arrow}</a><a class="h-pill h-dd2__mweb" href="${base}web/#price">웹사이트 제작 보기 ${arrow}</a></div>
 </section>`;
 }
 

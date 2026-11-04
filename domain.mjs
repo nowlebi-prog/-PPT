@@ -1,4 +1,4 @@
-import { pricing, websiteOptions, inquiryOptions, demodayPrice } from './data.mjs?v=5f756f98d8';
+import { pricing, websiteOptions, inquiryOptions, demodayPrice } from './data.mjs?v=ac549dcdc6';
 
 const codes = list => new Set(list.map(item => Array.isArray(item) ? item[0] : item));
 const ITEMS = codes(inquiryOptions.items);
@@ -289,7 +289,7 @@ function serviceMessage(data) {
 }
 
 /** Builds the HTTP request for each supported receiving service. */
-function buildRequest(provider, payload, key, { files = [], accessKey = null, sourcePath } = {}) {
+function buildRequest(provider, payload, key, { files = [], attachments = [], accessKey = null, sourcePath } = {}) {
   const n = normalizeInquiry(payload);
   const lines = summaryLines(payload);
   const subject = inquirySubject(payload);
@@ -312,7 +312,9 @@ function buildRequest(provider, payload, key, { files = [], accessKey = null, so
     // Apps Script web app. A form-encoded body is a "simple" request (no CORS preflight) and works with
     // FORM_SETUP.md's script (reads `payload`) as well as common sheet templates that read e.parameter[label].
     const body = new URLSearchParams();
-    body.set('payload', JSON.stringify({ subject, rows: lines, data: n, key }));
+    const list = Array.isArray(attachments) ? attachments.filter(f => f && typeof f.data === 'string' && f.name) : [];
+    const rows = list.length ? [...lines, ['첨부 파일', list.map(f => `[${f.kind || '첨부'}] ${f.name}`).join('\n')]] : lines;
+    body.set('payload', JSON.stringify({ subject, rows, data: n, key, files: list }));
     body.set('subject', subject);
     body.set('key', key);
     for (const [label, value] of lines) body.set(label, String(value));
@@ -353,12 +355,12 @@ function confirmed(provider, status, data, raw = '') {
  * provider: 'api' (own server, 201 + inquiryId), 'formspree', 'web3forms' or 'google' (Apps Script).
  * The caller keeps the returned idempotencyKey for retries of the same inquiry.
  */
-export async function submitInquiry(payload, { provider = 'api', endpoint, fetchImpl = globalThis.fetch, idempotencyKey, today, files = [], accessKey = null, sourcePath } = {}) {
+export async function submitInquiry(payload, { provider = 'api', endpoint, fetchImpl = globalThis.fetch, idempotencyKey, today, files = [], attachments = [], accessKey = null, sourcePath } = {}) {
   if (!text(endpoint)) return outcome('unavailable', '문의 접수 연동 준비 중', { idempotencyKey: idempotencyKey ?? null });
   const fieldErrors = validateInquiry(payload, today ? { today } : {});
   if (Object.keys(fieldErrors).length) return outcome('validation', '입력 내용을 확인해 주세요.', { fieldErrors, idempotencyKey: idempotencyKey ?? null });
   const key = idempotencyKey ?? globalThis.crypto?.randomUUID?.();
-  const request = typeof key === 'string' && /^[A-Za-z0-9._:-]{1,200}$/.test(key) ? buildRequest(provider, payload, key, { files, accessKey, sourcePath }) : null;
+  const request = typeof key === 'string' && /^[A-Za-z0-9._:-]{1,200}$/.test(key) ? buildRequest(provider, payload, key, { files, attachments, accessKey, sourcePath }) : null;
   if (typeof fetchImpl !== 'function' || !request || (provider === 'web3forms' && !text(accessKey))) return outcome('configuration', '문의 전송 설정을 확인해 주세요.', { idempotencyKey: key ?? null });
   const requestId = `${provider}\n${endpoint}\n${key}`;
   if (inFlight.has(requestId)) return inFlight.get(requestId);

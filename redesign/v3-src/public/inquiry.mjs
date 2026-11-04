@@ -45,7 +45,7 @@ if (form) {
   const stepOf = name => { const i = STEP_FIELDS.findIndex(list => list.includes(name)); return i < 0 ? last : i; };
   const order = STEP_FIELDS.flat();
 
-  const MORE_FIELDS = ['pages', 'attachmentLink', 'files', 'budget', 'referral', 'message'];
+  const MORE_FIELDS = ['pages', 'attachmentLink', 'budget', 'referral', 'message'];
 
   function sync() {
     const ppt = items().includes('ppt');
@@ -246,17 +246,32 @@ if (form) {
     done.focus({ preventScroll: true });
   }
 
+  // Draft and reference files (optional). Sent base64-encoded to the Apps Script, which saves them to Drive and attaches them to the notice mail.
+  const fileInputs = $$('input[type=file][data-file-kind]', form), fileList = $('[data-file-list]', form);
+  const pickedFiles = () => fileInputs.flatMap(input => [...input.files].map(file => ({ kind: input.dataset.fileKind, file })));
+  const sizeText = n => n >= 1048576 ? `${(n / 1048576).toFixed(1)}MB` : `${Math.max(1, Math.round(n / 1024))}KB`;
+  function renderFiles() {
+    if (!fileList) return;
+    const list = pickedFiles();
+    fileList.replaceChildren(...list.map(({ kind, file }) => { const li = document.createElement('li'); const b = document.createElement('b'); b.textContent = kind; const t = document.createElement('span'); t.textContent = `${file.name} (${sizeText(file.size)})`; li.append(b, t); return li; }));
+    fileList.hidden = !list.length;
+  }
+  fileInputs.forEach(input => input.addEventListener('change', () => { renderFiles(); const e = $('[data-err=files]', form); if (e) e.textContent = ''; }));
+  renderFiles();
+  const toBase64 = file => new Promise((ok, no) => { const r = new FileReader(); r.onload = () => ok(String(r.result).split(',')[1] || ''); r.onerror = () => no(r.error); r.readAsDataURL(file); });
+  const encodeFiles = list => Promise.all(list.map(async ({ kind, file }) => ({ kind, name: file.name.slice(0, 180), type: file.type || 'application/octet-stream', size: file.size, data: await toBase64(file) })));
+
   form.addEventListener('submit', async e => {
     e.preventDefault();
     if (cur < last) { next(); return; }
     if (busy || completed) return;
     if (el('website').value) return; // honeypot
     const data = payload();
-    const fileInput = el('files');
-    const files = site.inquiryFiles && fileInput ? [...fileInput.files] : [];
+    const picked = pickedFiles();
     const errors = validateInquiry(data, { today });
-    const maxMB = Number(fileInput?.dataset.maxMb || 0);
-    if (maxMB && files.reduce((sum, f) => sum + f.size, 0) > maxMB * 1048576) errors.files = `첨부 파일은 합계 ${maxMB}MB 이하로 올려 주세요.`;
+    const maxMB = Number(site.inquiryMaxFileMB || 20);
+    if (picked.reduce((sum, x) => sum + x.file.size, 0) > maxMB * 1048576) errors.files = `첨부 파일은 합계 ${maxMB}MB 이하로 올려 주세요. 큰 파일은 ‘더 알려 주기’의 자료 링크로 보내 주세요.`;
+    else if (picked.length > 10) errors.files = '첨부 파일은 10개까지 올릴 수 있습니다.';
     clearErrors();
     if (Object.keys(errors).length) {
       const target = Math.min(...Object.keys(errors).map(stepOf));
@@ -280,7 +295,9 @@ if (form) {
     label('보내는 중…');
     status.textContent = '문의를 보내고 있습니다.';
     try {
-      const result = await submitInquiry(data, { provider: site.inquiryProvider, endpoint: site.inquiryEndpoint, accessKey: site.inquiryKey, fetchImpl: (...args) => fetch(...args), idempotencyKey: key, today, files, sourcePath: location.pathname });
+      if (picked.length) status.textContent = '첨부 파일을 올리고 있습니다. 파일이 크면 조금 걸릴 수 있습니다.';
+      const attachments = picked.length ? await encodeFiles(picked) : [];
+      const result = await submitInquiry(data, { provider: site.inquiryProvider, endpoint: site.inquiryEndpoint, accessKey: site.inquiryKey, fetchImpl: (...args) => fetch(...args), idempotencyKey: key, today, files: picked.map(x => x.file), attachments, sourcePath: location.pathname });
       if (result.ok) { completed = true; status.textContent = ''; showDone(result.inquiryId); }
       else {
         status.textContent = result.message + ' 급하시면 카카오톡으로 문의해 주세요.';
