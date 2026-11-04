@@ -570,3 +570,18 @@ body.is-dark .filter-empty .button,body.is-dark .detail-gallery>.button{backgrou
  .dp-inc__grid .out{margin-top:10px;padding:5px 9px;font-size:11.5px;gap:5px}
  .dp-steps__list li{padding:20px 18px 22px}
 }
+/* v3.4: three web cases in one row */
+.web-cases{grid-template-columns:repeat(3,minmax(0,1fr));gap:48px 24px}
+@media(max-width:1024px){.web-cases{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:767px){.web-cases{grid-template-columns:1fr}}
+/* v3.4: portfolio grid — every thumbnail fills its frame; square laptop shots are zoomed to match the 16:10 ones */
+.portfolio-grid .project-image img{object-fit:cover}
+.portfolio-grid .project-image img.is-sq{object-position:50% 56%;scale:1.24}
+/* v3.4: detail pages carry blurred copies; one quiet line says why */
+.detail-guard{display:flex;flex-direction:column;gap:4px;margin:0 0 28px;padding:16px 20px;border-radius:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);font-size:14px;line-height:1.65;color:rgba(255,255,255,.72)}
+.detail-guard b{color:#fff;font-weight:700}
+.detail-guard a{color:#8fb0ff;text-decoration:underline;text-underline-offset:3px}
+body:not(.is-dark) .detail-guard{background:var(--surface);border-color:var(--line);color:var(--muted)}
+body:not(.is-dark) .detail-guard b{color:var(--ink)}
+body:not(.is-dark) .detail-guard a{color:var(--blue)}
+@media(max-width:767px){.detail-guard{font-size:13px;padding:14px 16px}}

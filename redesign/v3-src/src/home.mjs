@@ -78,7 +78,7 @@ function work(base) {
  </div>
  <div class="h-work__body">
   <ul class="h-work__grid" data-swipe data-swipe-auto>${tiles.map(({ p, image }, i) => `<li data-reveal style="--i:${i % 3}"><a class="h-work__tile" href="${base}portfolio/${p.slug}/"><span class="h-work__img"><img src="${base + image}" alt="${esc(p.title)} 작업 이미지" loading="lazy" decoding="async"></span><span class="h-work__cap"><small>${esc(typeNames[p.type] || '')}</small><b>${esc(p.title)}</b></span></a></li>`).join('')}</ul>
-  <div class="h-work__foot"><a class="h-pill h-pill--blue" href="${base}portfolio/">작업 사례 전체 보기 ${arrow}</a><p class="h-note h-note--dark">공개에 동의한 자료만 소개합니다.</p></div>
+  <div class="h-work__foot"><a class="h-pill h-pill--blue" href="${base}portfolio/">포트폴리오 전체 보기 ${arrow}</a><p class="h-note h-note--dark">공개에 동의한 자료만 소개합니다.</p></div>
  </div>
 </section>`;
 }
@@ -200,27 +200,31 @@ function beyond(base) {
 </section>`;
 }
 
-/* 8 — reviews and FAQ */
+/* 8 — reviews and FAQ, restored to the v2 look (owner request 2026-11-04): dark band, centred head with the score,
+   two rows of review cards drifting in opposite directions; FAQ as a two-column list with ring plus icons. */
 function voice() {
-  const shown = reviews.filter(r => r.excerpt);
-  return `<section id="reviews" class="h-rev" data-header="light">
- <div class="h-rev__head">
-  <div data-reveal>
-   ${eyebrow('CLIENT VOICE')}
-   <h2>${title(['다시 맡기는 이유,', '고객의 말에 있습니다.'])}</h2>
-   <p class="h-rev__sub">자료를 이해하는 과정부터 디자인과 소통까지. 함께 작업한 고객의 후기를 확인하세요.</p>
-   <p class="h-real"><b>100% 실제 고객 후기</b><span>외부 판매 페이지에 올라온 후기를 고치지 않고 그대로 옮겼습니다.</span></p>
-  </div>
-  <div class="h-rev__pager"><button type="button" data-rev-prev aria-label="이전 후기">${arrow}</button><span class="sr-only"><b data-rev-now>01</b> / ${String(shown.length).padStart(2, '0')}</span><button type="button" data-rev-next aria-label="다음 후기">${arrow}</button></div>
+  const rating = proofStats.items.find(x => x.label === '고객 평점'), count = proofStats.items.find(x => x.label === '공식 고객후기');
+  const card = (r, hidden) => `<article class="rv"${hidden ? ' aria-hidden="true"' : ''}><i aria-hidden="true">★★★★★</i><h3>${esc(r.title)}</h3><p>${esc(r.body)}</p></article>`;
+  const rowA = reviews.slice(0, 4), rowB = [reviews[3], ...reviews.slice(4)];
+  const row = list => `<div class="rvrow">${list.map(r => card(r, false)).join('')}${list.map(r => card(r, true)).join('')}</div>`;
+  return `<section id="reviews" class="h-rvx" data-header="dark">
+ <div class="h-rvx__head" data-reveal>
+  <p class="h-rvx__eye">Reviews</p>
+  <h2><b>먼저 맡겨 본 분들의</b> <span>이야기.</span></h2>
+  ${proofStats.approved && rating && count ? `<p class="h-rvx__score"><b>${rating.value}</b><span>공식 고객후기 ${count.value}${count.unit}</span></p>` : ''}
  </div>
- <div class="h-rev__track" data-rev-track tabindex="0" aria-label="고객 후기, 좌우로 넘기기">${[0, 1].map(k => shown.map(r => `<article class="h-rcard"${k ? ' aria-hidden="true" data-clone' : ''}>
-  <header><h3>“${esc(r.excerpt)}”</h3></header>
-  <div class="h-rcard__body"><p>${esc(r.body)}</p></div>
- </article>`).join('')).join('')}</div>
- <div class="h-rev__foot">${site.reviewSourceUrl ? `<a class="h-link" href="${esc(site.reviewSourceUrl)}" target="_blank" rel="noopener">후기 원문 보기 ${ext}</a>` : ''}</div>
- <div class="h-faq" id="faq">
-  <h3 class="h-faq__t" data-reveal>맡기기 전, 궁금한 것들.</h3>
-  <div class="faq-list">${faq.map((x, i) => `<div class="faq-item"><h4><button type="button" aria-expanded="false" aria-controls="answer-${i}" id="question-${i}"><span class="q">${esc(x.question)}</span><span class="pm" aria-hidden="true">+</span></button></h4><div class="faq-answer" id="answer-${i}" role="region" aria-labelledby="question-${i}" hidden><p>${esc(x.answer)}</p></div></div>`).join('')}</div><button class="faq-more" type="button" data-faq-more>질문 더 보기 +</button>
+ <div class="rvrows">${row(rowA)}${row(rowB)}</div>
+ <p class="h-rvx__note">외부 판매 페이지에 공개된 후기를 고치지 않고 옮겼습니다.${site.reviewSourceUrl ? ` <a href="${esc(site.reviewSourceUrl)}" target="_blank" rel="noopener">후기 원문 보기 ${ext}</a>` : ''}</p>
+</section>
+<section id="faq" class="h-fqx" data-header="dark">
+ <div class="h-fqx__head" data-reveal>
+  <p class="h-rvx__eye">FAQ</p>
+  <h2>자주 묻는 질문</h2>
+  <p>궁금한 게 없으면, 바로 상담으로 넘어가셔도 됩니다.</p>
+  <a class="h-fqx__btn" href="#contact">상담 요청하기 ${arrow}</a>
+ </div>
+ <div class="h-fqx__list">
+  <div class="faq-list">${faq.map((x, i) => `<div class="faq-item"><h3><button type="button" aria-expanded="false" aria-controls="answer-${i}" id="question-${i}"><span class="q">${esc(x.question)}</span><span class="pm" aria-hidden="true">+</span></button></h3><div class="faq-answer" id="answer-${i}" role="region" aria-labelledby="question-${i}" hidden><p>${esc(x.answer)}</p></div></div>`).join('')}</div><button class="faq-more" type="button" data-faq-more>질문 더 보기 +</button>
  </div>
 </section>`;
 }

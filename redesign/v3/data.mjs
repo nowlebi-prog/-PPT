@@ -391,13 +391,13 @@ export const partnerLogos = [
 // Real reviews from the external sales page. Bodies are verbatim; excerpt is a verbatim phrase used as the card title.
 // Reviews without an excerpt are kept but not shown.
 export const reviews = [
-  { excerpt: '정리가 완벽히 안 된 PPT 초안을 드렸는데도', body: "정리가 완벽히 안 된 PPT 초안을 드렸는데도, 찰떡같이 알아들어주시고 정말 '알잘딱깔센'으로 작업해 주셨습니다! 책임감 있게 끝까지 빠른 작업해 주셔서 너무 감사합니다." },
-  { excerpt: '벌써 8번째 작업 의뢰네요', body: '벌써 8번째 작업 의뢰네요. 이번에도 역시 작업 결과물이 기대 이상이었습니다~! 시각적으로도 뛰어나고, 자료의 톤앤매너를 정확하게 반영해 주셔서 만족도가 매우 높았습니다.' },
-  { excerpt: null, body: '매번 디자이너님께만 작업을 맡기게 되네요~! 요청 사항을 정확히 이해하고 감각적으로 완성해 주셔서 늘 다시 찾게 됩니다. 다음 작업도 계속 부탁드릴 예정입니다.' },
-  { excerpt: '적극적인 의견 개진 또한 너무나 감사합니다', body: '의뢰자가 원하는 걸 완벽하게 적용시켜 주는 건 물론이고 적극적인 의견 개진 또한 너무나 감사합니다. 갑작스러운 의뢰에도 최선을 다해 최고의 결과물을 보여주셨습니다.' },
-  { excerpt: '촉박한 일정 때문에 걱정했는데', body: '촉박한 일정 때문에 걱정했는데 최대한 편의를 봐주셔서 너무 감사해요. 결과물도 너무 만족스럽고요. 약속 정확하고 센스 있으시고 정말 잘 이용했습니다.' },
-  { excerpt: '적은 텍스트도, 많은 텍스트도 가독성 좋게', body: '항상 만족하며 이용하고 있습니다. 그 어떤 곳보다도 디자인이 세련되고 깔끔해요. 적은 텍스트도, 많은 텍스트도 가독성 좋게 정리해 주십니다.' },
-  { excerpt: null, body: '작업물이 완벽 그 자체네요. 너무 좋고 친절하시고 다음에도 무조건 이용할 것 같습니다. 성심성의껏 해주셔서 정말 감사합니다!' },
+  { title: '정리가 덜 된 자료도 찰떡같이 이해하는 알잘딱깔센!', excerpt: '정리가 완벽히 안 된 PPT 초안을 드렸는데도', body: "정리가 완벽히 안 된 PPT 초안을 드렸는데도, 찰떡같이 알아들어주시고 정말 '알잘딱깔센'으로 작업해 주셨습니다! 책임감 있게 끝까지 빠른 작업해 주셔서 너무 감사합니다." },
+  { title: '벌써 8번째 의뢰, 자료의 톤앤매너를 완벽하게 캐치합니다.', excerpt: '벌써 8번째 작업 의뢰네요', body: '벌써 8번째 작업 의뢰네요. 이번에도 역시 작업 결과물이 기대 이상이었습니다~! 시각적으로도 뛰어나고, 자료의 톤앤매너를 정확하게 반영해 주셔서 만족도가 매우 높았습니다.' },
+  { title: '디자인 퀄리티, 피드백 속도, 소통 모두 완벽합니다.', excerpt: null, body: '매번 디자이너님께만 작업을 맡기게 되네요~! 요청 사항을 정확히 이해하고 감각적으로 완성해 주셔서 늘 다시 찾게 됩니다. 다음 작업도 계속 부탁드릴 예정입니다.' },
+  { title: '단순 의뢰를 넘어, 전문가의 적극적인 의견 개진까지!', excerpt: '적극적인 의견 개진 또한 너무나 감사합니다', body: '의뢰자가 원하는 걸 완벽하게 적용시켜 주는 건 물론이고 적극적인 의견 개진 또한 너무나 감사합니다. 갑작스러운 의뢰에도 최선을 다해 최고의 결과물을 보여주셨습니다.' },
+  { title: '촉박한 일정에도 빛을 발하는 정확한 납기일', excerpt: '촉박한 일정 때문에 걱정했는데', body: '촉박한 일정 때문에 걱정했는데 최대한 편의를 봐주셔서 너무 감사해요. 결과물도 너무 만족스럽고요. 약속 정확하고 센스 있으시고 정말 잘 이용했습니다.' },
+  { title: '세대 불문 취향 저격, 세련되고 깔끔한 디자인', excerpt: '적은 텍스트도, 많은 텍스트도 가독성 좋게', body: '항상 만족하며 이용하고 있습니다. 그 어떤 곳보다도 디자인이 세련되고 깔끔해요. 적은 텍스트도, 많은 텍스트도 가독성 좋게 정리해 주십니다.' },
+  { title: '작업물이 완벽 그 자체네요!', excerpt: null, body: '작업물이 완벽 그 자체네요. 너무 좋고 친절하시고 다음에도 무조건 이용할 것 같습니다. 성심성의껏 해주셔서 정말 감사합니다!' },
 ];
 
 // IR consulting record ({ title, host }); the home hides the line while empty.
@@ -418,8 +418,9 @@ export const featuredWork = [
 
 // Website showcase on /web/. Items marked (샘플) are studio examples, not client sites. href: live site (null = 링크 준비 중, 버튼 없음).
 export const webShowcase = [
-  { title: '데모데이 행사 페이지', sub: '참가팀, 일정, 심사위원, 사전 등록까지 한 페이지로 (샘플)', src: 'assets/web/forge-demo.webp', poster: 'assets/web/forge-demo-poster.webp', href: null },
+  { title: '유별난PPT 홈페이지', sub: '3D 발표장과 포트폴리오, 단계형 문의까지 직접 만든 회사 홈페이지', src: 'assets/web/youstar-v3.webp', poster: 'assets/web/youstar-v3-poster.webp', href: null },
   { title: '반응형 웹 서비스 · 프모아', sub: 'PC와 모바일에 맞춰 바뀌는 서비스 홈페이지', src: 'assets/web/peumoa.webp', poster: 'assets/web/peumoa-poster.webp', href: 'https://peumoa.com/' },
+  { title: '데모데이 행사 페이지', sub: '참가팀, 일정, 심사위원, 사전 등록까지 한 페이지로 (샘플)', src: 'assets/web/forge-demo.webp', poster: 'assets/web/forge-demo-poster.webp', href: null },
 ];
 
 // One inquiry form for the home, /contact and the quick quote. Values are stable codes; labels are shown.
