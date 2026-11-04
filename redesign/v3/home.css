@@ -1391,3 +1391,31 @@ ul.h-price__notes li::marker{color:#c3c8d2}
  .js-ready .h-fqx .faq-more:not([hidden]){display:flex;align-items:center;justify-content:center;width:100%;min-height:48px;margin-top:14px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);font-size:14px;font-weight:600;color:#fff}
 }
 @media(prefers-reduced-motion:reduce){.rvrow{animation:none}.rvrows{overflow-x:auto;scrollbar-width:none}}
+
+/* ---- v3.5 (2026-11-04): reviews + FAQ keep the v2 layout on the earlier sky-blue ground; quieter FAQ type;
+   smaller corner radius on the demoday card and website strip; pricing notes aligned to the row labels ---- */
+.h-rvx,.h-fqx{background:#eef2fb;color:var(--ink);--ink-2:#4b515c;--ink-3:#6f7581}
+.h-rvx::before{background:radial-gradient(ellipse 50% 40% at 50% 25%,rgba(31,75,255,.1),transparent 70%)}
+.h-fqx{border-top:1px solid #dfe5f2}
+.h-rvx__eye{color:var(--blue)}
+.h-rvx h2,.h-rvx h2 b{color:var(--ink)}
+.h-rvx h2 span{color:var(--ink)}
+.h-rvx__score b{background:none;-webkit-background-clip:border-box;background-clip:border-box;color:var(--blue)}
+.rv{background:#fff;border:1px solid #e1e7f3;box-shadow:0 18px 36px -28px rgba(20,40,120,.35)}
+.rv i{color:var(--blue)}
+.rv h3{color:var(--ink)}
+.h-rvx__note a{color:var(--blue)}
+.h-fqx__head h2{color:var(--ink)}
+.h-fqx__btn{color:var(--ink);background:linear-gradient(#fff,#fff) padding-box,linear-gradient(120deg,rgba(63,208,240,.9),rgba(31,75,255,.9) 55%,rgba(31,75,255,.25)) border-box}
+.h-fqx .faq-list{border-top-color:#d6ddeb}
+.h-fqx .faq-item{border-bottom-color:#d6ddeb!important}
+.h-fqx .faq-item h3{font-size:16px!important;font-weight:600;line-height:1.5}
+.h-fqx .faq-item button{color:var(--ink);padding:18px 4px;font-size:16px!important}
+.h-fqx .faq-item button:hover{color:var(--blue)}
+.h-fqx .faq-item .pm{width:26px;height:26px;background-size:11px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M6 1v10M1 6h10' stroke='%231f4bff' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E");box-shadow:inset 0 0 0 1px rgba(31,75,255,.35)}
+.h-fqx .faq-answer p{font-size:14.5px!important}
+@media(max-width:767px){.h-fqx .faq-item h3,.h-fqx .faq-item button{font-size:15px!important}.js-ready .h-fqx .faq-more:not([hidden]){background:#fff;border-color:#d6ddeb;color:var(--ink)}}
+.h-dd__card{border-radius:16px}
+.wz{border-radius:14px}
+@media(min-width:768px){.h-price__help{padding-left:24px}ul.h-price__notes{margin-left:24px;padding-left:18px}}
+.h-fqx .faq-item .q{font-size:inherit!important;font-weight:600!important;line-height:1.5;letter-spacing:-.02em}

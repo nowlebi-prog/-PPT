@@ -207,7 +207,7 @@ function voice() {
   const card = (r, hidden) => `<article class="rv"${hidden ? ' aria-hidden="true"' : ''}><i aria-hidden="true">★★★★★</i><h3>${esc(r.title)}</h3><p>${esc(r.body)}</p></article>`;
   const rowA = reviews.slice(0, 4), rowB = [reviews[3], ...reviews.slice(4)];
   const row = list => `<div class="rvrow">${list.map(r => card(r, false)).join('')}${list.map(r => card(r, true)).join('')}</div>`;
-  return `<section id="reviews" class="h-rvx" data-header="dark">
+  return `<section id="reviews" class="h-rvx" data-header="light">
  <div class="h-rvx__head" data-reveal>
   <p class="h-rvx__eye">Reviews</p>
   <h2><b>먼저 맡겨 본 분들의</b> <span>이야기.</span></h2>
@@ -216,7 +216,7 @@ function voice() {
  <div class="rvrows">${row(rowA)}${row(rowB)}</div>
  <p class="h-rvx__note">외부 판매 페이지에 공개된 후기를 고치지 않고 옮겼습니다.${site.reviewSourceUrl ? ` <a href="${esc(site.reviewSourceUrl)}" target="_blank" rel="noopener">후기 원문 보기 ${ext}</a>` : ''}</p>
 </section>
-<section id="faq" class="h-fqx" data-header="dark">
+<section id="faq" class="h-fqx" data-header="light">
  <div class="h-fqx__head" data-reveal>
   <p class="h-rvx__eye">FAQ</p>
   <h2>자주 묻는 질문</h2>
