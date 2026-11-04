@@ -429,15 +429,13 @@ export const webShowcase = [
   { title: '유별난PPT 홈페이지', sub: '3D 발표장과 포트폴리오, 단계형 문의까지 직접 만든 회사 홈페이지', src: 'assets/web/youstar-v3.webp', poster: 'assets/web/youstar-v3-poster.webp', href: null },
   { title: '반응형 웹 서비스 · 프모아', sub: 'PC와 모바일에 맞춰 바뀌는 서비스 홈페이지', src: 'assets/web/peumoa.webp', poster: 'assets/web/peumoa-poster.webp', href: null },
   { title: '데모데이 행사 페이지', sub: '참가팀, 일정, 심사위원, 사전 등록까지 한 페이지로 (샘플)', src: 'assets/web/forge-demo.webp', poster: 'assets/web/forge-demo-poster.webp', href: null },
-  { title: '데모데이 행사 페이지 · SEED:UP', sub: '행사 개요, 참가팀, 심사위원, 일정까지 (샘플)', src: 'assets/web/sample-seedup-demoday-2026.webp', poster: 'assets/web/sample-seedup-demoday-2026-poster.webp', href: null },
   { title: '컨퍼런스 페이지 · Workflow Summit', sub: '연사, 세션 시간표, 등록까지 한 페이지로 (샘플)', src: 'assets/web/sample-workflow-summit-2026.webp', poster: 'assets/web/sample-workflow-summit-2026-poster.webp', href: null },
-  { title: '로봇 기업 홈페이지 · Atlas Robotics', sub: '제품, 도입 사례, 채용까지 (샘플)', src: 'assets/web/sample-atlas-robotics.webp', poster: 'assets/web/sample-atlas-robotics-poster.webp', href: null },
+  { title: '데모데이 행사 페이지 · SEED:UP', sub: '행사 개요, 참가팀, 심사위원, 일정까지 (샘플)', src: 'assets/web/sample-seedup-demoday-2026.webp', poster: 'assets/web/sample-seedup-demoday-2026-poster.webp', href: null },
   { title: 'AI 서비스 소개 · Flowdot AI', sub: '기능 소개부터 요금제, 도입 문의까지 (샘플)', src: 'assets/web/sample-flowdot-ai.webp', poster: 'assets/web/sample-flowdot-ai-poster.webp', href: null },
   { title: '에너지 기업 홈페이지 · CarbonEdge', sub: '사업 소개, 실적 수치, 기술 소식까지 (샘플)', src: 'assets/web/sample-carbonedge.webp', poster: 'assets/web/sample-carbonedge-poster.webp', href: null },
   { title: '바이오 기업 홈페이지 · Lumina Bio', sub: '파이프라인, 연구 성과, IR 정보까지 (샘플)', src: 'assets/web/sample-lumina-bio.webp', poster: 'assets/web/sample-lumina-bio-poster.webp', href: null },
   { title: '방산 기업 홈페이지 · VEGA', sub: '사업 분야, 협력사, 인재 채용까지 (샘플)', src: 'assets/web/sample-vega-defense.webp', poster: 'assets/web/sample-vega-defense-poster.webp', href: null },
   { title: '법률사무소 홈페이지 · 한결', sub: '업무 분야, 구성원, 상담 신청까지 (샘플)', src: 'assets/web/sample-hangyeol-law.webp', poster: 'assets/web/sample-hangyeol-law-poster.webp', href: null },
-  { title: '외식 브랜드 홈페이지 · 화로당', sub: '메뉴, 가맹 안내, 창업 상담까지 (샘플)', src: 'assets/web/sample-hwarodang.webp', poster: 'assets/web/sample-hwarodang-poster.webp', href: null },
 ];
 
 // One inquiry form for the home, /contact and the quick quote. Values are stable codes; labels are shown.
