@@ -622,3 +622,15 @@ body:not(.is-dark) .detail-guard a{color:var(--blue)}
 /* mobile menu: smaller links (2026-11-04) */
 #mobile-menu nav{gap:2px!important;margin-top:40px!important;font-size:22px!important;font-weight:600!important;letter-spacing:-.03em!important}
 #mobile-menu nav a{padding:10px 0!important;border-bottom:1px solid rgba(255,255,255,.08)}
+/* website pricing notes on mobile: out of the blue box, on white, as an accordion like the FAQ (2026-11-04) */
+.wp-faq{display:none}
+@media(max-width:767px){
+ .wp .wp__notes,.wp .wp__foot{display:none}
+ .wp-faq{display:block;margin-top:16px;padding:6px 18px 16px;border-radius:16px;background:#fff;border:1px solid var(--line);color:var(--ink)}
+ .wp-faq .faq-item{border:0!important;border-bottom:1px solid var(--line)!important;border-radius:0!important;background:none!important}
+ .wp-faq .faq-item h4{margin:0;font-size:15px;font-weight:700;letter-spacing:-.02em}
+ .wp-faq .faq-item button{display:flex;width:100%;align-items:center;justify-content:space-between;gap:12px;padding:16px 0;min-height:0;background:none;color:var(--ink);font:inherit;text-align:left}
+ .wp-faq .faq-item button span{flex:none;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:#eef2fb;color:var(--blue);font-size:16px;font-weight:500}
+ .wp-faq .faq-answer p{margin:0;padding:0 0 16px;font-size:13.5px;line-height:1.7;color:var(--muted)}
+ .wp-faq__foot{margin:14px 0 0;font-size:12.5px;line-height:1.6;color:#8b919c}
+}

@@ -189,7 +189,8 @@ export function webPricing(base, { eye = '', onHome = false, heading = 'h3', tie
   </ul>
   <dl class="wp__notes">${websitePricing.notes.map(([t, d]) => `<div><dt>${esc(t)}</dt><dd>${esc(d)}</dd></div>`).join('')}</dl>
   <p class="wp__foot">${esc(websitePricing.footnote)}</p>
- </div>`;
+ </div>
+ <div class="wp-faq"><div class="faq-list">${websitePricing.notes.map(([t, d], i) => `<div class="faq-item"><h4><button type="button" aria-expanded="false" aria-controls="wp-a-${i}" id="wp-q-${i}">${esc(t)}<span aria-hidden="true">+</span></button></h4><div class="faq-answer" id="wp-a-${i}" role="region" aria-labelledby="wp-q-${i}" hidden><p>${esc(d)}</p></div></div>`).join('')}</div><p class="wp-faq__foot">${esc(websitePricing.footnote)}</p></div>`;
 }
 
 /* 7 — beyond PPT: print, web and visuals. Sample sites live on the separate /web/ page. */
