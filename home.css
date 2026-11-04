@@ -1419,3 +1419,17 @@ ul.h-price__notes li::marker{color:#c3c8d2}
 .wz{border-radius:14px}
 @media(min-width:768px){.h-price__help{padding-left:24px}ul.h-price__notes{margin-left:24px;padding-left:18px}}
 .h-fqx .faq-item .q{font-size:inherit!important;font-weight:600!important;line-height:1.5;letter-spacing:-.02em}
+
+/* ---- v3.6 (2026-11-04): FAQ back on the dark ground (reviews stay sky blue); one size for every section title ---- */
+.h-fqx{background:#05070d;color:#fff;--ink-2:rgba(255,255,255,.72);--ink-3:rgba(255,255,255,.5);border-top:0}
+.h-fqx .h-rvx__eye{color:#3fd0f0}
+.h-fqx__head h2{color:#fff}
+.h-fqx__btn{color:#fff;background:linear-gradient(rgba(6,10,24,.55),rgba(6,10,24,.55)) padding-box,linear-gradient(120deg,rgba(63,208,240,.9),rgba(31,75,255,.9) 55%,rgba(255,255,255,.25)) border-box}
+.h-fqx .faq-list{border-top-color:rgba(255,255,255,.12)}
+.h-fqx .faq-item{border-bottom-color:rgba(255,255,255,.12)!important}
+.h-fqx .faq-item button{color:#fff}
+.h-fqx .faq-item button:hover{color:#3fd0f0}
+.h-fqx .faq-item .pm{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M6 1v10M1 6h10' stroke='%233fd0f0' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E");box-shadow:inset 0 0 0 1px rgba(63,208,240,.4)}
+@media(max-width:767px){.js-ready .h-fqx .faq-more:not([hidden]){background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12);color:#fff}}
+/* section titles: same size as the FAQ title (hero and the statement band keep their own scale) */
+.is-home :is(#clients,#portfolio,#pricing,#demoday,#beyond,#reviews,#faq) h2,.is-home #contact h2.h-ct__title{font-size:clamp(26px,2.6vw,38px)!important;line-height:1.25!important;letter-spacing:-.045em!important}

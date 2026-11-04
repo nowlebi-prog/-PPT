@@ -1,7 +1,7 @@
-import {calculateDemoday,parseSelection} from './domain.mjs?v=4b886e0efd';
-import './motion.mjs?v=4b886e0efd';
-import './inquiry.mjs?v=4b886e0efd';
-import './stage.mjs?v=4b886e0efd';
+import {calculateDemoday,parseSelection} from './domain.mjs?v=5f756f98d8';
+import './motion.mjs?v=5f756f98d8';
+import './inquiry.mjs?v=5f756f98d8';
+import './stage.mjs?v=5f756f98d8';
 document.documentElement.classList.add('js-ready');
 const $=(s,root=document)=>root.querySelector(s), $$=(s,root=document)=>[...root.querySelectorAll(s)];
 const base=document.body.dataset.base||'';

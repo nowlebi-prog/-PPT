@@ -216,7 +216,7 @@ function voice() {
  <div class="rvrows">${row(rowA)}${row(rowB)}</div>
  <p class="h-rvx__note">외부 판매 페이지에 공개된 후기를 고치지 않고 옮겼습니다.${site.reviewSourceUrl ? ` <a href="${esc(site.reviewSourceUrl)}" target="_blank" rel="noopener">후기 원문 보기 ${ext}</a>` : ''}</p>
 </section>
-<section id="faq" class="h-fqx" data-header="light">
+<section id="faq" class="h-fqx" data-header="dark">
  <div class="h-fqx__head" data-reveal>
   <p class="h-rvx__eye">FAQ</p>
   <h2>자주 묻는 질문</h2>
