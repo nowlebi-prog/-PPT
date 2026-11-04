@@ -1,8 +1,8 @@
 // Step-by-step inquiry form for the home (section 9) and /contact. Markup: src/contact.mjs.
 // One question per step; the last step asks for contact details and holds the optional extras.
 // Without a connected receiving service the form opens the visitor's mail app and never shows a receipt.
-import { site, inquiryOptions } from './data.mjs?v=ac549dcdc6';
-import { validateInquiry, submitInquiry, mailtoHref, inquiryText, summaryLines, parseSelection, localToday, daysUntil } from './domain.mjs?v=ac549dcdc6';
+import { site, inquiryOptions } from './data.mjs?v=29eb500e9b';
+import { validateInquiry, submitInquiry, mailtoHref, inquiryText, summaryLines, parseSelection, localToday, daysUntil } from './domain.mjs?v=29eb500e9b';
 
 const form = document.getElementById('inquiry-form');
 
