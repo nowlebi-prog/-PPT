@@ -108,7 +108,9 @@ function orgJsonLd() {
   const data = {
     '@context': 'https://schema.org',
     '@type': 'ProfessionalService',
+    '@id': site.url + '#business',
     name: site.brand,
+    alternateName: brandAliases,
     url: site.url,
     image: ogImage(),
     logo: site.url + 'assets/logo.svg',
@@ -121,8 +123,11 @@ function orgJsonLd() {
     keywords: 'IR 디자인, PPT 디자인 업체, PPT 제작 대행, 회사소개서 제작, 제안서 PPT, 데모데이 IR, 정부지원사업 발표자료, 브로슈어 디자인',
     ...(site.kakao ? { sameAs: [site.kakao] } : {}),
   };
-  return `<script type="application/ld+json">${JSON.stringify(data).replace(/</g, '\\u003c')}</script>`;
+  // WebSite node: tells search engines the site name and that the root URL is the brand's home page.
+  const webSite = { '@context': 'https://schema.org', '@type': 'WebSite', '@id': site.url + '#website', name: site.brand, alternateName: brandAliases, url: site.url, inLanguage: 'ko-KR', publisher: { '@id': site.url + '#business' } };
+  return [webSite, data].map(d => `<script type="application/ld+json">${JSON.stringify(d).replace(/</g, '\\u003c')}</script>`).join('');
 }
+const brandAliases = ['유별난 PPT', '유별난피피티', 'youstarppt'];
 
 /* /ir/ — IR service page (PPT team copy, 2026-11-04 SEO spec). Reuses page-intro and portfolio card styles. */
 export function irPage(base) {

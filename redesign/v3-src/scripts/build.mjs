@@ -14,7 +14,7 @@ for(const f of codeFiles.filter(f=>f.endsWith('.mjs'))){const file=path.join(dis
 const versioned=html=>html.replace(/((?:href|src)="[^"?]*?)((?:styles|home)\.css|app\.mjs)"/g,`$1$2?v=${version}"`);
 // [route, content, title, base, description] — titles and descriptions per page (SEO spec 2026-11-04, PPT team copy).
 const routes=[
-['',home(''),'IR 디자인·회사소개서·발표자료 PPT 제작 | 유별난PPT','','IR, 투자제안서, 회사소개서, 제안서, 데모데이·정부지원사업 발표자료를 기획부터 디자인까지 맡습니다. 리플렛·브로슈어 같은 인쇄물도 함께 만들고, 직접 고칠 수 있는 PPTX와 PDF로 드립니다.'],
+['',home(''),'유별난PPT | IR·회사소개서·발표자료 PPT 디자인 제작','','유별난PPT는 IR, 투자제안서, 회사소개서, 제안서, 데모데이·정부지원사업 발표자료를 기획부터 디자인까지 맡습니다. 리플렛·브로슈어 같은 인쇄물도 함께 만들고, 직접 고칠 수 있는 PPTX와 PDF로 드립니다.'],
 ['ir',irPage('../'),'IR 디자인·투자제안서 PPT 제작 | 유별난PPT','../','초기 스타트업의 IR, 투자제안서, 피치덱을 맡습니다. 내용 흐름부터 정하고, 직접 고칠 수 있는 PPTX와 PDF로 드립니다.'],
 ['portfolio',portfolioPage('../'),'포트폴리오 | 유별난PPT','../','유별난PPT가 만든 IR, 회사소개서, 제품·서비스 소개서, 발표자료, 교육 안내책자 작업 사례입니다. 고객이 공개를 허락한 자료만 올립니다.'],
 ['demoday',demodayPage('../'),'데모데이 IR 제작·액셀러레이터 발표자료 | 유별난PPT','../','액셀러레이터, 대학 창업지원단, 지자체, 공공·창업지원기관의 데모데이 참가팀 IR 자료를 행사 일정에 맞춰 한 번에 제작합니다.'],
